@@ -1,0 +1,39 @@
+fieldset.adminform {
+    border:1px solid #CCCCCC;
+    margin:15px 7px 7px;
+    padding:5px;
+    text-align:left;
+}
+
+legend {
+    color:#0B55C4;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.radio { font-size:11px; color:#666666;}
+
+table.admintable td.key {
+    background-color:#F6F6F6;
+    border-bottom:1px solid #E9E9E9;
+    border-right:1px solid #E9E9E9;
+    color:#666666;
+    text-align:right;
+    font-size:11px;
+    min-width:250px;
+    padding-right: 5px;
+}
+
+.error {
+    float: none; 
+    color: red; 
+    padding-left: .5em; 
+    vertical-align: top;
+    font-size:10px;
+}
+
+table.admintable textarea.dirty, input.dirty, select.dirty {
+    border: 1px solid #fcefa1; 
+    background: #fbf9ee url(images/ui-bg_glass_55_fbf9ee_1x400.png) 50% 50% repeat-x; 
+    color: #363636; 
+}

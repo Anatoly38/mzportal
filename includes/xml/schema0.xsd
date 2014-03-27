@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://microsoft.com/wsdl/types/" />
+  <xs:element name="Employee" nillable="true" type="Employee" />
+  <xs:complexType name="Employee">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" xmlns:q1="http://microsoft.com/wsdl/types/" type="q1:guid" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Population" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TabelNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UZ" type="LPU" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ChangeTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Region" type="Territory" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Surname" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Patroname" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Sex" type="SexEnum" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Birthdate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Deathdate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Document" type="DocumentEntity" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SNILS" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="INN" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Addresses" type="ArrayOfAddressEntity" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Phone" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="MarriageState" type="Marriage" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CitezenshipState" type="Сitizenship" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IsRealPerson" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HasAuto" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="1" maxOccurs="1" name="HasChildren" nillable="true" type="xs:boolean" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmployeeAwards" type="ArrayOfAward" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmployeeRecords" type="ArrayOfCardRecord" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmployeeSpecialities" type="ArrayOfDiplomaEducation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmployeePostGraduateEducation" type="ArrayOfPostGraduateEducation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmployeeSertificateEducation" type="ArrayOfSertificateEducation" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmployeeSkillImprovement" type="ArrayOfSkillImprovement" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmployeeRetrainment" type="ArrayOfRetrainment" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmployeeQualification" type="ArrayOfQualification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LPU">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" xmlns:q2="http://microsoft.com/wsdl/types/" type="q2:guid" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="INN" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="KPP" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Type" type="ArrayOfOrganisationType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="LPULevel" type="Level" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Nomen" type="Nomenclature" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfOrganisationType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OrganisationType" nillable="true" type="OrganisationType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrganisationType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Level">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parent" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Nomenclature">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parent" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Territory">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parent" nillable="true" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Order" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OUZ" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="KLADR" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="SexEnum">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Male" />
+      <xs:enumeration value="Female" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="DocumentEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Type" type="DocumentType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Serie" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Issued" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IssueDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DocumentType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAddressEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="AddressEntity" nillable="true" type="AddressEntity" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddressEntity">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Region" type="Territory" />
+      <xs:element minOccurs="0" maxOccurs="1" name="District" type="KLADR" />
+      <xs:element minOccurs="0" maxOccurs="1" name="City" type="KLADR" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Street" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="House" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Building" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Apartment" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Registration" type="RegistrationType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="RegistrationDate" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KLADR">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Prefix" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parent" nillable="true" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RegistrationType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Marriage">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Сitizenship">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfAward">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Award" nillable="true" type="Award" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Award">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Number" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Issued" nillable="true" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfCardRecord">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="CardRecord" nillable="true" type="CardRecord" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CardRecord">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="Duration" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Organisation" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OrgType" type="OrganisationType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Care" type="MedicalCare" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Conditions" type="MedicalCondition" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RecrodPosition" type="Position" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RecordSubdivision" type="Subdivision" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeIn" type="RecordTypeIn" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OrderIn" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TypeOut" type="RecordTypeOut" />
+      <xs:element minOccurs="0" maxOccurs="1" name="OrderOut" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DateBegin" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DateEnd" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RecordRegime" type="Regime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Unit" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RecordMilitary" type="Military" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Wage" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RecordPositionType" type="PositionType" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RecordPost" type="Post" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MedicalCare">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MedicalCondition">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Position">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Subdivision">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RecordTypeIn">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RecordTypeOut">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Regime">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Military">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PositionType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Post">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parent" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfDiplomaEducation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DiplomaEducation" nillable="true" type="DiplomaEducation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DiplomaEducation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="GraduatedFrom" type="EducationInstitution" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Type" type="EducationType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="GraduationDate" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiplomaSerie" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiplomaNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GraduationSpeciality" type="Speciality" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EducationInstitution">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parent" nillable="true" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="EducationType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:long" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Speciality">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parent" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfPostGraduateEducation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PostGraduateEducation" nillable="true" type="PostGraduateEducation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PostGraduateEducation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="BaseOrg" type="EducationInstitution" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Type" type="PostGraduationEducationType" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DateBegin" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DateEnd" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="1" maxOccurs="1" name="DateDocum" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Degree" type="AcademicDegree" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiplomaSerie" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiplomaNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PostGraduationSpeciality" type="SertificateSpeciality" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PostGraduationEducationType">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AcademicDegree">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SertificateSpeciality">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Parent" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSertificateEducation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SertificateEducation" nillable="true" type="SertificateEducation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SertificateEducation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="IssueOrg" type="EducationInstitution" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IssueDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SertificateSerie" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="SertificateNumber" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EducationSpeciality" type="SertificateSpeciality" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfSkillImprovement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="SkillImprovement" nillable="true" type="SkillImprovement" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SkillImprovement">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Organisation" type="EducationInstitution" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Cycle" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Hours" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Year" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiplomaSerie" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiplomaNumber" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="IssueDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EducationSpeciality" type="SertificateSpeciality" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfRetrainment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Retrainment" nillable="true" type="Retrainment" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Retrainment">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Organisation" type="EducationInstitution" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EducationSpeciality" type="SertificateSpeciality" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiplomaSerie" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="DiplomaNumber" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Hours" type="xs:decimal" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TrainingDate" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArrayOfQualification">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Qualification" nillable="true" type="Qualification" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Qualification">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Category" type="QualificationCategory" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Speciality" type="SertificateSpeciality" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Year" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="QualificationCategory">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

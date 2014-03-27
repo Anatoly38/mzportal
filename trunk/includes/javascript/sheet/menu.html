@@ -1,0 +1,154 @@
+<ul>
+	<li>
+		<a href="#">Файл</a>
+		<ul>
+			<li><a onclick="sheetInstance.newSheet(); return false;" title="Создать новый лист.">Новый</a></li>
+			<li><a onclick="sheetInstance.s.fnOpen(); return false;" title="Открыть новый лист.">Открыть</a></li>
+			<li><a onclick="sheetInstance.s.fnSave(); return false;" title="Сохранить текущий лист.">Сохранить</a></li>
+            <li><a onclick="sheetInstance.s.fnClose(); return false;" title="Закрыть текущий лист без сохранения.">Закрыть</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="#">Редактировать</a>
+		<ul>
+			<li>
+				<a href="#">Ячейка</a>
+				<ul>
+					<li><a onclick="sheetInstance.setCellRef(); return false;">Set Reference</a></li>
+				</ul>
+			</li>
+			<li>
+				<a menu="menuEditRow_menuInstance">Строка</a>
+				<ul>
+					<li><a onclick="sheetInstance.merge(); return false;">Объединить</a></li>
+					<li><a onclick="sheetInstance.unmerge(); return false;">Отменить объединение</a></li>
+					<li><a onclick="sheetInstance.controlFactory.addRow(null, null, ':last'); return false;" title="Adds an additional row to bottom of the spreadsheet.">Добавить строку</a></li>
+					<li><a onclick="sheetInstance.controlFactory.addRowMulti(); return false;" title="Adds an additional rows to bottom of the spreadsheet.">Добавить несколько строк</a></li>
+					<li><a onclick="sheetInstance.deleteRow(); return false;" title="Delets the current row thats highlighted.">Удалить строку</a></li>
+					<li><a onclick="sheetInstance.controlFactory.addRow(null, true); return false;" title="Inserts an additional row after currently selected row.">Вставить строку перед</a></li>
+					<li><a onclick="sheetInstance.controlFactory.addRow(); return false;" title="Inserts an additional row after currently selected row.">Вставить строку после</a></li>
+					<!--<li><a onclick="sheetInstance.toggleHide.rowAll();" title="Unhides all the hidden rows.">Show All</a></li>
+					<li><a onclick="sheetInstance.toggleHide.row();" title="Hides or shows the currently selected row.">Toggle Hide Row</a></li>-->
+				</ul>
+			</li>
+			<li>
+				<a menu="menuEditColumn_menuInstance">Столбец</a>
+				<ul>
+					<li><a onclick="sheetInstance.controlFactory.addColumn(null, null, ':last'); return false;" title="Adds an additional column to the right of the spreadsheet.">Добавить столбец</a></li>
+					<li><a onclick="sheetInstance.controlFactory.addColumnMulti(); return false;" title="Adds an additional columns to the right of the spreadsheet.">Добавить несколько столбцов</a></li>
+					<li><a onclick="sheetInstance.deleteColumn(); return false;" title="Deletes the current column thats highlighted.">Удалить столбец</a></li>
+					<li><a onclick="sheetInstance.controlFactory.addColumn(null, true); return false;" title="Inserts an additional column after currently selected column.">Вставить столбец перед</a></li>
+					<li><a onclick="sheetInstance.controlFactory.addColumn(); return false;" title="Inserts an additional column after currently selected column.">Вставить столбец после</a></li>
+					<li><a onclick="sheetInstance.fillUpOrDown(); return false;" title="Fill down current cell value.">Заполнить вниз</a></li>
+					<li><a onclick="sheetInstance.fillUpOrDown(true); return false;" title="Fill up current cell value.">заполнить вверх</a></li>
+					<!--<li><a onclick="sheetInstance.toggleHide.columnAll();" title="Unhides all the hidden columns.">Show All</a></li>
+					<li><a onclick="sheetInstance.toggleHide.column();" title="Hides or shows the currently selected column.">Toggle Hide Column</a></li>-->
+				</ul>
+			</li>
+			<li>
+				<a menu="menuEditSheet_menuInstance">Лист</a>
+				<ul>
+					<li><a onclick="sheetInstance.addSheet(); return false;" title="Add new spreadsheet.">Добавить лист</a></li>
+					<li><a onclick="sheetInstance.deleteSheet(); return false;" title="Delete the current spreadsheet.">Удалить лист</a></li>
+					<li><a onclick="sheetInstance.calc(); return false;" title="Recompiles the current sheet">Пересчитать</a></li>
+					<li><a onclick="sheetInstance.sheetTitle(); return false;" title="Change the title of the sheet.">Название</a></li>
+				</ul>
+			</li>
+			<li><a onclick="sheetInstance.cellFind(); return false;">Поиск</a></li>
+			<li><a onclick="sheetInstance.getTdRange(null, sheetInstance.obj.formula().val()); return false;">Получить массив ячеек</a></li>
+			<li>
+				<a href="#">Обработать массив ячеек</a>
+				<ul>
+					<li><a onclick="sheetInstance.getTdRange(null, sheetInstance.obj.formula().val(), 'SUM'); return false;" title="Функция SUM">SUM()</a></li>
+					<li><a onclick="sheetInstance.getTdRange(null, sheetInstance.obj.formula().val(), 'CEILING'); return false;" title="Функция CEILING">CEILING()</a></li>
+					<li><a onclick="sheetInstance.getTdRange(null, sheetInstance.obj.formula().val(), 'COUNT'); return false;" title="Функция COUNT">COUNT()</a></li>
+					<li><a onclick="sheetInstance.getTdRange(null, sheetInstance.obj.formula().val(), 'MAX'); return false;" title="Функция MAX">MAX()</a></li>
+					<li><a onclick="sheetInstance.getTdRange(null, sheetInstance.obj.formula().val(), 'MIN'); return false;" title="Функция MIN">MIN()</a></li>
+				</ul>
+			</li>
+			<li><a onclick="sheetInstance.cellUndoable.undoOrRedo(true); return false;">Undo</a></li>
+			<li><a onclick="sheetInstance.cellUndoable.undoOrRedo(); return false;">Redo</a></li>
+			<li><a onclick="sheetInstance.toggleState(); return false;">Переключить режим</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="#">Вид</a>
+		<ul>
+			<li><a onclick="sheetInstance.viewSource(true); return false;" title="Показывает HTML-код образующий данный лист.">Оформленный HTML</a></li>
+			<li><a onclick="sheetInstance.viewSource(false); return false;" title="Показывает компактный HTML-код образующий данный лист.">Компактный HTML</a></li>
+			<li><a onclick="sheetInstance.print(sheetInstance.HTMLtoPrettySource(jQuery(sheetInstance.exportSheet.xml(true))[0])); return false;">В виде XML</a></li>
+			<li><a onclick="sheetInstance.print(JSON.stringify(sheetInstance.exportSheet.json())); return false;">В виде JSON</a></li>
+			<li>
+				<a menu="menuViewFunctionReference_menuInstance">Справочник функций</a>
+				<ul>
+					<li>
+						<a href="#">Математические и стандартные</a>
+						<ul>
+							<li><a title="Возвращает абсолютное значение числа">ABS()</a></li>
+							<li><a title="Возвращает среднее значение">AVG(), AVERAGE()</a></li>
+							<li><a title="Returns a number rounded up based on a multiple of significance">CEILING()</a></li>
+							<li><a title="Подсчитывает число не пустых ячеек">COUNT()</a></li>
+							<li><a title="Counts full days from a specific date - format(YYYY,MM,DD)">DAYSFROM()</a></li>
+							<li><a title="Converts a number to text, using a currency format - options(number, decimals, symbol)">DOLLAR()</a></li>
+							<li><a title="Returns a logical value of FALSE">FALSE()</a></li>
+							<li><a title="Returns a text representation of a number rounded to a specified number of decimal places - options(number, decimals, useCommas)">FIXED()</a></li>
+							<li><a title="Returns a number rounded down based on a multiple of significance">FLOOR()</a></li>
+							<li><a title="Creates and executes a javascript function. example: FN(alert('Hello World')), this will execute when sheet compiles.">FN()</a></li>
+							<li><a title="Returns the integer portion of a number">INT()</a></li>
+							<li><a title="Returns the largest value from the numbers provided">MAX()</a></li>
+							<li><a title="Returns the smallest value from the numbers provided">MIN()</a></li>
+							<li><a title="Преобразует значение в число">N()</a></li>
+							<li><a title="Gets full date of today">NOW()</a></li>
+							<li><a title="Returns the mathematical constant called pi, which is 3.14159265358979">PI()</a></li>
+							<li><a title="Returns the result of a number raised to a given power">POWER(x, y)</a></li>
+							<li><a title="Returns a random number that is greater than or equal to 0 and less than 1">RAND(), RND()</a></li>
+							<li><a title="Returns a number rounded to a specified number of digits">ROUND()</a></li>
+							<li><a title="Returns all of the values in each of the specified cells and added together">SUM()</a></li>
+							<li><a title="Gets full date of today">TODAY()</a></li>
+							<li><a title="Returns a logical value of TRUE">TRUE()</a></li>
+							<li><a title="Преобразует число в текстовом формате в число">VALUE()</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">Графики</a>
+						<ul>
+							<li><a href="#" title="Simple verticle style bar chart.">BARCHART()</a></li>
+							<li><a href="#" title="Simple horizontal style bar chart.">HBARCHART()</a></li>
+							<li><a href="#" title="Simple line style bar chart.">LINECHART()</a></li>
+							<li><a href="#" title="Simple pie style bar chart.">PIECHART()</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">Формы ввода</a>
+						<ul>
+							<li><a href="#">DROPDOWN()</a></li>
+							<li><a href="#">RADIO()</a></li>
+							<li><a href="#">CHECKBOX()</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a onclick="sheetInstance.toggleFullScreen();">Полноэкранный режим</a></li>
+		</ul>
+	</li>
+	<li>
+		<a href="#">Стиль</a>
+		<ul>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleBold'); return false;">Полужирный</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleItalics'); return false;">Курсив</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleUnderline', 'styleLineThrough'); return false;">Подчеркнутый</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleLineThrough', 'styleUnderline'); return false;">Перечеркнутый</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleLeft', 'styleCenter styleRight'); return false;">Влево</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleCenter', 'styleLeft styleRight'); return false;">По центру</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleRight', 'styleLeft styleCenter'); return false;">Вправо</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleUpper', 'styleCapital styleLower'); return false;">Верхний регистр</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleCapital', 'styleUpper styleLower'); return false;">Как в предложении</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleLower', 'styleCapital styleUpper'); return false;">Нижний регистр</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleTop', 'styleMiddle styleBottom'); return false;">Сверху</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleMiddle', 'styleTop styleBottom'); return false;">По середине</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.cellStyleToggle('styleBottom', 'styleTop styleMiddle'); return false;">Снизу</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.fontReSize('up'); return false;">Размер шрифта +</a></li>
+			<li><a class="cellStyleToggle" onclick="sheetInstance.fontReSize('down'); return false;">Размер шрифта -</a></li>
+		</ul>
+	</li>
+</ul>

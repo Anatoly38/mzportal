@@ -1,0 +1,101 @@
+#fs_titlebar {
+    cursor: pointer;
+}
+
+.grid 
+{
+    width: 99%;
+    position: relative ! important;
+    margin-top: 3px ! important;
+    margin-left: 3px ! important;
+    margin-bottom: 3px ! important;
+    overflow: auto;
+}
+
+.grid table
+{
+    background-color:#cccccc;
+    border-spacing:1px;
+    table-layout: fixed;
+    color:#666666;
+    min-width:50%;
+    cursor: cell;    
+}
+
+.grid tr:hover td,  tr:hover td.cellProtected  {
+    color: green;
+    background: #FFFFEE ! important;
+}
+
+.grid td {
+    background:#FFFFFF none scroll 0 0;
+    border:1px solid #FFFFFF;
+}
+
+.gridInPlaceEdit
+{
+    position: absolute;
+    z-index: 9999;
+}
+
+.cellProtected
+{
+    background-color: #E0FFFF ! important;
+}
+
+.cellCalculated
+{
+    background-color: #FFFFD0 ! important;
+}
+
+.gridLists
+{
+    display: none;
+}
+
+.gridFullScreen
+{
+    top: 5px;
+    left: 5px;
+    position: fixed;
+    top: expression(eval(document.body.scrollTop + 15) + "px");
+    left: expression(eval(document.body.scrollLeft) + "px");
+    z-index: 9998;
+}
+
+.bodyNoScroll
+{
+    overflow: hidden ! important;
+}
+
+/* Cell styler classes */
+.styleBold
+{ font-weight: bold; }
+.styleItalics
+{ font-style: italic; }
+.styleUnderline	
+{ text-decoration: underline; }
+.styleLineThrough
+{ text-decoration: line-through;}
+.styleLeft
+{ text-align: left; }
+.styleRight
+{ text-align: right; }
+.styleCenter
+{ text-align: center; }
+.styleTop
+{ vertical-align: top; }
+.styleMiddle
+{ vertical-align: middle; }
+.styleBottom
+{ vertical-align: bottom; }
+.styleUpper 	
+{ text-transform: uppercase; }
+.styleCapital 	
+{ text-transform: capitalize; }
+.styleLower 	
+{ text-transform: lowercase; }
+.styleHidden 
+{ display: none; }
+.styleWrap
+{ word-wrap: break-word; }

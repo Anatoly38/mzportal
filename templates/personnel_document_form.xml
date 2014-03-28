@@ -1,0 +1,50 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Документ</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Тип документа
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_document_type" name="тип_документа" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Серия документа
+            </td>
+            <td>
+                <input type="text" id="серия_документа" name="серия_документа" style="width: 200px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Номер документа
+            </td>
+            <td>
+                <input type="text" id="номер_документа" name="номер_документа" style="width: 200px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Кем выдан
+            </td>
+            <td>
+                <input type="text" name="кем_выдан" id="кем_выдан" style="width: 200px; height: 17px;" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата выдачи
+            </td>
+            <td>
+                <input type="text" name="дата_выдачи" style="width: 80px; height: 17px;" value="" class="dateISO popup_date"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

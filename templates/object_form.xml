@@ -1,0 +1,34 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Объект</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Имя
+            </td>
+            <td>
+                <input type="text" name="name" style="width: 400px; height: 17px;" class="required" value=""/>
+        </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Описание
+            </td>
+            <td>
+                <input type="text" name="description" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>        
+        <tr>
+            <td valign="top" class="key">
+                Удален
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_object_state" name="deleted"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

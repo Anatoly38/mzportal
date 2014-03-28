@@ -1,0 +1,82 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Учреждение здравоохранения</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Выбор ЛПУ
+            </td>
+            <td>
+                <input type="hidden" id="lpu_id" name="lpu_id" value="" class="required" />
+                <справочник вид="дерево" имя="dic_subordination" name="lpu_id" check_acl="required" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Форма отчета</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Выбор мониторинга и шаблона отчета
+            </td>
+            <td>
+                <input type="hidden" id="pattern_id" name="pattern_id" value="" class="required" />
+                <справочник вид="дерево" имя="dic_mon_patterns" name="pattern_id" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Отчетный период</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Год
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_mon_years" name="год" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Период 
+            </td>
+            <td>
+               <select name="period" id="period" class="required">
+                    <option value="">Выберите мониторинг и шаблон отчета</option>
+               </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Описание</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr style="display:none">
+            <td width="185" valign="top" class="key">
+                Статус отчета
+            </td>
+            <td>
+                <input type="text" name="описание" id="описание" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Комментарий
+            </td>
+            <td>
+                <textarea name="комментарий" style="width: 400px; height: 60px;" rows="3" cols="50" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

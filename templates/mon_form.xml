@@ -1,0 +1,34 @@
+<form_pane>
+<input type="hidden" id="oid" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Мониторинг</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Наименование
+            </td>
+            <td>
+                <input type="text" name="наименование" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Описание
+            </td>
+            <td>
+                <input type="text" name="описание" id="описание" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Регламентирующие документы
+            </td>
+            <td>
+                <textarea name="рег_документ" style="width: 400px; height: 60px;" rows="3" cols="50" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

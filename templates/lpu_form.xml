@@ -1,0 +1,188 @@
+<form_pane>
+<input type="hidden" id="oid" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Основные данные учреждения</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Дата сверки с ЕГРЮЛ
+            </td>
+            <td>
+                <input type="text" name="егрюл" id="егрюл" style="width: 80px; height: 17px;" value="" class="dateISO popup_date"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Представляет
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_inst_affiliation" name="обособленность" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Код территории
+            </td>
+            <td>
+                <input type="text" name="код_территории" style="width:70px;height:17px;" class="digits" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                ОГРН
+            </td>
+            <td>
+                <input type="text" name="огрн" style="width:110px;height:17px;" class="digits" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Код ОУЗ
+            </td>
+            <td>
+                <input type="text" name="код_оуз" style="width:50px;height:17px;" class="digits" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Полное наименование
+            </td>
+            <td>
+                <textarea type="text" name="наименование" style="width: 400px; height: 60px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Сокращенное наименование
+            </td>
+            <td>
+                <input type="text" name="сокращенное_наименование" id="сокращенное_наименование" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Почтовый (юридический) адрес
+            </td>
+            <td>
+                <textarea name="почтовый_адрес" style="width: 400px; height: 60px;" rows="3" cols="50" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Фактический адрес
+            </td>
+            <td>
+                <textarea name="фактический_адрес" style="width: 400px; height: 60px;" rows="3" cols="50" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Вэб-сайт
+            </td>
+            <td>
+                <input type="text" name="вэб_сайт" id="вэб_сайт" style="width: 400px; height: 17px;" value="" class="www"/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Руководитель
+            </td>
+            <td>
+                <input type="text" name="руководитель" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Состояние
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_inst_state" name="состояние" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата создания
+            </td>
+            <td>
+                <input type="text" name="дата_создания" style="width: 80px; height: 17px;" value="" class="dateISO popup_date"/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата ликвидации
+            </td>
+            <td>
+                <input type="text" name="дата_ликвидации" style="width: 80px; height: 17px;" value="" class="dateISO popup_date"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Организационно-правовая форма
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_legal_form" name="опф" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Уровень
+            </td>
+            <td>
+                <input type="hidden" id="уровень" name="уровень" value=""/>
+                <справочник вид="дерево" имя="dic_level" name="уровень" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Тип учреждения (номенклатура)
+            </td>
+            <td>
+                <input type="hidden" id="номенклатура" name="номенклатура" value=""/>
+                <справочник вид="дерево" имя="dic_nomenclature" name="номенклатура" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Уровень медицинской помощи
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_medical_care_level" name="уровень_мп" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Оказывает скорую медицинскую помощь (отделение СМП)
+            </td>
+            <td>
+                <input type="checkbox" name="смп" id="смп" value="1" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Расположено в сельской местности
+            </td>
+            <td>
+                <input type="checkbox" name="село" id="село" value="1" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Оказывает медицинскую помощь детям 
+            </td>
+            <td>
+                <input type="checkbox" name="дети" id="дети" value="1" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Коэффициент районного регулирования тарифов
+            </td>
+            <td>
+                <input type="text" name="крр" style="width:60px;height:17px;" class="" value=""/>
+            </td>
+        </tr>        
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

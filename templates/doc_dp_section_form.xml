@@ -1,0 +1,49 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Описание раздела документа</legend>
+        <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Наименование
+            </td>
+            <td>
+                <input type="text" name="наименование" style="width: 400px; height: 17px;" class="required" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Описание
+            </td>
+            <td>
+                <input type="text" name="описание" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Тип
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_dp_section_type" name="тип" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Диапазон данных
+            </td>
+            <td>
+                <input type="text" name="диапазон_данных" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Диапазон печати
+            </td>
+            <td>
+                <input type="text" name="диапазон_печати" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

@@ -1,0 +1,218 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<input type="hidden" name="pers_id" value="" />
+<fieldset class="adminform">
+    <legend>Общие данные</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Фамилия
+            </td>
+            <td>
+                <input type="text" id="фамилия" name="фамилия" style="width: 200px; height: 17px;" value="" class="required rusname" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Имя
+            </td>
+            <td>
+                <input type="text" id="имя" name="имя" style="width: 200px; height: 17px;" value="" class="required rusname" />
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Отчество
+            </td>
+            <td>
+                <input type="text" name="отчество" style="width: 200px; height: 17px;" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Пол
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_administrative_sex" name="пол" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата рождения
+            </td>
+            <td>
+                <input type="text" name="дата_рождения" style="width: 70px; height: 17px;" value="" class="required dateISO popup_date"/>                          
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Лечебное учреждение</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Выбор ЛПУ
+            </td>
+            <td>
+                <input type="hidden" id="lpu_id" name="lpu_id" value=""/>
+                <справочник вид="дерево" имя="dic_subordination" name="lpu_id" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Место жительства</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Адрес
+            </td>
+            <td>
+                <input type="hidden" id="кладр" name="кладр" value=""/>
+                <справочник вид="кладр" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Госпитализация</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Направитель
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_senders" name="направитель"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Время госпитализации от момента появления симптомов
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_desease_start" name="срок_госпитализации" проверка="required"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Госпитализация минуя приемный покой 
+            </td>
+            <td>
+                <span class="radio">
+                Нет<input type="radio" name="приемный_покой" value="0" />&#160;&#160;
+                Да<input type="radio" name="приемный_покой"  value="1"/>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Помещен/а в ПИТ 
+            </td>
+            <td>
+                <span class="radio">
+                Нет<input type="radio" name="интенсивная_терапия" value="0" />&#160;&#160;
+                Да<input type="radio" name="интенсивная_терапия"  value="1" />
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дата поступления
+            </td>
+            <td>
+                <input type="text" name="дата_поступления" style="width: 70px; height: 17px;" value="" class="popup_date required"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Код диагноза по МКБ-10
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_mkb10_oks" name="диагноз_мкб10" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дата выписки/смерти
+            </td>
+            <td>
+                <input type="text" name="дата_выписки" style="width: 70px; height: 17px;" value="" class="popup_date"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Исход
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_outcomes" name="исход"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Направлен в РСЦ 
+            </td>
+            <td>
+                <span class="radio">
+                Нет<input type="radio" name="рсц" value="0" />&#160;&#160;
+                Да<input type="radio" name="рсц"  value="1" />
+                </span>
+            </td>
+        </tr>        
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Тромболитическая терапия</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Условия проведения
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_tlt_condition" name="тлт_проведение"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Срок до начала ТЛТ
+            </td>
+            <td>
+                <input type="text" name="тлт_срок" style="width: 50px; height: 17px;" class="text_area" value=""/> <span class="radio">часов</span>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Использованный тромболитик
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_tlt_preparates" name="тлт_препарат"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Эффективность
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_tlt_effect" name="тлт_эффективность"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Осложнения
+            </td>
+            <td>
+                <textarea name="тлт_осложнения" style="width: 400px; height: 34px;" class="text_area"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

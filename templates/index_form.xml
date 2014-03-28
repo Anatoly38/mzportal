@@ -1,0 +1,74 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>показатель</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Наименование
+        </td>
+            <td>
+                <input type="text" name="наименование" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Описание
+            </td>
+            <td>
+                <textarea name="описание" style="width: 400px; height: 60px;" rows="3" cols="50" class="text_area"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Вид
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_index_types" name="вид" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Группа
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_index_groups" name="группа" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Тип
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_data_types" name="тип" проверка="required"/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Единица измерения
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_units" name="ед_измерения"/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата утверждения
+            </td>
+            <td>
+                <input type="text" name="дата_утверждения" style="width: 60px; height: 17px;" value="" class="required dateISO popup_date"/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Регламентирующий документ
+            </td>
+            <td>
+                <textarea name="рег_документ" style="width: 400px; height: 17px;" rows="3" cols="50" class="text_area"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

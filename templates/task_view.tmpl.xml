@@ -1,0 +1,17 @@
+<task_pane>
+<script type="text/javascript">
+    function UnHide( eThis ){
+        if( eThis.firstChild.innerHTML.charCodeAt(0) == 9658 ){
+            eThis.firstChild.innerHTML = '▼'
+            eThis.parentNode.parentNode.className = '';
+        }else{
+            eThis.firstChild.innerHTML = '►'
+            eThis.parentNode.parentNode.className = 'cl';
+        }
+        return false;
+    }
+</script>
+<div class="treeview">
+    <ul id="0" />
+</div>
+</task_pane>

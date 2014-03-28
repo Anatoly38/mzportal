@@ -1,0 +1,64 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Форма сводного отчета и период</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Мониторинг
+            </td>
+            <td>
+                <input type="hidden" id="pattern_id" name="pattern_id" value="" class="required" />
+                <справочник вид="дерево" имя="dic_mon_patterns" name="pattern_id" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Доступные периоды
+            </td>
+            <td>
+                <справочник вид="список" имя="mon_periods_view" name="period_oid" проверка="required" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Дополнительные условия</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Группы учреждений
+            </td>
+            <td>
+                Все учреждения сдавшие отчет за данный период
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Статусы отчетов
+            </td>
+            <td>
+                Без учета статуса документов
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Описание</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Комментарий
+            </td>
+            <td>
+                <textarea name="комментарий" style="width: 400px; height: 60px;" rows="3" cols="50" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

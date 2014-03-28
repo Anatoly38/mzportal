@@ -1,0 +1,35 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Категория</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Квалификационная категория
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_qualification_category" name="категория" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Год присвоения
+            </td>
+            <td>
+                <input type="text" id="год_присвоения" name="год_присвоения" style="width: 70px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Специальность
+            </td>
+            <td>
+                <input type="hidden" id="специальность" name="специальность" value="" class="required"/>
+                <справочник вид="дерево" имя="dic_sertificate_specialities" name="специальность" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

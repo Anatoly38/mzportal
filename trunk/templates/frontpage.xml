@@ -1,0 +1,13 @@
+<frontpage>
+    <style type="text/css">
+    .frontpage { 
+        clear:both;
+        position:relative; 
+        padding: 0 0 0 10em; 
+        font-family: Arial, sans-serif; width: 100%; cursor: pointer; 
+    }
+    </style>
+    <div class="frontpage">
+        <ul id="root" />
+    </div>
+</frontpage>

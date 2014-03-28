@@ -1,0 +1,17 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Задача</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Текст шаблона
+            </td>
+            <td>
+                <textarea name="шаблон" rows="20" style="width: 600px; height: 300px;" class="required"></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

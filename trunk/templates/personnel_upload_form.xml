@@ -1,0 +1,27 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Выбор файла в формате ФРМР для загрузки</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Выбор ЛПУ
+            </td>
+            <td>
+                <input type="hidden" id="lpu_id" name="lpu_id" value=""/>
+                <справочник вид="дерево" имя="dic_subordination" name="lpu_id" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Выбор файл для загрузки
+            </td>
+            <td>
+                <input type="hidden" name="MAX_FILE_SIZE" value="30000000" />
+                <input name="frmr_file" type="file" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

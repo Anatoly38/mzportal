@@ -1,0 +1,155 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Личное дело</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Вид должности
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_position" name="вид_должности" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Должность
+            </td>
+            <td>
+                <input type="hidden" id="должность" name="должность" value="" class="required"/>
+                <справочник вид="дерево" имя="dic_post" name="должность" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Тип занятия должности
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_position_type" name="тип_должности" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Ставка
+            </td>
+            <td>
+                <input type="text" id="ставка" name="ставка" style="width: 30px; height: 17px;" value="" class="required" /> %
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дата начала трудовых отношений
+            </td>
+            <td>
+                <input type="text" id="дата_начала_труд_отношений" name="дата_начала_труд_отношений" style="width: 80px; height: 17px;" value="" class="dateISO popup_date required"/>
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Тип записи
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_recordtype_in" name="тип_записи_начало" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Приказ №
+            </td>
+            <td>
+                <input type="text" id="номер_приказа_начало" name="номер_приказа_начало" style="width: 200px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дата окончания трудовых отношений
+            </td>
+            <td>
+                <input type="text" id="дата_окончания_труд_отношений" name="дата_окончания_труд_отношений" style="width: 80px; height: 17px;" value="" class="dateISO popup_date"/>
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Тип записи
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_recordtype_out" name="тип_записи_окончание" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Приказ №
+            </td>
+            <td>
+                <input type="text" id="номер_приказа_начало" name="номер_приказа_окончание" style="width: 200px; height: 17px;" value="" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Дополнительные сведения</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Режим работы
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_regime" name="режим_работы" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Отношение к военной службе
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_military" name="военная_служба" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Тип подразделения
+            </td>
+            <td>
+                <input type="hidden" id="подразделение" name="подразделение" value="" class="required"/>
+                <справочник вид="дерево" имя="dic_subdivision" name="подразделение" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Название подразделения
+            </td>
+            <td>
+                <input type="text" id="название_подразделения" name="название_подразделения" style="width: 400px; height: 17px;" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Вид медицинской помощи
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_medical_care" name="вид_мп" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Условия медицинской помощи
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_medical_condition" name="условия_мп" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Численность прикрепленного населения (чел.)
+            </td>
+            <td>
+                <input type="text" id="население" name="население" style="width: 60px; height: 17px;" value="" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

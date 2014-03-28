@@ -1,0 +1,26 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Данные налоговой идентификации</legend>
+    <table cellspacing="1" class="admintable">
+    <tbody>
+        <tr>
+            <td valign="top" class="key">
+                ИНН
+            </td>
+            <td>
+                <input type="text" name="инн" style="width: 400px; height: 17px;" class="required inn" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                КПП
+            </td>
+            <td>
+                <input type="text" name="кпп" style="width: 400px; height: 17px;" class="required digits" value=""/>
+        </td>
+        </tr>
+    </tbody>
+    </table>
+</fieldset>
+</form_pane>

@@ -1,0 +1,34 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Задача</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Наименование
+            </td>
+            <td>
+                <input type="text" name="наименование" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Описание
+            </td>
+            <td>
+                <input type="text" name="описание" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Компонент
+            </td>
+            <td>
+                <input type="text" name="component_id" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

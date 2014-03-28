@@ -1,0 +1,42 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Поручение</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Наименование
+            </td>
+            <td>
+                <input type="text" id="наименование" name="наименование" style="width: 200px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Описание
+            </td>
+            <td>
+                <input type="text" id="описание" name="описание" style="width: 200px; height: 17px;" value=""  />
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Содержание
+            </td>
+            <td>
+                <input type="text" id="содержание" name="содержание" style="width: 200px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата вынесения
+            </td>
+            <td>
+                <input type="text" id="дата_вынесения" name="дата_вынесения" style="width: 80px; height: 17px;" value="" class="required dateISO popup_date"/>                          
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

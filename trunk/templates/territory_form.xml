@@ -1,0 +1,50 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Территория</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Уровень
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_territory_types" name="уровень" проверка="required" />
+        </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Код ОКАТО
+            </td>
+            <td>
+                <input type="text" name="ОКАТО" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>        
+        <tr>
+            <td valign="top" class="key">
+                Наименование
+            </td>
+            <td>
+                <input type="text" name="наименование" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Сокращенное наименование
+            </td>
+            <td>
+                <input type="text" name="сокр_наименование" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Код ОУЗ
+            </td>
+            <td>
+                <input type="text" name="код_ОУЗ" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

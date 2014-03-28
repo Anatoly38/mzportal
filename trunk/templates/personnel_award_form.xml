@@ -1,0 +1,34 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Награда/поощрение сотрудника</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Номер
+            </td>
+            <td>
+                <input type="text" id="номер_награды" name="номер_награды" style="width: 100px; height: 17px;" value="" class="" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Наименование
+            </td>
+            <td>
+                <input type="text" id="наименование" name="наименование" style="width: 400px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дата получения
+            </td>
+            <td>
+                <input type="text" id="дата_получения" name="дата_получения" style="width: 80px; height: 17px;" value="" class="required dateISO popup_date"/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

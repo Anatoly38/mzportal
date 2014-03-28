@@ -1,0 +1,60 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Пользователь</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Имя пользователя
+            </td>
+            <td>
+                <input type="text" name="name" style="width: 200px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Описание
+            </td>
+            <td>
+                <input type="text" name="description" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>        
+        <tr>
+            <td valign="top" class="key">
+                Отключен
+            </td>
+            <td>
+                <input type="checkbox" name="blocked" id="blocked" value="1"/>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Пароль</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Пароль
+            </td>
+            <td>
+                <input type="text" name="pwd" style="width: 250px; height: 17px;" class="text_area" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Шифрование
+            </td>
+            <td>
+                <span class="radio">
+                    Да (MD5) <input type="radio" value="1" name="crypt"/>&#160;&#160;
+                    Нет <input type="radio" checked="checked" value="0" name="crypt" />
+                </span>
+            </td>            
+        </tr>
+    </tbody>
+    </table>
+</fieldset>
+</form_pane>

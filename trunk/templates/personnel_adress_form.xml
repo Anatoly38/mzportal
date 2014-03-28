@@ -1,0 +1,75 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Место жительства</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Почтовый индекс
+            </td>
+            <td>
+                <input type="text" id="индекс" name="индекс" style="width: 70px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Адрес (район, населенный пункт)
+            </td>
+            <td>
+                <input type="hidden" id="код_кладр" name="код_кладр" value="" class="required" />
+                <справочник вид="кладр" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Улица
+            </td>
+            <td>
+                <input type="text" id="улица" name="улица" style="width: 200px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дом
+            </td>
+            <td>
+                <input type="text" id="дом" name="дом" style="width: 50px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Корпус/строение
+            </td>
+            <td>
+                <input type="text" id="строение" name="строение" style="width: 50px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Квартира
+            </td>
+            <td>
+                <input type="text" id="квартира" name="квартира" style="width: 50px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дата регистрации
+            </td>
+            <td>
+                <input type="text" name="дата_регистрации" style="width: 80px; height: 17px;" value="" class="required dateISO popup_date"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Тип регистрации
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_registration_type" name="регистрация" проверка="required" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

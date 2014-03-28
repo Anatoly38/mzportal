@@ -1,0 +1,26 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Выбор файла в формате Excel 2007 для загрузки</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Выбор файл для загрузки
+            </td>
+            <td>
+                <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+                <input name="excel_template_file" type="file" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Выбор диапазона ячеек для импорта
+            </td>
+            <td>
+                <input type="text" name="cell_gange" value="" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

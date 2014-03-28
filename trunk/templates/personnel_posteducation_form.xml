@@ -1,0 +1,84 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Образование</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Базовая организация
+            </td>
+            <td>
+                <input type="hidden" id="базовая_организация" name="базовая_организация" value="" class="required"/>
+                <справочник вид="дерево" имя="dic_education_institution" name="базовая_организация" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Тип образования
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_posteducation_type" name="тип_образования" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Начало прохождения
+            </td>
+            <td>
+                <input type="text" id="начало_прохождения" name="начало_прохождения" style="width: 100px; height: 17px;" value="" class="dateISO popup_date required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Окончание прохождения
+            </td>
+            <td>
+                <input type="text" id="окончание_прохождения" name="окончание_прохождения" style="width: 100px; height: 17px;" value="" class="dateISO popup_date required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дата получения документа
+            </td>
+            <td>
+                <input type="text" id="дата_получ_документа" name="дата_получ_документа" style="width: 100px; height: 17px;" value="" class="dateISO popup_date required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Ученая степень
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_academic_degree" name="ученая_степень" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Серия диплома
+            </td>
+            <td>
+                <input type="text" id="серия_диплома" name="серия_диплома" style="width: 200px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Номер диплома
+            </td>
+            <td>
+                <input type="text" id="номер_диплома" name="номер_диплома" style="width: 200px; height: 17px;" value="" class="required" />
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Специальность
+            </td>
+            <td>
+                <input type="hidden" id="специальность" name="специальность" value="" class="required"/>
+                <справочник вид="дерево" имя="dic_sertificate_specialities" name="специальность" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

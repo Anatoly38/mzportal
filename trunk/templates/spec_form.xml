@@ -1,0 +1,98 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<input type="hidden" name="subject" value="" />
+<fieldset class="adminform">
+    <legend>Основные сведения</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Фамилия
+            </td>
+            <td>
+                <input type="text" id="фамилия" name="фамилия" style="width: 200px; height: 17px;" value="" class="required rusname" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Имя
+            </td>
+            <td>
+                <input type="text" id="имя" name="имя" style="width: 200px; height: 17px;" value="" class="required rusname" />
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Отчество
+            </td>
+            <td>
+                <input type="text" name="отчество" style="width: 200px; height: 17px;" value="" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Пол
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_administrative_sex" name="пол" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата рождения
+            </td>
+            <td>
+                <input type="text" name="дата_рождения" style="width: 60px; height: 17px;" value="" class="required dateISO popup_date"/>                          
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата смерти
+            </td>
+            <td>
+                <input type="text" name="дата_смерти" style="width: 60px; height: 17px;" value="" class="dateISO popup_date"/>                          
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+<fieldset class="adminform">
+    <legend>Специальность</legend>
+    <table cellspacing="1" class="admintable">
+    <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Специальность
+            </td>
+            <td>
+                <input type="text" name="специальность" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Категория
+            </td>
+            <td>
+                <input type="text" name="категория" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Ученая степень
+            </td>
+            <td>
+                <input type="text" name="ученая_степень" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Ученое звание
+            </td>
+            <td>
+                <input type="text" name="ученое_звание" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+    </tbody>
+    </table>
+</fieldset>
+</form_pane>

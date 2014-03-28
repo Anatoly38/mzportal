@@ -1,0 +1,90 @@
+<form_pane>
+<input type="hidden" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Описание документа</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td valign="top" class="key">
+                Наименование
+            </td>
+            <td>
+                <input type="text" name="наименование" style="width: 400px; height: 17px;" class="required " value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Имя (уникальное название для ссылок в формулах расчета и контроля)
+            </td>
+            <td>
+                <input type="text" name="имя" style="width: 80px; height: 17px;" class="required " value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Описание
+            </td>
+            <td>
+                <input type="text" name="описание" style="width: 400px; height: 17px;" class="text_area" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Периодичность отчета
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_periodicity" name="периодичность" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Вид 
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_doc_pattern_kind" name="вид" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Версия
+            </td>
+            <td>
+                <input type="text" name="версия" style="width: 100px; height: 17px;" class="text_area" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Статус
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_doc_pattern_status" name="статус" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата утверждения
+            </td>
+            <td>
+                <input type="text" name="дата_утверждения" style="width: 60px; height: 17px;" value="" class="required dateISO popup_date"/>                          
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дата исключения
+            </td>
+            <td>
+                <input type="text" name="дата_исключения" style="width: 60px; height: 17px;" value="" class="dateISO popup_date"/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Основание
+            </td>
+            <td>
+                <textarea type="text" name="основание" style="width: 400px; height: 34px;" ></textarea>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

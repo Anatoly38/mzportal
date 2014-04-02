@@ -249,17 +249,6 @@ class DB_mzportal extends DB_Mysql
     public function __construct() { }
 }
 
-// Установка подключения к БД revdo
-class DB_revdo extends DB_Mysql 
-{
-    protected $user   = "root";
-    protected $pass   = "vtrbMX54";
-    protected $dbhost = "localhost";
-    protected $dbname = "revdo";
-
-    public function __construct() { }
-}
-
 // Установка подключения к БД add
 class DB_add extends DB_Mysql 
 {

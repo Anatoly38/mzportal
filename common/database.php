@@ -1,13 +1,13 @@
 <?php
 /**
-* @version		$Id: database.php,v 1.1 2009/11/26 00:50:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Indexes
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @version      $Id: database.php,v 1.1 2009/11/26 00:50:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Factory
+* @copyright    Copyright (C) 2010-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
-defined( '_MZEXEC' ) or die( 'Restricted access' );
+//defined( '_MZEXEC' ) or die( 'Restricted access' );
 
 // Обработка ошибок подключения к БД
 class MysqlException extends Exception {
@@ -260,4 +260,14 @@ class DB_add extends DB_Mysql
     public function __construct() { }
 }
 
+// Установка подключения к БД igivetest
+class DB_quize extends DB_Mysql 
+{
+    protected $user   = "root";
+    protected $pass   = "4lbt2f";
+    protected $dbhost = "localhost";
+    protected $dbname = "m-quize";
+
+    public function __construct() { }
+}
 ?>

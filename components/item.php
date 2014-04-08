@@ -1,15 +1,10 @@
 <?php
 /**
-* @version		$Id: user_item.php,v 1.1 2010/04/15 20:50:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	User
-* @copyright	Copyright (C) 2009 МИАЦ ИО
-* @license		GNU/GPL, see LICENSE.php
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details. 
+* @version      $Id: user_item.php,v 1.1 2014/04/15 20:50:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   User
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @license      GNU/GPL, see LICENSE.php
 
 Прямой доступ запрещен
 */

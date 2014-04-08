@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: component.php,v 1.3 2011/09/21 11:13:51 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Framework
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @version      $Id: component.php,v 1.3 2011/09/21 11:13:51 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Framework
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

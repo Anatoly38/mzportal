@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: mon_document_list.php,v 1.0 2011/09/05 20:51:30 shameev Exp $
+* @version		$Id: mon_document_list.php,v 1.0 2014/05/23 12:51:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Monitotings
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @copyright	Copyright (C) 2090-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -36,7 +36,7 @@ class MonDocumentList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(MonDocumentViewQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

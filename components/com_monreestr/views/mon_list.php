@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: mon_list.php,v 1.0 2011/08/28 12:29:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Monitotings
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @version      $Id: mon_list.php,v 1.0 2014/05/23 12:29:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Monitotings
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -31,7 +31,7 @@ class MonList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(MonReestrQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: doc_section_list.php,v 1.0 2011/09/19 1:46:30 shameev Exp $
+* @version		$Id: doc_section_list.php,v 1.0 2014/05/23 1:46:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Monitorings
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @copyright	Copyright (C) 2090-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -38,7 +38,7 @@ class DocSectionList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(MonSectionView $item)
+    protected function add($item)
     {
         parent::add($item);
     }

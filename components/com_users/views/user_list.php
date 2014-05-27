@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: user_list.php,v 1.1 2010/04/15 16:50:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Users
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @version      $Id: user_list.php,v 1.1 2014/05/23 16:50:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Users
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -35,7 +35,7 @@ class UserList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(UserQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

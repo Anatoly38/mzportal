@@ -20,8 +20,8 @@ if (MZConfig::$os == 'windows') {
     define( 'FRMR_DICTIONARY_UPLOADS',  'C:\uploaded_files\frmr_dic_uploads');
 }
 else if (MZConfig::$os == 'linux') {
-    define( 'UPLOADS',                  '/var/www/uploads/');
-    define( 'FRMR_DICTIONARY_UPLOADS',  '/var//www/uploads/');
+    define( 'UPLOADS',                  '/home/wwwroot/tmp_upload/');
+    define( 'FRMR_DICTIONARY_UPLOADS',  '/home/wwwroot/tmp_upload/');
 }
 
 ?>

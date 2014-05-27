@@ -1,15 +1,9 @@
 <?php
 /**
-* @version		$Id: territory_list.php,v 1.6 2009/09/21 00:50:30 shameev Exp $
+* @version		$Id: territory_list.php,v 1.6 2014/05/26 00:50:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Indexes
-* @copyright	Copyright (C) 2009 МИАЦ ИО
-* @license		GNU/GPL, see LICENSE.php
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details. 
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -38,7 +32,7 @@ class TerritoryList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(TerritoryQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

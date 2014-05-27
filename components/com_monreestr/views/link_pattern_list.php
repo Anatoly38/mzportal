@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: link_pattern_list.php,v 1.0 2011/08/29 19:18:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Document Patterns
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @version      $Id: link_pattern_list.php,v 1.0 2011/08/29 19:18:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Document Patterns
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -38,7 +38,7 @@ class LinkPatternList extends DocPatternList
         $constr->get_filters();
     }
     
-    protected function add(DocPatternQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

@@ -3,7 +3,7 @@
 * @version		$Id: view_cpanel.php,v 1.1 2012/02/19 13:29:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Frontpage
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

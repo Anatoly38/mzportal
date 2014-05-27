@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: doc_pattern_list.php,v 1.0 2011/04/24 13:40:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Document Patterns
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @version      $Id: doc_pattern_list.php,v 1.0 2011/04/24 13:40:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Document Patterns
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -32,7 +32,7 @@ class DocPatternList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(DocPatternQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

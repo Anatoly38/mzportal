@@ -22,7 +22,7 @@ class UserItem extends Item
     protected $model = 'UserQuery';
     protected $form = 'user_form_tmpl';
  
-    protected function set_values()
+    protected function set_values($add = null)
     {
         $values = $this->query->get_as_array();
         $values['oid'] = $values['uid'];

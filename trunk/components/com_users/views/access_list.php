@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: access_list.php,v 1.0 2012/02/27 13:40:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Users
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @version      $Id: access_list.php,v 1.0 2014/05/23 13:40:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Users
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -38,7 +38,7 @@ class AccessList extends ItemList
         //$constr->get_filters();
     }
     
-    protected function add(AccessListQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

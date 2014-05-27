@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: constraint.php,v 1.2 2011/10/06 11:33:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Factory
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @version      $Id: constraint.php,v 1.2 2014/05/23 11:33:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Factory
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -26,7 +26,7 @@ class Constraint
         //$this->registry = Registry::getInstance();
     }
     
-    public function getInstance()
+    public static function getInstance()
     {
         if(self::$instance === false) {
             self::$instance = new Constraint;

@@ -37,7 +37,7 @@ class GroupList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(UserQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

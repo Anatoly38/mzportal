@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: session.php 2010-01-19 21:03:02Z ian $
+* @version		$Id: session.php 2014-05-23 21:03:02Z ian $
 * @package		MZPortal.Framework
 * @subpackage	Session
 * @copyright	Copyright (C) 2010 МИАЦ ИО
@@ -111,7 +111,7 @@ class MZSession
         session_id($id);
         session_cache_limiter('none');
         session_start();
-        $this->state = 'active';
+        self::$state = 'active';
         return true;
     }
 

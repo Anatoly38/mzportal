@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: doc_pattern.php,v 1.0 2010/04/23 11:13:51 shameev Exp $
+* @version		$Id: doc_pattern.php,v 1.0 2014/05/23 15:13:51 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

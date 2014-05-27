@@ -40,7 +40,7 @@ class MemberList extends ItemList
         $this->where = $constr->get_where();
     }
     
-    protected function add(UserQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

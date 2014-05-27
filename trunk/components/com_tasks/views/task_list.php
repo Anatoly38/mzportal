@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: task_list.php,v 1.2 2011/04/18 13:40:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Tasks
-* @copyright	Copyright (C) 2009 МИАЦ ИО
+* @version      $Id: task_list.php,v 1.2 2014/05/23 13:40:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Tasks
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -31,7 +31,8 @@ class TaskList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(TaskQuery $item)
+    //protected function add(TaskQuery $item)
+    protected function add($item)
     {
         parent::add($item);
     }

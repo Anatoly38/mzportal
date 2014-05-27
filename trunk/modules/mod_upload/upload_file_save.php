@@ -1,9 +1,9 @@
 <?php
 /** 
-* @version		$Id: upload_file_save.php,v 1.0 2012/02/28 12:50:30 shameev Exp $
-* @package		MZPortal.Framework
-* @subpackage	Upload File Module
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @version      $Id: upload_file_save.php,v 1.0 2012/02/28 12:50:30 shameev Exp $
+* @package      MZPortal.Framework
+* @subpackage   Upload File Module
+* @copyright    Copyright (C) 2012 МИАЦ ИО
 
 Прямой доступ запрещен
 */

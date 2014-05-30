@@ -1,9 +1,9 @@
 <?php
 /** 
-* @version		$Id: excel_export.php,v 1.0 2012/01/05 14:50:30 shameev Exp $
+* @version		$Id: excel_export.php,v 1.0 2014/05/28 14:50:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Excel module
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 Прямой доступ запрещен
 */
 

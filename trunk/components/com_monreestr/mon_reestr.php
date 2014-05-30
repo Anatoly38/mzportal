@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: mon_reestr.php,v 1.0 2011/08/28 11:45:51 shameev Exp $
+* @version		$Id: mon_reestr.php,v 1.0 2014/05/28 11:45:51 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Passport
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

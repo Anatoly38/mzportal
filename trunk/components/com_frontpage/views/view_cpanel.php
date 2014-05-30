@@ -86,14 +86,15 @@ class ViewControlPanel
     function cpanel_components($component_id)
     {
         $cpanel_components = array(
-            11 => array( 'title' => 'Задачи'                                , 'icon' => 'icon-48-tasks.png' ),
-            6  => array( 'title' => 'Пользователи'                          , 'icon' => 'icon-48-user.png' ),
-            14 => array( 'title' => 'Шаблоны отчетных документов'           , 'icon' => 'icon-48-template.png' ),
-            47 => array( 'title' => 'Реестр мониторингов'                   , 'icon' => 'icon-48-monitoring.png' ),
-            49 => array( 'title' => 'Отчеты учреждений здравоохранения'     , 'icon' => 'icon-48-primary-report.png' ),
-            50 => array( 'title' => 'Свод и анализ первичных отчетов'       , 'icon' => 'icon-48-consolidated-report.png' ),
-            4  => array( 'title' => 'Территории'                            , 'icon' => 'icon-48-territory.png' ),
-            9  => array( 'title' => 'Паспорта ЛПУ'                          , 'icon' => 'icon-48-hospital.png' )
+            11  => array( 'title' => 'Задачи'                                , 'icon' => 'icon-48-tasks.png' ),
+            6   => array( 'title' => 'Пользователи'                          , 'icon' => 'icon-48-user.png' ),
+            14  => array( 'title' => 'Шаблоны отчетных документов'           , 'icon' => 'icon-48-template.png' ),
+            47  => array( 'title' => 'Реестр мониторингов'                   , 'icon' => 'icon-48-monitoring.png' ),
+            49  => array( 'title' => 'Отчеты учреждений здравоохранения'     , 'icon' => 'icon-48-primary-report.png' ),
+            50  => array( 'title' => 'Свод и анализ первичных отчетов'       , 'icon' => 'icon-48-consolidated-report.png' ),
+            4   => array( 'title' => 'Территории'                            , 'icon' => 'icon-48-territory.png' ),
+            9   => array( 'title' => 'Паспорта ЛПУ'                          , 'icon' => 'icon-48-hospital.png' ),
+            54  => array( 'title' => 'Тестирование'                          , 'icon' => 'icon-48-user.png' )
         );
         if (array_key_exists($component_id, $cpanel_components)) {
             return $cpanel_components[$component_id];

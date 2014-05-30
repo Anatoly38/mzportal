@@ -157,16 +157,16 @@ JS;
         $doc = new $this->model($doc_id);
         $s = new SectionDataEdit($doc_id, $section_id);
         $dformat = 'Y-m-d';
-        //$date1 = DateTime::createFromFormat($dformat, $doc->начало);
-        //$date2 = DateTime::createFromFormat($dformat, $doc->окончание);
-        //self::set_title('Мониторинг: "' . $doc->мониторинг . '"</br>Учреждение: ' . $doc->лпу 
-        //. '</br>Год: ' . $doc->год . ', Период: ' . $doc->наименование_периода . ' (с ' . $date1->format('j.m.Y') . ' по ' . $date2->format('j.m.Y') . ')') ;
-        self::set_title('Мониторинг: ' . $doc->мониторинг 
+        $date1 = DateTime::createFromFormat($dformat, $doc->начало);
+        $date2 = DateTime::createFromFormat($dformat, $doc->окончание);
+        self::set_title('Мониторинг: "' . $doc->мониторинг . '"</br>Учреждение: ' . $doc->лпу 
+        . '</br>Год: ' . $doc->год . ', Период: ' . $doc->наименование_периода . ' (с ' . $date1->format('j.m.Y') . ' по ' . $date2->format('j.m.Y') . ')') ;
+        /* self::set_title('Мониторинг: ' . $doc->мониторинг 
         . '</br> Форма: ' . $doc->шаблон
         . '</br> Раздел: ' . $s->section_title
         . '</br>Учреждение: ' . $doc->лпу 
         . '</br>Год: ' . $doc->год . ', Период: ' . $doc->наименование_периода . ' (с ' . $doc->начало . ' по ' . $doc->окончание .')'
-        );
+        ); */
         $save_t = self::set_toolbar_button('save', 'data_saving' , 'Сохранить');
         $js_code = '$("#source").val($.statgrid.instance.exportHTML()); $("#adminForm").submit(); return true;'; //
         $save_t->set_option('dialog',  $js_code);

@@ -34,18 +34,18 @@ catch (AuthException $e) {
 <title>Авторизация</title>
 <style type="text/css"> 
 #container { 
-	width: 100%;  
-	background: #FFFFFF;
-	margin: 0 auto; 
-	border: 1px solid #000000;
-	text-align: left; 
+    width: 100%;  
+    background: #FFFFFF;
+    margin: 0 auto; 
+    border: 1px solid #000000;
+    text-align: left; 
 } 
 #header { 
-	background: #DDDDDD; 
+    background: #DDDDDD; 
 } 
 #header h2 {
-	margin: 0; 
-	padding: 10px 10px 10px 10px; 
+    margin: 0; 
+    padding: 10px 10px 10px 10px; 
 }
 
 #login {
@@ -88,7 +88,7 @@ catch (AuthException $e) {
         </p>
         <p>
             <label>Пароль</label>
-            <input type="text" name="pwd" id="2" />
+            <input type="password" name="pwd" id="2" />
         </p>
         <p class="button">
             <input type="submit" name="button" id="button" value="Войти" />

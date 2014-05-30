@@ -1,9 +1,9 @@
 <?php
 /**
-* @version      $Id: component_acl.php,v 1.0 2011/09/11 10:33:51 shameev Exp $
+* @version      $Id: component_acl.php,v 1.0 2014/05/29 10:33:51 shameev Exp $
 * @package      MZPortal.Framework
 * @subpackage   Framework
-* @copyright    Copyright (C) 2011 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

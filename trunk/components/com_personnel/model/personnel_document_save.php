@@ -1,15 +1,9 @@
 <?php
 /**
-* @version		$Id: personal_document_save.php,v 1.0 2011/02/08 12:50:30 shameev Exp $
+* @version		$Id: personal_document_save.php,v 1.0 2014/06/27 12:50:30 shameev Exp $
 * @package		MZPortal.Framework
-* @subpackage	Passport
-* @copyright	Copyright (C) 2011 МИАЦ ИО
-* @license		GNU/GPL, see LICENSE.php
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details. 
+* @subpackage	Passport_LPU
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -38,8 +32,7 @@ class PersonnelDocumentSave extends ItemSave
             LinkObjects::set_link($this->human, $this->query->oid, $document_link); // Ассоциация между карточкой сотрудника и документом
         }
         catch (Exception $e) {
-            $m = Message::getInstance();
-            $m->enque_message('error', 'Ошибка: Ассоциация между объектами (PersDemographic, Document) не сохранена!');
+            Message::error('Ошибка: Ассоциация между объектами (PersDemographic, Document) не сохранена!');
             return false;
         }
     }

@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: lpu_list.php,v 1.0 2011/05/12 13:40:30 shameev Exp $
+* @version		$Id: lpu_list.php,v 1.0 2014/06/01 13:40:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Passport LPU
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -36,11 +36,6 @@ class LpuList extends ItemList
         $constr->add_filter('уровень' , 'dic_level');
         $constr->add_filter('уровень_мп' , 'dic_medical_care_level', 'наименование' , 'наименование' , 'уровень мед. помощи');
         $constr->get_filters();
-    }
-    
-    protected function add(LpuQuery $item)
-    {
-        parent::add($item);
     }
     
     protected function list_options()

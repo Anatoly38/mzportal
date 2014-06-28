@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: view_cpanel.php,v 1.1 2012/02/19 13:29:30 shameev Exp $
+* @version		$Id: view_cpanel.php,v 1.1 2014/06/01 13:29:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Frontpage
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО
@@ -13,8 +13,15 @@ require_once ( MZPATH_BASE . DS .'components' . DS .'com_tasks' . DS . 'views' .
 
 class ViewControlPanel 
 {
-    private $img_path = 'includes/style/images/cpanel/';
-    private $cpanel;
+    protected $img_path = 'includes/style/images/cpanel/';
+    protected $cpanel;
+	protected $cpanel_components = array(
+            11  => array( 'title' => 'Задачи'		, 'icon' => 'icon-48-tasks.png' ),
+            6   => array( 'title' => 'Пользователи' , 'icon' => 'icon-48-user.png' ),
+            4   => array( 'title' => 'Территории'   , 'icon' => 'icon-48-territory.png' ),
+            9   => array( 'title' => 'Паспорта ЛПУ' , 'icon' => 'icon-48-hospital.png' ),
+            54  => array( 'title' => 'Тестирование' , 'icon' => 'icon-48-question.png' )
+        );
     
     public function __construct()
     {
@@ -32,7 +39,7 @@ class ViewControlPanel
         $this->cpanel->loadXML($tmpl);
     }
 
-    function get_user_components() 
+    protected function get_user_components() 
     {
         $obj = new TaskList();
         $obj->set_limit(0);
@@ -47,7 +54,7 @@ class ViewControlPanel
         return $components;
     }
     
-    function set_content($components)
+    public function set_content($components)
     {
         if (!$components) {
             Message::error('Нет доступных приложений');
@@ -55,7 +62,7 @@ class ViewControlPanel
         }
         //print_r($components);
         foreach ($components as $c ) {
-            if ($icon_set = $this->cpanel_components($c)) {
+            if ($icon_set = $this->get_cpanel_component($c)) {
                 $new_wrapper_div = $this->cpanel->createElement('div');
                 $new_wrapper_div->setAttribute('class', 'icon-wrapper');
                 $new_icon_div = $this->cpanel->createElement('div');
@@ -77,32 +84,21 @@ class ViewControlPanel
         }
     }
     
-    private function add_style()
+    protected function add_style()
     {
         $css = CSS::getInstance();
         $css->add_style_link('cpanel.css');
     }
     
-    function cpanel_components($component_id)
+    protected function get_cpanel_component($component_id)
     {
-        $cpanel_components = array(
-            11  => array( 'title' => 'Задачи'                                , 'icon' => 'icon-48-tasks.png' ),
-            6   => array( 'title' => 'Пользователи'                          , 'icon' => 'icon-48-user.png' ),
-            14  => array( 'title' => 'Шаблоны отчетных документов'           , 'icon' => 'icon-48-template.png' ),
-            47  => array( 'title' => 'Реестр мониторингов'                   , 'icon' => 'icon-48-monitoring.png' ),
-            49  => array( 'title' => 'Отчеты учреждений здравоохранения'     , 'icon' => 'icon-48-primary-report.png' ),
-            50  => array( 'title' => 'Свод и анализ первичных отчетов'       , 'icon' => 'icon-48-consolidated-report.png' ),
-            4   => array( 'title' => 'Территории'                            , 'icon' => 'icon-48-territory.png' ),
-            9   => array( 'title' => 'Паспорта ЛПУ'                          , 'icon' => 'icon-48-hospital.png' ),
-            54  => array( 'title' => 'Тестирование'                          , 'icon' => 'icon-48-user.png' )
-        );
-        if (array_key_exists($component_id, $cpanel_components)) {
-            return $cpanel_components[$component_id];
+        if (array_key_exists($component_id, $this->cpanel_components)) {
+            return $this->cpanel_components[$component_id];
         }
         return false;
     }
     
-    function render()
+    public function render()
     {
         $out = $this->cpanel->getElementsByTagName('div');
         return $out->item(0);

@@ -10,18 +10,16 @@
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 
 require_once ( MZPATH_BASE .DS.'components'.DS.'component.php' );
-//require_once ( 'views' . DS . 'view_frontpage.php' );
 require_once ( 'views' . DS . 'view_cpanel.php' );
 
 class Frontpage extends Component
 {
-    protected $default_view = 'view_frontpage';
+    protected	$default_view = 'view_frontpage';
+	private 	$custom_components = array();
     
     protected function view_frontpage() 
     {
         self::set_title('Панель управления');
-        //$cp = new ViewFrontpage();
-        //$this->set_content($cp->get_page());
         $cp = new ViewControlPanel();
         $this->set_content($cp->render());
     }

@@ -96,7 +96,7 @@ class Content
         $this->block[] = $content;
     }
     
-    public function set_modal()
+    public static function set_modal()
     {
         self::$mode = 'modal';
     }

@@ -50,7 +50,7 @@ echo $mainframe->site;
 //$c = Constraint::getInstance();
 //print_r($c);
 //echo '<br />Сессия: ';
-//print_r($_SESSION);
+print_r($_SESSION);
 //print_r($_POST);
 //print_r($_FILES);
 ?>

@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: session.php 2014-05-23 21:03:02Z ian $
+* @version		$Id: session.php 2014-06-26 21:03:02Z ian $
 * @package		MZPortal.Framework
 * @subpackage	Session
-* @copyright	Copyright (C) 2010 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 */
 
 defined( '_MZEXEC' ) or die( 'Restricted access' );

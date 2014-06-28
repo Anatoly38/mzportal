@@ -1,15 +1,9 @@
 <?php
 /**
-* @version		$Id: taxes_list.php,v 1.0 2010/07/30 13:40:30 shameev Exp $
+* @version		$Id: taxes_list.php,v 1.0 2014/06/01 13:40:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Tasks
-* @copyright	Copyright (C) 2009 МИАЦ ИО
-* @license		GNU/GPL, see LICENSE.php
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details. 
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -45,11 +39,6 @@ class TaxesLpuList extends ItemList
         $constr->get_filters();
     }
     
-    protected function add(TaxQuery $item)
-    {
-        parent::add($item);
-    }
-
     protected function list_options()
     {
         $options = array();

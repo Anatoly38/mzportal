@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: lpu.php,v 1.1 2011/02/10 11:13:51 shameev Exp $
+* @version		$Id: lpu.php,v 1.1 2014/06/02 11:13:51 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Passport
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

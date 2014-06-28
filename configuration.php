@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: component_acl.php,v 1.0 2014/05/29 10:33:51 shameev Exp $
+* @version      $Id: component_acl.php,v 1.0 2014/06/02 10:33:51 shameev Exp $
 * @package      MZPortal.Framework
 * @subpackage   Framework
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО
@@ -57,6 +57,7 @@ class MZConfig
     public static $personnel_qualcategory_tmpl  = 'personnel_qualcategory_form.xml';
     public static $personnel_retrainment_tmpl   = 'personnel_retrainment_form.xml';
     public static $personnel_record_tmpl        = 'personnel_record_form.xml';
-    public static $quize_topic_form_tmpl        = 'quize_topic_form.xml';
+    public static $quiz_topic_form_tmpl         = 'quiz_topic_form.xml';
+    public static $quiz_question_form_tmpl      = 'quiz_question_form.xml';
 }
 ?>

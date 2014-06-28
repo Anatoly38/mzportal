@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id: item_list.php,v 1.3 2011/06/20 00:50:30 shameev Exp $
+* @version		$Id: item_list.php,v 1.3 2014/06/10 00:50:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Components
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

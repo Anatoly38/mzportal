@@ -1,15 +1,9 @@
 <?php
 /**
-* @version		$Id: toolbar_content.php,v 1.2 2011/05/18 19:56:27 shameev Exp $
+* @version		$Id: toolbar_content.php,v 1.2 2014/06/02 19:56:27 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Factory
-* @copyright	Copyright (C) 2011 МИАЦ ИО
-* @license		GNU/GPL, see LICENSE.php
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details. 
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

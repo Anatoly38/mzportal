@@ -1,0 +1,43 @@
+<form_pane>
+<input type="hidden" id="oid" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Тема теста</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Название темы 
+            </td>
+            <td>
+                <input type="text" name="название_темы" id="название_темы" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Описание темы
+            </td>
+            <td>
+                <input type="text" name="описание_темы" id="описание_темы" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Выбор специальности для аттестации
+            </td>
+            <td>
+                <input type="hidden" id="аттестуемая_специальность" name="аттестуемая_специальность" value="" class="required" />
+                <справочник вид="дерево" имя="dic_attest_specialities" name="аттестуемая_специальность" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Экспертная группа
+            </td>
+            <td>
+                <input type="text" name="экспертная_группа" id="экспертная_группа" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

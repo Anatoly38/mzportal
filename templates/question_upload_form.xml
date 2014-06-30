@@ -1,0 +1,27 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Выбор файла в формате Excel 2007 для загрузки</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Выбор файл для загрузки
+            </td>
+            <td>
+                <input type="hidden" name="MAX_FILE_SIZE" value="3000000" />
+                <input name="question_list_file" type="file" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Выбор темы тестов для добавления вопросов
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="topic" проверка="required" />
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

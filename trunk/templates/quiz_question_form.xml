@@ -1,0 +1,26 @@
+<form_pane>
+<input type="hidden" id="oid" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Тема теста</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Текст вопроса 
+            </td>
+            <td>
+                <input type="text" name="название_темы" id="название_темы" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Тип вопроса
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_question_types" name="состояние" проверка="required" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

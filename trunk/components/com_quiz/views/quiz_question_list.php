@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: quiz_question_list.php,v 1.0 2014/06/11 12:51:30 shameev Exp $
+* @version      $Id: quiz_question_list.php,v 1.0 2014/07/01 12:51:30 shameev Exp $
 * @package      MZPortal.Framework
 * @subpackage   Quize
 * @copyright    Copyright (C) 2090-2014 МИАЦ ИО
@@ -15,7 +15,7 @@ class QuizQuestionList extends ItemList
     protected $model        = 'QuizQuestionQuery';
     protected $source       = 'quiz_question';
     protected $namespace    = 'quiz_question';
-    protected $task         = 'default';
+    protected $task         = 'question_list';
     protected $obj          = 'quiz_question';
     protected $default_cols = array( 'oid', 'текст_вопроса', 'тип_вопроса' );
     
@@ -37,7 +37,7 @@ class QuizQuestionList extends ItemList
         $options = array();
         $options['oid']                 = array('sort' => false, 'type' => 'checkbox' ); 
         $options['текст_вопроса']       = array('sort' => true,  'type' => 'plain');
-        $options['тип_вопроса']   		= array('sort' => true,  'type' => 'plain', 'ref' => 'question_type' ); 
+        $options['тип_вопроса']   		= array('sort' => true,  'type' => 'plain', 'ref' => 'question_types' ); 
         return $options;
     }
   

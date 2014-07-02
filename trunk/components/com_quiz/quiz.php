@@ -164,8 +164,10 @@ class Quiz extends ComponentACL
             Message::error('Не определена тема теста!');
             $this->view_question_list();
         } else {
-            //$import = new QuestionImport($temp_topic);
-            Message::alert($temp_topic);
+            $import = new QuestionImport($temp_topic);
+            $ret = $import->import_all();
+            //Message::alert($temp_topic);
+            Message::alert('Импортировано ' .$ret['q_count'] . ' вопросов и ' . $ret['a_count'] . ' ответов');
             $this->view_question_list();
         }
     }

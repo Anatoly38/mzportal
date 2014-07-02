@@ -9,7 +9,7 @@
                 Текст вопроса 
             </td>
             <td>
-                <input type="text" name="название_темы" id="название_темы" style="width: 400px; height: 17px;" class="required" value=""/>
+                <input type="text" name="текст_вопроса" id="текст_вопроса" style="width: 400px; height: 17px;" class="required" value=""/>
             </td>
         </tr>
         <tr>
@@ -17,7 +17,7 @@
                 Тип вопроса
             </td>
             <td>
-                <справочник вид="список" имя="dic_question_types" name="состояние" проверка="required" />
+                <справочник вид="список" имя="dic_question_types" name="тип_вопроса" проверка="required" />
             </td>
         </tr>
         </tbody>

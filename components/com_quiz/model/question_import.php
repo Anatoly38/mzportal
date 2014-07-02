@@ -44,7 +44,7 @@ class QuestionImport
             $q_temp = new QuizQTempQuery($item);
             $q_oid = $this->insert_qestion($q_temp->текст_вопроса);
             $ret = $this->insert_answers($item, $q_oid);
-            $a = $a + $ret;
+            $a = $a + $ret['t_qount'];
             $q++;
         }
         $converted = array();
@@ -96,9 +96,17 @@ class QuestionImport
                 Message::error('Ошибка: Ассоциация между объектами (Вопрос теста, Ответ на вопрос) не сохранена!');
                 return false;
             }
+            $total_answer_count++;
+        }
+        if ($this->question_type) {
+            if ($correct_answer_count > 1) {
+                $this->set_question_type($q_oid, 2);
+            } elseif ($correct_answer_count == 1) {
+                $this->set_question_type($q_oid, 1);
+            }
         }
         $ret = array();
-        $ret['c_qount'] = $total_answer_count;
+        $ret['t_qount'] = $total_answer_count;
         $ret['c_qount'] = $correct_answer_count;
         return $ret;
     }
@@ -109,7 +117,7 @@ class QuestionImport
     }
     
     private function set_question_type($q_id, $q_type) {
-        if (!$q_id || !q_type) {
+        if (!$q_id || !$q_type) {
             return false;
         }
         $q_obj = new QuizQuestionQuery($q_id);
@@ -117,5 +125,5 @@ class QuestionImport
         $q_obj->update();
         return true;
     }
-
+}
 ?>

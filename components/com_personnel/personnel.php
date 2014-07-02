@@ -425,8 +425,7 @@ class Personnel extends Component
             $personnel = $personnel[0];
         }
         if (!$personnel) {
-            $m = Message::getInstance();
-            $m->enque_message('error', 'Запись для редактирования не определена!');
+            Message::error('Запись для редактирования не определена!');
             $this->view_personnel_list();
         }
         else {

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: object_item.php,v 1.1 2009/12/03 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
 * @copyright	Copyright (C) 2009 МИАЦ ИО

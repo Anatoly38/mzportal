@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: component_acl.php,v 1.0 2014/05/29 10:33:51 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Framework
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

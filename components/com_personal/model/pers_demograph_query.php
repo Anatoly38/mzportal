@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: pers_demograph_query.php,v 1.0 2010/05/23 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
 * @copyright	Copyright (C) 2010 МИАЦ ИО

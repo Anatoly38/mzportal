@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: territory_delete.php,v 1.0 2010/07/15 20:10:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Indexes
 * @copyright	Copyright (C) 2009 МИАЦ ИО

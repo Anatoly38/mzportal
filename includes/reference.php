@@ -1,6 +1,6 @@
 <?php 
 /**
-* @version		$Id: reference.php,v 1.1 2011/01/08 08:24:33 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Factory
 * @copyright	Copyright (C) 2011 МИАЦ ИО

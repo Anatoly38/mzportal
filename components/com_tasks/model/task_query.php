@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: task_query.php,v 1.1 2014/05/26 11:15:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Tasks
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

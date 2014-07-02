@@ -1,6 +1,6 @@
 <?php 
 /**
-* @version		$Id: task_pane_builder.php,v 1.1 2014/05/28 00:10:27 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Factory
 * @copyright	Copyright (C) 2009-2014 ÌÈÀÖ ÈÎ

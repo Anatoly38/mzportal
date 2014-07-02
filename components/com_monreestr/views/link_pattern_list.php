@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: link_pattern_list.php,v 1.0 2011/08/29 19:18:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Document Patterns
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

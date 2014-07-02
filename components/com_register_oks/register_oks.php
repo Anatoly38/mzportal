@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: register_oks.php,v 1.0 2010/05/23 11:13:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	OKS Register
 * @copyright	Copyright (C) 2010 МИАЦ ИО

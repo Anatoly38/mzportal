@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: user_query.php,v 1.1 2010/04/15 10:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Users
 * @copyright	Copyright (C) 2009-2010 МИАЦ ИО

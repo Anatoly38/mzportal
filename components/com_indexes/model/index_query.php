@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: index_query.php,v 1.4 2009/09/21 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Indexes
 * @copyright	Copyright (C) 2009 МИАЦ ИО

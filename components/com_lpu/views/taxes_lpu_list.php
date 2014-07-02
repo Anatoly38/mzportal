@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: taxes_list.php,v 1.0 2014/06/01 13:40:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Tasks
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

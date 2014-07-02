@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: spec_save.php,v 1.0 2011/01/22 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport
 * @copyright	Copyright (C) 2011 МИАЦ ИО

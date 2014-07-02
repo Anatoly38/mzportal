@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: lpu_item.php,v 1.0 2014/06/02 09:02:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

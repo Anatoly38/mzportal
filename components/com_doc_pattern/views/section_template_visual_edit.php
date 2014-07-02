@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: section_template_visual_edit.php,v 1.0 2011/05/04 15:59:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2010 МИАЦ ИО

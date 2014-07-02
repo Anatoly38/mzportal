@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: personnel_adress_item.php,v 1.0 2011/02/08 09:02:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport
 * @copyright	Copyright (C) 2011 МИАЦ ИО

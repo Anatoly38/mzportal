@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: item_list.php,v 1.3 2014/06/10 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Components
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

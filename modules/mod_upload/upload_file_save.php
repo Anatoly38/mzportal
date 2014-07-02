@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version      $Id: upload_file_save.php,v 1.0 2014/05/28 12:50:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Upload File Module
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

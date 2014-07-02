@@ -1,6 +1,6 @@
 <?php 
 /**
-* @version      $Id: layout.php,v 1.2 2010/05/17 10:10:27 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
 * @copyright    Copyright (C) 2009-2014 ÌÈÀÖ ÈÎ

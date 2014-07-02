@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: adapter_onmk_query.php,v 1.0 2010/07/24 20:07:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Register ONMK
 * @copyright	Copyright (C) 2010 МИАЦ ИО

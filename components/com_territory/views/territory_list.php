@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: territory_list.php,v 1.6 2014/05/26 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Indexes
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

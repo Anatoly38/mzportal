@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: doc_dp_section_template_text.php,v 1.0 2010/10/05 09:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2010 МИАЦ ИО

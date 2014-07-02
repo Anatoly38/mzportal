@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: object_manager.php,v 1.0 2010/06/20 19:59:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Territory
 * @copyright	Copyright (C) 2009 МИАЦ ИО

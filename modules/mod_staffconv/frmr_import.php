@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: frmr_import.php,v 1.0 2010/08/17 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	FRMR Import Module
 * @copyright	Copyright (C) 2010 МИАЦ ИО

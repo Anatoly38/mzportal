@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: member_delete.php,v 1.0 2010/06/29 12:48:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Indexes
 * @copyright	Copyright (C) 2009 МИАЦ ИО

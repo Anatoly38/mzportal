@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: quiz_q_temp_list.php,v 1.0 2014/06/06 12:51:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quiz
 * @copyright    Copyright (C) 2090-2014 МИАЦ ИО

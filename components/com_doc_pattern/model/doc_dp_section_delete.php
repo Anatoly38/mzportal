@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: doc_dp_section_delete.php,v 1.0 2010/10/01 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Register OKS
 * @copyright	Copyright (C) 2010 МИАЦ ИО

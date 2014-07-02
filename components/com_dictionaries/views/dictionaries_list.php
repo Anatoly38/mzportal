@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: dictionaries_list.php,v 1.0 2011/03/22 13:40:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2011 МИАЦ ИО

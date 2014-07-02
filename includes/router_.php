@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: router.php,v 1.3 2009/09/21 11:13:50 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Application
 * @copyright	Copyright (C) 2009 Open Source Matters. All rights reserved.

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: grid.php 13341 2011-01-31 03:03:54Z $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	HTML
 * @copyright	Copyright (C) 2011 МИАЦ ИО

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: class_query.php,v 1.1 2010/06/22 18:26:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
 * @copyright	Copyright (C) 2009 МИАЦ ИО

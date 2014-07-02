@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: personal_qualcategory_save.php,v 1.0 2011/04/07 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport
 * @copyright	Copyright (C) 2011 МИАЦ ИО

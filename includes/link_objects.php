@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: link_objects.php,v 1.1 2014/06/27 15:24:32 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: data_section_edit.php,v 1.0 2011/09/21 15:59:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Monitoring
 * @copyright	Copyright (C) 2010 МИАЦ ИО

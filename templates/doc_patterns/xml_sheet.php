@@ -1,6 +1,6 @@
 <?php 
 /**
-* @version		$Id: xml_sheet.php,v 1.0 2011/05/05 12:03:27 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2011 МИАЦ ИО

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: save_index.php,v 1.1 2009/11/05 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Indexes
 * @copyright	Copyright (C) 2009 МИАЦ ИО

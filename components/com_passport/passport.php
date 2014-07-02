@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: passport.php,v 1.10 2009/09/21 11:13:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Indexes
 * @copyright	Copyright (C) 2009 МИАЦ ИО

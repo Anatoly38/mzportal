@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: active_record.php,v 1.1 2014/06/27 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Factory
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

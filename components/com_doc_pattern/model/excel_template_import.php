@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: excel_template_import.php,v 1.0 2012/02/28 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2012 МИАЦ ИО

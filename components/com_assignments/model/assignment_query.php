@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: assignment_query.php,v 1.0 2010/12/08 17:32:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Assignments
 * @copyright	Copyright (C) 2010 МИАЦ ИО

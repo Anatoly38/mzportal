@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: constraint.php,v 1.2 2014/05/23 11:33:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

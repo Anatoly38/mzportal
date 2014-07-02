@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: mon_document_item.php,v 1.0 2011/09/06 21:56:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Monitorings
 * @copyright	Copyright (C) 2012 МИАЦ ИО

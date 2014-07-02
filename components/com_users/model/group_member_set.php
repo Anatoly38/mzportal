@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: group_member_set.php,v 1.0 2010/06/30 12:48:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Indexes
 * @copyright	Copyright (C) 2009 МИАЦ ИО

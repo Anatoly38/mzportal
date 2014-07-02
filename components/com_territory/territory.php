@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: territory.php,v 1.3 2011/09/11 11:13:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Territory
 * @copyright	Copyright (C) 2011 МИАЦ ИО

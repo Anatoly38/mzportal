@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: dic_query.php,v 1.0 2011/04/04 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
 * @copyright	Copyright (C) 2009 МИАЦ ИО

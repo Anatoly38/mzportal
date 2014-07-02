@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: view_frontpage.php,v 1.1 2010/04/18 13:29:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Frontpage
 * @copyright	Copyright (C) 2010 МИАЦ ИО

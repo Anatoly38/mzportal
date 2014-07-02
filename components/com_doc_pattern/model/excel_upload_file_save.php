@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: excel_upload_file_save.php,v 1.0 2014/05/23 15:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Upload File Module
 * @copyright	Copyright (C) 2009-2012 МИАЦ ИО

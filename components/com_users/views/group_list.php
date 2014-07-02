@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: group_list.php,v 1.1 2010/06/23 20:31:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Users
 * @copyright	Copyright (C) 2009 МИАЦ ИО

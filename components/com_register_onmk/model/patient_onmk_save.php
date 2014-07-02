@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: patient_save.php,v 1.0 2010/05/24 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Register OKS
 * @copyright	Copyright (C) 2010 МИАЦ ИО

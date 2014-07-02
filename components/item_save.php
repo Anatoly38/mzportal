@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: item_save.php,v 1.1 2010/04/19 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Components
 * @copyright	Copyright (C) 2009 МИАЦ ИО

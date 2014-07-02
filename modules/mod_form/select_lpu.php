@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: select_lpu.php,v 1.0 2010/06/01 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Form Loader
 * @copyright	Copyright (C) 2010 МИАЦ ИО

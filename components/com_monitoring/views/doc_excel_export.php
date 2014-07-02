@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version      $Id: doc_excel_export.php,v 1.1 2012/03/24 14:50:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Monitoring
 * @copyright    Copyright (C) 2012 МИАЦ ИО

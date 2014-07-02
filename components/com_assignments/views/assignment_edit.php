@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: assignment_edit.php,v 1.0 2010/12/09 12:11:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Assignments
 * @copyright	Copyright (C) 2010 МИАЦ ИО

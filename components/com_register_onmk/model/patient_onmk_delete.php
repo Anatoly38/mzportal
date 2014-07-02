@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: patient_onmk_delete.php,v 1.0 2010/07/21 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Register ONMK
 * @copyright	Copyright (C) 2010 МИАЦ ИО

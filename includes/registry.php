@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: registry.php,v 1.1 2014/06/26 00:10:27 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Factory
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

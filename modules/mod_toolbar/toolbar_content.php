@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: toolbar_content.php,v 1.2 2014/06/02 19:56:27 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Factory
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

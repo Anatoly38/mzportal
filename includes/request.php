@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: request.php,v 1.1 2014/06/26 07:28:04 shameev Exp $
+ * @version		$Id$
  * @package		MZPortal.Framework
  * @subpackage	Environment
  * @copyright	Copyright (C) 2009 - 2014 ÌÈÀÖ ÈÎ

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: message.php,v 1.5 2014/05/28 14:22:03 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

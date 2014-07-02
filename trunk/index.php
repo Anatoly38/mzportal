@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: index.php,v 1.11 2014/05/11 08:24:33 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
 * @copyright    Copyright (C) 2010-2014 МИАЦ ИО

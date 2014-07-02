@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: adapter_oks_query.php,v 1.0 2010/05/24 06:30:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Register OKS
 * @copyright	Copyright (C) 2010 МИАЦ ИО

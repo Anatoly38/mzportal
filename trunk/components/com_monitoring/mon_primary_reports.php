@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: mon_primary_reports.php,v 1.1 2012/03/23 18:48:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Monitorings
 * @copyright	Copyright (C) 2012 МИАЦ ИО

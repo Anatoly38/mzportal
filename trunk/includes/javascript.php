@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: javascript.php,v 1.0 2011/10/21 00:10:27 shameev Exp $
+* @version		$Id$
 * $Date$    
 * @package		MZPortal.Framework
 * @subpackage	Factory

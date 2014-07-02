@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: session.php 2014-06-26 21:03:02Z ian $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Session
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: tree_kladr.php,v 1.0 2011/06/06 00:44:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Frontpage
 * @copyright	Copyright (C) 2011 МИАЦ ИО

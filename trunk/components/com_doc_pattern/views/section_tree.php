@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: section_tree.php,v 1.0 2010/05/07 19:10:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2010 МИАЦ ИО

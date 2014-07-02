@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: adapter_personnel_query.php,v 1.0 2011/05/24 06:30:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport
 * @copyright	Copyright (C) 2011 МИАЦ ИО

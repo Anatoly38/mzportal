@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: quiz_question_item.php,v 1.0 2014/06/11 13:46:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quize
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

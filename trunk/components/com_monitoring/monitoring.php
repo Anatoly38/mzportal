@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: monitoring.php,v 1.1 2012/01/31 13:20:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Monitorings
 * @copyright	Copyright (C) 2012 МИАЦ ИО

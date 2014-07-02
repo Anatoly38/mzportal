@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: personnel_retrainment_list.php,v 1.0 2011/04/11 16:49:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
 * @copyright	Copyright (C) 2011 МИАЦ ИО

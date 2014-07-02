@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: print_select.php,v 1.0 2014/06/03 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Form Loader
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

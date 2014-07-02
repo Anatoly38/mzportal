@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: doc_dp_section_list.php,v 1.0 2014/05/23 16:33:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Passport_LPU
 * @copyright    Copyright (C) 2090-2014 МИАЦ ИО

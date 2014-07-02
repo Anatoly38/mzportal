@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: member_add.php,v 1.0 2014/05/23 16:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Users
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

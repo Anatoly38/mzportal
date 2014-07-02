@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: component.php,v 1.3 2014/06/02 11:13:51 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Framework
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

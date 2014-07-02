@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: form_template_loader.php,v 1.1 2014/06/03 23:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Form Loader
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

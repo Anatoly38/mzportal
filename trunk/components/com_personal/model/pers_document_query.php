@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: pers_document_query.php,v 1.0 2011/01/26 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Personal
 * @copyright	Copyright (C) 2011 МИАЦ ИО

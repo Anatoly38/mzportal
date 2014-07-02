@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: period_query.php,v 1.0 2011/09/16 13:13:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
 * @copyright	Copyright (C) 2009 МИАЦ ИО

@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: filterinput.php,v 1.1 2009/07/22 06:26:29 shameev Exp $
+ * @version		$Id$
  * @package		Joomla.Framework
  * @subpackage	Filter
  * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.

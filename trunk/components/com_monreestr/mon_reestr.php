@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: mon_reestr.php,v 1.0 2014/05/28 11:45:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

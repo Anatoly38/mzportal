@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: personnel.php,v 1.2 2011/07/06 15:06:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport
 * @copyright	Copyright (C) 2010 МИАЦ ИО

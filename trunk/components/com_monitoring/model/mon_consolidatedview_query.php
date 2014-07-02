@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: mon_documentview_query.php,v 1.0 2012/01/10 23:13:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Monitoring
 * @copyright	Copyright (C) 2012 МИАЦ ИО

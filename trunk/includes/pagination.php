@@ -1,6 +1,6 @@
 <?php
 /**
- * @version		$Id: pagination.php,v 1.2 2009/09/21 00:50:28 shameev Exp $
+ * @version		$Id$
  * @package		MZPortal.Framework
  * @subpackage	HTML
  * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.

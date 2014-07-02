@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: group_query.php,v 1.0 2010/06/26 15:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Users
 * @copyright	Copyright (C) 2009-2010 МИАЦ ИО

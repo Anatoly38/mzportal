@@ -1,6 +1,6 @@
 <?php 
 /**
-* @version		$Id: pattern2html.php,v 1.0 2010/05/03 00:10:27 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2010 МИАЦ ИО

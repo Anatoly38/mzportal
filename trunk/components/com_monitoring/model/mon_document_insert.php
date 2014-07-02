@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: mon_document_insert.php,v 1.0 2011/09/07 18:37:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Monitorings
 * @copyright	Copyright (C) 2012 МИАЦ ИО

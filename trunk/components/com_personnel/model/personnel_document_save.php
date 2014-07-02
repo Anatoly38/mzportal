@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: personal_document_save.php,v 1.0 2014/06/27 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

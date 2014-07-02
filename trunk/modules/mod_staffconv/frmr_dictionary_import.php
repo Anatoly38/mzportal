@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: frmr_dictionary_import.php,v 1.0 2011/03/22 15:51:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	FRMR Import Module
 * @copyright	Copyright (C) 2010 МИАЦ ИО

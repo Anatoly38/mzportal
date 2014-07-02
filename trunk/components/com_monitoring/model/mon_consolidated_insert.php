@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: mon_consolidated_insert.php v 1.0 2012/01/10 01:37:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Monitorings
 * @copyright	Copyright (C) 2012 МИАЦ ИО

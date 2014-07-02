@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: doc_pattern.php,v 1.0 2014/05/23 15:13:51 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО

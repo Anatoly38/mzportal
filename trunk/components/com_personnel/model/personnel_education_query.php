@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: personnel_education_query.php,v 1.0 2011/02/14 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
 * @copyright	Copyright (C) 2011 МИАЦ ИО

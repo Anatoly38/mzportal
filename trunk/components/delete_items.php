@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: delete_items.php,v 1.1 2009/11/25 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Indexes
 * @copyright	Copyright (C) 2012 МИАЦ ИО

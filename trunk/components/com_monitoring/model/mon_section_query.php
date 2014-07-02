@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: mon_section_query.php,v 1.0 2011/11/26 11:01:30 shameev Exp $
+* @version		$Id$
 * @package		Monitorings
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2011 МИАЦ ИО

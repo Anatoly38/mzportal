@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: mon_list.php,v 1.0 2014/05/23 12:29:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Monitotings
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

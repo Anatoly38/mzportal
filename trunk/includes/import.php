@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: import.php,v 1.1 2009/07/22 06:26:29 shameev Exp $
+* @version		$Id$
 * @package		MZoomla
 * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.
 * @license		GNU/GPL, see LICENSE.php

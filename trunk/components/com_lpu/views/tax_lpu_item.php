@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: tax_lpu_item.php,v 1.0 2010/07/31 09:02:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport
 * @copyright	Copyright (C) 2010 МИАЦ ИО

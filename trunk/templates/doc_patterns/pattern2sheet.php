@@ -1,6 +1,6 @@
 <?php 
 /**
-* @version		$Id: pattern2sheet.php,v 1.0 2011/05/04 16:23:27 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2011 МИАЦ ИО

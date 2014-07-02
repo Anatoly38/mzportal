@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: adress_query.php,v 1.0 2010/05/28 14:24:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Adress
 * @copyright	Copyright (C) 2010 МИАЦ ИО

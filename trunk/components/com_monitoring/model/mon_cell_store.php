@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: mon_cell_store.php,v 1.0 2011/09/24 18:37:30 shameev Exp $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Monitorings
 * @copyright    Copyright (C) 2011 МИАЦ ИО

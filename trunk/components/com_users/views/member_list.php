@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: member_list.php,v 1.0 2010/06/28 16:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Users
 * @copyright	Copyright (C) 2009 МИАЦ ИО

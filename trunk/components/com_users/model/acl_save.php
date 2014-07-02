@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: acl_save.php,v 1.0 2010/07/08 00:57:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Users
 * @copyright	Copyright (C) 2009 МИАЦ ИО

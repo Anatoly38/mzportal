@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: excel_upload_form.php,v 1.0 2011/12/28 17:24:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Document Patterns
 * @copyright	Copyright (C) 2011 МИАЦ ИО

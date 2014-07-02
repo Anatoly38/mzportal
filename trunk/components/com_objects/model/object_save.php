@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: object_save.php,v 1.0 2010/10/10 10:37:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Users
 * @copyright	Copyright (C) 2010 МИАЦ ИО

@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: frmr_upload_file_save.php,v 1.0 2011/03/09 12:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	FRMR Import Module
 * @copyright	Copyright (C) 2010 МИАЦ ИО

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: mon_reestr_query.php,v 1.1 2011/08/28 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Monitotings
 * @copyright	Copyright (C) 2011 МИАЦ ИО

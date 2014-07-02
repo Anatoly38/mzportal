@@ -1,6 +1,6 @@
 <?php 
 /**
-* @version		$Id: loader.php,v 1.6 2014/09/11 08:24:33 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Factory
 * @copyright	Copyright (C) 2014 МИАЦ ИО

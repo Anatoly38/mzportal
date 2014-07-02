@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: select.php,v 1.1 2014/09/21 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	HTML
 * @copyright	Copyright (C) 2005 - 2008 Open Source Matters. All rights reserved.

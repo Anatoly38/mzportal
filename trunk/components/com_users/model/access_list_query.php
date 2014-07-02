@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: access_list_query.php,v 1.0 2011/04/13 00:50:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Users
 * @copyright	Copyright (C) 2012 МИАЦ ИО

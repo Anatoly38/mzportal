@@ -1,6 +1,6 @@
 <?php
 /**
-* @version		$Id: task_tree.php,v 1.0 2010/07/06 16:45:30 shameev Exp $
+* @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Frontpage
 * @copyright	Copyright (C) 2010 МИАЦ ИО

@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: quiz_question_query.php,v 1.0 2014/05/28 13:13:30 shameev Exp $
+* @version      $Id: quiz_question_query.php,v 1.0 2014/07/02 13:13:30 shameev Exp $
 * @package      MZPortal.Framework
 * @subpackage   Quiz
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО
@@ -58,10 +58,10 @@ class QuizQuestionQuery extends ClActiveRecord
                                         $this->тип_вопроса,
                                         $this->oid
                                         );
-            Message::alert('Изменения при редактировании данных документа успешно сохранены');
+            Message::alert('Изменения при редактировании вопроса успешно сохранены');
         } 
         catch (Exception $e) {
-            Message::error('Ошибка: изменения при редактированиии данных документа не сохранены!');
+            Message::error('Ошибка: изменения при редактированиии вопроса не сохранены!');
             return false;
         }
         try {

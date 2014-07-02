@@ -1,6 +1,6 @@
 <?php
 /** 
-* @version		$Id: question_import.php,v 1.0 2014/06/27 12:50:30 shameev Exp $
+* @version		$Id: question_import.php,v 1.0 2014/07/01 12:50:30 shameev Exp $
 * @package		MZPortal.Framework
 * @subpackage	Quiz
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО
@@ -19,6 +19,7 @@ class QuestionImport
     private $topic; // тема теста, куда добавляем импортированные вопросы
     private $topic_question_link; // связь между темой и импортируемым вопросом
     private $question_answer_link; // связь между импортируемым вопросом и ответом к нему
+    private $question_type = true; // устанавливаем тип вопроса автоматически или нет (по умолчанию - да)
     
     public function __construct($topic = null, $scope = 'all') {
         if (!$topic) {
@@ -75,24 +76,46 @@ class QuestionImport
         if (!$temp_id || !$q_oid) {
             return false;
         }
-        $dbh = new DB_mzportal;
+        $dbh = new DB_mzportal();
         $query = "SELECT * FROM `quiz_a_temp` AS s WHERE s.`номер_пп` = '{$temp_id}' ";
-        $temp_answ = $this->dbh->execute($query)->fetch_assoc();
+        $temp_answ = $dbh->execute($query)->fetchall_assoc();
+        $total_answer_count = 0;
+        $correct_answer_count = 0;
         foreach ($temp_answ as $a_temp) {
             $a = new QuizAnswerQuery();
             $a->текст_ответа    = $a_temp['текст_ответа'];
             $a->правильный      = $a_temp['правильный'];
             $a->insert();
+            if ($a_temp['правильный']) {
+                $correct_answer_count++;
+            }
             try {
-                LinkObjects::set_link($this->topic, $q_obj->oid, $this->question_answer_link); // Ассоциация между темой и вопросом теста
+                LinkObjects::set_link($this->topic, $a->oid, $this->question_answer_link); // Ассоциация между темой и вопросом теста
             }
             catch (Exception $e) {
                 Message::error('Ошибка: Ассоциация между объектами (Вопрос теста, Ответ на вопрос) не сохранена!');
                 return false;
             }
         }
+        $ret = array();
+        $ret['c_qount'] = $total_answer_count;
+        $ret['c_qount'] = $correct_answer_count;
+        return $ret;
+    }
+    
+    public function set_q_type_mode($t = true) {
+        $this->question_type = $t;
         return true;
     }
-}
+    
+    private function set_question_type($q_id, $q_type) {
+        if (!$q_id || !q_type) {
+            return false;
+        }
+        $q_obj = new QuizQuestionQuery($q_id);
+        $q_obj->тип_вопроса = $q_type;
+        $q_obj->update();
+        return true;
+    }
 
 ?>

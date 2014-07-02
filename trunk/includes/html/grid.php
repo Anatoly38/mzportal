@@ -151,6 +151,7 @@ class HTMLGrid
     
     private function set_link($value, $name= null, $i = null, $oid = null)
     {
+        print_r($this->task);
         $tag = '<td><a href="index.php?app=' . $this->application;  
         $tag .= '&amp;task=' . $this->task . '&amp;'. $this->object_name . '[]=' . $oid .'">';
         $tag .= $value . '</a></td>';

@@ -12,7 +12,7 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'item_save.php' );
 
 class QuizQuestionSave extends ItemSave
 {
-    protected $model = 'QuizeQuestionQuery';
+    protected $model = 'QuizQuestionQuery';
     
     public function get_post_values()
     {

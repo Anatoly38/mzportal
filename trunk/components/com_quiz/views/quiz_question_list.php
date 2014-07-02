@@ -12,12 +12,13 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'item_list.php' );
 
 class QuizQuestionList extends ItemList
 {
-    protected $model        = 'QuizQuestionQuery';
-    protected $source       = 'quiz_question';
+    protected $model        = 'QuizQuestionViewQuery';
+    protected $source       = 'quiz_question_topic';
     protected $namespace    = 'quiz_question';
-    protected $task         = 'question_list';
+    protected $task         = 'quest23452345ion_list';
     protected $obj          = 'quiz_question';
-    protected $default_cols = array( 'oid', 'текст_вопроса', 'тип_вопроса' );
+    protected $order_task   = 'quiz_question';
+    protected $default_cols = array( 'oid', 'текст_вопроса', 'тип_вопроса', 'тема_теста' );
     
     public function __construct()
     {
@@ -29,6 +30,10 @@ class QuizQuestionList extends ItemList
         $constr = Constraint::getInstance();
         $constr->set_namespace($this->namespace);
         $constr->add_filter('текст_вопроса');
+        //$constr->add_filter('тема_теста');
+        $constr->add_filter('topic_id', 'dic_quiz_topics', 'код', 'наименование' , 'тема теста');
+
+//$condition, $source = null, $order = 'наименование', $field_name = 'наименование', $filter_name = null, $add_cond = null        
         $constr->get_filters();
     }
     
@@ -38,6 +43,7 @@ class QuizQuestionList extends ItemList
         $options['oid']                 = array('sort' => false, 'type' => 'checkbox' ); 
         $options['текст_вопроса']       = array('sort' => true,  'type' => 'plain');
         $options['тип_вопроса']   		= array('sort' => true,  'type' => 'plain', 'ref' => 'question_types' ); 
+        $options['тема_теста']          = array('sort' => true,  'type' => 'plain');
         return $options;
     }
   

@@ -231,6 +231,7 @@ class ItemList
             $grid_data = $this->get_array($this->items);
             $footer = $this->display_pagination();
             $t = new HTMLGrid($grid_data, $footer, $this->limitstart, $this->order, $this->direction);
+            //print_r($this->task);
             $t->set_task($this->task);
             $t->set_object_name($this->obj);
             $t->set_order_task($this->order_task);

@@ -15,6 +15,7 @@ require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 require_once ( 'model' . DS . 'quiz_topic_query.php' );
 require_once ( 'model' . DS . 'quiz_topic_save.php' );
 require_once ( 'model' . DS . 'quiz_question_query.php' );
+require_once ( 'model' . DS . 'quiz_question_view_query.php' );
 require_once ( 'model' . DS . 'quiz_question_save.php' );
 require_once ( 'model' . DS . 'quiz_answer_query.php' );
 require_once ( 'model' . DS . 'excel_question_upload_file_save.php' );
@@ -107,6 +108,13 @@ class Quiz extends ComponentACL
         $this->view_new_question_item();
     }
     
+    protected function exec_edit_question()
+    {
+        $question = (array)Request::getVar('quiz_question');
+        Content::set_route('question', $question[0]);
+        $this->view_edit_question_item($question[0]);
+    }
+    
     protected function exec_question_save()
     {
         $question = (array)Request::getVar('question');
@@ -118,6 +126,11 @@ class Quiz extends ComponentACL
             $s = new QuizQuestionSave($question[0]);
             $s->update_data();
         }
+        $this->view_question_list();
+    }
+
+    protected function exec_cancel_question_edit()
+    {
         $this->view_question_list();
     }
 
@@ -226,7 +239,7 @@ class Quiz extends ComponentACL
         $list = new QuizQuestionList();
         self::set_title($title);
         self::set_toolbar_button('new', 'new_question' , 'Новый вопрос');
-        $edit_b = self::set_toolbar_button('edit', 'edit' , 'Редактировать');
+        $edit_b = self::set_toolbar_button('edit', 'edit_question' , 'Редактировать');
         $edit_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
         $del_b->set_option('obligate', true);
@@ -243,6 +256,19 @@ class Quiz extends ComponentACL
         $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
         $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel' , 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }
+    
+    protected function view_edit_question_item($q) 
+    {
+        self::set_title('Редактирование вопроса теста');
+        $i = new QuizQuestionItem($q);
+        $i->edit_item(); 
+        $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_question_edit' , 'Закрыть');
         $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);

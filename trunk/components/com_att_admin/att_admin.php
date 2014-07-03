@@ -12,30 +12,21 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'component_acl.php' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
-require_once ( 'model' . DS . 'quiz_topic_query.php' );
-require_once ( 'model' . DS . 'quiz_topic_save.php' );
-require_once ( 'model' . DS . 'quiz_question_query.php' );
-require_once ( 'model' . DS . 'quiz_question_view_query.php' );
-require_once ( 'model' . DS . 'quiz_question_save.php' );
-require_once ( 'model' . DS . 'quiz_answer_query.php' );
-require_once ( 'model' . DS . 'excel_question_upload_file_save.php' );
-require_once ( 'model' . DS . 'excel_question_import.php' );
-require_once ( 'model' . DS . 'question_import.php' );
+require_once ( 'model' . DS . 'att_topic_query.php' );
+require_once ( 'model' . DS . 'att_topic_save.php' );
+require_once ( 'model' . DS . 'att_question_query.php' );
+require_once ( 'model' . DS . 'att_question_view_query.php' );
+require_once ( 'model' . DS . 'att_question_save.php' );
+require_once ( 'model' . DS . 'att_answer_query.php' );
 
-require_once ( 'views' . DS . 'quiz_topic_list.php' );
-require_once ( 'views' . DS . 'quiz_topic_item.php' );
-require_once ( 'views' . DS . 'quiz_question_list.php' );
-require_once ( 'views' . DS . 'quiz_question_item.php' );
-require_once ( 'views' . DS . 'download_question_file_form.php' );
-require_once ( 'views' . DS . 'quiz_q_temp_list.php' );
+require_once ( 'views' . DS . 'att_topic_list.php' );
+require_once ( 'views' . DS . 'att_topic_item.php' );
+require_once ( 'views' . DS . 'att_question_list.php' );
+require_once ( 'views' . DS . 'att_question_item.php' );
 
-require_once ( MODULES . DS . 'mod_user'  . DS . 'acl.php' );
-require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'access_list.php' );
-require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'user_list.php' );
-
-class Quiz extends ComponentACL
+class AttAdmin extends ComponentACL
 {
-    protected $default_view = 'view_topic_list';
+    protected $default_view = 'view_att_doc_list';
     
     protected function exec_new()
     {

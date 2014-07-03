@@ -76,7 +76,7 @@ public $site;               // Сведенная воедино html-стран
         $this->registry = Registry::getInstance();
         $this->registry->application = Request::getVar('app');
         $this->registry->task = Request::getVar('task');
-        $this->registry->oid = Request::getVar('oid');
+        $this->registry->oid = (array)Request::getVar('oid');
     }
 
     public function get_layout()

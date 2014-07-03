@@ -15,9 +15,9 @@ class QuizQuestionList extends ItemList
     protected $model        = 'QuizQuestionViewQuery';
     protected $source       = 'quiz_question_topic';
     protected $namespace    = 'quiz_question';
-    protected $task         = 'quest23452345ion_list';
+    protected $task         = 'question_list';
     protected $obj          = 'quiz_question';
-    protected $order_task   = 'quiz_question';
+    protected $order_task   = 'question_list';
     protected $default_cols = array( 'oid', 'текст_вопроса', 'тип_вопроса', 'тема_теста' );
     
     public function __construct()
@@ -30,10 +30,7 @@ class QuizQuestionList extends ItemList
         $constr = Constraint::getInstance();
         $constr->set_namespace($this->namespace);
         $constr->add_filter('текст_вопроса');
-        //$constr->add_filter('тема_теста');
         $constr->add_filter('topic_id', 'dic_quiz_topics', 'код', 'наименование' , 'тема теста');
-
-//$condition, $source = null, $order = 'наименование', $field_name = 'наименование', $filter_name = null, $add_cond = null        
         $constr->get_filters();
     }
     

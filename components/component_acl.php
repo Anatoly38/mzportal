@@ -31,9 +31,9 @@ class ComponentACL extends Component
 
     protected function exec_current_acl()
     {
-        if (!$this->oid[0]) {
+        if (!isset($this->oid[0])) {
             Message::error('Объект не определен!');
-            $this->view_list();
+            $this->exec_default();
         } 
         else {
             $obj = new MZObject($this->oid[0]);
@@ -123,7 +123,7 @@ class ComponentACL extends Component
     
     protected function exec_acl_cancel()
     {
-        $this->view_list();
+        $this->exec_default();
     }
 
     protected function view_current_users_acl($acl_id)

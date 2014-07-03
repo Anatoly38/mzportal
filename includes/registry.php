@@ -13,6 +13,8 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class Registry 
 {
     private static $instance = false;
+    public $task;
+    public $current_task;
     private $vars = array();
     
     private function __construct()

@@ -3,7 +3,7 @@
 * @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	HTML
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 */
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 
@@ -151,7 +151,6 @@ class HTMLGrid
     
     private function set_link($value, $name= null, $i = null, $oid = null)
     {
-        print_r($this->task);
         $tag = '<td><a href="index.php?app=' . $this->application;  
         $tag .= '&amp;task=' . $this->task . '&amp;'. $this->object_name . '[]=' . $oid .'">';
         $tag .= $value . '</a></td>';

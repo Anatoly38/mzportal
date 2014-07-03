@@ -16,7 +16,7 @@ class MZConfig
     public static $root                 = '';
     public static $pw                   = '4lbt2f';
     public static $js_version_contol    = true;
-    public static $images               = '/includes/style/images/';
+    public static $images               = 'includes/style/images/';
     public static $list_limit           = 20; // кол-во объектов в списке по умолчанию
     public static $default_application  = '2'; // Frontpage
     public static $default_layout       = 'main_layout.xml';

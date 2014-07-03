@@ -13,6 +13,7 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'com_frontpage'.DS.'views' .DS. '
 class Component
 {
     protected $task;
+    protected $current_task;
     protected $content;
     protected $user_id;
     protected $oid = array();
@@ -28,6 +29,8 @@ class Component
     {
         $r = Registry::getInstance();
         $this->task = $r->task;
+        $r->current_task = $this->task;
+        $this->current_task = &$r->current_task;
         $this->user_id = $r->user->user_id;
         $this->user_name = $r->user->name;
         $this->rights = $r->rights;

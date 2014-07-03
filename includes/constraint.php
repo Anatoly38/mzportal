@@ -18,12 +18,13 @@ class Constraint
     private $options = null;
     private $clear_filter = null;
     private $namespace = 'default';
-    private $registry;
+    private $task;
     private $active = false;
     
     private function __construct()
     {
-        //$this->registry = Registry::getInstance();
+        $r = Registry::getInstance();
+        $this->task = $r->current_task;
     }
     
     public static function getInstance()
@@ -103,7 +104,7 @@ class Constraint
         }
         $html = HTMLSelect::genericlist
             ( $options, 
-                'фильтр_' . $condition, "class=\"inputbox {$highlight}\" size=\"1\" onchange=\"submitform();\"", 'value', 'text', $selected
+                'фильтр_' . $condition, "class=\"inputbox {$highlight}\" size=\"1\" onchange=\"submitform('{$this->task}');\"", 'value', 'text', $selected
             );
         return $html;
     }
@@ -117,7 +118,7 @@ class Constraint
             $highlight = 'ui-state-highlight';
         }
         $html =  "<input class=\"text_area {$highlight}\" type=\"text\" id=\"фильтр_{$condition}\" name=\"фильтр_{$condition}\"" ;
-        $html .= ' value="' . $match . '" onchange="document.adminForm.submit();" title = "фильтровать по полю ' . $condition . '"/>';
+        $html .= ' value="' . $match . '" onchange="submitform(\''. $this->task .'\');" title = "фильтровать по полю ' . $condition . '"/>';
         $this->clear_filter .= "document.getElementById('фильтр_" . $condition . "').value='';";
         return $html;
     }
@@ -173,8 +174,8 @@ JS;
         $filter .= "<legend id=\"filter_sw\" style=\"cursor: pointer;\"><span id=\"filter_sw_icon\" class=\"ui-icon ui-icon-triangle-1-e\" style=\"float: left;\"></span>Фильтр</legend>";
         $filter .= "<div id=\"filter_cn\" style=\"min-height: 20px; display:{$show}\">";
         $filter .= "<div style=\"max-width:60%;margin-right:180px; float:left\">{$this->options}</div>";
-        $filter .= "<div style=\"width:180px;float:right;\"><button onclick=\"this.form.submit();\">Применить</button>";
-        $filter .= "<button onclick=\"{$this->clear_filter}this.form.submit();\">Сбросить</button></div></div></fieldset>";
+        $filter .= "<div style=\"width:180px;float:right;\"><button onclick=\"submitform('{$this->task}');\">Применить</button>";
+        $filter .= "<button onclick=\"{$this->clear_filter}submitform('{$this->task}');\">Сбросить</button></div></div></fieldset>";
         return $filter;
     }
 

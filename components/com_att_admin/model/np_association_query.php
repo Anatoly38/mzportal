@@ -13,10 +13,10 @@ require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 
 class NPAssocitionQuery extends ClActiveRecord 
 {
-    protected $source = 'quiz_question';
+    protected $source = 'attest_np_association';
     public $oid;
-    public $текст_вопроса;
-    public $тип_вопроса;
+    public $наименование;
+    public $аббревиатура;
     
     public function __construct($oid = false)
     {
@@ -25,8 +25,8 @@ class NPAssocitionQuery extends ClActiveRecord
         }
         $dbh = new DB_mzportal;
         $query =    "SELECT 
-                        a.текст_вопроса,
-                        a.тип_вопроса
+                        a.наименование,
+                        a.аббревиатура
                     FROM {$this->source} AS a 
                     WHERE oid = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
@@ -34,8 +34,8 @@ class NPAssocitionQuery extends ClActiveRecord
             throw new Exception("Вопрос не существует");
         }
         $this->oid              = $oid;
-        $this->текст_вопроса    = $data['текст_вопроса'];
-        $this->тип_вопроса      = $data['тип_вопроса'];
+        $this->наименование     = $data['наименование'];
+        $this->аббревиатура     = $data['аббревиатура'];
     }
 
     public function update() 
@@ -48,20 +48,20 @@ class NPAssocitionQuery extends ClActiveRecord
         $query =    "UPDATE  
                         {$this->source} 
                     SET
-                        текст_вопроса   = :1,
-                        тип_вопроса  	= :2
+                        наименование    = :1,
+                        аббревиатура    = :2
                     WHERE 
                         oid = :3";
         try {
             $dbh->prepare($query)->execute( 
-                                        $this->текст_вопроса,
-                                        $this->тип_вопроса,
+                                        $this->наименование,
+                                        $this->аббревиатура,
                                         $this->oid
                                         );
-            Message::alert('Изменения при редактировании вопроса успешно сохранены');
+            Message::alert('Изменения при редактировании успешно сохранены');
         } 
         catch (Exception $e) {
-            Message::error('Ошибка: изменения при редактированиии вопроса не сохранены!');
+            Message::error('Ошибка: изменения при редактированиии не сохранены!');
             return false;
         }
         try {
@@ -85,7 +85,7 @@ class NPAssocitionQuery extends ClActiveRecord
         $class_name = get_class($this);
         // Регистрация нового объекта в таблице sys_objects
         $obj = MZObject::set_class_id($class_name); // Создаем объект класса MZObject с определенной переменной $class_id
-        $obj->name = 'Вопрос теста';
+        $obj->name = 'Ассоциация медработников';
         $obj->description = $this->текст_вопроса;
         $obj->deleted = 0;
         if (isset($this->acl_id)) {
@@ -95,16 +95,16 @@ class NPAssocitionQuery extends ClActiveRecord
         $this->oid = $obj->obj_id;
         $query =    "INSERT INTO {$this->source} 
                     (oid, 
-                    текст_вопроса,
-                    тип_вопроса
+                    наименование,
+                    аббревиатура
                     )
                     VALUES(:1, :2, :3)";
         $dbh = new DB_mzportal;
         try {
             $dbh->prepare($query)->execute( 
                                         $this->oid,
-                                        $this->текст_вопроса,
-                                        $this->тип_вопроса
+                                        $this->наименование,
+                                        $this->аббревиатура
                                         );
         }
         catch (MysqlException $e) {

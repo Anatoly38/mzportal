@@ -1,0 +1,26 @@
+<form_pane>
+<input type="hidden" id="oid" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Медицинская ассоциация</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Наименование ассоциации 
+            </td>
+            <td>
+                <textarea type="text" name="наименование" style="width: 400px; height: 60px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Аббревиатура
+            </td>
+            <td>
+                <input type="text" name="аббревиатура" id="аббревиатура" style="width: 400px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

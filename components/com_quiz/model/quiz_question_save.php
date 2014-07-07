@@ -16,8 +16,8 @@ class QuizQuestionSave extends ItemSave
     
     public function get_post_values()
     {
-        $this->query->название_темы             = Request::getVar('текст_вопроса');
-        $this->query->описание_темы             = Request::getVar('тип_вопроса');
+        $this->query->текст_вопроса             = Request::getVar('текст_вопроса');
+        $this->query->тип_вопроса               = Request::getVar('тип_вопроса');
     }
 }
 ?>

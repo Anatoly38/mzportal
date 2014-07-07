@@ -2,7 +2,7 @@
 /**
 * @version      $Id$
 * @package      MZPortal.Framework
-* @subpackage   Quiz
+* @subpackage   AttAdmin
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
@@ -11,7 +11,7 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'active_record.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 
-class NPAssocitionQuery extends ClActiveRecord 
+class NPAssociationQuery extends ClActiveRecord 
 {
     protected $source = 'attest_np_association';
     public $oid;
@@ -66,8 +66,8 @@ class NPAssocitionQuery extends ClActiveRecord
         }
         try {
             $obj = new MZObject($this->oid);
-            $obj->name = 'Вопрос теста';
-            $obj->description = $this->текст_вопроса;
+            $obj->name = 'Медицинская ассоциация';
+            $obj->description = $this->наименование;
             $obj->update();
         }
         catch (Exception $e) {
@@ -85,8 +85,8 @@ class NPAssocitionQuery extends ClActiveRecord
         $class_name = get_class($this);
         // Регистрация нового объекта в таблице sys_objects
         $obj = MZObject::set_class_id($class_name); // Создаем объект класса MZObject с определенной переменной $class_id
-        $obj->name = 'Ассоциация медработников';
-        $obj->description = $this->текст_вопроса;
+        $obj->name = 'Медицинская ассоциация';
+        $obj->description = $this->наименование;
         $obj->deleted = 0;
         if (isset($this->acl_id)) {
             $obj->acl_id = $this->acl_id;

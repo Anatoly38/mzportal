@@ -105,6 +105,7 @@ class Quiz extends ComponentACL
     
     protected function exec_new_question()
     {
+        Content::set_route('question');
         $this->view_new_question_item();
     }
     
@@ -156,7 +157,6 @@ class Quiz extends ComponentACL
         catch (UploadException $e) {
             Message::error($e->message . 'Код ошибки ' . $e->code);
         }
-        //Content::set_route('topic', $topic); 
         $this->view_q_for_import_list();
     }
     

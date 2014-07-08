@@ -26,6 +26,7 @@ function tableOrdering( order, dir, task ) {
 <body>
 
 <div id="container" class="ui-widget ui-widget-content">
+    <div id="top-menu" />
     <div class="ui-widget-header">
         <модуль имя="заголовок" />
     </div>

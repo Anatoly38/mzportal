@@ -4,7 +4,7 @@
 * $Date$    
 * @package		MZPortal.Framework
 * @subpackage	Factory
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -13,12 +13,12 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class Javascript
 {
     private static $instance = false;
-    private static $version  = 'v5';
+    private static $version  = 'v10';
     private $container  = null;
     private $jquery     = false;
     private $jquery_validate = false;
-    private $calendar   = false;
-    private $datepicker = false;
+    //private $calendar   = false;
+    //private $datepicker = false;
     private $dirtyforms = false;
     private $treeview   = false;
     private $jstree     = false;
@@ -90,9 +90,10 @@ class Javascript
         if ($this->jquery) {
             return true;
         }
-        $this->add_js_link('jquery.min.js');
+        //$this->add_js_link('jquery.min.js');
+        $this->add_js_link('jquery-2.1.1.min.js');
         $this->add_js_link('jquery-ui.min.js');
-        $this->add_js_link('jquery.ui.datepicker-ru.js');
+        //$this->add_js_link('jquery.ui.datepicker-ru.js');
         $this->jquery = true;
     }
     

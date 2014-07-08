@@ -12,10 +12,10 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class CSS
 {
     private static $instance = false;
-    private static $version  = 'v2';
+    private static $version  = 'v3';
     private $container  = null;
-    private $calendar   = false;
-    private $datepicker = false;
+    //private $calendar   = false;
+    //private $datepicker = false;
     private $treeview   = false;
     private $jquery_ui  = false;
     private $sheet      = false;

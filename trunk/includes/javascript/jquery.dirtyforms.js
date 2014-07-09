@@ -143,8 +143,8 @@
 	}
 	bindExit = function(){
 		if(settings.exitBound) return;
-		$('a').live('click',aBindFn);
-		$('form').live('submit',formBindFn);
+		$('a').on('click',aBindFn);
+		$('form').on('submit',formBindFn);
 		$(window).bind('beforeunload', beforeunloadBindFn);
 		settings.exitBound = true;
 	}

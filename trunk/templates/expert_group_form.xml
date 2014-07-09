@@ -1,0 +1,18 @@
+<form_pane>
+<input type="hidden" id="oid" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Экспертная группа</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Наименование экспертной группы 
+            </td>
+            <td>
+                <textarea type="text" name="наименование" style="width: 400px; height: 60px;" class="required" value=""/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

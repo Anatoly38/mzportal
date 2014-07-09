@@ -10,10 +10,10 @@
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'item.php' );
 
-class ExpertGroupItem extends Item 
+class NPAssociationItem extends Item 
 {
-    protected $model    = 'ExpertGroupQuery';
-    protected $form     = 'expert_group_form_tmpl';
+    protected $model    = 'NPAssociationQuery';
+    protected $form     = 'np_association_form_tmpl';
 }
 
 ?>

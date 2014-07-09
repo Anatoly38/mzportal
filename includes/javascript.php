@@ -13,7 +13,7 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class Javascript
 {
     private static $instance = false;
-    private static $version  = 'v10';
+    private static $version  = 'v13';
     private $container  = null;
     private $jquery     = false;
     private $jquery_validate = false;
@@ -93,6 +93,7 @@ class Javascript
         //$this->add_js_link('jquery.min.js');
         $this->add_js_link('jquery-2.1.1.min.js');
         $this->add_js_link('jquery-ui.min.js');
+        //$this->add_js_link('jquery-migrate-1.2.1.js');
         //$this->add_js_link('jquery.ui.datepicker-ru.js');
         $this->jquery = true;
     }

@@ -14,10 +14,13 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 require_once ( 'model' . DS . 'np_association_query.php' );
 require_once ( 'model' . DS . 'np_association_save.php' );
+require_once ( 'model' . DS . 'expert_group_query.php' );
+require_once ( 'model' . DS . 'expert_group_save.php' );
 
 require_once ( 'views' . DS . 'np_association_list.php' );
 require_once ( 'views' . DS . 'np_association_item.php' );
-
+require_once ( 'views' . DS . 'expert_group_list.php' );
+require_once ( 'views' . DS . 'expert_group_item.php' );
 
 class AttAdmin extends ComponentACL
 {
@@ -90,7 +93,6 @@ class AttAdmin extends ComponentACL
         $title = 'Медицинские ассоциации';
         $confirm = 'Удаление выбранных ассоциаций';
         $this->current_task = substr( __FUNCTION__ , 5);
-        //$this->current_task = 'np_association_list';
         $list = new NPAssociationList();
         self::set_title($title);
         self::set_toolbar_button('new', 'new_np_association' , 'Новая ассоциация');
@@ -123,6 +125,36 @@ class AttAdmin extends ComponentACL
         $sb = self::set_toolbar_button('save', 'np_association_save' , 'Сохранить');
         $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_np_association_edit' , 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }
+    
+// экспертные группы
+    protected function view_expert_group_list()
+    {
+        $title = 'Экспертные группы';
+        $confirm = 'Удаление выбранных экспертных групп';
+        $this->current_task = substr( __FUNCTION__ , 5);
+        $list = new ExpertGroupList();
+        self::set_title($title);
+        self::set_toolbar_button('new', 'new_expert_group' , 'Новая экспертная группа');
+        $edit_b = self::set_toolbar_button('edit', 'edit_expert_group' , 'Редактировать');
+        $edit_b->set_option('obligate', true);
+        $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
+        $del_b->set_option('obligate', true);
+        DeleteItems::set_confirm_dialog($confirm);
+        $this->set_content($list->get_items_page());
+    }
+
+    protected function view_new_expert_group_item() 
+    {
+        self::set_title('Ввод новой экспертной группы');
+        $i = new ExpertGroupItem();
+        $i->new_item(); 
+        $sb = self::set_toolbar_button('save', 'expert_group_save' , 'Сохранить данные экспертной группы');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_expert_group_edit' , 'Закрыть');
         $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);

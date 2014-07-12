@@ -85,6 +85,10 @@ class AttAdmin extends ComponentACL
         $this->view_np_association_list();
     }
 
+    protected function exec_expert_group_list()
+    {
+        $this->view_expert_group_list();
+    }
 // Представления данных (view)
 
     // Медицинские ассоциации    

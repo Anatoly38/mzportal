@@ -14,8 +14,6 @@ class CSS
     private static $instance = false;
     private static $version  = 'v3';
     private $container  = null;
-    //private $calendar   = false;
-    //private $datepicker = false;
     private $treeview   = false;
     private $jquery_ui  = false;
     private $sheet      = false;
@@ -100,6 +98,8 @@ class CSS
             return true;
         }
         $this->add_style_link('jquery-ui-1.8.12.custom.css');
+        $this->add_style_link('sm-core-css.css');
+        $this->add_style_link('sm-simple.css');
         $this->jquery_ui = true;
     }       
     

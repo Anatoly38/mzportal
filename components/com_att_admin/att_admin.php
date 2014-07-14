@@ -47,7 +47,7 @@ class AttAdmin extends ComponentACL
         $this->view_theme_list();
     }
 
-	// Медицинские ассоциации
+    // Медицинские ассоциации
     protected function exec_np_association_list()
     {
         $this->view_np_association_list();
@@ -85,10 +85,32 @@ class AttAdmin extends ComponentACL
         $this->view_np_association_list();
     }
 
+// экспертные группы    
     protected function exec_expert_group_list()
     {
         $this->view_expert_group_list();
     }
+    
+    protected function exec_new_expert_group()
+    {
+        Content::set_route('expert_group');
+        $this->view_new_expert_group_item();
+    }
+    
+    protected function exec_expert_group_save()
+    {
+        $eg = (array)Request::getVar('expert_group');
+        if (!$eg[0]) {
+            $s = new ExpertGroupSave();
+            $s->insert_data();
+        } 
+        else {
+            $s = new ExpertGroupSave($assoc[0]);
+            $s->update_data();
+        }
+        $this->view_expert_group_list();
+    }
+    
 // Представления данных (view)
 
     // Медицинские ассоциации    

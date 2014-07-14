@@ -209,11 +209,11 @@ class Quiz extends ComponentACL
         self::set_title('Редактирование темы тестов');
         $i->edit_item();
         $sb = self::set_toolbar_button('save', 'save' , 'Сохранить');
-        $sb->validate(true);
+        //$sb->validate(true);
         $ab = self::set_toolbar_button('apply', 'apply' , 'Применить');
-        $ab->validate(true);
+        //$ab->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel' , 'Закрыть');
-        $cb->track_dirty(true);
+        //$cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);
     }
@@ -268,9 +268,9 @@ class Quiz extends ComponentACL
         $i = new QuizQuestionItem($q);
         $i->edit_item(); 
         $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
-        $sb->validate(true);
+        //$sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_question_edit' , 'Закрыть');
-        $cb->track_dirty(true);
+        //$cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);
     }

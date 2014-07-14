@@ -84,7 +84,7 @@ class Form_Template_Loader
         $js->add_jquery();
         $js->add_jquery_validate();
         $js->add_datepicker();
-        $js->add_dirtyforms();
+        //$js->add_dirtyforms();
         $q="//input[@default_date]"; // Обработка дат по умолчанию
         $xpath = new DOMXpath($this->form_xml);
         $dom_node_list = $xpath->query($q);

@@ -37,6 +37,7 @@ class Quiz extends ComponentACL
 {
     protected $default_view = 'view_topic_list';
     
+// темы тестирования
     protected function exec_new()
     {
         $this->view_new_item();
@@ -52,6 +53,11 @@ class Quiz extends ComponentACL
             $this->view_edit_item();
         }
     }
+    
+    protected function exec_topic_list()
+    {
+        $this->view_topic_list();
+    }    
     
     protected function exec_cancel()
     {
@@ -91,10 +97,10 @@ class Quiz extends ComponentACL
     {
         if (!$this->oid[0]) {
             Message::error('Тема(ы) не определен(ы)!');
-            $this->view_theme_list();
+            $this->view_topic_list();
         } 
         $lpu = new DeleteItems($this->oid);
-        $this->view_theme_list();
+        $this->view_topic_list();
     }
 
 	// Вопросы тестов
@@ -127,6 +133,17 @@ class Quiz extends ComponentACL
             $s = new QuizQuestionSave($question[0]);
             $s->update_data();
         }
+        $this->view_question_list();
+    }
+    
+    protected function exec_delete_question()
+    {
+        $question = (array)Request::getVar('quiz_question');
+        if (!$question[0]) {
+            Message::error('Вопрос(ы) не определен(ы)!');
+            $this->view_question_list();
+        } 
+        $qd = new DeleteItems($question);
         $this->view_question_list();
     }
 
@@ -209,11 +226,11 @@ class Quiz extends ComponentACL
         self::set_title('Редактирование темы тестов');
         $i->edit_item();
         $sb = self::set_toolbar_button('save', 'save' , 'Сохранить');
-        //$sb->validate(true);
+        $sb->validate(true);
         $ab = self::set_toolbar_button('apply', 'apply' , 'Применить');
-        //$ab->validate(true);
+        $ab->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel' , 'Закрыть');
-        //$cb->track_dirty(true);
+        $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);
     }
@@ -242,9 +259,9 @@ class Quiz extends ComponentACL
         self::set_toolbar_button('new', 'new_question' , 'Новый вопрос');
         $edit_b = self::set_toolbar_button('edit', 'edit_question' , 'Редактировать');
         $edit_b->set_option('obligate', true);
-        $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
+        $del_b = self::set_toolbar_button('delete', 'delete_question' , 'Удалить');
         $del_b->set_option('obligate', true);
-        DeleteItems::set_confirm_dialog($confirm);
+        DeleteItems::set_confirm_dialog($confirm, 'delete_question');
         self::set_toolbar_button('upload', 'download_question_file' , 'Загрузить файл');        
         $this->set_content($list->get_items_page());
     }

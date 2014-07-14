@@ -33,7 +33,7 @@ class DeleteItems
             for ($i = 0, $cnt = count($this->items); $i < $cnt; $i++) {
                 $this->set_object_deleted($this->items[$i]);
             }
-            //Message::alert($this->alert_message . ' ('. $cnt .')');
+            Message::alert($this->alert_message . ' ('. $cnt .')');
         }
     }
     
@@ -43,7 +43,7 @@ class DeleteItems
         $obj->delete();
     }
     
-    public static function set_confirm_dialog($title)
+    public static function set_confirm_dialog($title, $action = 'delete')
     {
         $c = Content::getInstance();
         $text  = '<p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>';
@@ -51,7 +51,7 @@ class DeleteItems
         $dialog_id = 'confirm-delete';
         $c->set_dialog_form($text, $title, $dialog_id);
         $tb = Toolbar_Content::getInstance();
-        $del_button = $tb->get_button('delete');
+        $del_button = $tb->get_button($action);
         $code = '$( "#' . $dialog_id . '" ).dialog( "open" );';
         $del_button->set_option('dialog', $code);
         $jq_block =
@@ -59,7 +59,7 @@ class DeleteItems
     $( "#$dialog_id" ).dialog({
         resizable: false,
         autoOpen: false,
-        height: 140,
+        height: 170,
         modal: true,
         buttons: {
             "Удалить": function() {

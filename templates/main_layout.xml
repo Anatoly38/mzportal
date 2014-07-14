@@ -42,6 +42,12 @@ function tableOrdering( order, dir, task ) {
       <li><a href="index.php?app=58&#38;task=expert_group_list">Экспертные группы</a></li>
     </ul>
   </li>
+  <li><a href="#">Тестирование</a>
+    <ul>
+      <li><a href="index.php?app=54&#38;task=topic_list">Темы тестов</a></li>
+      <li><a href="index.php?app=54&#38;task=question_list">Вопросы тестов</a></li>
+    </ul>
+  </li>
 </ul>
     </div>
 <div id="container" class="ui-widget ui-widget-content">

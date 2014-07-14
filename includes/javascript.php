@@ -93,8 +93,8 @@ class Javascript
         //$this->add_js_link('jquery.min.js');
         $this->add_js_link('jquery-2.1.1.min.js');
         $this->add_js_link('jquery-ui.min.js');
-        $this->add_js_link('jquery.smartmenus.min.js');
-        //$this->add_js_link('jquery-migrate-1.2.1.js');
+        $this->add_js_link('jquery.smartmenus.js');
+        $this->add_js_link('jquery-migrate-1.2.1.js');
         //$this->add_js_link('jquery.ui.datepicker-ru.js');
         $this->jquery = true;
     }

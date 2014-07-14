@@ -111,6 +111,11 @@ class AttAdmin extends ComponentACL
         $this->view_expert_group_list();
     }
     
+    protected function exec_cancel_expert_group_edit()
+    {
+        $this->view_expert_group_list();
+    }
+    
 // Представления данных (view)
 
     // Медицинские ассоциации    

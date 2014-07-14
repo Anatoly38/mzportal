@@ -12,7 +12,7 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class CSS
 {
     private static $instance = false;
-    private static $version  = 'v3';
+    private static $version  = 'v5';
     private $container  = null;
     private $treeview   = false;
     private $jquery_ui  = false;
@@ -97,7 +97,10 @@ class CSS
         if ($this->jquery_ui) {
             return true;
         }
-        $this->add_style_link('jquery-ui-1.8.12.custom.css');
+        //$this->add_style_link('jquery-ui-1.8.12.custom.css');
+        $this->add_style_link('jquery-ui.css');
+        $this->add_style_link('jquery-ui.structure.css');
+        $this->add_style_link('jquery-ui.theme.css');
         $this->add_style_link('sm-core-css.css');
         $this->add_style_link('sm-simple.css');
         $this->jquery_ui = true;

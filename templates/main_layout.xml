@@ -35,7 +35,7 @@ function tableOrdering( order, dir, task ) {
 </script>
  <div id="top-menu">
  <ul id="main-menu" class="sm sm-simple">
-  <li><a href="index.php">К началу</a></li>
+  <li><a href="index.php">Панель управления</a></li>
   <li><a href="#">Аттестация</a>
     <ul>
       <li><a href="index.php?app=58&#38;task=np_association_list">Медицинские ассоциации</a></li>
@@ -46,6 +46,7 @@ function tableOrdering( order, dir, task ) {
     <ul>
       <li><a href="index.php?app=54&#38;task=topic_list">Темы тестов</a></li>
       <li><a href="index.php?app=54&#38;task=question_list">Вопросы тестов</a></li>
+      <li><a href="index.php?app=54&#38;task=download_question_file">Импорт вопросов</a></li>
     </ul>
   </li>
 </ul>

@@ -17,7 +17,7 @@ class ExpertGroupList extends ItemList
     protected $namespace    = 'expert_group';
     protected $task         = 'expert_group_list';
     protected $obj          = 'expert_group';
-    protected $order_task   = 'expert_group';
+    protected $order_task   = 'expert_group_list';
     protected $default_cols = array( 'oid', 'наименование');
     
     public function __construct()

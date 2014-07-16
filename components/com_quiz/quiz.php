@@ -210,7 +210,7 @@ class Quiz extends ComponentACL
         $list = new QuizTopicList();
         self::set_title($title);
         self::set_toolbar_button('new', 'new' , 'Создать');
-		self::set_toolbar_button('education', 'question_list' , 'Вопросы тестов');
+		//self::set_toolbar_button('education', 'question_list' , 'Вопросы тестов');
         $edit_b = self::set_toolbar_button('edit', 'edit' , 'Редактировать');
         $edit_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
@@ -285,9 +285,9 @@ class Quiz extends ComponentACL
         $i = new QuizQuestionItem($q);
         $i->edit_item(); 
         $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
-        //$sb->validate(true);
+        $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_question_edit' , 'Закрыть');
-        //$cb->track_dirty(true);
+        $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);
     }

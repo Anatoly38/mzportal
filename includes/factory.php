@@ -188,11 +188,11 @@ public $site;               // Сведенная воедино html-стран
     {
         $m = Toolbar_Content::getInstance();
         $c = Content::getInstance();
-        if (!$c->get_mode() && $this->registry->application != $this->default_application ) {
+/*         if (!$c->get_mode() && $this->registry->application != $this->default_application ) {
             $js = Javascript::getInstance();
             $options = array('icon' => 'cpanel',  'action' => 'cpanel', 'title' => 'Панель управления' );
             $js->add_toolbar_button($options); 
-        }
+        } */
         $tools_nodes = $m->get_toolbar();
         return $tools_nodes;
     }

@@ -38,7 +38,7 @@ class QuizTopicList extends ItemList
         $options['oid']                         = array('sort' => false, 'type' => 'checkbox' ); 
         $options['название_темы']               = array('sort' => true, 'type' => 'plain');
         $options['аттестуемая_специальность']   = array('sort' => true, 'type' => 'plain', 'ref' => 'attest_specialities' ); 
-        $options['экспертная_группа']           = array('sort' => true, 'type' => 'plain');
+        $options['экспертная_группа']           = array('sort' => true, 'type' => 'plain', 'ref' => 'expert_groups' );
         return $options;
     }
   

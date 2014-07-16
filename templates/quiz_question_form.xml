@@ -1,7 +1,7 @@
 <form_pane>
 <input type="hidden" id="oid" name="oid[]" value="" />
 <fieldset class="adminform">
-    <legend>Тема теста</legend>
+    <legend>Вопрос теста</legend>
     <table cellspacing="1" class="admintable">
         <tbody>
         <tr>

@@ -34,7 +34,7 @@
                 Экспертная группа
             </td>
             <td>
-                <input type="text" name="экспертная_группа" id="экспертная_группа" style="width: 400px; height: 17px;" value=""/>
+                <справочник вид="список" имя="dic_expert_groups" name="экспертная_группа" проверка="required" />
             </td>
         </tr>
         </tbody>

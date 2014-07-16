@@ -4,7 +4,6 @@
 * @package      MZPortal.Framework
 * @subpackage   Framework
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО
-* @license      GNU/GPL, see LICENSE.php
 
 Прямой доступ запрещен
 */

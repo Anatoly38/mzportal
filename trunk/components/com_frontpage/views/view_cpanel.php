@@ -16,7 +16,6 @@ class ViewControlPanel
     protected $img_path = 'includes/style/images/cpanel/';
     protected $cpanel;
 	protected $cpanel_components = array(
-            11  => array( 'title' => 'Задачи'                   , 'icon' => 'icon-48-tasks.png' ),
             6   => array( 'title' => 'Пользователи'             , 'icon' => 'icon-48-user.png' ),
             4   => array( 'title' => 'Территории'               , 'icon' => 'icon-48-territory.png' ),
             9   => array( 'title' => 'Паспорта ЛПУ'             , 'icon' => 'icon-48-hospital.png' ),

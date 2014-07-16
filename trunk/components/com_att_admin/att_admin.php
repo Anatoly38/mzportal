@@ -97,6 +97,13 @@ class AttAdmin extends ComponentACL
         $this->view_new_expert_group_item();
     }
     
+    protected function exec_edit_expert_group()
+    {
+        $eg = (array)Request::getVar('expert_group');
+        Content::set_route('expert_group', $eg[0]);
+        $this->view_edit_expert_group_item($eg[0]);
+    }
+    
     protected function exec_expert_group_save()
     {
         $eg = (array)Request::getVar('expert_group');
@@ -105,7 +112,7 @@ class AttAdmin extends ComponentACL
             $s->insert_data();
         } 
         else {
-            $s = new ExpertGroupSave($assoc[0]);
+            $s = new ExpertGroupSave($eg[0]);
             $s->update_data();
         }
         $this->view_expert_group_list();
@@ -148,10 +155,10 @@ class AttAdmin extends ComponentACL
         $this->set_content($form);
     }
     
-    protected function view_edit_np_association_item($q) 
+    protected function view_edit_np_association_item($na) 
     {
         self::set_title('Редактирование ассоциации');
-        $i = new NPAssociationItem($q);
+        $i = new NPAssociationItem($na);
         $i->edit_item(); 
         $sb = self::set_toolbar_button('save', 'np_association_save' , 'Сохранить');
         $sb->validate(true);
@@ -184,6 +191,19 @@ class AttAdmin extends ComponentACL
         $i = new ExpertGroupItem();
         $i->new_item(); 
         $sb = self::set_toolbar_button('save', 'expert_group_save' , 'Сохранить данные экспертной группы');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_expert_group_edit' , 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }
+    
+    protected function view_edit_expert_group_item($eg) 
+    {
+        self::set_title('Редактирование экспертной группы');
+        $i = new ExpertGroupItem($eg);
+        $i->edit_item(); 
+        $sb = self::set_toolbar_button('save', 'expert_group_save' , 'Сохранить');
         $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_expert_group_edit' , 'Закрыть');
         $cb->track_dirty(true);

@@ -173,8 +173,8 @@ JS;
         $filter  =  "<fieldset class=\"ui-corner-all\" style=\"margin:2px;\">";
         $filter .= "<legend id=\"filter_sw\" style=\"cursor: pointer;\"><span id=\"filter_sw_icon\" class=\"ui-icon ui-icon-triangle-1-e\" style=\"float: left;\"></span>Фильтр</legend>";
         $filter .= "<div id=\"filter_cn\" style=\"min-height: 20px; display:{$show}\">";
-        $filter .= "<div style=\"max-width:60%;margin-right:180px; float:left\">{$this->options}</div>";
-        $filter .= "<div style=\"width:180px;float:right;\"><button onclick=\"submitform('{$this->task}');\">Применить</button>";
+        $filter .= "<div style=\"max-width:60%;margin-right:190px; float:left\">{$this->options}</div>";
+        $filter .= "<div style=\"width:190px;float:right;\"><button onclick=\"submitform('{$this->task}');\">Применить</button>";
         $filter .= "<button onclick=\"{$this->clear_filter}submitform('{$this->task}');\">Сбросить</button></div></div></fieldset>";
         return $filter;
     }

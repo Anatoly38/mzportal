@@ -18,7 +18,7 @@ class QuizQuestionList extends ItemList
     protected $task         = 'question_list';
     protected $obj          = 'quiz_question';
     protected $order_task   = 'question_list';
-    protected $default_cols = array( 'oid', 'текст_вопроса', 'тип_вопроса', 'тема_теста' );
+    protected $default_cols = array( 'oid', 'текст_вопроса', 'тип_вопроса', 'тема_теста', 'количество_ответов' );
     
     public function __construct()
     {
@@ -41,6 +41,7 @@ class QuizQuestionList extends ItemList
         $options['текст_вопроса']       = array('sort' => true,  'type' => 'plain');
         $options['тип_вопроса']   		= array('sort' => true,  'type' => 'plain', 'ref' => 'question_types' ); 
         $options['тема_теста']          = array('sort' => true,  'type' => 'plain');
+        $options['количество_ответов']  = array('sort' => true,  'type' => 'plain');
         return $options;
     }
   

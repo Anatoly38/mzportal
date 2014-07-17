@@ -1,0 +1,33 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Параметры</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Выберите тему 
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="topic" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Количество вопросов 
+            </td>
+            <td>
+                <input type="number" name="q_count" value="100" style="width: 60px;"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Продолжительность 
+            </td>
+            <td>
+                <input type="number" name="duration" style="width: 60px;" value="60" /> мин.
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

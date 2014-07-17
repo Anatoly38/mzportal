@@ -23,6 +23,7 @@ class ClActiveRecord
 {
     protected   $link_type;
     protected   $source;
+    protected   $show_update_message = true;
     public      $acl_id = null;
     
     public function delete()
@@ -46,6 +47,12 @@ class ClActiveRecord
             return null;
         }
         return $p[0];
+    }
+    
+    public function set_update_message($state = true) 
+    {
+        $this->show_update_message = $state;
+        return true;
     }
     
     public function get_as_array()

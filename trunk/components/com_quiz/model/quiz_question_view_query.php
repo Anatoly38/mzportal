@@ -19,6 +19,7 @@ class QuizQuestionViewQuery extends ClActiveRecord
     public $тема_теста;
     public $текст_вопроса;
     public $тип_вопроса;
+    public $количество_ответов;
     
     public function __construct($oid = false)
     {
@@ -30,7 +31,8 @@ class QuizQuestionViewQuery extends ClActiveRecord
                         a.topic_id,
                         a.тема_теста,
                         a.текст_вопроса,
-                        a.тип_вопроса
+                        a.тип_вопроса,
+                        a.количество_ответов
                     FROM {$this->source} AS a 
                     WHERE oid = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
@@ -42,6 +44,7 @@ class QuizQuestionViewQuery extends ClActiveRecord
         $this->тема_теста       = $data['тема_теста'];
         $this->текст_вопроса    = $data['текст_вопроса'];
         $this->тип_вопроса      = $data['тип_вопроса'];
+        $this->количество_ответов = $data['количество_ответов'];
     }
 
     public function update() 

@@ -90,7 +90,7 @@ class QuestionImport
                 $correct_answer_count++;
             }
             try {
-                LinkObjects::set_link($this->topic, $a->oid, $this->question_answer_link); // Ассоциация между темой и вопросом теста
+                LinkObjects::set_link($q_oid, $a->oid, $this->question_answer_link); // Ассоциация между вопросом и ответом теста
             }
             catch (Exception $e) {
                 Message::error('Ошибка: Ассоциация между объектами (Вопрос теста, Ответ на вопрос) не сохранена!');
@@ -121,6 +121,7 @@ class QuestionImport
             return false;
         }
         $q_obj = new QuizQuestionQuery($q_id);
+        $q_obj->set_update_message(false);
         $q_obj->тип_вопроса = $q_type;
         $q_obj->update();
         return true;

@@ -58,7 +58,9 @@ class QuizQuestionQuery extends ClActiveRecord
                                         $this->тип_вопроса,
                                         $this->oid
                                         );
-            Message::alert('Изменения при редактировании вопроса успешно сохранены');
+            if ($this->show_update_message) {
+                Message::alert('Изменения при редактировании вопроса успешно сохранены');
+            }
         } 
         catch (Exception $e) {
             Message::error('Ошибка: изменения при редактированиии вопроса не сохранены!');

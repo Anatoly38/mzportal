@@ -28,6 +28,8 @@ require_once ( 'views' . DS . 'quiz_question_list.php' );
 require_once ( 'views' . DS . 'quiz_question_item.php' );
 require_once ( 'views' . DS . 'download_question_file_form.php' );
 require_once ( 'views' . DS . 'quiz_q_temp_list.php' );
+require_once ( 'views' . DS . 'trial_testing_selection_form.php' );
+require_once ( 'views' . DS . 'trial_quiz.php' );
 
 require_once ( MODULES . DS . 'mod_user'  . DS . 'acl.php' );
 require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'access_list.php' );
@@ -196,12 +198,32 @@ class Quiz extends ComponentACL
         } else {
             $import = new QuestionImport($temp_topic);
             $ret = $import->import_all();
-            //Message::alert($temp_topic);
-            Message::alert('Импортировано ' .$ret['q_count'] . ' вопросов и ' . $ret['a_count'] . ' ответов');
+            Message::alert('Импортировано ' .$ret['q_count'] . ' вопросов и ' . $ret['a_count'] . ' ответов по теме ' . $temp_topic );
             $this->view_question_list();
         }
     }
 
+// Пробное тестирование
+
+    protected function exec_trial_testing_selection()
+    {
+        $this->view_trial_testing_selection();
+    }    
+    
+    protected function exec_cancel_trial_test()
+    {
+        $this->view_question_list();
+    }
+    
+    protected function exec_start_trial_test()
+    {
+        $topic = Request::getVar('topic');
+        $q_count = Request::getVar('q_count');
+        $duration = Request::getVar('duration');
+        $q = new TrialQuiz($topic, $q_count, $duration);
+        
+    }
+    
 // Представления данных (view)
     protected function view_topic_list()
     {
@@ -248,7 +270,7 @@ class Quiz extends ComponentACL
         $this->set_content($form);
     }
 
-    // Работа с вопросами тестов    
+// Работа с вопросами тестов    
    protected function view_question_list()
     {
         $title = 'Вопросы';
@@ -273,7 +295,7 @@ class Quiz extends ComponentACL
         $i->new_item(); 
         $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
         $sb->validate(true);
-        $cb = self::set_toolbar_button('cancel', 'cancel' , 'Закрыть');
+        $cb = self::set_toolbar_button('cancel', 'cancel_question_edit', 'Закрыть');
         $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);
@@ -313,6 +335,25 @@ class Quiz extends ComponentACL
         self::set_toolbar_button('cancel', 'cancel_import' , 'Закрыть');
         $this->set_content($list->get_items_page());
     }
+    
+// Пробное тестирование
+    protected function view_trial_testing_selection()
+    {
+        self::set_title('Пробное тестирование');
+        $db = self::set_toolbar_button('new', 'start_trial_test' , 'Начать тест');
+        $db->validate(true);
+        self::set_toolbar_button('cancel', 'cancel_trial_test' , 'Закрыть');
+        $u = new TrialTestingSelectionForm();
+        $this->set_content($u->get_form());
+    }
+    
+    protected function view_trial_testing()
+    {
+        self::set_title('Пробное тестирование теме ' . $topic);   
+        
+    }
+    
+    
 }
 
 ?>

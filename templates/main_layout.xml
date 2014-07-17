@@ -47,6 +47,7 @@ function tableOrdering( order, dir, task ) {
       <li><a href="index.php?app=54&#38;task=topic_list">Темы тестов</a></li>
       <li><a href="index.php?app=54&#38;task=question_list">Вопросы тестов</a></li>
       <li><a href="index.php?app=54&#38;task=download_question_file">Импорт вопросов</a></li>
+      <li><a href="index.php?app=54&#38;task=trial_testing_selection">Пробное тестирование</a></li>      
     </ul>
   </li>
 </ul>

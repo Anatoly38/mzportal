@@ -9,7 +9,7 @@
                 Текст вопроса 
             </td>
             <td>
-                <input type="text" name="текст_вопроса" id="текст_вопроса" style="width: 400px; height: 17px;" class="required" value=""/>
+                <textarea type="text" name="текст_вопроса" id="текст_вопроса" style="width: 400px; height: 40px;" class="required" value=""/>
             </td>
         </tr>
         <tr>
@@ -18,6 +18,28 @@
             </td>
             <td>
                 <справочник вид="список" имя="dic_question_types" name="тип_вопроса" проверка="required" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <legend>Варианты ответов</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="120" valign="top">
+                Номер п/п <input type="number" name="номер_пп" value="" style="width: 40px;"/>
+            </td>
+            <td valign="top">
+                Текст ответа 
+            </td>
+            <td>
+                <textarea type="text" name="текст_вопроса" id="текст_вопроса" style="width: 400px; height: 30px;" class="required" value=""/>
+            </td>
+            <td> Правильный: &#160;&#160;
+                <span class="radio">
+                    Нет<input type="radio" name="правильный" value="0" />&#160;&#160;
+                    Да<input type="radio" name="правильный"  value="1"/>
+                </span>
             </td>
         </tr>
         </tbody>

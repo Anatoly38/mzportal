@@ -347,12 +347,12 @@ class Quiz extends ComponentACL
         $this->set_content($u->get_form());
     }
     
-    protected function view_trial_testing()
+    protected function view_trial_testing($test)
     {
-        self::set_title('Пробное тестирование теме ' . $topic);   
+        self::set_title('Пробное тестирование теме ' . $topic); 
+        $this->set_content($test);
         
     }
-    
     
 }
 

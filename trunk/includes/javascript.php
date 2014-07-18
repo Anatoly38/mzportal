@@ -1,7 +1,6 @@
 <?php
 /**
 * @version		$Id$
-* $Date$    
 * @package		MZPortal.Framework
 * @subpackage	Factory
 * @copyright	Copyright (C) 2009-2014 МИАЦ ИО
@@ -24,6 +23,7 @@ class Javascript
     private $jstree     = false;
     private $grid       = false;
     private $toolbar    = false;
+    private $jsquiz     = false;
     private $jquery_block = array();
 
     private function __construct()
@@ -279,6 +279,22 @@ JS;
         $code .= "$('#grid').statgrid();$('.numeric').numeric();";
         $this->add_jblock($code);
         $this->grid = true;
+    }
+    
+    public function add_quiz()
+    {
+        if (!$this->container) {
+            $this->set_container();
+        }
+        if (!$this->jquery) {
+            $this->add_jquery();
+        }
+        if ($this->jsquiz) {
+            return true;
+        }
+        $this->add_js_link('jquery.jquize-ru.js');
+        $this->add_js_link('jquery.timeTo.js');
+        $this->jsquiz = true;
     }
 
     public function get_js_scripts()

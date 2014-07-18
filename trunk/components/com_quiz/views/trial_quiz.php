@@ -12,15 +12,14 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 
 class TrialQuiz 
 {
-    private $q_obj; // вопросы
-    private $a_obj; // ответы
+    private $dbh;
     private $topic;
     private $q_qount;
     private $duration;
     
     public function __construct($topic = false, $q_qount  = null, $duration) {
         if (!$topic) {
-            throw new Exception("Не определен тема тестирования");
+            throw new Exception("Не определена тема тестирования");
         }
         if (!$q_qount) {
             throw new Exception("Не определено количество вопросов теста");
@@ -28,14 +27,15 @@ class TrialQuiz
         if (!$duration) {
             throw new Exception("Не определена продолжительность теста");
         }
+        $this->dbh = new DB_mzportal();
         $this->topic    = $topic;
         $this->q_qount  = $q_qount;
         $this->duration = $duration;
-        $this->q_obj =  new QuizQTempQuery();
-        $this->a_obj =  new QuizATempQuery();
+        $this->append_script_tags();
+        $this->append_html();
     }
     
-    private function insert_qestion_text($n, $q)
+    private function get_qestions()
     {
         if (!$n || !$q) {
             return false;
@@ -46,17 +46,76 @@ class TrialQuiz
         return true;
     }
     
-    private function insert_answer_text($n, $a, $c)
+    private function get_qestions_count()
     {
-        if (!$n || !$a) {
-            return false;
+        $count_query =  "SELECT COUNT(*) FROM (SELECT `s`.`oid` FROM quiz_qestion_topic AS s 
+                        JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`  
+                        WHERE `s`.`topic_id` = '{$this->topic}') AS source";
+        //print_r($count_query);
+        list($count) = $this->dbh->execute($count_query)->fetch_row();
+        return $count;
+    }
+    
+
+    private function get_answers($question) 
+    {
+        $qa = "SELECT * FROM `quiz_answer_question` WHERE `question_id` = '{$question}'";
+        $ra = $this->dbh->execute($qa);
+        if (!$ra) {
+            return null;
+            exit;
         }
-        $this->a_obj->id = $n;
-        $this->a_obj->текст_ответа  = $a;
-        $this->a_obj->правильный    = $c;
-        $this->a_obj->insert();
+        $a_arr_q = array(); // Массив с ответами
+        $a_arr_c = array(); // Правильные ответы
+        $res = array(); // Все вместе 
+        $i = 1;
+        
+        while ($data = $ra->fetch_assoc()) {
+            $answer = "'" . trim($data['текст_ответа']) . "'";
+            $a_arr_q[] = $answer; 
+            if ($data['правильный']) {
+                $a_arr_c[] = $i;
+            }
+            $i++;
+        }
+        $ans_arr = "[";
+        $ans_arr .= implode(",", $a_arr_q);
+        $ans_arr .= "]";
+        $corr_ans_arr = "[";
+        $corr_ans_arr .= implode(",", $a_arr_c);
+        $corr_ans_arr .= "]";
+        
+        $res['answers'] = $ans_arr;
+        $res['correct_ans'] = $corr_ans_arr;
+        return $res;
+    }
+    
+    private function append_script_tags()
+    {
+        $seconds = $this->duration * 60;
+        $css = CSS::getInstance();
+        $css->add_style_link('quiz_styles.css');
+        $css->add_style_link('timeTo.css');
+        $js = Javascript::getInstance();
+        $js->add_quiz();
+        $jquizzy = "$('#quiz-container').jquizzy( { questions: init.questions, timeToTest: {$seconds} });";
+        $js->add_jblock($jquizzy);
+        
+        
+    }
+    
+    private function append_html()
+    {
+    $html = 
+<<<HTML
+<div id="countdown"></div>
+<div id="quiz-container"></div>
+HTML;
+        $c = Content::getInstance();
+        $c->add_content($html);
         return true;
     }
+
 }
 
 ?>

@@ -12,12 +12,11 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class Javascript
 {
     private static $instance = false;
-    private static $version  = 'v13';
+    private static $version  = 'v23';
     private $container  = null;
     private $jquery     = false;
     private $jquery_validate = false;
-    //private $calendar   = false;
-    //private $datepicker = false;
+    private $datepicker = false;
     private $dirtyforms = false;
     private $treeview   = false;
     private $jstree     = false;
@@ -95,7 +94,6 @@ class Javascript
         $this->add_js_link('jquery-ui.min.js');
         $this->add_js_link('jquery.smartmenus.js');
         $this->add_js_link('jquery-migrate-1.2.1.js');
-        //$this->add_js_link('jquery.ui.datepicker-ru.js');
         $this->jquery = true;
     }
     

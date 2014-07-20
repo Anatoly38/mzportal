@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id$
-* @package		MZPortal.Framework
-* @subpackage	Monitorings
-* @copyright	Copyright (C) 2012 МИАЦ ИО
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Monitorings
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */

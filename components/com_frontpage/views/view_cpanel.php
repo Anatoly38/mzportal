@@ -19,7 +19,7 @@ class ViewControlPanel
             6   => array( 'title' => 'Пользователи'             , 'icon' => 'icon-48-user.png' ),
             4   => array( 'title' => 'Территории'               , 'icon' => 'icon-48-territory.png' ),
             9   => array( 'title' => 'Паспорта ЛПУ'             , 'icon' => 'icon-48-hospital.png' ),
-            58  => array( 'title' => 'Аттестация медработников' , 'icon' => 'icon-48-question.png' ),
+            58  => array( 'title' => 'Аттестация медработников' , 'icon' => 'icon-48-employee.png' ),
             54  => array( 'title' => 'Тестирование'             , 'icon' => 'icon-48-quiz.png' )
         );
     

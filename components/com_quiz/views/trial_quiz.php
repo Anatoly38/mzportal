@@ -1,13 +1,12 @@
 <?php
 /** 
-* @version		$Id$
-* @package		MZPortal.Framework
-* @subpackage	Quiz
-* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Quiz
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
-
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 
 class TrialQuiz 
@@ -16,6 +15,7 @@ class TrialQuiz
     private $topic;
     private $q_qount;
     private $duration;
+    private $init_questions; // json объект
     
     public function __construct($topic = false, $q_qount  = null, $duration) {
         if (!$topic) {

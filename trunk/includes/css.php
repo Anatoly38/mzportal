@@ -12,7 +12,7 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class CSS
 {
     private static $instance = false;
-    private static $version  = 'v5';
+    private static $version  = 'v14';
     private $container  = null;
     private $treeview   = false;
     private $jquery_ui  = false;

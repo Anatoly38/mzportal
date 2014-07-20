@@ -105,7 +105,7 @@ class Quiz extends ComponentACL
         $this->view_topic_list();
     }
 
-	// Вопросы тестов
+// Вопросы тестов
     protected function exec_question_list()
     {
         $this->view_question_list();
@@ -221,7 +221,8 @@ class Quiz extends ComponentACL
         $q_count = Request::getVar('q_count');
         $duration = Request::getVar('duration');
         $q = new TrialQuiz($topic, $q_count, $duration);
-        
+        Content::set_route('source', ''); 
+        $this->view_trial_testing($topic);
     }
     
 // Представления данных (view)
@@ -232,7 +233,6 @@ class Quiz extends ComponentACL
         $list = new QuizTopicList();
         self::set_title($title);
         self::set_toolbar_button('new', 'new' , 'Создать');
-		//self::set_toolbar_button('education', 'question_list' , 'Вопросы тестов');
         $edit_b = self::set_toolbar_button('edit', 'edit' , 'Редактировать');
         $edit_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
@@ -284,7 +284,7 @@ class Quiz extends ComponentACL
         $del_b = self::set_toolbar_button('delete', 'delete_question' , 'Удалить');
         $del_b->set_option('obligate', true);
         DeleteItems::set_confirm_dialog($confirm, 'delete_question');
-        self::set_toolbar_button('upload', 'download_question_file' , 'Загрузить файл');        
+        //self::set_toolbar_button('upload', 'download_question_file' , 'Загрузить файл');        
         $this->set_content($list->get_items_page());
     }
     
@@ -347,13 +347,12 @@ class Quiz extends ComponentACL
         $this->set_content($u->get_form());
     }
     
-    protected function view_trial_testing($test)
+    protected function view_trial_testing($topic)
     {
-        self::set_title('Пробное тестирование теме ' . $topic); 
-        $this->set_content($test);
-        
+        $obj = new QuizTopicQuery($topic);
+        self::set_title('Пробное тестирование по теме "' . $obj->название_темы . '"'); 
+
     }
     
 }
-
 ?>

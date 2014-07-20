@@ -14,10 +14,10 @@
         questions: null,
         startText : 'Начало теста',
         endText: 'Тест завершен',
-        splashImage: 'img/start.png',
+        splashImage: 'includes/style/images/play-icon.png',
         sendResultsURL: '172.16.172.33/get_result.php',
         timeToTest: 3600,
-        hostip: '172.16.172.33', 
+        hostip: '127.0.0.1:8080', 
         resultComments :  
         {
             perfect: 'Замечательно! (оценка - 5)',
@@ -28,7 +28,7 @@
             poor: 'Оценка - 1',
             worst: 'Оценка - 1'
         }
-           };
+    };
   
     var config = $.extend(defaults, settings);  
     if (window.location.host != config.hostip) {
@@ -101,6 +101,7 @@
                 userAnswers.push(qAnswer);
             });
             progressKeeper.hide();
+            notice.hide();
             var results = checkAnswers(),
             resultSet = '',
             questionResult = '',
@@ -133,7 +134,7 @@
                 }
                 resultSet += '</ul></div></div>';
             }
-            resultSet += '<div class="legend"><span class="right-point">  - Правильный ответ</span><span class="selected-point"> - Выбор пользователя</span></div>';
+            resultSet += '<div class="jquizzy-clear"></div><div class="legend"><span class="right-point">  - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя</span></div>';
             score = roundReloaded(trueCount / questionLength * 100, 2);
             resultSet = '<h2 class="qTitle"> Время отведенное на ответы исчерпано. <br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
@@ -271,23 +272,23 @@
             });
              userAnswers.push(qAnswer);
         });
-
+        var collate =[];
+        for (r=0; r<userAnswers.length;r++) {
+            collate.push('{questionNumber:"'+parseInt(r+1)+'", UserAnswer:"'+userAnswers[r]+'"}');
+        }
+        res = '[' + collate.join(",") + ']';
+        $("#source").val(res);
         if (config.sendResultsURL !== null) 
         {
             console.log("Попытка отправки результатов теста");
-            var collate =[];
-            for (r=0; r<userAnswers.length;r++)
-                {
-                    collate.push('{questionNumber:"'+parseInt(r+1)+'", UserAnswer:"'+userAnswers[r]+'"}');
-                } 
+
             $.ajax({
                 type: 'POST',
                 url: config.sendResultsURL,
-                data: '[' + collate.join(",") + ']',
+                data: res,
                 complete: function () {console.log("Успешная отправка результатов теста");}
             });
         }
-
         progressKeeper.hide();
         var results = checkAnswers(),
         resultSet = '',
@@ -316,7 +317,7 @@
             resultSet += '</ul></div></div>';
 
         }
-        resultSet += '<div class="legend"><span class="right-point">  - Правильный ответ</span><span class="selected-point"> - Выбор пользователя</span></div>';
+        resultSet += '<div class="jquizzy-clear"></div><div class="legend"><span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя</span></div>';
         score = roundReloaded(trueCount / questionLength * 100, 2);
         resultSet = '<h2 class="qTitle">Результат: ' + judgeSkills(score) + '.<br/>Вы набрали ' + score + '%, затрачено времени ' + spentTime + ' сек.</h2>' + resultSet + '<div class="jquizzy-clear"></div>';
         superContainer.find('.result-keeper').html(resultSet).show(500);

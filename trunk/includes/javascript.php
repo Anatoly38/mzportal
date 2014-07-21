@@ -12,7 +12,7 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class Javascript
 {
     private static $instance = false;
-    private static $version  = 'v23';
+    private static $version  = 'v33';
     private $container  = null;
     private $jquery     = false;
     private $jquery_validate = false;
@@ -22,7 +22,7 @@ class Javascript
     private $jstree     = false;
     private $grid       = false;
     private $toolbar    = false;
-    private $jsquiz     = false;
+    private $quiz     = false;
     private $jquery_block = array();
 
     private function __construct()
@@ -287,12 +287,12 @@ JS;
         if (!$this->jquery) {
             $this->add_jquery();
         }
-        if ($this->jsquiz) {
+        if ($this->quiz) {
             return true;
         }
-        $this->add_js_link('jquery.jquize-ru.js');
+        $this->add_js_link('jquery.quiz.js');
         $this->add_js_link('jquery.timeTo.js');
-        $this->jsquiz = true;
+        $this->quiz = true;
     }
 
     public function get_js_scripts()

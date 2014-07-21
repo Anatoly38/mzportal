@@ -43,14 +43,14 @@ $mainframe->set_css();
 $mainframe->render();
     // Отправляем на вывод
 echo $mainframe->site;
-$r = Registry::getInstance();
-echo 'Регистри: ' . print_r($r);
+//$r = Registry::getInstance();
+//echo 'Регистри: ' . print_r($r);
 //$s = SessionStorage::getInstance();
 //print_r($s);
 //$c = Constraint::getInstance();
 //print_r($c);
 //echo '<br />Сессия: ';
-echo 'Сессия: ' . print_r($_SESSION);
-//print_r($_POST);
+//echo 'Сессия: ' . print_r($_SESSION);
+print_r($_POST);
 //print_r($_FILES);
 ?>

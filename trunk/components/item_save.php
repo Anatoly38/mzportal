@@ -3,13 +3,7 @@
 * @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Components
-* @copyright	Copyright (C) 2009 МИАЦ ИО
-* @license		GNU/GPL, see LICENSE.php
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details. 
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -40,8 +34,7 @@ class ItemSave
     public function update_data()
     {
         if (!$this->item) {
-            $m = Message::getInstance();
-            $m->enque_message('error', 'Объект не определен (update)!');
+            Message::error('Объект не определен (update)!');
             return false;
         }
         $this->query->update();

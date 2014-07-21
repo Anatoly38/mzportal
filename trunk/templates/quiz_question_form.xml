@@ -1,17 +1,16 @@
 <form_pane>
-<input type="hidden" id="oid" name="oid[]" value="" />
 <fieldset class="adminform">
     <legend>Вопрос теста</legend>
     <table cellspacing="1" class="admintable">
         <tbody>
         <tr>
             <td width="185" valign="top" class="key">
-                Текст вопроса 
+                Текст вопроса
             </td>
             <td>
-                <textarea type="text" name="текст_вопроса" id="текст_вопроса" style="width: 400px; height: 40px;" class="required" value=""/>
+                <textarea type="text" id="текст_вопроса" name="текст_вопроса" style="width: 400px; height: 60px;" class="required" value=""/>
             </td>
-        </tr>
+        </tr>        
         <tr>
             <td width="185" valign="top" class="key">
                 Тип вопроса
@@ -33,7 +32,7 @@
                 Текст ответа 
             </td>
             <td>
-                <textarea type="text" name="текст_вопроса" id="текст_вопроса" style="width: 400px; height: 30px;" class="required" value=""/>
+                <textarea type="text" name="текст_ответа" id="текст_ответа" style="width: 400px; height: 30px;" value=""/>
             </td>
             <td> Правильный: &#160;&#160;
                 <span class="radio">

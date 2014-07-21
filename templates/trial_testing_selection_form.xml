@@ -24,7 +24,19 @@
                 Продолжительность 
             </td>
             <td>
-                <input type="number" name="duration" style="width: 60px;" value="60" /> мин.
+                <input type="number" name="duration" style="width: 60px;" value="60" min="0" /> мин.
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Выборка
+            </td>
+            <td>
+                <select id="q_order" name="order">
+                    <option value=""></option>
+                    <option value="ordered">По порядку</option>
+                    <option value="random">В случайном порядке</option>
+                </select>            
             </td>
         </tr>
         </tbody>

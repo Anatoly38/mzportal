@@ -13,7 +13,7 @@ class TrialQuiz
 {
     private $dbh;
     private $topic;
-    private $q_qount;
+    private $q_qount = null;
     private $duration;
     private $init_questions; // json объект
     
@@ -29,26 +29,42 @@ class TrialQuiz
         }
         $this->dbh = new DB_mzportal();
         $this->topic    = $topic;
-        $this->q_qount  = $q_qount;
+        if ($q_qount) {
+            $this->q_qount  = $q_qount;
+        }
         $this->duration = $duration;
+        $this->init_questions = $this->get_qestions();
         $this->append_script_tags();
         $this->append_html();
+        
     }
     
     private function get_qestions()
     {
-        if (!$n || !$q) {
-            return false;
+        if ($this->q_qount) {
+            $limit = " LIMIT 0, {$this->q_qount} ";
         }
-        $this->q_obj->номер_пп      = $n;
-        $this->q_obj->текст_вопроса = $q;
-        $this->q_obj->insert();
-        return true;
+        $q = "SELECT * FROM quiz_question_topic AS s 
+                        JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`  
+                        WHERE `s`.`topic_id` = '{$this->topic}' AND `o`.`deleted` <> '1' {$limit}";
+        $r = $this->dbh->execute($q);
+        $i = 1;
+        $js_object = "var init = {'questions': [";
+        while ($data = $r->fetch_assoc()) {
+            $answers = $this->get_answers($data['oid']);
+            $js_object .= "{ 'question':'" . $data['текст_вопроса'];
+            $js_object .= "','answers':" . $answers['answers'];
+            $js_object .= ",'ca':{$answers['correct_ans']},";
+            $js_object .= "'qT':{$data['тип_вопроса']}},";
+            
+        }
+        $js_object .= "]};";
+        return $js_object;
     }
     
     private function get_qestions_count()
     {
-        $count_query =  "SELECT COUNT(*) FROM (SELECT `s`.`oid` FROM quiz_qestion_topic AS s 
+        $count_query =  "SELECT COUNT(*) FROM (SELECT `s`.`oid` FROM quiz_question_topic AS s 
                         JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`  
                         WHERE `s`.`topic_id` = '{$this->topic}') AS source";
         //print_r($count_query);
@@ -97,8 +113,9 @@ class TrialQuiz
         $css->add_style_link('quiz_styles.css');
         $css->add_style_link('timeTo.css');
         $js = Javascript::getInstance();
+        $js->add_js_text($this->init_questions);
         $js->add_quiz();
-        $jquizzy = "$('#quiz-container').jquizzy( { questions: init.questions, timeToTest: {$seconds} });";
+        $jquizzy = "$('#quiz-container').quiz( { questions: init.questions, timeToTest: {$seconds} });";
         $js->add_jblock($jquizzy);
         
         

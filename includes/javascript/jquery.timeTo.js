@@ -103,22 +103,22 @@
             },
             method, options = {};
 
-        for(var i = 0, arg; arg = arguments[i]; ++i){
-            if(i == 0 && typeof arg === "string"){
+        for (var i = 0, arg; arg = arguments[i]; ++i) {
+            if (i == 0 && typeof arg === "string") {
                 method = arg;
-            }else{
-                if(typeof arg == "object"){
+            } else {
+                if (typeof arg == "object") {
                     if(typeof arg.getTime === 'function'){
                         options.timeTo = arg;
                     }else {
                         options = $.extend(options, arg);
                     }
-                }else{
-                    if(typeof arg == "function"){
+                } else {
+                    if (typeof arg == "function") {
                         options.callback = arg;
-                    }else{
+                    } else {
                         var v = parseInt(arg);
-                        if(!isNaN(v)){
+                        if (!isNaN(v)) {
                             options.seconds = v;
                         }
                     }

@@ -76,6 +76,7 @@ class Message
         if (!$this->alert_node) {
             $this->alert_node = $this->document->createElement('div');
             $this->alert_node->setAttribute('class', 'ui-state-highlight ui-corner-all');
+            $this->alert_node->setAttribute('id', 'message');
             $this->root->appendChild($this->alert_node);
         }
         $p = $this->document->createElement('p');

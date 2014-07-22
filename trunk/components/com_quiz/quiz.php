@@ -351,7 +351,9 @@ class Quiz extends ComponentACL
     {
         $obj = new QuizTopicQuery($topic);
         self::set_title('Пробное тестирование по теме "' . $obj->название_темы . '"'); 
-
+        Message::alert('Тест подготовлен');
+        $stop_test = self::set_toolbar_button('cancel', 'cancel_trial_test' , 'Прервать выполнение теста');
+        $stop_test->set_option('dialog', "$('#quiz-container').quiz('stopQuiz');");
     }
     
 }

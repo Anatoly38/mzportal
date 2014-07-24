@@ -118,7 +118,7 @@ class Constraint
             $highlight = 'ui-state-highlight';
         }
         $html =  "<input class=\"text_area {$highlight}\" type=\"text\" id=\"фильтр_{$condition}\" name=\"фильтр_{$condition}\"" ;
-        $html .= ' value="' . $match . '" onchange="submitform(\''. $this->task .'\');" title = "фильтровать по полю ' . $condition . '" placeholder="' . $condition . '" />';
+        $html .= ' value="' . $match . '" onchange="submitform(\''. $this->task .'\');" title = "фильтровать по полю ' . str_replace("_", " ", $condition) . '" placeholder="' . str_replace("_", " ", $condition) . '" />';
         $this->clear_filter .= "document.getElementById('фильтр_" . $condition . "').value='';";
         return $html;
     }

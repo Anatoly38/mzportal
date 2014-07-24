@@ -1,149 +1,11 @@
 (function($){
      var methods = {
-        init_quiz : function() { 
-
-
-            /*             countdown.timeTo(config.timeToTest, function(){ 
-                    superContainer.find('ul.answers').each(function(index) {
-                        var qAnswer = [];
-                        r = 1;
-                        $(this).children('li').each(function() {
-                            if ($(this).hasClass('selected')) {
-                                qAnswer.push(r);
-                            }
-                            r++;
-                        });
-                        userAnswers.push(qAnswer);
-                    });
-                    progressKeeper.hide();
-                    notice.hide();
-                    var results = checkAnswers(),
-                    resultSet = '',
-                    questionResult = '',
-                    trueCount = 0,
-                    score;
-
-                    for (var i = 0, toLoopTill = results.length; i < toLoopTill; i++) {
-                        if (results[i] === true) {
-                            trueCount++;
-                        }
-                       if (results[i] === true)
-                            questionResult = "<div class='correct'><span>Верно</span></div>";
-                         else if (results[i] === false)
-                            questionResult = "<div class='wrong'><span>Неверно</span></div>";
-                        else 
-                            questionResult = "<div class='unanswered'><span>Без ответа</span></div>";
-                        resultSet += '<div class="result-row"> Вопрос №' + (i + 1) + questionResult;
-                        resultSet += '<div class="resultsview-qhover">' + config.questions[i].question;
-                        resultSet += "<ul>";
-                        for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[i].answers.length; answersIteratorIndex++) {
-                            var correctAdd = '';
-                            var selectedAdd = '';
-                            if ($.inArray( answersIteratorIndex + 1 , config.questions[i].ca ) !== -1 ) {
-                                correctAdd += 'right';
-                            }
-                            if ($.inArray( answersIteratorIndex + 1 , userAnswers[i] ) !== -1 ) {
-                                selectedAdd += ' selected-point';
-                            }
-                            resultSet += '<li class="' + correctAdd + '"><span class="' + selectedAdd + '"></span>' + config.questions[i].answers[answersIteratorIndex] + '</li>';
-                        }
-                        resultSet += '</ul></div></div>';
-                    }
-                    resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя </span> </div>';
-                    score = roundReloaded(trueCount / questionLength * 100, 2);
-                    resultSet = '<h2 class="qTitle"> Время отведенное на ответы исчерпано. <br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
-                    superContainer.find('.result-keeper').html(resultSet).show(500);
-                    superContainer.find('.resultsview-qhover').hide();
-                    superContainer.find('.result-row').hover(function() {
-                        $(this).find('.resultsview-qhover').show();
-                        }, function() {
-                        $(this).find('.resultsview-qhover').hide();
-                        });
-                    superContainer.find('.slide-container').hide(function() {
-                        superContainer.find('.results-container').fadeIn(500); 
-                    });
-                    return false;
-                }); */
-                
-
-            function fulfillment(reason, obj) {
-                endTime = $.now();
-                spentTime = Math.round((endTime - startTime) / 1000) ;
-                 superContainer.find('ul.answers').each(function(index) {
-                    var qAnswer = [];
-                    r = 1;
-                    $(this).children('li').each(function() {
-                        if ($(this).hasClass('selected')) {
-                            qAnswer.push(r);
-                        }
-                        r++;
-                    });
-                     userAnswers.push(qAnswer);
-                });
-                var collate =[];
-                for (r=0; r<userAnswers.length;r++) {
-                    collate.push('{questionNumber:"'+parseInt(r+1)+'", UserAnswer:"'+userAnswers[r]+'"}');
-                }
-                res = '[' + collate.join(",") + ']';
-                $("#source").val(res);
-                if (config.sendResultsURL !== null) 
-                {
-                    console.log("Попытка отправки результатов теста");
-
-                    $.ajax({
-                        type: 'POST',
-                        url: config.sendResultsURL,
-                        data: res,
-                        complete: function () {console.log("Успешная отправка результатов теста");}
-                    });
-                }
-                progressKeeper.hide();
-                var results = checkAnswers(),
-                resultSet = '',
-                trueCount = 0,
-                score,
-                url;
-
-                for (var i = 0, toLoopTill = results.length; i < toLoopTill; i++) {
-                    if (results[i] === true) {
-                        trueCount++;
-                    }
-                    resultSet += '<div class="result-row"> Вопрос №' + (i + 1) + (results[i] === true ? "<div class='correct'><span>Верно</span></div>": "<div class='wrong'><span>Неверно</span></div>");
-                    resultSet += '<div class="resultsview-qhover">' + config.questions[i].question;
-                    resultSet += "<ul>";
-                    for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[i].answers.length; answersIteratorIndex++) {
-                        var correctAdd = '';
-                        var selectedAdd = '';
-                        if ($.inArray( answersIteratorIndex + 1 , config.questions[i].ca ) !== -1 ) {
-                            correctAdd += 'right';
-                        }
-                        if ($.inArray( answersIteratorIndex + 1 , userAnswers[i] ) !== -1 ) {
-                            selectedAdd += ' selected-point';
-                        }
-                        resultSet += '<li class="' + correctAdd + '"><span class="' + selectedAdd + '"></span>' + config.questions[i].answers[answersIteratorIndex] + '</li>';
-                    }
-                    resultSet += '</ul></div></div>';
-
-                }
-                resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя </span></div>';
-                score = roundReloaded(trueCount / questionLength * 100, 2);
-                resultSet = '<h2 class="qTitle">Результат: ' + judgeSkills(score) + '.<br/>Вы набрали ' + score + '%, затрачено времени ' + spentTime + ' сек.</h2>' + resultSet + '<div class="jquizzy-clear"></div>';
-                superContainer.find('.result-keeper').html(resultSet).show(500);
-                superContainer.find('.resultsview-qhover').hide();
-                superContainer.find('.result-row').hover(function() {
-                    $(this).find('.resultsview-qhover').show();
-                    }, function() {
-                    $(this).find('.resultsview-qhover').hide();
-                    });
-                $(obj).parents('.slide-container').fadeOut(500, function() {
-                    $(obj).next().fadeIn(500);
-                });
-                return false;
+        stopQuiz : function( reason ) {
+            var d = superContainer.data();
+            if (d.quizEnded) {
+                return true;
             }
-        },
-        stopQuiz : function( ) {
-            $( "#message" ).html( "Прервать выполнение теста" ); 
-            this.find('ul.answers').each(function(index) {
+            superContainer.find('ul.answers').each(function(index) {
                 var qAnswer = [];
                 r = 1;
                 $(this).children('li').each(function() {
@@ -152,11 +14,12 @@
                     }
                     r++;
                 });
-                //userAnswers.push(qAnswer);
+                userAnswers.push(qAnswer);
             });
-            //progressKeeper.hide();
-            //notice.hide();
-            //var results = checkAnswers(),
+            countdown.timeTo("stop");
+            progressKeeper.hide();
+            notice.hide();
+            var results = checkAnswers(),
             resultSet = '',
             questionResult = '',
             trueCount = 0,
@@ -173,24 +36,24 @@
                 else 
                     questionResult = "<div class='unanswered'><span>Без ответа</span></div>";
                 resultSet += '<div class="result-row"> Вопрос №' + (i + 1) + questionResult;
-                resultSet += '<div class="resultsview-qhover">' + config.questions[i].question;
+                resultSet += '<div class="resultsview-qhover">' + quizConfig.questions[i].question;
                 resultSet += "<ul>";
-                for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[i].answers.length; answersIteratorIndex++) {
+                for (answersIteratorIndex = 0; answersIteratorIndex < quizConfig.questions[i].answers.length; answersIteratorIndex++) {
                     var correctAdd = '';
                     var selectedAdd = '';
-                    if ($.inArray( answersIteratorIndex + 1 , config.questions[i].ca ) !== -1 ) {
+                    if ($.inArray( answersIteratorIndex + 1 , quizConfig.questions[i].ca ) !== -1 ) {
                         correctAdd += 'right';
                     }
                     if ($.inArray( answersIteratorIndex + 1 , userAnswers[i] ) !== -1 ) {
                         selectedAdd += ' selected-point';
                     }
-                    resultSet += '<li class="' + correctAdd + '"><span class="' + selectedAdd + '"></span>' + config.questions[i].answers[answersIteratorIndex] + '</li>';
+                    resultSet += '<li class="' + correctAdd + '"><span class="' + selectedAdd + '"></span>' + quizConfig.questions[i].answers[answersIteratorIndex] + '</li>';
                 }
                 resultSet += '</ul></div></div>';
             }
             resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя </span> </div>';
             score = roundReloaded(trueCount / questionLength * 100, 2);
-            resultSet = '<h2 class="qTitle"> Время отведенное на ответы исчерпано. <br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
+            resultSet = '<h2 class="qTitle">' + reason + '<br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
             superContainer.find('.result-row').hover(function() {
@@ -201,10 +64,10 @@
             superContainer.find('.slide-container').hide(function() {
                 superContainer.find('.results-container').fadeIn(500); 
             });
-            return false;
-
+            superContainer.data('quizEnded', 1);
+            return true;
         },
-        update : function( content ) {
+        saveResults : function() {
           // 
         }
     };
@@ -241,70 +104,81 @@
             $.error( 'Метод с именем ' +  method + ' не существует для jQuery.quiz' );
         }
         
-        var config = $.extend(defaults, settings);  
-        if (window.location.host != config.hostip) {
+        quizConfig = $.extend(defaults, settings);  
+        if (window.location.host != quizConfig.hostip) {
             $(this).html('<div class="intro-container slide-container"><h2 class="qTitle">Ошибка подготовки вопросов (1)</h2></div>');
             return;
         }
-        if (config.questions === null) 
+        if (quizConfig.questions === null) 
         {
             $(this).html('<div class="intro-container slide-container"><h2 class="qTitle">Ошибка подготовки вопросов (2)</h2></div>');
             return;
         }
-        if (config.questions.length === 0) 
+        if (quizConfig.questions.length === 0) 
         {
             $(this).html('<div class="intro-container slide-container"><h2 class="qTitle">Нет вопросов по выбранной теме</h2></div>');
             return;
         }
         
-        var superContainer = this, answers = [];
-        introFob = '<div class="intro-container slide-container"><div class="question-number">'+config.startText+'</div><a class="nav-start" href="#"><img src="'+config.splashImage+'" /></a></div>';
-        exitFob =  '<div class="results-container slide-container"><div class="question-number">'+config.endText+'</div><div class="result-keeper"></div></div>';
+        superContainer = this;
+        answers = [];
+        introFob = '<div class="intro-container slide-container"><div class="question-number">'+quizConfig.startText+'</div><a class="nav-start" href="#"><img src="'+quizConfig.splashImage+'" /></a></div>';
+        exitFob =  '<div class="results-container slide-container"><div class="question-number">'+quizConfig.endText+'</div><div class="result-keeper"></div></div>';
         exitFob += '<div class="notice">Пожалуйста выберите вариант ответа</div><div class="progress-keeper" ><div class="progress"></div></div>';
         contentFob = '';
         startTime = '';
         endTime = '';
         countdown = $('#countdown');
         superContainer.addClass('main-quiz-holder');
-        if (window.location.host == config.hostip) {
-            for (questionsIteratorIndex = 0; questionsIteratorIndex < config.questions.length; questionsIteratorIndex++) {
+        qType = function(qt) {
+            if (qt == 1)
+                return "Выбор";
+            else if (qt == 2)
+                return "Несколько ответов";
+            else 
+                return "Тип вопроса не определен";
+        }; 
+        if (window.location.host == quizConfig.hostip) {
+            for (questionsIteratorIndex = 0; questionsIteratorIndex < quizConfig.questions.length; questionsIteratorIndex++) {
                 contentFob += '<div class="slide-container">';
-                contentFob += '<div class="question-type">Тип вопроса: "' + qType(config.questions[questionsIteratorIndex].qT) + '"</div>';
-                contentFob += '<div class="question-number">' + (questionsIteratorIndex + 1) + '/' + config.questions.length + '</div>';
-                contentFob += '<div class="question">' + config.questions[questionsIteratorIndex].question + '</div>'
+                contentFob += '<div class="question-type">Тип вопроса: "' + qType(quizConfig.questions[questionsIteratorIndex].qT) + '"</div>';
+                contentFob += '<div class="question-number">' + (questionsIteratorIndex + 1) + '/' + quizConfig.questions.length + '</div>';
+                contentFob += '<div class="question">' + quizConfig.questions[questionsIteratorIndex].question + '</div>'
                 contentFob += '<ul class="answers">';
-                for (answersIteratorIndex = 0; answersIteratorIndex < config.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
-                    contentFob += '<li>' + config.questions[questionsIteratorIndex].answers[answersIteratorIndex] + '</li>';
+                for (answersIteratorIndex = 0; answersIteratorIndex < quizConfig.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
+                    contentFob += '<li>' + quizConfig.questions[questionsIteratorIndex].answers[answersIteratorIndex] + '</li>';
                 }
                 contentFob += '</ul>';
                 contentFob += '<div class="nav-container">';
                 if (questionsIteratorIndex !== 0) {
                     contentFob += '<div class="prev"><a class="nav-previous" href="#">Предыдущий</a></div>';
                 }
-                if (questionsIteratorIndex < config.questions.length - 1) {
+                if (questionsIteratorIndex < quizConfig.questions.length - 1) {
                     contentFob += '<div class="next"><a class="nav-next" href="#">Следующий</a></div>';
                 }
                 else {
                     contentFob += '<div class="next final"><a class="nav-show-result" href="#">Завершение</a></div>';
                 }
                 contentFob += '</div></div>';
-                answers.push(config.questions[questionsIteratorIndex].ca);
+                answers.push(quizConfig.questions[questionsIteratorIndex].ca);
             }
             superContainer.html(introFob + contentFob + exitFob);
 
-            var progress = superContainer.find('.progress'),
-            progressKeeper = superContainer.find('.progress-keeper'),
-            notice = superContainer.find('.notice'),
-            progressWidth = progressKeeper.width(),
-            userAnswers = [],
-            questionLength = config.questions.length,
+            progress = superContainer.find('.progress');
+            progressKeeper = superContainer.find('.progress-keeper');
+            notice = superContainer.find('.notice');
+            progressWidth = progressKeeper.width();
+            userAnswers = [];
+            questionLength = quizConfig.questions.length;
             slidesList = superContainer.find('.slide-container');
             progressKeeper.hide();
             notice.hide();
             slidesList.hide().first().fadeIn(500);
         }
+        
+        countdown.timeTo(quizConfig.timeToTest, function() { methods.stopQuiz(' Время отведенное на ответы исчерпано. ') });
 
-        function checkAnswers() {
+        checkAnswers = function() {
             var resultArr = [],
             flag = false;
             for (i = 0; i < answers.length; i++) {
@@ -319,35 +193,26 @@
                 resultArr.push(flag);
             }
             return resultArr;
-        }    
+        };
 
-        function roundReloaded(num, dec) {
+        roundReloaded = function(num, dec) {
             var result = Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
             return result;
-        }
+        };
             
-        function qType(qt) {
-            if (qt == 1)
-                return "Выбор";
-            else if (qt == 2)
-                return "Несколько ответов";
-            else 
-                return "Тип вопроса не определен";
-        } 
-
-        function judgeSkills(score) {
+        judgeSkills = function(score) {
             var returnString;
             if (score == 100)
-                return config.resultComments.excellent;
+                return quizConfig.resultComments.excellent;
             else if (score > 85)
-                return config.resultComments.good;
+                return quizConfig.resultComments.good;
             else if (score > 70)
-                return config.resultComments.average;
+                return quizConfig.resultComments.average;
             else if (score > 50)
-                return config.resultComments.bad;
+                return quizConfig.resultComments.bad;
             else
-                return config.resultComments.poor;
-        }
+                return quizConfig.resultComments.poor;
+        };
 
         superContainer.find('li').click(function() {
             var thisLi = $(this);
@@ -373,7 +238,7 @@
                 progressKeeper.fadeIn(500);
             });
             startTime = $.now();
-            countdown.timeTo("start", config.timeToTest);
+            countdown.timeTo("start", quizConfig.timeToTest);
             return false;
         });
 
@@ -412,5 +277,79 @@
             fulfillment('Все вопросы пройдены', this);
         });
 
+        fulfillment = function(reason, obj) {
+            endTime = $.now();
+            spentTime = Math.round((endTime - startTime) / 1000) ;
+            superContainer.find('ul.answers').each(function(index) {
+                var qAnswer = [];
+                r = 1;
+                $(this).children('li').each(function() {
+                    if ($(this).hasClass('selected')) {
+                        qAnswer.push(r);
+                    }
+                    r++;
+                });
+                 userAnswers.push(qAnswer);
+            });
+            var collate =[];
+            for (r=0; r<userAnswers.length;r++) {
+                collate.push('{questionNumber:"'+parseInt(r+1)+'", UserAnswer:"'+userAnswers[r]+'"}');
+            }
+            res = '[' + collate.join(",") + ']';
+            $("#source").val(res);
+            if (quizConfig.sendResultsURL !== null) 
+            {
+                console.log("Попытка отправки результатов теста");
+
+                $.ajax({
+                    type: 'POST',
+                    url: quizConfig.sendResultsURL,
+                    data: res,
+                    complete: function () {console.log("Успешная отправка результатов теста");}
+                });
+            }
+            progressKeeper.hide();
+            var results = checkAnswers(),
+            resultSet = '',
+            trueCount = 0,
+            score,
+            url;
+
+            for (var i = 0, toLoopTill = results.length; i < toLoopTill; i++) {
+                if (results[i] === true) {
+                    trueCount++;
+                }
+                resultSet += '<div class="result-row"> Вопрос №' + (i + 1) + (results[i] === true ? "<div class='correct'><span>Верно</span></div>": "<div class='wrong'><span>Неверно</span></div>");
+                resultSet += '<div class="resultsview-qhover">' + quizConfig.questions[i].question;
+                resultSet += "<ul>";
+                for (answersIteratorIndex = 0; answersIteratorIndex < quizConfig.questions[i].answers.length; answersIteratorIndex++) {
+                    var correctAdd = '';
+                    var selectedAdd = '';
+                    if ($.inArray( answersIteratorIndex + 1 , quizConfig.questions[i].ca ) !== -1 ) {
+                        correctAdd += 'right';
+                    }
+                    if ($.inArray( answersIteratorIndex + 1 , userAnswers[i] ) !== -1 ) {
+                        selectedAdd += ' selected-point';
+                    }
+                    resultSet += '<li class="' + correctAdd + '"><span class="' + selectedAdd + '"></span>' + quizConfig.questions[i].answers[answersIteratorIndex] + '</li>';
+                }
+                resultSet += '</ul></div></div>';
+
+            }
+            resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя </span></div>';
+            score = roundReloaded(trueCount / questionLength * 100, 2);
+            resultSet = '<h2 class="qTitle">Результат: ' + judgeSkills(score) + '.<br/>Вы набрали ' + score + '%, затрачено времени ' + spentTime + ' сек.</h2>' + resultSet + '<div class="jquizzy-clear"></div>';
+            superContainer.find('.result-keeper').html(resultSet).show(500);
+            superContainer.find('.resultsview-qhover').hide();
+            superContainer.find('.result-row').hover(function() {
+                $(this).find('.resultsview-qhover').show();
+                }, function() {
+                $(this).find('.resultsview-qhover').hide();
+                });
+            $(obj).parents('.slide-container').fadeOut(500, function() {
+                $(obj).next().fadeIn(500);
+            });
+            return false;
+        }
     };
 })(jQuery);

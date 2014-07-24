@@ -14,6 +14,7 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 require_once ( 'model' . DS . 'quiz_topic_query.php' );
 require_once ( 'model' . DS . 'quiz_topic_save.php' );
+require_once ( 'model' . DS . 'quiz_topic_qcount_query.php' );
 require_once ( 'model' . DS . 'quiz_question_query.php' );
 require_once ( 'model' . DS . 'quiz_question_view_query.php' );
 require_once ( 'model' . DS . 'quiz_question_save.php' );
@@ -37,7 +38,7 @@ require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'user_list.ph
 
 class Quiz extends ComponentACL
 {
-    protected $default_view = 'view_topic_list';
+    protected $default_view = 'view_trial_testing_selection';
     
 // темы тестирования
     protected function exec_new()
@@ -212,7 +213,7 @@ class Quiz extends ComponentACL
     
     protected function exec_cancel_trial_test()
     {
-        $this->view_question_list();
+        $this->view_topic_list();
     }
     
     protected function exec_start_trial_test()
@@ -225,11 +226,19 @@ class Quiz extends ComponentACL
         $this->view_trial_testing($topic);
     }
     
-// Представления данных (view)
+// Результаты тестирования    
+    
+    protected function exec_result_list()
+    {
+        $this->view_result_list();
+    }
+
+    // Представления данных (view)
     protected function view_topic_list()
     {
         $title = 'Темы тестов';
         $confirm = 'Удаление выбранных тем';
+        $this->current_task = 'topic_list';
         $list = new QuizTopicList();
         self::set_title($title);
         self::set_toolbar_button('new', 'new' , 'Создать');
@@ -238,7 +247,7 @@ class Quiz extends ComponentACL
         $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
         $del_b->set_option('obligate', true);
         DeleteItems::set_confirm_dialog($confirm);
-        self::set_toolbar_button('switch', 'current_acl' , 'Доступ');
+        //self::set_toolbar_button('switch', 'current_acl' , 'Доступ');
         $this->set_content($list->get_items_page());
     }
 
@@ -351,10 +360,21 @@ class Quiz extends ComponentACL
     {
         $obj = new QuizTopicQuery($topic);
         self::set_title('Пробное тестирование по теме "' . $obj->название_темы . '"'); 
-        Message::alert('Тест подготовлен');
         $stop_test = self::set_toolbar_button('cancel', 'cancel_trial_test' , 'Прервать выполнение теста');
-        $stop_test->set_option('dialog', "$('#quiz-container').quiz('stopQuiz');");
+        $stop_test->set_option('dialog', "$('#quiz-container').quiz('stopQuiz', 'Тест прерван пользователем' );");
     }
+ 
+// Результаты тестирования
     
+    protected function view_result_list()
+    {
+        $title = 'Результаты тестирования';
+        $this->current_task = 'question_list';
+        $list = new QuizResultList();
+        self::set_title($title);
+        $edit_b = self::set_toolbar_button('edit', 'edit_question' , 'Редактировать');
+        $edit_b->set_option('obligate', true);
+        $this->set_content($list->get_items_page());
+    }
 }
 ?>

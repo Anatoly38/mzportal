@@ -136,6 +136,8 @@ class Javascript
         }
         if (!$this->toolbar) {
             $this->add_js_link('jquery.toolbar.js');
+            $css = CSS::getInstance();
+            $css->add_style_link('toolbar-styles.css');
             $this->toolbar = true;
         }
         $code = '$("#toolbar-container").toolbar(' . $js_obj . ');';

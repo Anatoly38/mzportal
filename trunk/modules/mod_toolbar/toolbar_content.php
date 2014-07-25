@@ -32,7 +32,7 @@ class Toolbar_Content
     {
         $this->container = new DOMdocument();
         $this->container->formatOutput = true;
-        $xml= '<div id="toolbar" class="toolbar"><table class="toolbar"><tbody><tr id="toolbar-container"></tr></tbody></table></div>';
+        $xml= '<div id="toolbar-container" class="toolbar-container"></div>';
         $this->container->loadXML($xml);
     }
     
@@ -72,7 +72,7 @@ class Toolbar_Content
         foreach ($this->buttons as $b) {
             $js->add_toolbar_button($b->options);
         }
-        $toolbar = $this->container->getElementsByTagName('table')->item(0);
+        $toolbar = $this->container->getElementsByTagName('div')->item(0);
         return $toolbar;
     }
 }

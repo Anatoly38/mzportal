@@ -29,13 +29,25 @@
         </tr>
         <tr>
             <td width="185" valign="top" class="key">
-                Выборка
+                Сортировка
             </td>
             <td>
-                <select id="q_order" name="order">
+                <select id="q_order" name="q_order">
                     <option value=""></option>
-                    <option value="ordered">По порядку</option>
+                    <option value="ordered" selected="selected">От первого к последнему</option>
                     <option value="random">В случайном порядке</option>
+                </select>            
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Показывать варинаты ответы при выводе результатов
+            </td>
+            <td>
+                <select id="show_answers" name="show_answers">
+                    <option value=""></option>
+                    <option value="1" selected="selected">Да</option>
+                    <option value="2">Нет</option>
                 </select>            
             </td>
         </tr>

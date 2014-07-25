@@ -46,8 +46,9 @@ $(function() {
           </li>
           <li><a href="#">Тестирование</a>
             <ul>
-              <li><a href="index.php?app=54&#38;task=topic_list">Темы тестов</a></li>
-              <li><a href="index.php?app=54&#38;task=question_list">Вопросы тестов</a></li>
+              <li><a href="index.php?app=54&#38;task=topic_list">Темы</a></li>
+              <li><a href="index.php?app=54&#38;task=question_list">Вопросы</a></li>
+              <li><a href="index.php?app=54&#38;task=result_list">Результаты</a></li>
               <li><a href="index.php?app=54&#38;task=download_question_file">Импорт вопросов</a></li>
               <li><a href="index.php?app=54&#38;task=trial_testing_selection">Пробное тестирование</a></li>      
             </ul>

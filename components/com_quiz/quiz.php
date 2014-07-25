@@ -27,6 +27,7 @@ require_once ( 'views' . DS . 'quiz_topic_list.php' );
 require_once ( 'views' . DS . 'quiz_topic_item.php' );
 require_once ( 'views' . DS . 'quiz_question_list.php' );
 require_once ( 'views' . DS . 'quiz_question_item.php' );
+require_once ( 'views' . DS . 'quiz_result_list.php' );
 require_once ( 'views' . DS . 'download_question_file_form.php' );
 require_once ( 'views' . DS . 'quiz_q_temp_list.php' );
 require_once ( 'views' . DS . 'trial_testing_selection_form.php' );
@@ -369,11 +370,11 @@ class Quiz extends ComponentACL
     protected function view_result_list()
     {
         $title = 'Результаты тестирования';
-        $this->current_task = 'question_list';
+        $this->current_task = 'result_list';
         $list = new QuizResultList();
         self::set_title($title);
-        $edit_b = self::set_toolbar_button('edit', 'edit_question' , 'Редактировать');
-        $edit_b->set_option('obligate', true);
+        //$edit_b = self::set_toolbar_button('edit', 'edit_question' , 'Редактировать');
+        //$edit_b->set_option('obligate', true);
         $this->set_content($list->get_items_page());
     }
 }

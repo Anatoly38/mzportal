@@ -1,0 +1,67 @@
+.toolbar-container { 
+    border-collapse: collapse; 
+    padding: 0; 
+    margin: 0;  
+}
+
+.toolbar-button { 
+    padding: 1px 4px 1px 4px; 
+    vertical-align: top;
+    text-align: center; 
+    color: #666; 
+    height: 48px;
+    cursor: pointer ; 
+}
+
+.toolbar-image  { 
+    float: none; 
+    width: 32px; 
+    height: 32px; 
+    margin: 0 auto; 
+    display: block; 
+}
+
+/** иконки панели инструментов **/
+.icon-32-send 			{ background-image: url(images/toolbar/icon-32-send.png); }
+.icon-32-delete 		        { background-image: url(images/toolbar/icon-32-delete.png); }
+.icon-32-help 			{ background-image: url(images/toolbar/icon-32-help.png); }
+.icon-32-config 		        { background-image: url(images/toolbar/icon-32-config.png); }
+.icon-32-apply 			{ background-image: url(images/toolbar/icon-32-apply.png); }
+.icon-32-cancel 		        { background-image: url(images/toolbar/icon-32-cancel.png); }
+.icon-32-back			{ background-image: url(images/toolbar/icon-32-back.png); }
+.icon-32-forward		{ background-image: url(images/toolbar/icon-32-forward.png); }
+.icon-32-save 			{ background-image: url(images/toolbar/icon-32-save.png); }
+.icon-32-edit 			{ background-image: url(images/toolbar/icon-32-edit.png); }
+.icon-32-copy 			{ background-image: url(images/toolbar/icon-32-copy.png); }
+.icon-32-move 			{ background-image: url(images/toolbar/icon-32-move.png); }
+.icon-32-new 			{ background-image: url(images/toolbar/icon-32-new.png); }
+.icon-32-upload 		        { background-image: url(images/toolbar/icon-32-upload.png); }
+.icon-32-assign 		        { background-image: url(images/toolbar/icon-32-publish.png); }
+.icon-32-html 			{ background-image: url(images/toolbar/icon-32-html.png); }
+.icon-32-css 			{ background-image: url(images/toolbar/icon-32-css.png); }
+.icon-32-menus 			{ background-image: url(images/toolbar/icon-32-menu.png); }
+.icon-32-publish 		{ background-image: url(images/toolbar/icon-32-publish.png); }
+.icon-32-unpublish 		{ background-image: url(images/toolbar/icon-32-unpublish.png);}
+.icon-32-restore		{ background-image: url(images/toolbar/icon-32-revert.png); }
+.icon-32-trash 			{ background-image: url(images/toolbar/icon-32-trash.png); }
+.icon-32-archive 		{ background-image: url(images/toolbar/icon-32-archive.png); }
+.icon-32-unarchive 		{ background-image: url(images/toolbar/icon-32-unarchive.png); }
+.icon-32-preview 		{ background-image: url(images/toolbar/icon-32-preview.png); }
+.icon-32-subordinate 	{ background-image: url(images/toolbar/icon-32-subordinate.png); }
+.icon-32-default 		{ background-image: url(images/toolbar/icon-32-default.png); }
+.icon-32-cpanel 		        { background-image: url(images/toolbar/icon-32-cpanel.png); }
+.icon-32-adduser 		{ background-image: url(images/toolbar/addperson.png); }
+.icon-32-user 		        { background-image: url(images/toolbar/person.png); }
+.icon-32-addgroup 		{ background-image: url(images/toolbar/addusers.png); }
+.icon-32-groups 		        { background-image: url(images/toolbar/groups.png); }
+.icon-32-switch 		        { background-image: url(images/toolbar/switch.png); }
+.icon-32-document 		{ background-image: url(images/toolbar/icon-32-document.png); }
+.icon-32-education 		{ background-image: url(images/toolbar/icon-32-education.png); }
+.icon-32-records 		{ background-image: url(images/toolbar/icon-32-records.png); }
+.icon-32-excel 		        { background-image: url(images/toolbar/icon-32-excel.png); }
+.icon-32-tax 		        { background-image: url(images/toolbar/icon-32-tax.png); }
+.icon-32-award 		        { background-image: url(images/toolbar/icon-32-award.png); }
+.icon-32-check 		        { background-image: url(images/toolbar/icon-32-check.png); }
+.icon-32-tableedit	        { background-image: url(images/toolbar/icon-32-tableedit.png); }
+.icon-32-refresh                { background-image: url(images/toolbar/icon-32-refresh.png); }
+.icon-32-quiz                      { background-image: url(images/toolbar/icon-32-quiz.png); }

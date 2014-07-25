@@ -2,12 +2,13 @@
 
     var methods = {
         init : function( options ) {
-            var settings = {
+            var buttonSettings = {
                 form        : 'adminForm',
                 action      : 'cancel',
                 icon        : 'cancel',
                 title       : 'Закрыть',
-                show_label  : true,
+                showStatus  : true,
+                showLabel   : true,
                 dialog      : false,
                 obligate    : false,
                 number      : 1,
@@ -15,18 +16,23 @@
                 trackdirty  : false
             };
             if ( options ) { 
-                $.extend( settings, options );
+                $.extend( buttonSettings, options );
             }
-            var td = settings.show_label ? '<td id="' + settings.action + '">' + settings.title +'</td>' :  '<td></td>';
-            var img = '<span class="icon-32-'+settings.icon+'" title="'+settings.title+'"></span>';
-            var r = $(this).append(td);
-            var c = $(r).children().last().prepend(img);
-            $(c).click( function () { 
-                $(this).toolbar('call', settings); 
+            //var td = buttonSettings.showLabel ? '<td id="' + buttonSettings.action + '">' + buttonSettings.title +'</td>' :  '<td></td>';
+            //var img = '<span class="icon-32-'+buttonSettings.icon+'" title="'+buttonSettings.title+'"></span>';
+            //var r = $(this).append(td);
+            //var c = $(r).children().last().prepend(img);var td = buttonSettings.showLabel ? '<td id="' + buttonSettings.action + '">' + buttonSettings.title +'</td>' :  '<td></td>';
+            //var img = '<span class="icon-32-'+buttonSettings.icon+'" title="'+buttonSettings.title+'"></span>';
+            var buttonContent = '<div id="' + buttonSettings.action + '" class="toolbar-button">';
+            buttonContent += '<span class="toolbar-image icon-32-'+ buttonSettings.icon +'" title="' + buttonSettings.title+'"></span>'; 
+            buttonContent += buttonSettings.title +'</div>';
+            var currentContent = $(this).html();
+            $(this).html(currentContent + buttonContent);
+            $(this).find("#" + buttonSettings.action).click( function () { 
+                methods.call(buttonSettings); 
             } );
-            return c;
         },
-        call    : function(s) {  
+        call : function(s) { 
             form = $("#"+s.form);
             $("#task").val(s.action);
             if (s.validate) {
@@ -38,7 +44,7 @@
                 }
             } 
             if (s.trackdirty) {
-                if ($("#adminForm").isDirty()) {
+                if (form.isDirty()) {
                     if (confirm("Сделанные изменения будут потеряны")) {
                         $("#adminForm").submit();
                     } else {
@@ -47,7 +53,8 @@
                 }
             }
             if (s.obligate) {
-                l = $(".grid_row");
+                var message;
+                var l = $(".grid_row");
                 if (l.length == 1) {
                     $("#adminForm").append('<input type="hidden" name="'+ $(l).attr("name") +'" value="'+ $(l).attr("id") +'" />');
                     if (s.dialog !== false) {
@@ -59,12 +66,14 @@
                 }
                 if ($("td > span.ui-icon-check").length < s.number ) {
                     if (s.number == 1) {
-                        alert ("Выберите как минимум " + s.number + " элемент из списка");
+                        message = "Выберите как минимум " + s.number + " элемент из списка";
                     } else if (s.number > 1 && s.number < 5)  { 
-                        alert ("Выберите как минимум " + s.number + " элемента из списка");
+                        message = "Выберите как минимум " + s.number + " элемента из списка";
                     } else {
-                        alert ("Выберите как минимум " + s.number + " элементов из списка");
+                        message = "Выберите как минимум " + s.number + " элементов из списка";
                     }
+                    
+                    
                     return false;
                 }
             }
@@ -73,6 +82,9 @@
                 return false;
             }
             $("#adminForm").submit();
+        }, 
+        showButton : function () {
+        
         }
     };
 

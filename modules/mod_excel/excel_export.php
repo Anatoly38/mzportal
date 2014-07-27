@@ -102,7 +102,7 @@ class ExcelExport
         $code = "var pos = Array ( $( \"#$button\" ).offset().left, $( \"#$button\" ).offset().top + $( \"#$button\" ).outerHeight() );";
         $code .= '$( "#' . $dialog_id . '" ).dialog( "option" , "position" , pos );';
         $code .= '$( "#' . $dialog_id . '" ).dialog( "open" );';
-        $excel_button->set_option('dialog', $code);
+        $excel_button->set_option('action', $code);
         $jq_block =
 <<<JS
     $( "#$dialog_id" ).dialog({

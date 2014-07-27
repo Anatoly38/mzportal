@@ -53,7 +53,7 @@ class DeleteItems
         $tb = Toolbar_Content::getInstance();
         $del_button = $tb->get_button($action);
         $code = '$( "#' . $dialog_id . '" ).dialog( "open" );';
-        $del_button->set_option('dialog', $code);
+        $del_button->set_option('action', $code);
         $jq_block =
 <<<JS
     $( "#$dialog_id" ).dialog({

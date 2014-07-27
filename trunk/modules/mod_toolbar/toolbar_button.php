@@ -13,10 +13,10 @@ class Toolbar_Button
 {
     public $options = array();
     
-    public function __construct($icon, $action, $title)
+    public function __construct($icon, $task, $title)
     {
         $this->options['icon']      = $icon;
-        $this->options['action']    = $action;
+        $this->options['task']      = $task;
         $this->options['title']     = $title;
     }
     

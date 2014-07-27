@@ -12,7 +12,7 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class Javascript
 {
     private static $instance = false;
-    private static $version  = 'v57';
+    private static $version  = 'v64';
     private $container  = null;
     private $jquery     = false;
     private $jquery_validate = false;

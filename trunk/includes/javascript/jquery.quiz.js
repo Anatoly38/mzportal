@@ -80,8 +80,8 @@
             splashImage: 'includes/style/images/play-icon.png',
             sendResultsURL: '172.16.172.33/get_result.php',
             timeToTest: 3600,
-            hostip: '172.16.172.33', 
-            //hostip: '127.0.0.1:8080', 
+            //hostip: '172.16.172.33', 
+            hostip: '127.0.0.1:8080', 
             resultComments :  
             {
                 perfect: 'Замечательно! (оценка - 5)',

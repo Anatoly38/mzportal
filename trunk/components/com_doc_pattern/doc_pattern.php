@@ -385,7 +385,7 @@ class DocPattern extends Component
         else {
             $save_t = self::set_toolbar_button('save', 'save_table' , 'Сохранить');
             $js_code = '$("#pattern_source").val($.sheet.instance[0].HTMLtoCompactSource($($.sheet.instance[0].exportSheet.xml())[0]));$("#adminForm").submit();return true;';
-            $save_t->set_option('dialog',  $js_code);
+            $save_t->set_option('action',  $js_code);
         }
         $cancel_b = self::set_toolbar_button('cancel', 'section_edit_cancel' , 'Закрыть');
         $track_dirty_code = "if ($.sheet.instance[0].isDirty) { 
@@ -394,7 +394,7 @@ class DocPattern extends Component
                                 } else {
                                     return false;
                                 } } else { $('#adminForm').submit(); } ";
-        $cancel_b->set_option('dialog', $track_dirty_code);
+        $cancel_b->set_option('action', $track_dirty_code);
         $c = $i->get_content();
         $this->set_content($c);
     }

@@ -90,7 +90,7 @@ class MonPrimaryReports extends Monitoring
         $status_button = $tb->get_button($button);
         $c->set_dialog_form($df, 'Изменение статуса отчета(ов)', $dialog_id);
         $code = '$( "#' . $dialog_id . '" ).dialog( "open" );';
-        $status_button->set_option('dialog', $code);
+        $status_button->set_option('action', $code);
         $jradio_block = '$( "#radio" ).buttonset();';
         $jq_block =
 <<<JS
@@ -163,12 +163,12 @@ JS;
         . '</br>Год: ' . $doc->год . ', Период: ' . $doc->наименование_периода . ' (с ' . $date1->format('j.m.Y') . ' по ' . $date2->format('j.m.Y') . ')') ;
         $save_t = self::set_toolbar_button('save', 'data_saving' , 'Сохранить');
         $js_code = '$("#source").val($.statgrid.instance.exportHTML()); $("#adminForm").submit(); return true;'; //
-        $save_t->set_option('dialog',  $js_code);
+        $save_t->set_option('action',  $js_code);
         $fullscreen = self::set_toolbar_button('subordinate', '#' , 'Полный экран');
-        $fullscreen->set_option('dialog', '$.statgrid.instance.toggleFullScreen();');
+        $fullscreen->set_option('action', '$.statgrid.instance.toggleFullScreen();');
         $cancel_b = self::set_toolbar_button('cancel', 'data_entering_cancel' , 'Закрыть');
         $track_dirty_code = "if ($.statgrid.instance.isDirty) { if (confirm('Сделанные изменения будут потеряны')) { $('#adminForm').submit(); } else { return false; } } else { $('#adminForm').submit(); } ";
-        $cancel_b->set_option('dialog', $track_dirty_code);
+        $cancel_b->set_option('action', $track_dirty_code);
         $c = $s->get_content();
         $this->set_content($c);
         $c = Content::getInstance();

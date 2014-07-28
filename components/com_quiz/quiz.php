@@ -27,6 +27,7 @@ require_once ( 'views' . DS . 'quiz_topic_list.php' );
 require_once ( 'views' . DS . 'quiz_topic_item.php' );
 require_once ( 'views' . DS . 'quiz_question_list.php' );
 require_once ( 'views' . DS . 'quiz_question_item.php' );
+require_once ( 'views' . DS . 'quiz_answer_list.php' );
 require_once ( 'views' . DS . 'quiz_result_list.php' );
 require_once ( 'views' . DS . 'download_question_file_form.php' );
 require_once ( 'views' . DS . 'quiz_q_temp_list.php' );
@@ -316,12 +317,39 @@ class Quiz extends ComponentACL
         self::set_title('Редактирование вопроса теста');
         $i = new QuizQuestionItem($q);
         $i->edit_item(); 
+        $i->get_answers();
         $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
         $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_question_edit' , 'Закрыть');
         $cb->track_dirty(true);
+        $correct = self::set_toolbar_button('check', 'set_correct_answer' , 'Установить/Снять правильный ответ');
+        $correct->set_option( 'action', $this->_set_correct_answer_js() );
+        $correct->set_option( 'leavePage', false );
         $form = $i->get_form();
         $this->set_content($form);
+    }
+    
+    protected function _set_correct_answer_js() 
+    {
+        $code = 
+<<<JS
+$(function(){
+    var collate =[];
+    $(".item_list").find('.ui-state-highlight').each(function() {
+        collate.push('{answerNumber: "' + parseInt($(this).attr("id")) + '", correctAnswer: "' + $(this).find('td').last().html() + '"}');
+    });
+    output = '[' + collate.join(",") + ']';
+    alert(output);
+    $.ajax(
+        {
+            type: 'POST',
+            url: 'includes/ajax_loading.php',
+            data: { answers: output }
+        }
+        ).done(function( msg ) { alert( "Data Saved: " + msg );   });
+});
+JS;
+        return $code;
     }
     
     protected function view_upload_file()
@@ -363,6 +391,7 @@ class Quiz extends ComponentACL
         self::set_title('Пробное тестирование по теме "' . $obj->название_темы . '"'); 
         $stop_test = self::set_toolbar_button('cancel', 'cancel_trial_test' , 'Прервать выполнение теста');
         $stop_test->set_option('action', "$('#quiz-container').quiz('stopQuiz', 'Тест прерван пользователем' );");
+        $stop_test->set_option('leavePage', false );
     }
  
 // Результаты тестирования

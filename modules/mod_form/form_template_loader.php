@@ -152,6 +152,15 @@ class Form_Template_Loader
         }
     }
     
+    public function append_section($content) {
+        $fragment = '<div id="answers-table">' . $content . '</div>';
+        $l = $this->form_xml->getElementsByTagName('legend')->item(0);
+        $doc_frag = $this->form_xml->createDocumentFragment();
+        $doc_frag->appendXML($fragment);
+        $form_nodes = $this->form_xml->getElementsByTagName('form_pane')->item(0);    
+        $form_nodes->appendChild($doc_frag);
+    }
+    
     private function insert_node($newNode, $refNode, $insertMode=null) {
        
         if(!$insertMode || $insertMode == "inside") {

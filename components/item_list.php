@@ -27,6 +27,8 @@ class ItemList
     protected $constraints  = null;
     protected $order        = null;
     protected $direction    = null;
+    protected $show_constraint = true;
+    protected $show_pagination = true;
     protected $id           = 'oid'; // Для sql запросов
     protected $obj          = 'oid'; // Для передачи на html страницу
     protected $task         = 'default';
@@ -73,6 +75,16 @@ class ItemList
     public function set_limitstart($new_limitstart = 0)
     {
         $this->limitstart = $new_limitstart;
+    }
+    
+    public function set_show_constraint($show = true)
+    {
+        $this->show_constraint = $show;
+    }
+    
+    public function set_show_pagination($show = true)
+    {
+        $this->show_pagination = $show;
     }
 
     public function set_columns($c = null)
@@ -228,16 +240,23 @@ class ItemList
             $table = '';
         } 
         else {
+            $footer = null;
             $grid_data = $this->get_array($this->items);
-            $footer = $this->display_pagination();
+            if ($this->show_pagination) {
+                $footer = $this->display_pagination();
+            }
             $t = new HTMLGrid($grid_data, $footer, $this->limitstart, $this->order, $this->direction);
             $t->set_task($this->task);
             $t->set_object_name($this->obj);
             $t->set_order_task($this->order_task);
             $table = $t->render_table();
         }
-        $constr = Constraint::getInstance();
-        $admin_form = $constr->get_constraints() . $table;
+        $constraints = null;
+        if ($this->show_constraint) {
+            $constr = Constraint::getInstance();
+            $constraints = $constr->get_constraints();
+        }
+        $admin_form = $constraints . $table;
         return $admin_form;
     }
 

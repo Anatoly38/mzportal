@@ -325,6 +325,7 @@ class Quiz extends ComponentACL
         $correct = self::set_toolbar_button('check', 'set_correct_answer' , 'Установить/Снять правильный ответ');
         $correct->set_option( 'action', $this->_set_correct_answer_js() );
         $correct->set_option( 'leavePage', false );
+        $correct->set_option('obligate', true);
         $form = $i->get_form();
         $this->set_content($form);
     }
@@ -336,10 +337,9 @@ class Quiz extends ComponentACL
 $(function(){
     var collate =[];
     $(".item_list").find('.ui-state-highlight').each(function() {
-        collate.push('{answerNumber: "' + parseInt($(this).attr("id")) + '", correctAnswer: "' + $(this).find('td').last().html() + '"}');
+        collate.push('{"answerId": "' + parseInt($(this).attr("id")) + '", "correctAnswer": "' + parseInt($(this).find('td').last().html()) + '"}');
     });
     output = '[' + collate.join(",") + ']';
-    alert(output);
     $.ajax(
         {
             type: 'POST',

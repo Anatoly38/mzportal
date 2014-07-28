@@ -10,7 +10,9 @@
     text-align: center; 
     color: #666; 
     height: 48px;
-    cursor: pointer ; 
+    width: auto;
+    cursor: pointer;
+    float: left;
 }
 
 .toolbar-image  { 

@@ -8,7 +8,7 @@
                 Текст вопроса
             </td>
             <td>
-                <textarea type="text" id="текст_вопроса" name="текст_вопроса" style="width: 400px; height: 60px;" class="required" value=""/>
+                <textarea type="text" id="текст_вопроса" name="текст_вопроса" style="width: 450px; height: 80px;" class="required" value=""/>
             </td>
         </tr>        
         <tr>
@@ -21,7 +21,7 @@
         </tr>
         </tbody>
     </table>
-    <legend>Варианты ответов</legend>
+<!--     <legend>Варианты ответов</legend>
     <table cellspacing="1" class="admintable">
         <tbody>
         <tr>
@@ -42,6 +42,6 @@
             </td>
         </tr>
         </tbody>
-    </table>
+    </table> -->
 </fieldset>
 </form_pane>

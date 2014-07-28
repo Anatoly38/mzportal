@@ -7,6 +7,7 @@
                 task        : null,
                 icon        : null,
                 title       : null,
+                leavePage   : true,
                 showStatus  : true,
                 showLabel   : true,
                 action      : false,
@@ -18,19 +19,12 @@
             if ( options ) { 
                 $.extend( buttonSettings, options );
             }
-            //var td = buttonSettings.showLabel ? '<td id="' + buttonSettings.action + '">' + buttonSettings.title +'</td>' :  '<td></td>';
-            //var img = '<span class="icon-32-'+buttonSettings.icon+'" title="'+buttonSettings.title+'"></span>';
-            //var r = $(this).append(td);
-            //var c = $(r).children().last().prepend(img);var td = buttonSettings.showLabel ? '<td id="' + buttonSettings.action + '">' + buttonSettings.title +'</td>' :  '<td></td>';
-            //var img = '<span class="icon-32-'+buttonSettings.icon+'" title="'+buttonSettings.title+'"></span>';
             var buttonContent = '<div id="' + buttonSettings.task + '" class="toolbar-button">';
             buttonContent += '<span class="toolbar-image icon-32-'+ buttonSettings.icon +'" title="' + buttonSettings.title+'"></span>'; 
             buttonContent += buttonSettings.title +'</div>';
-            //var currentContent = $(this).html();
             $(this).append(buttonContent);
             var button = $("#" + buttonSettings.task);
             button.click( function () {
-            //$(this).find("#" + buttonSettings.action).click( function () { 
                 methods.call(buttonSettings); 
             } );
         },
@@ -106,7 +100,7 @@
             if (typeof s.action === 'function') {
                 s.action();
             }
-            if (valid && noDirty && noObligate && deleteRows) {
+            if (valid && noDirty && noObligate && deleteRows && s.leavePage) {
                 form.submit();
             }
         }, 

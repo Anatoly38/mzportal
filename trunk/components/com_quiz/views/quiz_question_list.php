@@ -45,6 +45,6 @@ class QuizQuestionList extends ItemList
         $options['количество_ответов']  = array('sort' => true,  'type' => 'plain');
         return $options;
     }
-  
+    
 }
 ?>

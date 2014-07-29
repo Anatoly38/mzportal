@@ -124,6 +124,7 @@ class Quiz extends ComponentACL
     {
         $question = (array)Request::getVar('quiz_question');
         Content::set_route('question', $question[0]);
+        Content::set_route('updated_answers');
         $this->view_edit_question_item($question[0]);
     }
     
@@ -204,6 +205,18 @@ class Quiz extends ComponentACL
             Message::alert('Импортировано ' .$ret['q_count'] . ' вопросов и ' . $ret['a_count'] . ' ответов по теме ' . $temp_topic );
             $this->view_question_list();
         }
+    }
+    
+// Работа с ответами
+
+    protected function exec_set_correct_answer()
+    {
+        $u = Request::getVar('updated_answers');
+        $q = Request::getVar('question');
+        Content::set_route('question', $q);
+        Content::set_route('updated_answers');
+        Message::alert($u);
+        $this->view_edit_question_item($q);
     }
 
 // Пробное тестирование
@@ -346,7 +359,7 @@ $(function(){
             url: 'includes/ajax_loading.php',
             data: { answers: output }
         }
-        ).done(function( msg ) { alert( "Data Saved: " + msg );   });
+        ).done(function( msg ) { $("#updated_answers").val(msg); $("#adminForm").submit(); });
 });
 JS;
         return $code;

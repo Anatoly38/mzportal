@@ -20,13 +20,17 @@ require_once ( MZPATH_BASE . DS . 'components' . DS . 'com_quiz' . DS . 'model' 
 $mainframe = new MZFactory();
 $mainframe->check_auth();
 $answers = $_POST['answers'];
+if (is_array($answers) && count($answers) < 1) {
+    echo 'Нет данных для сохранения';
+    exit;
+}
 $json_decoded =json_decode($answers, 1);
-//var_dump($json_decoded);
-//$dbh = new DB_mzportal();
-$i = 1;
+$i = 0;
 foreach($json_decoded as $answer) {
     $a = new QuizAnswerQuery((int)$answer['answerId']);
-    $a->правильный = (int)$answer['correctAnswer'];
+    (int)$answer['correctAnswer'] == 1 ? $a->правильный = 0 : $a->правильный = 1;
     $a->update();
+    $i++;
 }
+echo 'Изменено вариантов ответа: ' . $i ;
 ?>

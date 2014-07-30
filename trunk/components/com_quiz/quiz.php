@@ -236,7 +236,8 @@ class Quiz extends ComponentACL
         $topic = Request::getVar('topic');
         $q_count = Request::getVar('q_count');
         $duration = Request::getVar('duration');
-        $q = new TrialQuiz($topic, $q_count, $duration);
+        (int)Request::getVar('show_answers') == 1 ? $show_correct_answers = true : $show_correct_answers = false;
+        $q = new TrialQuiz($topic, $q_count, $duration, $show_correct_answers);
         Content::set_route('source', ''); 
         $this->view_trial_testing($topic);
     }

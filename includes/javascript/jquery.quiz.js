@@ -56,11 +56,13 @@
             resultSet = '<h2 class="qTitle">' + reason + '<br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
-            superContainer.find('.result-row').hover(function() {
-                $(this).find('.resultsview-qhover').show();
-                }, function() {
-                $(this).find('.resultsview-qhover').hide();
-                });
+            if (quizConfig.showCorrectAnswers) {
+                superContainer.find('.result-row').hover(function() {
+                    $(this).find('.resultsview-qhover').show();
+                    }, function() {
+                    $(this).find('.resultsview-qhover').hide();
+                    });
+            }
             superContainer.find('.slide-container').hide(function() {
                 superContainer.find('.results-container').fadeIn(500); 
             });
@@ -78,10 +80,11 @@
             startText : 'Начало теста',
             endText: 'Тест завершен',
             splashImage: 'includes/style/images/play-icon.png',
-            sendResultsURL: '172.16.172.33/get_result.php',
+            sendResultsURL: 'includes/get_result.php',
             timeToTest: 3600,
             hostip: '172.16.172.33', 
-            //hostip: '127.0.0.1:8080', 
+            //hostip: '127.0.0.1:8080',
+            showCorrectAnswers: true,
             resultComments :  
             {
                 perfect: 'Замечательно! (оценка - 5)',
@@ -334,18 +337,19 @@
                     resultSet += '<li class="' + correctAdd + '"><span class="' + selectedAdd + '"></span>' + quizConfig.questions[i].answers[answersIteratorIndex] + '</li>';
                 }
                 resultSet += '</ul></div></div>';
-
             }
             resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя </span></div>';
             score = roundReloaded(trueCount / questionLength * 100, 2);
             resultSet = '<h2 class="qTitle">Результат: ' + judgeSkills(score) + '.<br/>Вы набрали ' + score + '%, затрачено времени ' + spentTime + ' сек.</h2>' + resultSet + '<div class="jquizzy-clear"></div>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
+            if (quizConfig.showCorrectAnswers) {
             superContainer.find('.result-row').hover(function() {
                 $(this).find('.resultsview-qhover').show();
                 }, function() {
                 $(this).find('.resultsview-qhover').hide();
                 });
+            };
             $(obj).parents('.slide-container').fadeOut(500, function() {
                 $(obj).next().fadeIn(500);
             });

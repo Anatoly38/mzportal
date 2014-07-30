@@ -15,9 +15,10 @@ class TrialQuiz
     private $topic;
     private $q_qount = null;
     private $duration;
+    private $show_correct_answers;
     private $init_questions; // json объект
     
-    public function __construct($topic = false, $q_qount  = null, $duration) {
+    public function __construct($topic = false, $q_qount  = null, $duration, $show_correct_answers = true) {
         if (!$topic) {
             throw new Exception("Не определена тема тестирования");
         }
@@ -33,6 +34,7 @@ class TrialQuiz
             $this->q_qount  = $q_qount;
         }
         $this->duration = $duration;
+        $this->show_correct_answers = $show_correct_answers;
         $this->init_questions = $this->get_qestions();
         $this->append_script_tags();
         $this->append_html();
@@ -109,13 +111,14 @@ class TrialQuiz
     private function append_script_tags()
     {
         $seconds = $this->duration * 60;
+        $this->show_correct_answers ? $show_ca = 'true' : $show_ca = 'false';
         $css = CSS::getInstance();
         $css->add_style_link('quiz_styles.css');
         $css->add_style_link('timeTo.css');
         $js = Javascript::getInstance();
         $js->add_js_text($this->init_questions);
         $js->add_quiz();
-        $jquizzy = "$('#quiz-container').quiz( { questions: init.questions, timeToTest: {$seconds} });";
+        $jquizzy = "$('#quiz-container').quiz( { questions: init.questions, timeToTest: {$seconds}, showCorrectAnswers: {$show_ca} });";
         $js->add_jblock($jquizzy);
         
         

@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
-* @copyright    Copyright (C) 2010-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -244,6 +244,7 @@ class DB_mzportal extends DB_Mysql
     protected $user   = "root";
     protected $pass   = "4lbt2f";
     protected $dbhost = "localhost";
+    //protected $dbname = "attest";
     protected $dbname = "mzportal";
 
     public function __construct() { }

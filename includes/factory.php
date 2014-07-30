@@ -56,6 +56,7 @@ public $site;               // Сведенная воедино html-стран
             $this->user_id = $auth->user_id;
             $s = new MZSession();
             $s->start(md5($auth->user_id)); // ????? user ID в качестве идентификатора сессии
+            //$s->start(md5((int)$auth->user_id * time()));
             $this->registry->user = new User($auth->user_id);
             $apps = Application::get_user_applications($this->registry->user->user_id);
             if (count($apps) == 1) {

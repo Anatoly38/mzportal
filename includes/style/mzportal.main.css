@@ -108,7 +108,7 @@ html, body {
     background-color:#E7E7E7;
     border-spacing:1px;
     color:#666666;
-    min-width:50%;
+    width:100%;
 }
 
 .item_list th {

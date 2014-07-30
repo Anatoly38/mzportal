@@ -15,10 +15,11 @@ class TrialQuiz
     private $topic;
     private $q_qount = null;
     private $duration;
+    private $random;
     private $show_correct_answers;
     private $init_questions; // json объект
     
-    public function __construct($topic = false, $q_qount  = null, $duration, $show_correct_answers = true) {
+    public function __construct($topic = false, $q_qount  = null, $duration, $random = false, $show_correct_answers = true) {
         if (!$topic) {
             throw new Exception("Не определена тема тестирования");
         }
@@ -29,23 +30,63 @@ class TrialQuiz
             throw new Exception("Не определена продолжительность теста");
         }
         $this->dbh = new DB_mzportal();
-        $this->topic    = $topic;
+        $this->topic = $topic;
         if ($q_qount) {
             $this->q_qount  = $q_qount;
         }
         $this->duration = $duration;
+        $this->random = $random;
         $this->show_correct_answers = $show_correct_answers;
-        $this->init_questions = $this->get_qestions();
+        $this->init_questions = $this->get_ordered_questions();
         $this->append_script_tags();
         $this->append_html();
         
     }
     
-    private function get_qestions()
+    private function get_ordered_questions()
     {
+        $limit = '';
         if ($this->q_qount) {
             $limit = " LIMIT 0, {$this->q_qount} ";
         }
+        $q = "SELECT * FROM quiz_question_topic AS s 
+                        JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`  
+                        WHERE `s`.`topic_id` = '{$this->topic}' AND `o`.`deleted` <> '1' {$limit}";
+        $r = $this->dbh->execute($q);
+        $i = 1;
+        $js_object = "var init = {'questions': [";
+        while ($data = $r->fetch_assoc()) {
+            $answers = $this->get_answers($data['oid']);
+            $js_object .= "{ 'question':'" . $data['текст_вопроса'];
+            $js_object .= "','answers':" . $answers['answers'];
+            $js_object .= ",'ca':{$answers['correct_ans']},";
+            $js_object .= "'qT':{$data['тип_вопроса']}},";
+            
+        }
+        $js_object .= "]};";
+        return $js_object;
+    }
+    
+    private function get_shuffled_questions()
+    {
+        $limit = '';
+        if ($this->q_qount) {
+            $limit = " LIMIT 0, {$this->q_qount} ";
+        }
+        
+        $query =    "SELECT DISTINCT
+                       s.oid 
+                    FROM 
+                        quiz_question_topic AS s
+                        JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`
+                    WHERE 1=1
+                        `s`.`topic_id` = '{$this->topic}' AND `o`.`deleted` <> '1' ";
+        //print_r($query);
+        $stmt = $this->dbh->execute($query)->fetch();
+        foreach ($stmt as $id) {
+            //$this->add(new $this->model($id));
+        }
+        
         $q = "SELECT * FROM quiz_question_topic AS s 
                         JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`  
                         WHERE `s`.`topic_id` = '{$this->topic}' AND `o`.`deleted` <> '1' {$limit}";

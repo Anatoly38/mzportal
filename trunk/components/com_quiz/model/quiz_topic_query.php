@@ -121,7 +121,9 @@ class QuizTopicQuery extends ClActiveRecord
         }
         catch (MysqlException $e) {
             Message::error($e->code);
+            return false;
         }
+        return true;
     } 
 }
 ?>

@@ -43,13 +43,13 @@ class ItemSave
     
     public function insert_data()
     {
-        $m = Message::getInstance();
         if ($this->item) {
-            $m->enque_message('error', 'Добавление объекта невозможно, уже определен идентификатор!');
+            Message::error('Добавление объекта невозможно, уже определен идентификатор!');
             return false;
-        }
-        $this->query->insert();
-        return true;
+        };
+        if ($this->query->insert()) {
+            return true;
+        };
     }
 }
 ?>

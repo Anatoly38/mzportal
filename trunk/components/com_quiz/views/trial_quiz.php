@@ -37,10 +37,21 @@ class TrialQuiz
         $this->duration = $duration;
         $this->random = $random;
         $this->show_correct_answers = $show_correct_answers;
-        $this->init_questions = $this->get_ordered_questions();
+        $this->init_questions = $this->get_questions();
         $this->append_script_tags();
         $this->append_html();
         
+    }
+
+    private function get_questions() 
+    {
+        if ($this->random) {
+            $ret = $this->get_shuffled_questions();
+        } 
+        else {
+            $ret = $this->get_ordered_questions();
+        }
+        return $ret;
     }
     
     private function get_ordered_questions()
@@ -79,30 +90,21 @@ class TrialQuiz
                     FROM 
                         quiz_question_topic AS s
                         JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`
-                    WHERE 1=1
-                        `s`.`topic_id` = '{$this->topic}' AND `o`.`deleted` <> '1' ";
+                    WHERE `s`.`topic_id` = '{$this->topic}' AND `o`.`deleted` <> '1' ";
         //print_r($query);
         $stmt = $this->dbh->execute($query)->fetch();
-        foreach ($stmt as $id) {
-            //$this->add(new $this->model($id));
-        }
-        
-        $q = "SELECT * FROM quiz_question_topic AS s 
-                        JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`  
-                        WHERE `s`.`topic_id` = '{$this->topic}' AND `o`.`deleted` <> '1' {$limit}";
-        $r = $this->dbh->execute($q);
-        $i = 1;
+        shuffle($stmt);
         $js_object = "var init = {'questions': [";
-        while ($data = $r->fetch_assoc()) {
-            $answers = $this->get_answers($data['oid']);
-            $js_object .= "{ 'question':'" . $data['текст_вопроса'];
+        for ($i = 0; $i <  $this->q_qount; $i++) {
+            $o = new QuizQuestionQuery($stmt[$i]);
+            $answers = $this->get_answers($o->oid);
+            $js_object .= "{ 'question':'" . $o->текст_вопроса;
             $js_object .= "','answers':" . $answers['answers'];
             $js_object .= ",'ca':{$answers['correct_ans']},";
-            $js_object .= "'qT':{$data['тип_вопроса']}},";
-            
+            $js_object .= "'qT':{$o->тип_вопроса}},";            
         }
         $js_object .= "]};";
-        return $js_object;
+        return $js_object; 
     }
     
     private function get_qestions_count()

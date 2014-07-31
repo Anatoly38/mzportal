@@ -78,7 +78,9 @@ class Quiz extends ComponentACL
     {
         if (!$this->oid[0]) {
             $s = new QuizTopicSave();
-            $s->insert_data();
+            if ($s->insert_data()) {
+                Message::alert('Данные по новой теме теста сохранены');
+            };
         } 
         else {
             $s = new QuizTopicSave($this->oid[0]);

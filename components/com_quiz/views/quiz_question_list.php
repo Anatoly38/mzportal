@@ -40,7 +40,7 @@ class QuizQuestionList extends ItemList
         $options = array();
         $options['oid']                 = array('sort' => false, 'type' => 'checkbox' ); 
         $options['текст_вопроса']       = array('sort' => true,  'type' => 'plain');
-        $options['тип_вопроса']   		= array('sort' => true,  'type' => 'plain', 'ref' => 'question_types' ); 
+        $options['тип_вопроса']         = array('sort' => true,  'type' => 'plain', 'ref' => 'question_types' ); 
         $options['тема_теста']          = array('sort' => true,  'type' => 'plain');
         $options['количество_ответов']  = array('sort' => true,  'type' => 'plain');
         return $options;

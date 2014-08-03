@@ -66,6 +66,8 @@
             superContainer.find('.slide-container').hide(function() {
                 superContainer.find('.results-container').fadeIn(500); 
             });
+            $('#' + quizConfig.saveResultButtonId).toolbar('showButton');
+            $('#' + quizConfig.cancelTestButtonId).toolbar('hideButton');
             superContainer.data('quizEnded', 1);
             return true;
         },
@@ -82,9 +84,11 @@
             splashImage: 'includes/style/images/play-icon.png',
             sendResultsURL: 'includes/get_result.php',
             timeToTest: 3600,
-            hostip: '172.16.172.33', 
-            //hostip: '127.0.0.1:8080',
+            //hostip: '172.16.172.33', 
+            hostip: '127.0.0.1:8080',
             showCorrectAnswers: true,
+            saveResultButtonId: 'save_test_result',
+            cancelTestButtonId: 'cancel_trial_test',
             resultComments :  
             {
                 perfect: 'Замечательно! (оценка - 5)',

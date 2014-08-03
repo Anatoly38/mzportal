@@ -24,6 +24,9 @@
             buttonContent += buttonSettings.title +'</div>';
             $(this).append(buttonContent);
             var button = $("#" + buttonSettings.task);
+            if (!buttonSettings.showStatus) {
+                button.hide();
+            }
             button.click( function () {
                 methods.call(buttonSettings); 
             } );
@@ -86,11 +89,11 @@
                     var selection_dialog = '<div id="selection-warning" title="Не выбраны объекты">';
                     selection_dialog +=  '<p>' + message + '</p></div>';
                     form.append(selection_dialog);                    
-                    $( "#selection-warning" ).dialog({
+                    $("#selection-warning").dialog({
                         modal: true,
                         buttons: {
                             Ok: function() {
-                                $( this ).dialog( "close" );
+                                $(this).dialog("close");
                             }
                         }
                     });
@@ -105,7 +108,10 @@
             }
         }, 
         showButton : function () {
-        
+            $(this).show();
+        },
+        hideButton : function () {
+            $(this).hide();
         }
     };
 

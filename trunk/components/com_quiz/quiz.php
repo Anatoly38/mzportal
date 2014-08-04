@@ -242,7 +242,8 @@ class Quiz extends ComponentACL
     
     protected function exec_cancel_edit_answer()
     {
-        $question = Request::getVar('question');    
+        $question = Request::getVar('question');  
+        Content::set_route('question', $question);        
         $this->view_edit_question_item($question);
     }
     
@@ -280,6 +281,11 @@ class Quiz extends ComponentACL
         $this->view_trial_testing($topic);
     }
     
+    protected function exec_save_test_result()
+    {
+    
+    }
+    
 // Результаты тестирования    
     
     protected function exec_result_list()
@@ -287,7 +293,7 @@ class Quiz extends ComponentACL
         $this->view_result_list();
     }
 
-    // Представления данных (view)
+// Представления данных (view) ****************************************************
     protected function view_topic_list()
     {
         $title = 'Темы тестов';

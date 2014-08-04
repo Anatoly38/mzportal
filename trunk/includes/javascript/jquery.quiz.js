@@ -5,6 +5,8 @@
             if (d.quizEnded) {
                 return true;
             }
+            endTime = $.now();
+            spentTime = Math.round((endTime - startTime) / 1000) ;
             superContainer.find('ul.answers').each(function(index) {
                 var qAnswer = [];
                 r = 1;
@@ -53,7 +55,7 @@
             }
             resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя </span> </div>';
             score = roundReloaded(trueCount / questionLength * 100, 2);
-            resultSet = '<h2 class="qTitle">' + reason + '<br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
+            resultSet = '<h2 class="qTitle">' + reason + '<br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%, затрачено времени ' + spentTime + ' сек.</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
             if (quizConfig.showCorrectAnswers) {
@@ -151,7 +153,7 @@
                 contentFob += '<div class="question-type">Тип вопроса: "' + qType(quizConfig.questions[questionsIteratorIndex].qT) + '"</div>';
                 contentFob += '<div class="question-number">' + (questionsIteratorIndex + 1) + '/' + quizConfig.questions.length + '</div>';
                 contentFob += '<div class="question">' + quizConfig.questions[questionsIteratorIndex].question + '</div>'
-                contentFob += '<ul class="answers">';
+                contentFob += '<ul id="' + quizConfig.questions[questionsIteratorIndex].qId +  '" class="answers">';
                 for (answersIteratorIndex = 0; answersIteratorIndex < quizConfig.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
                     contentFob += '<li>' + quizConfig.questions[questionsIteratorIndex].answers[answersIteratorIndex] + '</li>';
                 }

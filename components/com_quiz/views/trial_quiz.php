@@ -69,8 +69,10 @@ class TrialQuiz
         while ($data = $r->fetch_assoc()) {
             $answers = $this->get_answers($data['oid']);
             $js_object .= "{ 'question':'" . $data['текст_вопроса'];
-            $js_object .= "','answers':" . $answers['answers'];
-            $js_object .= ",'ca':{$answers['correct_ans']},";
+            $js_object .= "','answers':" . $answers['answers'] . ",";
+            $js_object .= "'ca':{$answers['correct_ans']},";
+            $js_object .= "'qId':{$data['oid']},";
+            $js_object .= "'aId':{$answers['ids']},";
             $js_object .= "'qT':{$data['тип_вопроса']}},";
             
         }
@@ -99,8 +101,10 @@ class TrialQuiz
             $o = new QuizQuestionQuery($stmt[$i]);
             $answers = $this->get_answers($o->oid);
             $js_object .= "{ 'question':'" . $o->текст_вопроса;
-            $js_object .= "','answers':" . $answers['answers'];
-            $js_object .= ",'ca':{$answers['correct_ans']},";
+            $js_object .= "','answers':" . $answers['answers'] . ",";
+            $js_object .= "'ca':{$answers['correct_ans']},";
+            $js_object .= "'qId':{$o->oid},";
+            $js_object .= "'aId':{$answers['ids']},";
             $js_object .= "'qT':{$o->тип_вопроса}},";            
         }
         $js_object .= "]};";
@@ -128,12 +132,13 @@ class TrialQuiz
         }
         $a_arr_q = array(); // Массив с ответами
         $a_arr_c = array(); // Правильные ответы
+        $a_arr_ids = array(); // Массив с Id ответов
         $res = array(); // Все вместе 
         $i = 1;
-        
         while ($data = $ra->fetch_assoc()) {
             $answer = "'" . trim($data['текст_ответа']) . "'";
             $a_arr_q[] = $answer; 
+            $a_arr_ids[] = $data['oid']; 
             if ($data['правильный']) {
                 $a_arr_c[] = $i;
             }
@@ -142,11 +147,15 @@ class TrialQuiz
         $ans_arr = "[";
         $ans_arr .= implode(",", $a_arr_q);
         $ans_arr .= "]";
+        $id_arr = "[";
+        $id_arr .= implode(",", $a_arr_ids);
+        $id_arr .= "]";
         $corr_ans_arr = "[";
         $corr_ans_arr .= implode(",", $a_arr_c);
         $corr_ans_arr .= "]";
         
         $res['answers'] = $ans_arr;
+        $res['ids']     = $id_arr;
         $res['correct_ans'] = $corr_ans_arr;
         return $res;
     }

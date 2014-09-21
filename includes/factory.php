@@ -8,7 +8,8 @@
  Прямой доступ запрещен
  */
 defined( '_MZEXEC' ) or die( 'Restricted access' );
-require_once ( MZPATH_BASE .DS.'common'.DS.'database.php' );
+require_once ( MZPATH_BASE .DS.'common'.DS.'db.php' );
+//require_once ( MZPATH_BASE .DS.'common'.DS.'database.php' );
 require_once ( MZPATH_BASE .DS.'configuration.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'defines.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'session'.DS.'session.php' );

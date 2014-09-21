@@ -49,7 +49,7 @@ class QuizQuestionQuery extends ClActiveRecord
                         {$this->source} 
                     SET
                         текст_вопроса   = :1,
-                        тип_вопроса  	= :2
+                        тип_вопроса     = :2
                     WHERE 
                         oid = :3";
         try {

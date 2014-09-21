@@ -9,24 +9,7 @@
 */
 //defined( '_MZEXEC' ) or die( 'Restricted access' );
 
-// Обработка ошибок подключения к БД
-class MysqlException extends Exception {
-    public $backtrace;
-    public $message;
-    public $code;
-    
-    public function __construct($message = false, $code = false) {
-    if(!$message) {
-        $this->message = mysqli_error();
-    }
-    if(!$code) {
-        $this->code = mysqli_errno();
-    }
-    $this->backtrace = debug_backtrace();
-  }
-}
- 
-class DB_Mysql {
+class DB_PDO {
     protected $user;
     protected $pass;
     protected $dbhost;
@@ -40,136 +23,135 @@ class DB_Mysql {
         $this->dbname = $dbname;
     }
     
-    protected function connect() {
-        $this->dbh = new mysqli($this->dbhost, $this->user, $this->pass, $this->dbname);
-        if($mysqli->connect_error) {
-            throw new MysqlException("Ошибка подключения к базе данных");
+    protected function connect() { // По умолчанию Mysql
+        try {  
+            $this->dbh = new PDO("mysql:host={$this->dbhost};dbname={$this->dbname}", $this->user, $this->pass);  
+            $this->dbh->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );  
+        }  
+        catch(PDOException $e) {  
+            echo 'Connection failed: ' . $e->getMessage();  
         }
     }
     
-    public function execute($query) {
+    public function query($query) {
         if(!$this->dbh) {
             $this->connect();
         }
-        $ret = mysql_query($query, $this->dbh);
-        if(!$ret) {
-            throw new MysqlException("Пустой результат запроса");
-        }
-        else if(!is_resource($ret)) {
-            return true;
+        try 
+        {
+            $ret = $this->dbh->query($query);
         } 
-        else {
-            $stmt = new DB_MysqlStatement($this->dbh, $query);
-            $stmt->result = $ret;
-            return $stmt;
+        catch(PDOException $e) {
+            echo 'Query failed: ' . $e->getMessage();  
+            $ret = null;
         }
+        $stmt = new Statement_PDO($this->dbh);
+        $stmt->pdo_object = $ret;
+        return $stmt;
+    }    
+    
+    public function execute($query) {
+        $stmt = $this->query($query);
+        return $stmt;
     }
+    
     public function prepare($query) {
         if(!$this->dbh) {
             $this->connect();
         }
-        return new DB_MysqlStatement($this->dbh, $query);
+        $stmt = new Statement_PDO($this->dbh, $query);
+        $stmt->prepare();
+        return $stmt;
     }
+    
     public function get_fields($tablename) {
         if(!$this->dbh) {
             $this->connect();
         }
         $query = "SHOW FULL COLUMNS FROM {$tablename}";
         $stmt = $this->execute($query);
-        $fields = $stmt->get_fields();
-        return $fields;
-    }
-}
-
-class DB_MysqlStatement 
-{
-    public $result;
-    public $query;
-    protected $dbh;
-    protected $binds = array();
-    
-  
-    public function __construct($dbh, $query) 
-    {
-        $this->query = $query;
-        $this->dbh = $dbh;
-        if(!is_resource($dbh)) {
-            throw new MysqlException("Ошибка соединения с базой данных");
-        }
-    }
-    public function execute() 
-    {
-        $binds = func_get_args();
-        foreach($binds as $index => $name) {
-            $this->binds[$index + 1] = $name;
-        }
-        $cnt = count($binds);
-        $query = $this->query;
-        foreach ($this->binds as $ph => $pv) {
-            if (!is_null($pv)) {
-                $query = preg_replace('/(:'.$ph.'){1}/', "'".mysql_escape_string($pv)."'" , $query, 1);
-            }
-            else {
-                $query = preg_replace('/(:'.$ph.'){1}/', ' NULL ' , $query, 1);
-            }
-        }
-        //print_r($query);
-        $this->result = mysql_query($query, $this->dbh);
-        if(!$this->result) {
-          throw new MysqlException("Запрос не выполнен");
-        }
-        return $this;
-    }
-    public function fetch_row() 
-    {
-        if(!$this->result) {
-            throw new MysqlException("Запрос не выполнен");
-        } 
-        return mysql_fetch_row($this->result);
-    }
-    public function fetch_assoc() 
-    {
-        if(!$this->result) {
-            throw new MysqlException("Запрос не выполнен");
-        }
-        return mysql_fetch_assoc($this->result);
-    }
-    public function fetchall_assoc() 
-    {
-        if(!$this->result) {
-            throw new MysqlException("Запрос не выполнен");
-        }
-        $retval = array();
-        while($row = $this->fetch_assoc()) {
-            $retval[] = $row;
-        }
-        return $retval;
-    }
-    
-    public function fetch() 
-    {
-        if(!$this->result) {
-            throw new MysqlException("Запрос не выполнен");
-        }
-        $retval = array();
-        while (list($value) = $this->fetch_row()) {
-            $retval[] = $value;
-        }
-        return $retval;
-    }
-
-    public function get_fields() {
         $fields = array();
-        while ($row_fieldsquery = $this->fetch_assoc()) {
+        while ($row_fieldsquery = $stmt->fetch_assoc()) {
             $name     = $row_fieldsquery['Field'];
             $fields[$name] = array();
             $fields[$name]["type"]      = $row_fieldsquery['Type'];
             $fields[$name]["null"]      = $row_fieldsquery['Null'];
             $fields[$name]["key"]       = $row_fieldsquery['Key'];
-            $fields[$name]["default"]   =  $row_fieldsquery['Default'];
             $fields[$name]["comment"]   = $row_fieldsquery['Comment'];
         }
         return $fields;
+    }
+}
+
+class Statement_PDO
+{
+    public $query;
+    public $pdo_object;
+    protected $dbh;
+  
+    public function __construct($dbh, $query = null) 
+    {
+        $this->query = $query;
+        $this->dbh = $dbh;
+        if(!$dbh) {
+            throw new PDOException("PDO объект пуст");
+        }
+    }
+    
+    public function prepare()
+    {
+        $this->pdo_object = $this->dbh->prepare($this->query);
+    }
+
+    public function execute() 
+    {
+        $arr_values = func_get_args();
+        $binds = array();
+        foreach($arr_values as $index => $value) {
+            $order = $index + 1;
+            $binds[':' . $order] = $value;
+        }
+        try 
+        {
+            $this->pdo_object->execute($binds);
+        } 
+        catch(PDOException $e) {
+            echo 'Execute failed: ' . $e->getMessage();  
+        }
+        return $this;
+    }
+
+    public function fetch_row() 
+    {
+        if(!$this->pdo_object) {
+            throw new PDOException("Запрос не выполнен");
+        } 
+        return $this->pdo_object->fetch(PDO::FETCH_NUM);
+    }
+    
+    public function fetch_assoc() 
+    {
+        if(!$this->pdo_object) {
+            throw new PDOException("Запрос не выполнен");
+        }
+        return $this->pdo_object->fetch(PDO::FETCH_ASSOC);
+    }
+    
+    public function fetchall_assoc() 
+    {
+        if(!$this->pdo_object) {
+            throw new PDOException("Запрос не выполнен");
+        }
+        return $this->pdo_object->fetchAll(PDO::FETCH_ASSOC);    
+    }
+    
+    public function fetch() 
+    {
+        if(!$this->pdo_object) {
+            throw new PDOException("Запрос не выполнен");
+        }
+        $retval = array();
+        return $this->pdo_object->fetchAll(PDO::FETCH_COLUMN, 0);    
     }
 }
 
@@ -180,7 +162,7 @@ class DB_Result {
     private $rowIndex = 0;
     private $currIndex = 0;
     private $done = false;
-    public function __construct(DB_MysqlStatement $stmt) {
+    public function __construct($stmt) {
         $this->stmt = $stmt;
     }
     public function first() {
@@ -235,36 +217,15 @@ class DB_Result {
 }
 
 // Установка подключения к БД mzportal
-class DB_mzportal extends DB_Mysql 
+class DB_mzportal extends DB_PDO 
 {
     protected $user   = "root";
     protected $pass   = "4lbt2f";
     protected $dbhost = "localhost";
-    //protected $dbname = "attest";
     protected $dbname = "mzportal";
 
     public function __construct() { }
 }
 
-// Установка подключения к БД add
-class DB_add extends DB_Mysql 
-{
-    protected $user   = "root";
-    protected $pass   = "4lbt2f";
-    protected $dbhost = "localhost";
-    protected $dbname = "add";
 
-    public function __construct() { }
-}
-
-// Установка подключения к БД igivetest
-class DB_quize extends DB_Mysql 
-{
-    protected $user   = "root";
-    protected $pass   = "4lbt2f";
-    protected $dbhost = "localhost";
-    protected $dbname = "m-quize";
-
-    public function __construct() { }
-}
 ?>

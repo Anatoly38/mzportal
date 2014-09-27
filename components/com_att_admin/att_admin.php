@@ -12,11 +12,15 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'component_acl.php' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
+require_once ( 'model' . DS . 'dossier_query.php' );
+require_once ( 'model' . DS . 'dossier_save.php' );
 require_once ( 'model' . DS . 'np_association_query.php' );
 require_once ( 'model' . DS . 'np_association_save.php' );
 require_once ( 'model' . DS . 'expert_group_query.php' );
 require_once ( 'model' . DS . 'expert_group_save.php' );
 
+require_once ( 'views' . DS . 'dossier_list.php' );
+require_once ( 'views' . DS . 'dossier_item.php' );
 require_once ( 'views' . DS . 'np_association_list.php' );
 require_once ( 'views' . DS . 'np_association_item.php' );
 require_once ( 'views' . DS . 'expert_group_list.php' );
@@ -45,6 +49,44 @@ class AttAdmin extends ComponentACL
         } 
         $lpu = new DeleteItems($this->oid);
         $this->view_theme_list();
+    }
+
+    // Аттестационные дела
+    protected function exec_dossier_list()
+    {
+        $this->view_dossier_list();
+    }
+    
+    protected function exec_new_dossier()
+    {
+        Content::set_route('dossier');
+        $this->view_dossier_item();
+    }
+    
+    protected function exec_edit_dossier()
+    {
+        $dossier = (array)Request::getVar('dossier');
+        Content::set_route('dossier', $dossier[0]);
+        $this->view_edit_dossier_item($dossier[0]);
+    }
+    
+    protected function exec_dossier_save()
+    {
+        $dossier = (array)Request::getVar('dossier');
+        if (!$dossier[0]) {
+            $s = new DossierSave();
+            $s->insert_data();
+        } 
+        else {
+            $s = new DossierSave($dossier[0]);
+            $s->update_data();
+        }
+        $this->view_dossier_list();
+    }
+    
+    protected function exec_cancel_dossier_edit()
+    {
+        $this->view_dossier_list();
     }
 
     // Медицинские ассоциации
@@ -124,6 +166,49 @@ class AttAdmin extends ComponentACL
     }
     
 // Представления данных (view)
+
+    // Аттестационные дела    
+   protected function view_dossier_list()
+    {
+        $title = 'Аттестационные дела';
+        $confirm = 'Удаление выбранных аттестационных дел';
+        $this->current_task = substr( __FUNCTION__ , 5);
+        $list = new DossierList();
+        self::set_title($title);
+        self::set_toolbar_button('new', 'new_dossier' , 'Новое аттестационное дело');
+        $edit_b = self::set_toolbar_button('edit', 'edit_dossier' , 'Редактировать');
+        $edit_b->set_option('obligate', true);
+        $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
+        $del_b->set_option('obligate', true);
+        DeleteItems::set_confirm_dialog($confirm);
+        $this->set_content($list->get_items_page());
+    }
+    
+    protected function view_dossier_item() 
+    {
+        self::set_title('Ввод нового аттестационного дела');
+        $i = new DossierItem();
+        $i->new_item(); 
+        $sb = self::set_toolbar_button('save', 'dossier_save' , 'Сохранить данные аттестационного дела');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_dossier_edit' , 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }
+    
+    protected function view_edit_dossier_item($d) 
+    {
+        self::set_title('Редактирование аттестационного дела');
+        $i = new DossierItem($d);
+        $i->edit_item(); 
+        $sb = self::set_toolbar_button('save', 'dossier_save' , 'Сохранить');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_dossier_edit' , 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }
 
     // Медицинские ассоциации    
    protected function view_np_association_list()

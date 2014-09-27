@@ -1,0 +1,43 @@
+<form_pane>
+<input type="hidden" id="oid" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Аттестационное дело</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Номер дела 
+            </td>
+            <td>
+                <input type="text" name="номер_дела" id="номер_дела" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Фамилия Имя Отчество
+            </td>
+            <td>
+                <input type="text" name="фио" id="фио" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Медицинская организация (основное место работы)
+            </td>
+            <td>
+                <input type="hidden" id="аттестуемая_специальность" name="аттестуемая_специальность" value="" class="required" />
+                <справочник вид="дерево" имя="dic_attest_specialities" name="аттестуемая_специальность" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Экспертная группа
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_expert_groups" name="экспертная_группа" проверка="required" />
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

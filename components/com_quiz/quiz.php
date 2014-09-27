@@ -247,6 +247,24 @@ class Quiz extends ComponentACL
         $this->view_edit_question_item($question);
     }
     
+    protected function exec_corranswer_asinc_save()
+    {
+        $answers = Request::getVar('answers');
+        if (is_array($answers) && count($answers) < 1) {
+            echo 'Нет данных для сохранения';
+            exit;
+        }
+        $json_decoded =json_decode($answers, 1);
+        $i = 0;
+        foreach($json_decoded as $answer) {
+            $a = new QuizAnswerQuery((int)$answer['answerId']);
+            (int)$answer['correctAnswer'] == 1 ? $a->правильный = 0 : $a->правильный = 1;
+            $a->update();
+            $i++;
+        }
+        echo 'Изменено вариантов ответа: ' . $i ;
+    }
+    
     protected function exec_set_correct_answer()
     {
         $u = Request::getVar('updated_answers');
@@ -404,7 +422,7 @@ $(function(){
     $.ajax(
         {
             type: 'POST',
-            url: 'includes/ajax_loading.php',
+            url: 'asinc.php?app=54&task=corranswer_asinc_save',
             data: { answers: output }
         }
         ).done(function( msg ) { $("#updated_answers").val(msg); $("#adminForm").submit(); });

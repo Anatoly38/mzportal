@@ -109,6 +109,7 @@ public $site;               // Сведенная воедино html-стран
     public function get_content()
     {
         try {
+            $this->registry->rights = Components::get_rights($this->registry->application, $this->user_id);
             $a = new Application($this->registry->application);
             $c = Content::getInstance();
             $content_node = $c->get_document_node();
@@ -133,7 +134,6 @@ public $site;               // Сведенная воедино html-стран
         if (!$this->registry->application) {
             $this->registry->application = $this->default_application;
         }
-        $this->registry->rights = Components::get_rights($this->registry->application, $this->user_id);
         $nodes = $this->get_content();
         // Импортируем загруженные элементы содержания документа
         if ($nodes instanceof DOMElement) {

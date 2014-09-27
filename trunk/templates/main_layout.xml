@@ -40,6 +40,7 @@ $(function() {
           <li><a href="index.php">Панель управления</a></li>
           <li><a href="#">Аттестация</a>
             <ul>
+              <li><a href="index.php?app=58&#38;task=dossier_list">Аттестационные дела</a></li>
               <li><a href="index.php?app=58&#38;task=np_association_list">Медицинские ассоциации</a></li>
               <li><a href="index.php?app=58&#38;task=expert_group_list">Экспертные группы</a></li>
             </ul>

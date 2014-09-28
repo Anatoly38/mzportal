@@ -95,7 +95,7 @@ class DossierQuery extends ClActiveRecord
         $this->oid = $obj->obj_id;
         $query =    "INSERT INTO {$this->source} 
                     (oid, 
-                    номер_дела
+                    номер_дела, 
                     фио
                     )
                     VALUES(:1, :2, :3)";

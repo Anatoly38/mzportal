@@ -52,7 +52,17 @@ class LinkObjects
         $i = "DELETE FROM `sys_obj_links` WHERE `link_type` = :1 AND `left` = :2 AND `right` = :3";
         $dbh->prepare($i)->execute($link_type, $left, $right);
     }
-
+    
+    public static function unset_parents($right = null, $link_type = '0')
+    {
+        if (!$right) {
+            throw new Exception("Объект не определен");
+        }
+        $dbh = new DB_mzportal;
+        $i = "DELETE FROM `sys_obj_links` WHERE `link_type` = :1 AND `right` = :2";
+        $dbh->prepare($i)->execute($link_type, $right);
+    }
+    
     public static function get_parents($oid, $link_type = null)
     {
         if (!$oid) {

@@ -182,8 +182,7 @@ class Personnel extends Component
     {
         $personnel = Request::getVar('personnel');
         if (!$this->oid[0]) {
-            $m = Message::getInstance();
-            $m->enque_message('error', 'Запись для редактирования не определена!');
+            Message::error('Запись для редактирования не определена!');
             $this->view_personnel_document_list($personnel);
         } 
         else {

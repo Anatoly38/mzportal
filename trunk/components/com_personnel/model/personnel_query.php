@@ -3,13 +3,7 @@
 * @version		$Id$
 * @package		MZPortal.Framework
 * @subpackage	Passport_LPU
-* @copyright	Copyright (C) 2009 МИАЦ ИО
-* @license		GNU/GPL, see LICENSE.php
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details. 
+* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -91,8 +85,7 @@ class PersonnelQuery extends ClActiveRecord
                                         );
         }
         catch (MysqlException $e) {
-            $m = Message::getInstance();
-            $m->enque_message('error', $e->code);
+            Message::error($e->code);
         }
     }
 
@@ -115,7 +108,6 @@ class PersonnelQuery extends ClActiveRecord
                         автомобиль =:7
                      WHERE 
                         oid = :8";
-        $m = Message::getInstance();
         try {
             $dbh->prepare($query)->execute( 
                                         $this->табельный_номер, 
@@ -130,7 +122,7 @@ class PersonnelQuery extends ClActiveRecord
             $m->enque_message('alert', 'Изменения при редактировании данных сотрудника успешно сохранены');
         } 
         catch (Exception $e) {
-            $m->enque_message('error', 'Ошибка: изменения при редактированиии данных сотрудника не сохранены!');
+            Message::error('Ошибка: изменения при редактированиии данных сотрудника не сохранены!');
             return false;
         }
         try {
@@ -140,7 +132,7 @@ class PersonnelQuery extends ClActiveRecord
             $obj->update();
         }
         catch (Exception $e) {
-            $m->enque_message('error', 'Ошибка: изменения <object> не сохранены!');
+            Message::error('Ошибка: изменения <object> не сохранены!');
             return false;
         }
     }

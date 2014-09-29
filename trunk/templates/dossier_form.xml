@@ -25,8 +25,8 @@
                 Медицинская организация (основное место работы)
             </td>
             <td>
-                <input type="hidden" id="аттестуемая_специальность" name="аттестуемая_специальность" value="" class="required" />
-                <справочник вид="дерево" имя="dic_attest_specialities" name="аттестуемая_специальность" />
+                <input type="hidden" id="мо" name="мо" value="" class="required" />
+                <справочник вид="дерево" имя="dic_subordination" name="мо" />
             </td>
         </tr>
         <tr>

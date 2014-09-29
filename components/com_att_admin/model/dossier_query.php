@@ -17,6 +17,8 @@ class DossierQuery extends ClActiveRecord
     public $oid;
     public $номер_дела;
     public $фио;
+    public $мо;
+    public $экспертная_группа;
     
     public function __construct($oid = false)
     {
@@ -26,7 +28,9 @@ class DossierQuery extends ClActiveRecord
         $dbh = new DB_mzportal;
         $query =    "SELECT 
                         a.номер_дела,
-                        a.фио
+                        a.фио,
+                        a.мо,
+                        a.экспертная_группа
                     FROM {$this->source} AS a 
                     WHERE oid = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
@@ -36,6 +40,8 @@ class DossierQuery extends ClActiveRecord
         $this->oid          = $oid;
         $this->номер_дела   = $data['номер_дела'];
         $this->фио          = $data['фио'];
+        $this->мо           = $data['мо'];
+        $this->экспертная_группа = $data['экспертная_группа'];
     }
 
     public function update() 
@@ -49,13 +55,17 @@ class DossierQuery extends ClActiveRecord
                         {$this->source} 
                     SET
                         номер_дела  = :1,
-                        фио         = :2
+                        фио         = :2,
+                        мо          = :3,
+                        экспертная_группа = :4
                     WHERE 
-                        oid = :3";
+                        oid = :5";
         try {
             $dbh->prepare($query)->execute( 
                                         $this->номер_дела,
                                         $this->фио,
+                                        $this->мо,
+                                        $this->экспертная_группа,
                                         $this->oid
                                         );
             Message::alert('Изменения при редактировании успешно сохранены');
@@ -96,15 +106,19 @@ class DossierQuery extends ClActiveRecord
         $query =    "INSERT INTO {$this->source} 
                     (oid, 
                     номер_дела, 
-                    фио
+                    фио,
+                    мо,
+                    экспертная_группа
                     )
-                    VALUES(:1, :2, :3)";
+                    VALUES(:1, :2, :3, :4, :5)";
         $dbh = new DB_mzportal;
         try {
             $dbh->prepare($query)->execute( 
                                         $this->oid,
                                         $this->номер_дела,
-                                        $this->фио
+                                        $this->фио,
+                                        $this->мо,
+                                        $this->экспертная_группа
                                         );
         }
         catch (MysqlException $e) {

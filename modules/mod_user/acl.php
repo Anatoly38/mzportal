@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Core
-* @copyright    Copyright (C) 2011 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
 
  Прямой доступ запрещен
  */

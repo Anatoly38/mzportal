@@ -1,4 +1,12 @@
 <?php
+/**
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Framework
+* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+
+Прямой доступ запрещен
+*/
 define( '_MZEXEC', 1 );
 require_once ('includes/authorization.php');
 require_once ('includes/authentication.php');
@@ -79,7 +87,7 @@ catch (AuthException $e) {
         <h2>МИАЦ ИО</h2>
     </div>
     <div id="login">
-    <h2>Вход в систему обработки данных</h2>
+    <h2>Аттестация медицинских работников</h2>
     <p>Что бы получить доступ используйте правильное сочетание имени пользователя и пароля</p>
         <form method="post" enctype="application/x-www-form-urlencoded" name="login" >
         <p>

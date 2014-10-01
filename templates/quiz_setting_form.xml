@@ -1,0 +1,92 @@
+<form_pane>
+<input type="hidden" id="oid" name="oid[]" value="" />
+<fieldset class="adminform">
+    <legend>Аттестационное дело</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                наименование 
+            </td>
+            <td>
+                <input type="text" name="наименование" id="наименование" style="width: 400px; height: 17px;" class="required" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Основная тема
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="основная_тема" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дополнительная тема 1, Наименование
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="доп_тема1_наименование" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дополнительная тема 1, Доля
+            </td>
+            <td>
+                <input type="text" name="доп_тема1_доля" id="доп_тема1_доля" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дополнительная тема 2, Наименование
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="доп_тема2_наименование" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дополнительная тема 2, Доля
+            </td>
+            <td>
+                <input type="text" name="доп_тема1_доля" id="доп_тема2_доля" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" class="key">
+                Дополнительная тема 3, Наименование
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="доп_тема3_наименование" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дополнительная тема 3, Доля
+            </td>
+            <td>
+                <input type="text" name="доп_тема1_доля" id="доп_тема3_доля" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Количество вопросов
+            </td>
+            <td>
+                <input type="text" name="количество_вопросов" id="количество_вопросов" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>        
+        <tr>
+            <td width="185" valign="top" class="key">
+                Продолжительность теста
+            </td>
+            <td>
+                <input type="text" name="продолжительность_теста" id="продолжительность_теста" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>
+
+   

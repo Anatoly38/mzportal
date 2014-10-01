@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   AttAdmin
 * @copyright    Copyright (C) 2090-2014 МИАЦ ИО

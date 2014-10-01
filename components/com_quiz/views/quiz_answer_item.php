@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id:$
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quize
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО

@@ -59,6 +59,7 @@ class MZConfig
     public static $personnel_record_tmpl        = 'personnel_record_form.xml';
     public static $quiz_topic_form_tmpl         = 'quiz_topic_form.xml';
     public static $quiz_question_form_tmpl      = 'quiz_question_form.xml';
+    public static $quiz_setting_form_tmpl       = 'quiz_setting_form.xml';
     public static $quiz_answer_form_tmpl        = 'quiz_answer_form.xml';
     public static $np_association_form_tmpl     = 'np_association_form.xml';
     public static $expert_group_form_tmpl       = 'expert_group_form.xml';

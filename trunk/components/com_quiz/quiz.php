@@ -18,6 +18,10 @@ require_once ( 'model' . DS . 'quiz_topic_qcount_query.php' );
 require_once ( 'model' . DS . 'quiz_question_query.php' );
 require_once ( 'model' . DS . 'quiz_question_view_query.php' );
 require_once ( 'model' . DS . 'quiz_question_save.php' );
+
+require_once ( 'model' . DS . 'quiz_setting_query.php' );
+require_once ( 'model' . DS . 'quiz_setting_save.php' );
+
 require_once ( 'model' . DS . 'quiz_answer_query.php' );
 require_once ( 'model' . DS . 'quiz_answer_save.php' );
 
@@ -29,6 +33,9 @@ require_once ( 'views' . DS . 'quiz_topic_list.php' );
 require_once ( 'views' . DS . 'quiz_topic_item.php' );
 require_once ( 'views' . DS . 'quiz_question_list.php' );
 require_once ( 'views' . DS . 'quiz_question_item.php' );
+
+require_once ( 'views' . DS . 'quiz_setting_list.php' );
+
 require_once ( 'views' . DS . 'quiz_answer_list.php' );
 require_once ( 'views' . DS . 'quiz_answer_item.php' );
 
@@ -212,7 +219,57 @@ class Quiz extends ComponentACL
             $this->view_question_list();
         }
     }
+
+    // Настройки тестирования
+    protected function exec_settings_list()
+    {
+        $this->view_settings_list();
+    }
     
+    protected function exec_setting_new()
+    {
+        Content::set_route('quiz_setting');
+        $this->view_new_setting_item();
+    }
+    
+    protected function exec_setting_edit()
+    {
+        $question = (array)Request::getVar('quiz_setting');
+        Content::set_route('question', $question[0]);
+        Content::set_route('updated_answers');
+        $this->view_edit_question_item($question[0]);
+    }
+    
+    protected function exec_setting_save()
+    {
+        $question = (array)Request::getVar('question');
+        if (!$question[0]) {
+            $s = new QuizQuestionSave();
+            $s->insert_data();
+        } 
+        else {
+            $s = new QuizQuestionSave($question[0]);
+            $s->update_data();
+        }
+        $this->view_question_list();
+    }
+    
+    protected function exec_setting_delete()
+    {
+        $setting = (array)Request::getVar('quiz_setting');
+        if (!$setting[0]) {
+            Message::error('Вопрос(ы) не определен(ы)!');
+            $this->view_settings_list();
+        } 
+        $qd = new DeleteItems($setting);
+        $this->view_settings_list();
+    }
+
+    protected function exec_setting_cancel_edit()
+    {
+        $this->view_question_list();
+    }
+
 // Работа с ответами
 
     protected function exec_edit_answer()
@@ -465,6 +522,59 @@ JS;
         $form = $i->get_form();
         $this->set_content($form);
     }   
+
+// Работа с настройками теста    
+   protected function view_settings_list()
+    {
+        $title = 'Настройки тестирования';
+        $confirm = 'Удаление выбранных настроек';
+        $this->current_task = 'settings_list';
+        $list = new QuizSettingList();
+        self::set_title($title);
+        self::set_toolbar_button('new', 'setting_new' , 'Новая настройка');
+        $edit_b = self::set_toolbar_button('edit', 'setting_edit' , 'Редактировать');
+        $edit_b->set_option('obligate', true);
+        $del_b = self::set_toolbar_button('delete', 'setting_delete' , 'Удалить');
+        $del_b->set_option('obligate', true);
+        DeleteItems::set_confirm_dialog($confirm, 'delete_setting');
+        $this->set_content($list->get_items_page());
+    }
+    
+    protected function view_new_setting_item() 
+    {
+        self::set_title('Ввод новой настройки тестирования');
+        $i = new QuizSettingItem();
+        $i->new_item(); 
+        $sb = self::set_toolbar_button('save', 'setting_save' , 'Сохранить настройку');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_setting_edit', 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }
+    
+    protected function view_edit_setting_item($q) 
+    {
+        self::set_title('Редактирование вопроса теста');
+        $i = new QuizQuestionItem($q);
+        $i->edit_item(); 
+        $i->get_answers();
+        $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_question_edit' , 'Закрыть');
+        $cb->track_dirty(true);
+        $ea = self::set_toolbar_button('edit', 'edit_answer' , 'Редактировать ответ');
+        $ea->track_dirty(true);
+        $ea->set_option('obligate', true);
+        $correct = self::set_toolbar_button('check', 'set_correct_answer' , 'Установить/Снять правильный ответ');
+        $correct->set_option( 'action', $this->_set_correct_answer_js() );
+        $correct->set_option( 'leavePage', false );
+        $correct->set_option('obligate', true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }
+
+
 // Пробное тестирование
     protected function view_trial_testing_selection()
     {

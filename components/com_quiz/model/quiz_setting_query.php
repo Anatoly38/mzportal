@@ -11,7 +11,7 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'active_record.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 
-class QuizSettingsQuery extends ClActiveRecord 
+class QuizSettingQuery extends ClActiveRecord 
 {
     protected $source = 'quiz_settings';
     public $oid;

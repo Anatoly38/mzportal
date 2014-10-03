@@ -10,9 +10,9 @@
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'item_save.php' );
 
-class QuizQuestionSave extends ItemSave
+class QuizSettingSave extends ItemSave
 {
-    protected $model = 'QuizSettingsQuery';
+    protected $model = 'QuizSettingQuery';
     
     public function get_post_values()
     {

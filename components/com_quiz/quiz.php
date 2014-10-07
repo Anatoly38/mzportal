@@ -35,6 +35,7 @@ require_once ( 'views' . DS . 'quiz_question_list.php' );
 require_once ( 'views' . DS . 'quiz_question_item.php' );
 
 require_once ( 'views' . DS . 'quiz_setting_list.php' );
+require_once ( 'views' . DS . 'quiz_setting_item.php' );
 
 require_once ( 'views' . DS . 'quiz_answer_list.php' );
 require_once ( 'views' . DS . 'quiz_answer_item.php' );
@@ -267,7 +268,7 @@ class Quiz extends ComponentACL
 
     protected function exec_setting_cancel_edit()
     {
-        $this->view_question_list();
+        $this->view_settings_list();
     }
 
 // Работа с ответами
@@ -536,7 +537,7 @@ JS;
         $edit_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'setting_delete' , 'Удалить');
         $del_b->set_option('obligate', true);
-        DeleteItems::set_confirm_dialog($confirm, 'delete_setting');
+        DeleteItems::set_confirm_dialog($confirm, 'setting_delete');
         $this->set_content($list->get_items_page());
     }
     
@@ -547,7 +548,7 @@ JS;
         $i->new_item(); 
         $sb = self::set_toolbar_button('save', 'setting_save' , 'Сохранить настройку');
         $sb->validate(true);
-        $cb = self::set_toolbar_button('cancel', 'cancel_setting_edit', 'Закрыть');
+        $cb = self::set_toolbar_button('cancel', 'setting_cancel_edit', 'Закрыть');
         $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);

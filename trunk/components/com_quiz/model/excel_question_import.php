@@ -30,6 +30,7 @@ class ExcelQuestionImport
         if (!$topic) {
             throw new Exception("Не определена тема теста");
         }
+        set_time_limit(0);
         $this->path = UPLOADS . DS . $file;
         $this->file = $file;
         $this->topic = $topic;

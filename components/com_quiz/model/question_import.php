@@ -25,6 +25,7 @@ class QuestionImport
         if (!$topic) {
             throw new Exception("Не определена тема теста");
         }
+        set_time_limit(0);
         $this->topic = $topic;
         $this->topic_question_link = Reference::get_id('тема-вопрос', 'link_types');
         $this->question_answer_link = Reference::get_id('вопрос-ответ', 'link_types');

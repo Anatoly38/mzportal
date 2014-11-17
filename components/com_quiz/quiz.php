@@ -235,24 +235,23 @@ class Quiz extends ComponentACL
     
     protected function exec_setting_edit()
     {
-        $question = (array)Request::getVar('quiz_setting');
-        Content::set_route('question', $question[0]);
-        Content::set_route('updated_answers');
-        $this->view_edit_question_item($question[0]);
+        $quiz_setting = (array)Request::getVar('quiz_setting');
+        Content::set_route('quiz_setting', $quiz_setting[0]);
+        $this->view_edit_setting_item($quiz_setting[0]);
     }
     
     protected function exec_setting_save()
     {
-        $question = (array)Request::getVar('question');
-        if (!$question[0]) {
-            $s = new QuizQuestionSave();
+        $quiz_setting = (array)Request::getVar('quiz_setting');
+        if (!$quiz_setting[0]) {
+            $s = new QuizSettingSave();
             $s->insert_data();
         } 
         else {
-            $s = new QuizQuestionSave($question[0]);
+            $s = new QuizSettingSave($quiz_setting[0]);
             $s->update_data();
         }
-        $this->view_question_list();
+        $this->view_settings_list();
     }
     
     protected function exec_setting_delete()
@@ -347,13 +346,24 @@ class Quiz extends ComponentACL
     
     protected function exec_start_trial_test()
     {
-        $topic = Request::getVar('topic');
-        $q_count = Request::getVar('q_count');
+        $topic      = Request::getVar('topic');
+        $setting    = Request::getVar('setting');
+        $q_count    = Request::getVar('q_count');
         $duration = Request::getVar('duration');
         (int)Request::getVar('show_answers') == 1 ? $show_correct_answers = true : $show_correct_answers = false;
         Request::getVar('q_order') == 'random' ? $random = true : $random = false;
-        $q = new TrialQuiz($topic, $q_count, $duration, $random, $show_correct_answers);
-        Content::set_route('source', ''); 
+        $q = new TrialQuiz($topic, $random, $show_correct_answers);
+        if ($q_count) {
+            $q->q_count = $q_count;
+        }
+        if ($duration) {
+            $q->duration = $duration;
+        }
+        if ($setting) {
+            $q->setting = $setting;
+        }
+        Content::set_route('source', '');
+        $q->start_quiz();
         $this->view_trial_testing($topic);
     }
     
@@ -556,21 +566,13 @@ JS;
     
     protected function view_edit_setting_item($q) 
     {
-        self::set_title('Редактирование вопроса теста');
-        $i = new QuizQuestionItem($q);
+        self::set_title('Редактирование настройки теста');
+        $i = new QuizSettingItem($q);
         $i->edit_item(); 
-        $i->get_answers();
-        $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
+        $sb = self::set_toolbar_button('save', 'setting_save' , 'Сохранить вопрос');
         $sb->validate(true);
-        $cb = self::set_toolbar_button('cancel', 'cancel_question_edit' , 'Закрыть');
+        $cb = self::set_toolbar_button('cancel', 'setting_cancel_edit' , 'Закрыть');
         $cb->track_dirty(true);
-        $ea = self::set_toolbar_button('edit', 'edit_answer' , 'Редактировать ответ');
-        $ea->track_dirty(true);
-        $ea->set_option('obligate', true);
-        $correct = self::set_toolbar_button('check', 'set_correct_answer' , 'Установить/Снять правильный ответ');
-        $correct->set_option( 'action', $this->_set_correct_answer_js() );
-        $correct->set_option( 'leavePage', false );
-        $correct->set_option('obligate', true);
         $form = $i->get_form();
         $this->set_content($form);
     }

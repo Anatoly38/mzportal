@@ -113,7 +113,7 @@ class Form_Template_Loader
                 $node = $dom_node_list->item(0);
                 if ($node->nodeName == 'input') {
                     $input_type = $node->getAttribute('type');
-                    if (!$input_type || $input_type == 'text' || $input_type == 'hidden') {
+                    if (!$input_type || $input_type == 'text' || $input_type == 'hidden' || $input_type == 'number') {
                         if ($value != "0000-00-00 00:00:00" &&  $value != "0000-00-00") {
                             $node->setAttribute('value', htmlspecialchars($value));
                         }

@@ -1,25 +1,25 @@
 <form_pane>
 <input type="hidden" id="oid" name="oid[]" value="" />
 <fieldset class="adminform">
-    <legend>Аттестационное дело</legend>
+    <legend>Параметры</legend>
     <table cellspacing="1" class="admintable">
         <tbody>
         <tr>
             <td width="185" valign="top" class="key">
-                наименование 
+                Наименование 
             </td>
             <td>
                 <input type="text" name="наименование" id="наименование" style="width: 400px; height: 17px;" class="required" value=""/>
             </td>
         </tr>
-        <tr>
+<!--         <tr>
             <td width="185" valign="top" class="key">
                 Основная тема
             </td>
             <td>
                 <справочник вид="список" имя="dic_quiz_topics" name="основная_тема" />
             </td>
-        </tr>
+        </tr> -->
         <tr>
             <td valign="top" class="key">
                 Дополнительная тема 1, Наименование
@@ -33,7 +33,7 @@
                 Дополнительная тема 1, Доля
             </td>
             <td>
-                <input type="text" name="доп_тема1_доля" id="доп_тема1_доля" style="width: 100px; height: 17px;" value=""/>
+                <input type="number" name="доп_тема1_доля" id="доп_тема1_доля" style="width: 60px; height: 17px;" value="" min="0" max="99" />
             </td>
         </tr>
         <tr>
@@ -49,7 +49,7 @@
                 Дополнительная тема 2, Доля
             </td>
             <td>
-                <input type="text" name="доп_тема1_доля" id="доп_тема2_доля" style="width: 100px; height: 17px;" value=""/>
+                 <input type="number" name="доп_тема2_доля" id="доп_тема2_доля" style="width: 60px; height: 17px;" value="" min="0" max="99" />
             </td>
         </tr>
         <tr>
@@ -65,7 +65,7 @@
                 Дополнительная тема 3, Доля
             </td>
             <td>
-                <input type="text" name="доп_тема1_доля" id="доп_тема3_доля" style="width: 100px; height: 17px;" value=""/>
+                 <input type="number" name="доп_тема3_доля" id="доп_тема3_доля" style="width: 60px; height: 17px;" value="" min="0" max="99" />
             </td>
         </tr>
         <tr>
@@ -73,7 +73,7 @@
                 Количество вопросов
             </td>
             <td>
-                <input type="text" name="количество_вопросов" id="количество_вопросов" style="width: 100px; height: 17px;" value=""/>
+                <input type="number" name="количество_вопросов" id="количество_вопросов" style="width: 60px; height: 17px;" value="" min="10" max="500"/>
             </td>
         </tr>        
         <tr>
@@ -81,7 +81,7 @@
                 Продолжительность теста
             </td>
             <td>
-                <input type="text" name="продолжительность_теста" id="продолжительность_теста" style="width: 100px; height: 17px;" value=""/>
+                <input type="number" name="продолжительность_теста" id="продолжительность_теста" style="width: 60px; height: 17px;" value="" min="1" max="180" /> мин.
             </td>
         </tr>
         </tbody>

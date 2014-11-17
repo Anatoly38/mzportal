@@ -13,12 +13,13 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'item_list.php' );
 class QuizSettingList extends ItemList
 {
     protected $model        = 'QuizSettingQuery';
-    protected $source       = 'quiz_settings';
+    protected $source       = 'quiz_setting';
     protected $namespace    = 'quiz_setting';
     protected $task         = 'settings_list';
     protected $obj          = 'quiz_setting';
     protected $order_task   = 'settings_list';
-    //protected $default_cols = array( 'oid', 'текст_вопроса', 'тип_вопроса', 'тема_теста', 'количество_ответов' );
+    protected $default_cols = array( 'oid', 'наименование', 'доп_тема1_наименование', 'доп_тема1_доля', 'доп_тема2_наименование', 'доп_тема2_доля', 'доп_тема3_наименование', 
+                                        'доп_тема3_доля', 'количество_вопросов', 'продолжительность_теста' );
     
     public function __construct()
     {
@@ -30,19 +31,20 @@ class QuizSettingList extends ItemList
         $constr = Constraint::getInstance();
         $constr->set_namespace($this->namespace);
         $constr->add_filter('наименование');
-        //$constr->add_filter('topic_id',     'dic_quiz_topics',      'код', 'наименование' , 'тема теста');
-        //$constr->add_filter('тип_вопроса',  'dic_question_types',   'код', 'наименование' , 'тип вопроса');
         $constr->get_filters();
     }
     
     protected function list_options()
     {
         $options = array();
-        $options['oid']                 = array('sort' => false, 'type' => 'checkbox' ); 
-        $options['наименование']        = array('sort' => true,  'type' => 'plain');
-        $options['основная_тема']       = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_topics' ); 
-        $options['тема_теста']          = array('sort' => true,  'type' => 'plain');
-        $options['количество_ответов']  = array('sort' => true,  'type' => 'plain');
+        $options['oid']                     = array('sort' => false, 'type' => 'checkbox' ); 
+        $options['наименование']            = array('sort' => true,  'type' => 'plain');
+        $options['доп_тема1_наименование']  = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_topics' ); 
+        $options['доп_тема1_доля']          = array('sort' => true,  'type' => 'plain');
+        $options['доп_тема2_наименование']  = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_topics' ); 
+        $options['доп_тема2_доля']          = array('sort' => true,  'type' => 'plain');
+        $options['доп_тема3_наименование']  = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_topics' ); 
+        $options['доп_тема3_доля']          = array('sort' => true,  'type' => 'plain');
         return $options;
     }
     

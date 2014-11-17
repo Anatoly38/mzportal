@@ -13,6 +13,14 @@
         </tr>
         <tr>
             <td width="185" valign="top" class="key">
+                Использовать параметры тем тестирования из настройки
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_settings" name="setting" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
                 Количество вопросов 
             </td>
             <td>
@@ -24,7 +32,7 @@
                 Продолжительность 
             </td>
             <td>
-                <input type="number" name="duration" style="width: 60px;" value="60" min="0" /> мин.
+                <input type="number" name="duration" style="width: 60px;" value="60" min="0" max="300" /> мин.
             </td>
         </tr>
         <tr>

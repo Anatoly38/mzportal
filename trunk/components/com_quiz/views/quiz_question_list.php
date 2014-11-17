@@ -30,8 +30,8 @@ class QuizQuestionList extends ItemList
         $constr = Constraint::getInstance();
         $constr->set_namespace($this->namespace);
         $constr->add_filter('текст_вопроса');
-        $constr->add_filter('topic_id',     'dic_quiz_topics',      'код', 'наименование' , 'тема теста');
-        $constr->add_filter('тип_вопроса',  'dic_question_types',   'код', 'наименование' , 'тип вопроса');
+        $constr->add_filter('topic_id', 'dic_quiz_topics', 'наименование', 'наименование', 'тема теста');
+        $constr->add_filter('тип_вопроса', 'dic_question_types', 'код', 'наименование' , 'тип вопроса');
         $constr->get_filters();
     }
     

@@ -26,6 +26,7 @@ class QuizSettingSave extends ItemSave
         $this->query->доп_тема3_доля         = Request::getVar('доп_тема3_доля');
         $this->query->количество_вопросов    = Request::getVar('количество_вопросов');
         $this->query->продолжительность_теста= Request::getVar('продолжительность_теста');
+        
     }
 }
 ?>

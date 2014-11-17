@@ -13,7 +13,7 @@ require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 
 class QuizSettingQuery extends ClActiveRecord 
 {
-    protected $source = 'quiz_settings';
+    protected $source = 'quiz_setting';
     public $oid;
     public $наименование;
     public $основная_тема;
@@ -47,7 +47,7 @@ class QuizSettingQuery extends ClActiveRecord
                     WHERE oid = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
         if(!$data) {
-            throw new Exception("Вопрос не существует");
+            throw new Exception("Запись не существует");
         }
         $this->oid                      = $oid;
         $this->наименование             = $data['наименование'];
@@ -99,11 +99,11 @@ class QuizSettingQuery extends ClActiveRecord
                                         $this->oid
                                         );
             if ($this->show_update_message) {
-                Message::alert('Изменения при редактировании результата тестирования успешно сохранены');
+                Message::alert('Изменения при редактировании настройки тестирования успешно сохранены');
             }
         } 
         catch (Exception $e) {
-            Message::error('Ошибка: изменения при редактированиии вопроса не сохранены!');
+            Message::error('Ошибка: изменения при редактированиии настройки тестирования не сохранены!');
             return false;
         }
         try {

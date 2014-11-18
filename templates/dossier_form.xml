@@ -37,6 +37,14 @@
                 <справочник вид="список" имя="dic_expert_groups" name="экспертная_группа" проверка="required" />
             </td>
         </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Вид должности
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_position_short" name="вид_должности" проверка="required" />
+            </td>
+        </tr>
         </tbody>
     </table>
 </fieldset>

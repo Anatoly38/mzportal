@@ -261,14 +261,4 @@ class DB_add extends DB_Mysql
     public function __construct() { }
 }
 
-// Установка подключения к БД igivetest
-class DB_quize extends DB_Mysql 
-{
-    protected $user   = "root";
-    protected $pass   = "4lbt2f";
-    protected $dbhost = "localhost";
-    protected $dbname = "m-quize";
-
-    public function __construct() { }
-}
 ?>

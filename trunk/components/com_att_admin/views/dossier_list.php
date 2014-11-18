@@ -32,6 +32,7 @@ class DossierList extends ItemList
         $constr->add_filter('номер_дела');
         $constr->add_filter('фио');
         $constr->add_filter('экспертная_группа', 'dic_expert_groups', 'наименование', 'наименование', 'экспертная группа');
+        $constr->add_filter('вид_должности', 'dic_position_short', 'наименование', 'наименование', 'вид должности');
         $constr->add_filter('мо', 'pasp_lpu', 'сокращенное_наименование', 'сокращенное_наименование' ,'медицинская организация');
         $constr->get_filters();
     }
@@ -43,7 +44,8 @@ class DossierList extends ItemList
         $options['номер_дела']  = array('sort' => true,  'type' => 'plain');
         $options['фио']         = array('sort' => true,  'type' => 'plain');
         $options['мо']          = array('sort' => true,  'type' => 'plain', 'ref' => 'subordination' );
-        $options['экспертная_группа'] = array('sort' => true,  'type' => 'plain', 'ref' => 'expert_groups' );
+        $options['экспертная_группа']   = array('sort' => true,  'type' => 'plain', 'ref' => 'expert_groups' );
+        $options['вид_должности']       = array('sort' => true,  'type' => 'plain', 'ref' => 'position_short' );
         return $options;
     }
   

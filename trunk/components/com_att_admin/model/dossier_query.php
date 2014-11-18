@@ -19,6 +19,7 @@ class DossierQuery extends ClActiveRecord
     public $фио;
     public $мо;
     public $экспертная_группа;
+    public $вид_должности;
     
     public function __construct($oid = false)
     {
@@ -30,7 +31,8 @@ class DossierQuery extends ClActiveRecord
                         a.номер_дела,
                         a.фио,
                         a.мо,
-                        a.экспертная_группа
+                        a.экспертная_группа,
+                        a.вид_должности
                     FROM {$this->source} AS a 
                     WHERE oid = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
@@ -42,6 +44,7 @@ class DossierQuery extends ClActiveRecord
         $this->фио          = $data['фио'];
         $this->мо           = $data['мо'];
         $this->экспертная_группа = $data['экспертная_группа'];
+        $this->вид_должности     = $data['вид_должности'];
     }
 
     public function update() 
@@ -57,15 +60,17 @@ class DossierQuery extends ClActiveRecord
                         номер_дела  = :1,
                         фио         = :2,
                         мо          = :3,
-                        экспертная_группа = :4
+                        экспертная_группа = :4,
+                        вид_должности     = :5
                     WHERE 
-                        oid = :5";
+                        oid = :6";
         try {
             $dbh->prepare($query)->execute( 
                                         $this->номер_дела,
                                         $this->фио,
                                         $this->мо,
                                         $this->экспертная_группа,
+                                        $this->вид_должности,
                                         $this->oid
                                         );
             Message::alert('Изменения при редактировании успешно сохранены');
@@ -108,9 +113,10 @@ class DossierQuery extends ClActiveRecord
                     номер_дела, 
                     фио,
                     мо,
-                    экспертная_группа
+                    экспертная_группа,
+                    вид_должности
                     )
-                    VALUES(:1, :2, :3, :4, :5)";
+                    VALUES(:1, :2, :3, :4, :5, :6)";
         $dbh = new DB_mzportal;
         try {
             $dbh->prepare($query)->execute( 
@@ -118,7 +124,8 @@ class DossierQuery extends ClActiveRecord
                                         $this->номер_дела,
                                         $this->фио,
                                         $this->мо,
-                                        $this->экспертная_группа
+                                        $this->экспертная_группа,
+                                        $this->вид_должности
                                         );
         }
         catch (MysqlException $e) {

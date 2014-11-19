@@ -4,7 +4,6 @@
 * @package      MZPortal.Framework
 * @subpackage   Factory
 * @copyright    Copyright (C) 2009-2014 МИАЦ ИО
-* @license      GNU/GPL, see LICENSE.php
  
 Прямой доступ запрещен
 */
@@ -36,11 +35,22 @@ class LinkObjects
         if ($data1) {
             throw new Exception("Объект не может быть одновременно и подчиненным и подчиняемым в данной иерархии");                
         }
-        $i = "INSERT IGNORE INTO `sys_obj_links` (`link_type`, `left`, `right`) VALUES(:1, :2, :3)";
-        $dbh->prepare($i)->execute($link_type, $left, $right); 
+        $i = "INSERT INTO `sys_obj_links` (`link_type`, `left`, `right`) VALUES(:1, :2, :3) ON DUPLICATE KEY UPDATE `link_type` = :1, `left` = :2, `right` = :3";
+        $ex = $dbh->prepare($i)->execute($link_type, $left, $right); 
         if ($set_rights) {
             self::inherit_rights($left, $right);
         }
+    }
+    // экземпляр класса на конце стрелки (справа) в кдинственном числе 
+    public static function set_lto1_link($left = null, $right = null, $link_type = '0', $set_rights = false) 
+    {
+        $dbh = new DB_mzportal;
+        $query1 ="SELECT * FROM `sys_obj_links` WHERE `right` = :1 AND `link_type` = :2";
+        $data1 = $dbh->prepare($query1)->execute($right, $link_type)->fetch_assoc();
+        if ($data1) {
+            self::unset_link($data1['left'], $right, $link_type); // стараю ассоциацию удаляем
+        }
+        self::set_link($left, $right, $link_type, $set_rights); // новую ассоциацию создаем
     }
     
     public static function unset_link($left = null, $right = null, $link_type = '0')

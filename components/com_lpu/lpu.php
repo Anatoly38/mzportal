@@ -113,7 +113,7 @@ class LPU extends ComponentACL
             $t = new TerritoryQuery($terr_id);
             $alert = $t->наименование;
         }
-        Message::alert("Текущее подчинение: {$alert}");
+        Message::alert("Сейчас установлена территория: {$alert}");
         Content::set_route('lpu', $lpu);
         $this->view_subordinate($lpu);
     }
@@ -126,13 +126,13 @@ class LPU extends ComponentACL
             $this->view_list();
             return false;
         }
-        $territory = Request::getVar('territory');
+        $territory = (array)Request::getVar('territory');
         if (!$territory) {
-            Message::error('Не выбрана Территория/МО!');
+            Message::error('Не выбрана Территория!');
         }
         else {
             $link_type = Reference::get_id('подчинение', 'link_types');
-            LinkObjects::set_link($territory[0], $lpu, $link_type);
+            LinkObjects::set_lto1_link($territory[0], $lpu, $link_type);
             $t = new TerritoryQuery($territory[0]);
             Message::alert("Установлено подчинение: {$t->наименование}");
         }
@@ -270,7 +270,7 @@ class LPU extends ComponentACL
         $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
         $del_b->set_option('obligate', true);
         DeleteItems::set_confirm_dialog($confirm);
-        self::set_toolbar_button('subordinate', 'subordinate' , 'Подчинение');
+        self::set_toolbar_button('subordinate', 'subordinate' , 'Территория');
         $tax_b = self::set_toolbar_button('tax', 'taxes' , 'Налоговая идентификация');
         $tax_b->set_option('obligate', true);
         $acl_b = self::set_toolbar_button('switch', 'current_acl' , 'Доступ');
@@ -311,7 +311,7 @@ class LPU extends ComponentACL
         $i = new LpuQuery($lpu);
         $list = new LpuSubordinate($lpu);
         $list->set_limit(0);
-        self::set_title('Выбор Территории/МО для ЛПУ"' . $i->наименование . '"');
+        self::set_title('Выбор Территории для ЛПУ"' . $i->наименование . '"');
         $sb = self::set_toolbar_button('default', 'subordinate_apply' , 'Установить');
         $sb->set_option('obligate', true);
         self::set_toolbar_button('cancel', 'close_lists', 'Закрыть');

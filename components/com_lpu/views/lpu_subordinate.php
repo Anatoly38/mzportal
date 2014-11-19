@@ -18,7 +18,7 @@ class LpuSubordinate extends ItemList
     protected $task         = 'subordinate';
     protected $order_task   = 'subordinate';
     protected $obj          = 'territory';
-    protected $default_cols = array( 'oid', 'наименование', 'уровень');
+    protected $default_cols = array( 'oid', 'наименование', 'сокр_наименование', 'код_ОУЗ', 'уровень');
     protected $lpu; 
     
     

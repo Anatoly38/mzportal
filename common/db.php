@@ -223,6 +223,7 @@ class DB_mzportal extends DB_PDO
     protected $pass   = "4lbt2f";
     protected $dbhost = "localhost";
     protected $dbname = "mzportal";
+    //protected $dbname = "attest";
 
     public function __construct() { }
 }

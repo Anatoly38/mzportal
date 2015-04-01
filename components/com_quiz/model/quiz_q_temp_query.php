@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quiz
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -48,7 +48,7 @@ class QuizQTempQuery extends ClActiveRecord
                         {$this->source} 
                     SET
                         текст_вопроса   = :1,
-                        тип_вопроса  	= :2
+                        тип_вопроса     = :2
                     WHERE 
                         номер_пп = :3";
         try {
@@ -97,6 +97,5 @@ class QuizQTempQuery extends ClActiveRecord
         $dbh->execute($query);
         return true;
     }
-    
 }
 ?>

@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id$
-* @package		MZPortal.Framework
-* @subpackage	Passport
-* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Passport
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -15,12 +15,20 @@ require_once ( 'model' . DS . 'lpu_query.php' );
 require_once ( 'model' . DS . 'lpu_save.php' );
 require_once ( 'model' . DS . 'tax_lpu_save.php' );
 require_once ( 'model' . DS . 'tax_query.php' );
+require_once ( 'model' . DS . 'excel_lpu_upload_file_save.php' );
+require_once ( 'model' . DS . 'excel_lpu_import.php' );
+require_once ( 'model' . DS . 'lpu_import.php' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'com_territory'.DS.'model' .DS. 'territory_query.php' );
+
 require_once ( 'views' . DS . 'lpu_list.php' );
 require_once ( 'views' . DS . 'lpu_item.php' );
 require_once ( 'views' . DS . 'lpu_subordinate.php' );
 require_once ( 'views' . DS . 'tax_lpu_item.php' );
 require_once ( 'views' . DS . 'taxes_lpu_list.php' );
+require_once ( 'views' . DS . 'download_lpu_file_form.php' );
+require_once ( 'views' . DS . 'lpu_temp_list.php' );
+
+
 require_once ( MODULES . DS . 'mod_user'  . DS . 'acl.php' );
 require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'access_list.php' );
 require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'user_list.php' );
@@ -256,6 +264,44 @@ class LPU extends ComponentACL
         }
     }
 
+// Загрузка обновленных данных из эксельной выгрузки 1с
+// Форма загрузки файла
+
+    protected function exec_download_lpu_file()
+    {
+        $this->view_upload_file();
+    }
+    
+    protected function exec_uploaded_file_import()
+    {
+        $names = Request::getVar('names');
+        try {
+            $uploaded = new ExcelLpuUploadFileSave();
+            $f = $uploaded->save_file();
+            $i = new ExcelLpuImport($f);
+            $ret = $i->excel_convert();
+            Message::alert('Полученный файл содержит '. $ret . ' обновленных наименований');
+            $this->view_lpu_for_import_list();
+        }
+        catch (UploadException $e) {
+            Message::error($e->message . 'Код ошибки ' . $e->code);
+            $this->view_list();
+        }
+        
+    }
+    
+    protected function exec_cancel_import()
+    {
+        $this->view_list();
+    }
+    
+    protected function exec_renew_all_data() {
+        $import = new LpuImport();
+        $ret = $import->update_all();
+        Message::alert('Обновлено ' . $ret . ' наименований медицинских организаций' );
+        $this->view_list();
+    }
+    
 // Представления данных (view)
 // Данные учреждений здравоохранения
     protected function view_list()
@@ -271,12 +317,13 @@ class LPU extends ComponentACL
         $del_b->set_option('obligate', true);
         DeleteItems::set_confirm_dialog($confirm);
         self::set_toolbar_button('subordinate', 'subordinate' , 'Территория');
-        $tax_b = self::set_toolbar_button('tax', 'taxes' , 'Налоговая идентификация');
-        $tax_b->set_option('obligate', true);
+        //$tax_b = self::set_toolbar_button('tax', 'taxes' , 'Налоговая идентификация');
+        //$tax_b->set_option('obligate', true);
         $acl_b = self::set_toolbar_button('switch', 'current_acl' , 'Доступ');
         $acl_b->set_option('obligate', true);
         self::set_toolbar_button('excel', 'excel_export' , 'Сохранить в Excel');
         ExcelExport::set_dialog($title);
+        self::set_toolbar_button('upload', 'download_lpu_file' , 'Загрузить файл');        
         $this->set_content($list->get_items_page());
     }
 
@@ -358,6 +405,28 @@ class LPU extends ComponentACL
         $this->set_content($form);
     }
 
+    protected function view_upload_file() 
+    {
+        self::set_title('Импорт обновленных данных из 1С Свод отчетов (формат Excel)');
+        $db = self::set_toolbar_button('upload', 'uploaded_file_import' , 'Загрузить');
+        $db->validate(true);
+        self::set_toolbar_button('cancel', 'cancel_import' , 'Закрыть');
+        $u = new DownloadLpuFileForm();
+        $this->set_content($u->get_form());
+
+    }
+    
+    protected function view_lpu_for_import_list()
+    {
+        $title = 'Полученный файл содержит следующие данные медицинских организаций:';
+        $list = new LpuTempList();
+        $list->set_limit(0);
+        self::set_title($title);
+        self::set_toolbar_button('new', 'renew_all_data' , 'Обновить данные');
+        self::set_toolbar_button('cancel', 'cancel_import' , 'Закрыть');
+        $this->set_content($list->get_items_page());
+    }
+    
 }
 
 ?>

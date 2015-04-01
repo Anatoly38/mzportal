@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quiz
-* @copyright    Copyright (C) 2090-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2090-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -67,9 +67,9 @@ class QuizQTempList extends ItemList
     protected function list_options()
     {
         $options = array();
-        $options['номер_пп']            = array('sort' => false, 'type' => 'checkbox' ); 
-        $options['текст_вопроса']       = array('sort' => true,  'type' => 'plain');
-        $options['тип_вопроса']   		= array('sort' => true,  'type' => 'plain', 'ref' => 'question_types' ); 
+        $options['номер_пп']        = array('sort' => false, 'type' => 'checkbox' ); 
+        $options['текст_вопроса']   = array('sort' => true,  'type' => 'plain');
+        $options['тип_вопроса']     = array('sort' => true,  'type' => 'plain', 'ref' => 'question_types' ); 
         return $options;
     }
   

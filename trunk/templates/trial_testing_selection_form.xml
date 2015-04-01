@@ -49,7 +49,7 @@
         </tr>        
         <tr>
             <td width="185" valign="top" class="key">
-                Показывать варинаты ответы при выводе результатов
+                Показывать варианты ответов при выводе результатов
             </td>
             <td>
                 <select id="show_answers" name="show_answers">

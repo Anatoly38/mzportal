@@ -132,7 +132,7 @@ class LpuQuery extends ClActiveRecord
     
     public static function findByOgrn($ogrn = null)
     {
-        if (!ogrn) {
+        if (!$ogrn) {
             throw new Exception("ОГРН учреждения для поиска не определен");
         }
         $dbh = new DB_mzportal;

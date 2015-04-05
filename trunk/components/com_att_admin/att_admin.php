@@ -89,6 +89,14 @@ class AttAdmin extends ComponentACL
         $this->view_dossier_list();
     }
 
+    protected function exec_new_attest_cab_user()
+    {
+        $dossier = (array)Request::getVar('dossier');
+        Content::set_route('dossier', $dossier[0]);
+        Content::set_route('cab_user');
+        $this->view_attest_cab_user_item();
+    }
+    
     // Медицинские ассоциации
     protected function exec_np_association_list()
     {
@@ -178,6 +186,8 @@ class AttAdmin extends ComponentACL
         self::set_toolbar_button('new', 'new_dossier' , 'Новое аттестационное дело');
         $edit_b = self::set_toolbar_button('edit', 'edit_dossier' , 'Редактировать');
         $edit_b->set_option('obligate', true);
+        $user_b = self::set_toolbar_button('edit', 'edit_attest_cab_user' , 'Редактировать');
+        $user_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
         $del_b->set_option('obligate', true);
         DeleteItems::set_confirm_dialog($confirm);
@@ -205,6 +215,19 @@ class AttAdmin extends ComponentACL
         $sb = self::set_toolbar_button('save', 'dossier_save' , 'Сохранить');
         $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_dossier_edit' , 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }    
+    
+    protected function view_attest_cab_user_item($d) 
+    {
+        self::set_title('Ввод логина и пароля для пользователя личного кабинета аттестационной комиссии');
+        $i = new AttestCabUserItem($d);
+        $i->edit_item(); 
+        $sb = self::set_toolbar_button('save', 'attest_cab_user_save' , 'Сохранить');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_attest_cab_user_edit' , 'Закрыть');
         $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);

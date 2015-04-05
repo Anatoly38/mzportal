@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: attest_cab_user_query.php 28 2014-07-02 03:54:03Z shameev38 $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Users
 * @copyright    Copyright (C) 2009-2015 МИАЦ ИО
@@ -19,6 +19,7 @@ class AttestCabUserQuery extends ClActiveRecord
     public $pwd;
     public $description;
     public $blocked;
+    
     
     public function __construct($uid = false)
     {

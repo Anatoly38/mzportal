@@ -14,13 +14,11 @@ require_once ( MZPATH_BASE .DS.'includes'.DS.'object.php' );
 class AttestCabUserQuery extends ClActiveRecord 
 {
     protected $source = 'attest_cab_user';
-    protected $oid;
     public $uid;
     public $name;
     public $pwd;
     public $description;
     public $blocked;
-    public $encryption = true;
     
     public function __construct($uid = false)
     {
@@ -40,8 +38,7 @@ class AttestCabUserQuery extends ClActiveRecord
         if(!$data) {
             throw new Exception("Пользователь не найден");
         }
-        $this->oid = $uid;
-        $this->uid =& $this->oid;
+        $this->uid = $uid;
         $this->name = $data['name'];
         $this->pwd = $data['pwd'];
         $this->description = $data['description'];
@@ -59,7 +56,7 @@ class AttestCabUserQuery extends ClActiveRecord
         if(!$id) {
             throw new Exception("Код пользователя не найден");
         }
-        return new UserQuery($id);
+        return new AttestCabUserQuery($id);
     }
 
     public function update() 
@@ -103,7 +100,7 @@ class AttestCabUserQuery extends ClActiveRecord
         $obj->update();
     }
 
-    public function insert($obj_type = 'user')
+    public function insert()
     {
         if($this->uid) 
         {
@@ -112,10 +109,10 @@ class AttestCabUserQuery extends ClActiveRecord
         $class_name = get_class($this);
         // Регистрация нового объекта в таблице sys_objects
         $obj = MZObject::set_class_id($class_name); // Создаем объект класса MZObject с определенной переменной $class_id
-        $obj->name = $class_name . ' obj';
+        $obj->name = 'Пользователь личного кабинета по аттестации';
         $obj->description = $this->name;
         $obj->deleted = 0;
-        $obj->create($obj_type);
+        $obj->create();
         $dbh = new DB_mzportal;
         $this->uid = $obj->obj_id;
         $query =    "INSERT INTO {$this->source}  

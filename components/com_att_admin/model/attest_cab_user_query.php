@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id$
+* @version      $Id $
 * @package      MZPortal.Framework
 * @subpackage   Users
 * @copyright    Copyright (C) 2009-2015 МИАЦ ИО

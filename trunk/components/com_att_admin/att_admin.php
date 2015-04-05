@@ -14,6 +14,8 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 require_once ( 'model' . DS . 'dossier_query.php' );
 require_once ( 'model' . DS . 'dossier_save.php' );
+require_once ( 'model' . DS . 'attest_cab_user_query.php' );
+
 require_once ( 'model' . DS . 'np_association_query.php' );
 require_once ( 'model' . DS . 'np_association_save.php' );
 require_once ( 'model' . DS . 'expert_group_query.php' );
@@ -21,6 +23,8 @@ require_once ( 'model' . DS . 'expert_group_save.php' );
 
 require_once ( 'views' . DS . 'dossier_list.php' );
 require_once ( 'views' . DS . 'dossier_item.php' );
+require_once ( 'views' . DS . 'attest_cab_user_item.php' );
+
 require_once ( 'views' . DS . 'np_association_list.php' );
 require_once ( 'views' . DS . 'np_association_item.php' );
 require_once ( 'views' . DS . 'expert_group_list.php' );
@@ -89,7 +93,7 @@ class AttAdmin extends ComponentACL
         $this->view_dossier_list();
     }
 
-    protected function exec_new_attest_cab_user()
+    protected function exec_edit_attest_cab_user()
     {
         $dossier = (array)Request::getVar('dossier');
         Content::set_route('dossier', $dossier[0]);
@@ -135,7 +139,7 @@ class AttAdmin extends ComponentACL
         $this->view_np_association_list();
     }
 
-// экспертные группы    
+// экспертные группы  
     protected function exec_expert_group_list()
     {
         $this->view_expert_group_list();
@@ -186,7 +190,7 @@ class AttAdmin extends ComponentACL
         self::set_toolbar_button('new', 'new_dossier' , 'Новое аттестационное дело');
         $edit_b = self::set_toolbar_button('edit', 'edit_dossier' , 'Редактировать');
         $edit_b->set_option('obligate', true);
-        $user_b = self::set_toolbar_button('edit', 'edit_attest_cab_user' , 'Редактировать');
+        $user_b = self::set_toolbar_button('edit', 'edit_attest_cab_user' , 'Доступ в личный кабинет');
         $user_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
         $del_b->set_option('obligate', true);
@@ -220,10 +224,10 @@ class AttAdmin extends ComponentACL
         $this->set_content($form);
     }    
     
-    protected function view_attest_cab_user_item($d) 
+    protected function view_attest_cab_user_item() 
     {
         self::set_title('Ввод логина и пароля для пользователя личного кабинета аттестационной комиссии');
-        $i = new AttestCabUserItem($d);
+        $i = new AttestCabUserItem();
         $i->edit_item(); 
         $sb = self::set_toolbar_button('save', 'attest_cab_user_save' , 'Сохранить');
         $sb->validate(true);

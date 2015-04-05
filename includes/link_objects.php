@@ -41,14 +41,14 @@ class LinkObjects
             self::inherit_rights($left, $right);
         }
     }
-    // экземпляр класса на конце стрелки (справа) в кдинственном числе 
+    // экземпляр класса на конце стрелки (справа) в единственном числе 
     public static function set_lto1_link($left = null, $right = null, $link_type = '0', $set_rights = false) 
     {
         $dbh = new DB_mzportal;
         $query1 ="SELECT * FROM `sys_obj_links` WHERE `right` = :1 AND `link_type` = :2";
         $data1 = $dbh->prepare($query1)->execute($right, $link_type)->fetch_assoc();
         if ($data1) {
-            self::unset_link($data1['left'], $right, $link_type); // стараю ассоциацию удаляем
+            self::unset_link($data1['left'], $right, $link_type); // старую ассоциацию удаляем
         }
         self::set_link($left, $right, $link_type, $set_rights); // новую ассоциацию создаем
     }

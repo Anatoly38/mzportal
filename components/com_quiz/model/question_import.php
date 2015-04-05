@@ -35,11 +35,7 @@ class QuestionImport
     {
         $dbh = new DB_mzportal;
         $query =    "SELECT `номер_пп` FROM quiz_q_temp"; 
-        //print_r($query);
         $items = $dbh->execute($query)->fetch();
-        //$question = new QuizQTempList();
-        //$question->set_limit(0);
-        //$items = $question->get_items();
         if (!$items) {
             throw new Exception("В БД нет вопросов для импорта");
         }

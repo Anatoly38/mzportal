@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id$
+* @version      $Id: attest_cab_user_query.php 28 2014-07-02 03:54:03Z shameev38 $
 * @package      MZPortal.Framework
 * @subpackage   Users
 * @copyright    Copyright (C) 2009-2015 МИАЦ ИО
@@ -11,9 +11,9 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'active_record.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'object.php' );
 
-class UserQuery extends ClActiveRecord implements ActiveRecord
+class AttestCabUserQuery extends ClActiveRecord 
 {
-    protected $source = 'sys_users';
+    protected $source = 'attest_cab_user';
     protected $oid;
     public $uid;
     public $name;
@@ -34,7 +34,7 @@ class UserQuery extends ClActiveRecord implements ActiveRecord
                         a.name,
                         a.description,
                         a.blocked
-                    FROM `sys_users` AS a 
+                    FROM {$this->source} AS a 
                     WHERE uid = :1";
         $data = $dbh->prepare($query)->execute($uid)->fetch_assoc();
         if(!$data) {
@@ -48,24 +48,13 @@ class UserQuery extends ClActiveRecord implements ActiveRecord
         $this->blocked = $data['blocked'];    
     }
     
-    public function set_encryption($e)
-    {
-        if ($e === true) {
-            $this->encryption = true;
-        } 
-        else if ($e === false) {
-            $this->encryption = false;
-        }
-        return $this->encryption;
-    }
-
     public static function findByName($name = null)
     {
         if (!$name) {
             throw new Exception("Имя пользователя не определено");
         }
         $dbh = new DB_mzportal;
-        $query = "SELECT uid FROM `sys_users` WHERE name = :1";
+        $query = "SELECT uid FROM `attest_cab_user` WHERE name = :1";
         list($id) = $dbh->prepare($query)->execute($name)->fetch_row();
         if(!$id) {
             throw new Exception("Код пользователя не найден");
@@ -81,7 +70,7 @@ class UserQuery extends ClActiveRecord implements ActiveRecord
         }
         $dbh = new DB_mzportal;
         $query =    "UPDATE 
-                        `sys_users` 
+                        {$this->source} 
                     SET 
                         name = :1, 
                         description = :2,
@@ -129,7 +118,7 @@ class UserQuery extends ClActiveRecord implements ActiveRecord
         $obj->create($obj_type);
         $dbh = new DB_mzportal;
         $this->uid = $obj->obj_id;
-        $query =    "INSERT INTO `sys_users` 
+        $query =    "INSERT INTO {$this->source}  
                     (uid, name, description, pwd, blocked)
                     VALUES(:1, :2, :3, :4, :5)";
         try {
@@ -137,7 +126,7 @@ class UserQuery extends ClActiveRecord implements ActiveRecord
                                         $obj->obj_id,
                                         $this->name, 
                                         $this->description,
-                                        $this->encryption ? md5($this->pwd) : $this->pwd,
+                                        $this->pwd,
                                         $this->blocked
                                         );
             Message::alert('Изменения при вводе нового пользователя успешно сохранены');

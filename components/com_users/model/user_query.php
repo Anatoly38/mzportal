@@ -123,7 +123,7 @@ class UserQuery extends ClActiveRecord implements ActiveRecord
         $class_name = get_class($this);
         // Регистрация нового объекта в таблице sys_objects
         $obj = MZObject::set_class_id($class_name); // Создаем объект класса MZObject с определенной переменной $class_id
-        $obj->name = $class_name . ' obj';
+        $obj->name = 'Пользователь системы';
         $obj->description = $this->name;
         $obj->deleted = 0;
         $obj->create($obj_type);

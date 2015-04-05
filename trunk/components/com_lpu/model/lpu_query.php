@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id$
-* @package		MZPortal.Framework
-* @subpackage	Passport_LPU
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Passport_LPU
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */

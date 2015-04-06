@@ -1,6 +1,6 @@
 <?php
 /**
-* @version      $Id: $
+* @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Users
 * @copyright    Copyright (C) 2009-2015 МИАЦ ИО
@@ -15,14 +15,15 @@ class AttestCabUserQuery extends ClActiveRecord
 {
     protected $source = 'attest_cab_user';
     public $uid;
+    public $oid;
     public $name;
     public $pwd;
     public $description;
-    public $blocked;
+    public $blocked = 0;
     
-    
-    public function __construct($uid = false)
+    public function __construct($uid = null)
     {
+        $this->oid = &$this->uid;
         if (!$uid) {
             return;
         }
@@ -79,21 +80,21 @@ class AttestCabUserQuery extends ClActiveRecord
             $dbh->prepare($query)->execute( 
                                         $this->name,
                                         $this->description,
-                                        $this->encryption ? md5($this->pwd) : $this->pwd, 
+                                        $this->pwd, 
                                         $this->blocked,
                                         $this->uid
                                         );
             Message::alert('Изменения при редактировании пользователя успешно сохранены');
         }
         catch (Exception $e) {
-            $m->enque_message('error', 'Ошибка: изменения при редактированиии пользователя не сохранены (sys_users)!');
+            $m->enque_message('error', 'Ошибка: изменения при редактировании пользователя не сохранены (sys_users)!');
             return false;
         }
         try {
             $obj = new MZObject($this->uid);
         }
         catch (Exception $e) {
-            Message::error('Ошибка: изменения object при редактированиии пользователя не сохранены!');
+            Message::error('Ошибка: изменения object при редактировании пользователя не сохранены!');
             return false;
         }
         $obj->description = $this->name;
@@ -115,6 +116,7 @@ class AttestCabUserQuery extends ClActiveRecord
         $obj->create();
         $dbh = new DB_mzportal;
         $this->uid = $obj->obj_id;
+        //$this->oid &= $this->uid;
         $query =    "INSERT INTO {$this->source}  
                     (uid, name, description, pwd, blocked)
                     VALUES(:1, :2, :3, :4, :5)";

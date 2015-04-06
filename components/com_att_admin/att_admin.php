@@ -16,6 +16,7 @@ require_once ( 'model' . DS . 'dossier_query.php' );
 require_once ( 'model' . DS . 'dossier_cab_query.php' );
 require_once ( 'model' . DS . 'dossier_save.php' );
 require_once ( 'model' . DS . 'attest_cab_user_query.php' );
+require_once ( 'model' . DS . 'attest_cab_user_save.php' );
 
 require_once ( 'model' . DS . 'np_association_query.php' );
 require_once ( 'model' . DS . 'np_association_save.php' );
@@ -112,7 +113,17 @@ class AttAdmin extends ComponentACL
     
     protected function exec_attest_cab_user_save()
     {
-        
+        $dossier  = (array)Request::getVar('dossier');
+        $cab_user = (array)Request::getVar('cab_user');
+        $s = new AttestCabUserSave($cab_user[0]);
+        $id = $s->save();
+        if (!$cab_user[0]) {
+            $link_type = Reference::get_id('аттестационное_дело-пользователь', 'link_types');
+            $s->set_left_obj($dossier[0]);
+            $s->set_right_obj($id);
+            $s->set_association($link_type);
+        }
+        $this->view_dossier_list();
     }
     
     protected function exec_cancel_attest_cab_user_edit()

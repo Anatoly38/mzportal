@@ -103,6 +103,7 @@
             if (typeof s.action === 'function') {
                 s.action();
             }
+            //alert(valid + noDirty + noObligate + deleteRows + s.leavePage);
             if (valid && noDirty && noObligate && deleteRows && s.leavePage) {
                 form.submit();
             }

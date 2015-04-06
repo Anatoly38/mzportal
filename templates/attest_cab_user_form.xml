@@ -8,7 +8,7 @@
                 Логин 
             </td>
             <td>
-                <input type="text" name="user" id="user" style="width: 400px; height: 17px;" class="required" value=""/>
+                <input type="text" name="name" id="name" style="width: 400px; height: 17px;" class="required" value=""/>
             </td>
         </tr>
         <tr>

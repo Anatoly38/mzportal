@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Framework
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -64,6 +64,7 @@ class MZConfig
     public static $np_association_form_tmpl     = 'np_association_form.xml';
     public static $expert_group_form_tmpl       = 'expert_group_form.xml';
     public static $dossier_form_tmpl            = 'dossier_form.xml';
+    public static $atest_cab_user_form_tmpl     = 'attest_cab_user_form.xml';
     
 }
 ?>

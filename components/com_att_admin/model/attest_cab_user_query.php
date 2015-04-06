@@ -30,7 +30,6 @@ class AttestCabUserQuery extends ClActiveRecord
         $query =    "SELECT 
                         a.name, 
                         a.pwd,
-                        a.name,
                         a.description,
                         a.blocked
                     FROM {$this->source} AS a 

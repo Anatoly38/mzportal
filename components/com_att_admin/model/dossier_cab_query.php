@@ -13,7 +13,7 @@ require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 
 class DossierCabQuery extends ClActiveRecord 
 {
-    protected $source = ' attest_dossier_cab_user_view';
+    protected $source = 'attest_dossier_cab_user_view';
     public $uid;
     public $name;
     public $pwd;

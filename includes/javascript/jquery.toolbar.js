@@ -3,18 +3,18 @@
     var methods = {
         init : function( options ) {
             var buttonSettings = {
-                form        : 'adminForm',
-                task        : null,
-                icon        : null,
-                title       : null,
-                leavePage   : true,
-                showStatus  : true,
-                showLabel   : true,
-                action      : false,
-                obligate    : false,
-                number      : 1,
-                validate    : false,
-                trackdirty  : false
+                form            : 'adminForm',
+                task            : null,
+                icon            : null,
+                title           : null,
+                confirmDelete   : false,
+                showStatus      : true,
+                showLabel       : true,
+                action          : function () { $("#" + buttonSettings.form).submit() },
+                obligate        : false,
+                number          : 1,
+                validate        : false,
+                trackdirty      : false
             };
             if ( options ) { 
                 $.extend( buttonSettings, options );
@@ -41,14 +41,13 @@
             if (s.validate) {
                 if (!form.valid()) {
                     valid = false;
-
-                } 
+                }
             }
             if (s.trackdirty) {
                 if (form.isDirty()) {
                     noDirty = false;
-                    form.append('<div id="discard-changes" title="Данные изменены"><p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Сделанные изменения будут потеряны?</p></div>');
-                    $( "#discard-changes" ).dialog({
+                    $('<div id="discard-changes" title="Данные изменены"><p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>Сделанные изменения будут потеряны?</p></div>')
+                    .appendTo('body').dialog({
                         resizable: false,
                         width: 450,
                         height:160,
@@ -63,6 +62,7 @@
                             "Продолжить редактирование": function() {
                                 noDirty = false;
                                 $(this).dialog( "close" );
+                                $("#task").val(null);
                             }
                         }
                     });
@@ -73,9 +73,6 @@
                 var l = $(".grid_row");
                 if (l.length == 1) {
                     form.append('<input type="hidden" name="'+ $(l).attr("name") +'" value="'+ $(l).attr("id") +'" />'); // Нужно изменить - тут единственную строку выделить.
-                    //if (typeof s.dialog === 'function') {
-                    //    s.dialog();
-                    //}
                 }
                 if ($("td > span.ui-icon-check").length < s.number ) {
                     noObligate = false;
@@ -88,24 +85,43 @@
                     }
                     var selection_dialog = '<div id="selection-warning" title="Не выбраны объекты">';
                     selection_dialog +=  '<p>' + message + '</p></div>';
-                    form.append(selection_dialog);                    
-                    $("#selection-warning").dialog({
+                    $(selection_dialog).appendTo('body').dialog({
                         modal: true,
                         buttons: {
                             Ok: function() {
                                 $(this).dialog("close");
+                                $("#task").val(null);
                             }
                         }
                     });
                 }
                 
             }
-            if (typeof s.action === 'function') {
-                s.action();
+            if (s.confirmDelete) {
+                deleteRows = false;
+                var delete_dialog = '<div id="delete-warning" title="Подтвердите действие">';
+                delete_dialog += '<p>Выделенные объекты будут удалены. Вы уверены?</p></div>'
+                $(delete_dialog).appendTo('body').dialog({
+                    resizable: false,
+                    height: 170,
+                    modal: true,
+                    buttons: {
+                        "Удалить": function() {
+                            $( this ).dialog( "close" );
+                            form.submit();
+                            return true;
+                        },
+                        "Отменить": function() {
+                            $( this ).dialog( "close" );
+                            $("#task").val(null);
+                            deleteRows = false;
+                            return false;
+                        }
+                    }
+                });
             }
-            //alert(valid + noDirty + noObligate + deleteRows + s.leavePage);
-            if (valid && noDirty && noObligate && deleteRows && s.leavePage) {
-                form.submit();
+            if ( valid && noDirty && noObligate && deleteRows ) {
+                s.action();
             }
         }, 
         showButton : function () {

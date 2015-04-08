@@ -32,9 +32,9 @@ require_once ( 'views' . DS . 'np_association_item.php' );
 require_once ( 'views' . DS . 'expert_group_list.php' );
 require_once ( 'views' . DS . 'expert_group_item.php' );
 
-class AttAdmin extends ComponentACL
+class AttAdmin extends Component
 {
-    protected $default_view = 'view_np_association_list';
+    protected $default_view = 'view_dossier_list';
     
     protected function exec_apply()
     {
@@ -49,12 +49,13 @@ class AttAdmin extends ComponentACL
     
     protected function exec_delete()
     {
-        if (!$this->oid[0]) {
-            Message::error('Тема(ы) не определен(ы)!');
-            $this->view_theme_list();
+        if ( !isset($this->oid[0]) ) {
+            Message::error('Объект(ы) для удаления не определен(ы)!');
         } 
-        $lpu = new DeleteItems($this->oid);
-        $this->view_theme_list();
+        else {
+            $lpu = new DeleteItems($this->oid);
+        }
+        $this->exec_default();
     }
 
     // Аттестационные дела
@@ -95,9 +96,24 @@ class AttAdmin extends ComponentACL
         $this->view_dossier_list();
     }    
     
+    protected function exec_dossier_delete()
+    {
+        $dossier = (array)Request::getVar('dossier');
+        if (!$dossier[0]) {
+            Message::error('Аттестационные дела не определен(ы)!');
+            $this->view_dossier_list();
+        } 
+        $qd = new DeleteItems($dossier);
+        $this->view_dossier_list();
+    }
+    
     protected function exec_edit_attest_cab_user()
     {
         $dossier = (array)Request::getVar('dossier');
+        if ( count($dossier) > 1 ) {
+            Message::alert("Выделите только одно дело из списка для редактирования");
+            $this->view_dossier_list();
+        }
         Content::set_route('dossier', $dossier[0]);
         try {
             $d = new DossierCabQuery($dossier[0]);
@@ -130,7 +146,22 @@ class AttAdmin extends ComponentACL
     {
         $this->view_dossier_list();
     }
-    
+
+    protected function exec_quiz_ticket()
+    {
+        $dossier = (array)Request::getVar('dossier');
+        if ( count($dossier) > 1 ) {
+            Message::alert("Выделите только одно дело из списка для редактирования");
+            $this->view_dossier_list();
+        }
+        Content::set_route('dossier', $dossier[0]);
+        $d = new DossierTicketQuery($dossier[0]);
+        $this->view_attest_cab_user_item($d->uid);
+        Message::error('Логин и пароль для этого аттестационного дела еще не созданы, введите новые');
+            Content::set_route('cab_user');
+            $this->view_attest_cab_user_item();
+        }
+    }
     // Медицинские ассоциации
     protected function exec_np_association_list()
     {
@@ -222,9 +253,10 @@ class AttAdmin extends ComponentACL
         $edit_b->set_option('obligate', true);
         $user_b = self::set_toolbar_button('user', 'edit_attest_cab_user' , 'Доступ в личный кабинет');
         $user_b->set_option('obligate', true);
-        $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
+        $del_b = self::set_toolbar_button('delete', 'dossier_delete' , 'Удалить');
         $del_b->set_option('obligate', true);
-        DeleteItems::set_confirm_dialog($confirm);
+        $del_b->set_option('confirmDelete', true);
+        //DeleteItems::set_confirm_dialog($confirm);
         $this->set_content($list->get_items_page());
     }
     

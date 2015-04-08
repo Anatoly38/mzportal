@@ -2,7 +2,7 @@
 /**
 * @version      $Id$
 * @package      MZPortal.Framework
-* @subpackage   Quize
+* @subpackage   Att_Admin
 * @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
@@ -10,13 +10,13 @@
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'item_list.php' );
 
-class QuizAnswerList extends ItemList
+class DossierTicketList extends ItemList
 {
-    protected $model        = 'QuizAnswerQuery';
-    protected $source       = 'quiz_answer_question';
-    protected $namespace    = 'quiz_answer';
-    protected $task         = 'answer_list';
-    protected $obj          = 'quiz_answer';
+    protected $model        = 'QuizTicketQuery';
+    protected $source       = 'attest_dossier_ticket_view';
+    protected $namespace    = 'dossier_ticket';
+    protected $task         = 'ticket_list';
+    protected $obj          = 'ticket';
     protected $order_task   = 'answer_list';
     protected $default_cols = array( 'oid', 'текст_ответа', 'правильный');
     protected $question;

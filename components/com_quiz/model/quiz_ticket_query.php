@@ -17,6 +17,7 @@ class QuizTicketQuery extends ClActiveRecord
     public $oid;
     public $тема;
     public $настройка;
+    public $пин_код;
     public $в_процессе;
     public $текущий_вопрос;
     public $реализована;
@@ -30,6 +31,7 @@ class QuizTicketQuery extends ClActiveRecord
         $query =    "SELECT 
                         a.тема,
                         a.настройка,
+                        a.пин_код,
                         a.в_процессе,
                         a.текущий_вопрос,
                         a.реализована
@@ -42,6 +44,7 @@ class QuizTicketQuery extends ClActiveRecord
         $this->oid              = $oid;
         $this->тема             = $data['тема'];
         $this->настройка        = $data['настройка'];
+        $this->пин_код          = $data['пин_код'];
         $this->в_процессе       = $data['в_процессе'];
         $this->текущий_вопрос   = $data['текущий_вопрос'];
         $this->реализована      = $data['реализована'];
@@ -59,15 +62,17 @@ class QuizTicketQuery extends ClActiveRecord
                     SET
                         тема            = :1,
                         настройка       = :2,
-                        в_процессе      = :3,
-                        текущий_вопрос  = :4.
-                        реализована     = :5
+                        пин_код         = :3,
+                        в_процессе      = :4,
+                        текущий_вопрос  = :5,
+                        реализована     = :6
                     WHERE 
-                        oid = :6";
+                        oid = :7";
         try {
             $dbh->prepare($query)->execute( 
                                         $this->тема,
                                         $this->настройка,
+                                        $this->пин_код,
                                         $this->в_процессе,
                                         $this->текущий_вопрос,
                                         $this->реализована,

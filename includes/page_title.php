@@ -1,15 +1,9 @@
 <?php
 /**
-* @version		$Id$
-* @package		MZPortal.Framework
-* @subpackage	Factory
-* @copyright	Copyright (C) 2009 МИАЦ ИО
-* @license		GNU/GPL, see LICENSE.php
-* This version may have been modified pursuant
-* to the GNU General Public License, and as distributed it includes or
-* is derivative of works licensed under the GNU General Public License or
-* other free or open source software licenses.
-* See COPYRIGHT.php for copyright notices and details. 
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Factory
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -33,6 +27,12 @@ class Page_Title
             self::$instance = new Page_Title;
         }
         return self::$instance;    
+    }
+    
+    public static function set($text) 
+    {
+        $t = Page_Title::getInstance();
+        $t->set_title($text);
     }
     
     private function set_container()
@@ -66,6 +66,7 @@ class Page_Title
         $title_node = $this->container->getElementsByTagName('h2')->item(0);
         return $title_node;
     }
+    
 }
 
 ?>

@@ -13,10 +13,11 @@ require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 
 class DossierQuery extends ClActiveRecord 
 {
-    protected $source = ' attest_dossier';
+    protected $source = 'attest_dossier';
     public $oid;
     public $номер_дела;
     public $фио;
+    public $email;
     public $мо;
     public $экспертная_группа;
     public $вид_должности;
@@ -30,6 +31,7 @@ class DossierQuery extends ClActiveRecord
         $query =    "SELECT 
                         a.номер_дела,
                         a.фио,
+                        a.email,
                         a.мо,
                         a.экспертная_группа,
                         a.вид_должности
@@ -42,6 +44,7 @@ class DossierQuery extends ClActiveRecord
         $this->oid          = $oid;
         $this->номер_дела   = $data['номер_дела'];
         $this->фио          = $data['фио'];
+        $this->email        = $data['email'];
         $this->мо           = $data['мо'];
         $this->экспертная_группа = $data['экспертная_группа'];
         $this->вид_должности     = $data['вид_должности'];
@@ -59,15 +62,17 @@ class DossierQuery extends ClActiveRecord
                     SET
                         номер_дела  = :1,
                         фио         = :2,
-                        мо          = :3,
-                        экспертная_группа = :4,
-                        вид_должности     = :5
+                        email       = :3,
+                        мо          = :4,
+                        экспертная_группа = :5,
+                        вид_должности     = :6
                     WHERE 
                         oid = :6";
         try {
             $dbh->prepare($query)->execute( 
                                         $this->номер_дела,
                                         $this->фио,
+                                        $this->email,
                                         $this->мо,
                                         $this->экспертная_группа,
                                         $this->вид_должности,
@@ -112,17 +117,19 @@ class DossierQuery extends ClActiveRecord
                     (oid, 
                     номер_дела, 
                     фио,
+                    email,
                     мо,
                     экспертная_группа,
                     вид_должности
                     )
-                    VALUES(:1, :2, :3, :4, :5, :6)";
+                    VALUES(:1, :2, :3, :4, :5, :6, :7 )";
         $dbh = new DB_mzportal;
         try {
             $dbh->prepare($query)->execute( 
                                         $this->oid,
                                         $this->номер_дела,
                                         $this->фио,
+                                        $this->email,
                                         $this->мо,
                                         $this->экспертная_группа,
                                         $this->вид_должности

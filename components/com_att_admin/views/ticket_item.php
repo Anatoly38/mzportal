@@ -10,10 +10,10 @@
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'item.php' );
 
-class DossierItem extends Item 
+class TicketItem extends Item 
 {
-    protected $model    = 'DossierQuery';
-    protected $form     = 'dossier_form_tmpl';
+    protected $model    = 'QuizTicketQuery';
+    protected $form     = 'ticket_form_tmpl';
 }
 
 ?>

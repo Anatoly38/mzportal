@@ -65,6 +65,8 @@ class MZConfig
     public static $expert_group_form_tmpl       = 'expert_group_form.xml';
     public static $dossier_form_tmpl            = 'dossier_form.xml';
     public static $atest_cab_user_form_tmpl     = 'attest_cab_user_form.xml';
-    
+    public static $tickets_form_tmpl            = 'tickets_form.xml';
+    public static $ticket_form_tmpl             = 'ticket_form.xml';
+
 }
 ?>

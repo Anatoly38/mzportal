@@ -596,8 +596,8 @@ JS;
         $stop_test = self::set_toolbar_button('cancel', 'cancel_trial_test' , 'Прервать выполнение теста');
         $stop_test->set_option('action', "$('#quiz-container').quiz('stopQuiz', 'Тест прерван пользователем' );");
         $stop_test->set_option('leavePage', false );
-        $save_res = self::set_toolbar_button('save', 'save_test_result' , 'Сохранить результат теста');
-        $save_res->set_option('showStatus', false );
+        //$save_res = self::set_toolbar_button('save', 'save_test_result' , 'Сохранить результат теста');
+        //$save_res->set_option('showStatus', false );
         
     }
  

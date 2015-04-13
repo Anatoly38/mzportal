@@ -1,9 +1,9 @@
 <?php
 /** 
-* @version		$Id$
-* @package		MZPortal.Framework
-* @subpackage	Form Loader
-* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Form Loader
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 */
 
 defined( '_MZEXEC' ) or die( 'Restricted access' );
@@ -83,7 +83,7 @@ class Form_Template_Loader
         $js = Javascript::getInstance();
         $js->add_jquery();
         $js->add_jquery_validate();
-        $js->add_datepicker();
+        $js->add_uiwidgets();
         $js->add_dirtyforms();
         $q="//input[@default_date]"; // Обработка дат по умолчанию
         $xpath = new DOMXpath($this->form_xml);
@@ -104,7 +104,6 @@ class Form_Template_Loader
         if (!$values || !is_array($values)) {
             return true;
         }
-        //$js = Javascript::getInstance();
         foreach($values as $key => $value) {
             $q="//*[@name='$key'] | //*[@name='". $key . "[]']"; // 
             $xpath = new DOMXpath($this->form_xml);
@@ -120,15 +119,25 @@ class Form_Template_Loader
                     }
                     if ($input_type == 'radio') {
                         foreach ($dom_node_list as $radio) {
-                            if ($radio->getAttribute('value') == $value) {
+                            if ($radio->getAttribute('value') === $value) {
                                 $radio->setAttribute('checked', '');
+                            }
+                            else {
+                                if ($radio->hasAttribute('checked')) {
+                                    $radio->removeAttribute('checked');
+                                }
                             }
                         }
                     }
                     if ($input_type == 'checkbox') {
                         foreach ($dom_node_list as $checkbox) {
-                            if ($checkbox->getAttribute('value') == $value) {
+                            if ($checkbox->getAttribute('value') === $value) {
                                 $checkbox->setAttribute('checked', '');
+                            }
+                            else {
+                                if ($checkbox->hasAttribute('checked')) {
+                                    $checkbox->removeAttribute('checked');
+                                }
                             }
                         }
                     }

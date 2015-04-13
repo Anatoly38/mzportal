@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quiz
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -25,6 +25,8 @@ class QuizSettingQuery extends ClActiveRecord
     public $доп_тема3_доля;
     public $количество_вопросов;
     public $продолжительность_теста;
+    public $сортировка;
+    public $показ_ответов;
     
     public function __construct($oid = false)
     {
@@ -42,7 +44,9 @@ class QuizSettingQuery extends ClActiveRecord
                         a.доп_тема3_наименование,
                         a.доп_тема3_доля,
                         a.количество_вопросов,
-                        a.продолжительность_теста
+                        a.продолжительность_теста,
+                        a.сортировка,
+                        a.показ_ответов
                     FROM {$this->source} AS a 
                     WHERE oid = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
@@ -60,6 +64,8 @@ class QuizSettingQuery extends ClActiveRecord
         $this->доп_тема3_доля           = $data['доп_тема3_доля'];
         $this->количество_вопросов      = $data['количество_вопросов'];
         $this->продолжительность_теста  = $data['продолжительность_теста'];
+        $this->сортировка               = $data['сортировка'];
+        $this->показ_ответов            = $data['показ_ответов'];
     }
 
     public function update() 
@@ -77,13 +83,15 @@ class QuizSettingQuery extends ClActiveRecord
                         доп_тема1_наименование  = :3,
                         доп_тема1_доля          = :4,
                         доп_тема2_наименование  = :5,
-                        доп_тема2_доля  	    = :6,
+                        доп_тема2_доля          = :6,
                         доп_тема3_наименование  = :7,
                         доп_тема3_доля          = :8,
                         количество_вопросов     = :9,
-                        продолжительность_теста = :10
+                        продолжительность_теста = :10,
+                        сортировка              = :11,
+                        показ_ответов           = :12
                     WHERE 
-                        oid = :11";
+                        oid = :13";
         try {
             $dbh->prepare($query)->execute( 
                                         $this->наименование,
@@ -96,6 +104,8 @@ class QuizSettingQuery extends ClActiveRecord
                                         $this->доп_тема3_доля,
                                         $this->количество_вопросов,
                                         $this->продолжительность_теста,
+                                        $this->сортировка,
+                                        $this->показ_ответов,
                                         $this->oid
                                         );
             if ($this->show_update_message) {
@@ -147,9 +157,11 @@ class QuizSettingQuery extends ClActiveRecord
                     доп_тема3_наименование,
                     доп_тема3_доля,
                     количество_вопросов,
-                    продолжительность_теста
+                    продолжительность_теста,
+                    сортировка,
+                    показ_ответов
                     )
-                    VALUES(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11)";
+                    VALUES(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13)";
         $dbh = new DB_mzportal;
         try {
             $dbh->prepare($query)->execute( 
@@ -163,7 +175,9 @@ class QuizSettingQuery extends ClActiveRecord
                                         $this->доп_тема3_наименование,
                                         $this->доп_тема3_доля,
                                         $this->количество_вопросов,
-                                        $this->продолжительность_теста
+                                        $this->продолжительность_теста,
+                                        $this->сортировка,
+                                        $this->показ_ответов
                                         );
         }
         catch (MysqlException $e) {

@@ -220,7 +220,12 @@ class ItemList
                 foreach ($p as $param => $title) {
                     if ( !$this->default_cols || in_array($param , $this->default_cols) ) {
                         if (isset($o[$param]['ref'])) {
-                            $g[$j][] = Reference::get_name($item->$param, $o[$param]['ref']);
+                            if ($o[$param]['ref'] !== 'bool') {
+                                $g[$j][] = Reference::get_name($item->$param, $o[$param]['ref']);
+                            }
+                            else {
+                                $item->$param == 1 ? $g[$j][] = 'Да' : $g[$j][] = 'Нет';
+                            }
                         }
                         else {
                             $g[$j][] = $item->$param;

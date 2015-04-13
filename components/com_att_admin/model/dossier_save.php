@@ -18,6 +18,7 @@ class DossierSave extends ItemSave
     {
         $this->query->номер_дела = Request::getVar('номер_дела');
         $this->query->фио        = Request::getVar('фио');
+        $this->query->email      = Request::getVar('email');
         $this->query->мо         = Request::getVar('мо');
         $this->query->экспертная_группа = Request::getVar('экспертная_группа');
         $this->query->вид_должности     = Request::getVar('вид_должности');

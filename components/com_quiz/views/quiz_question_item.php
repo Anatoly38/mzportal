@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quize
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -21,7 +21,6 @@ class QuizQuestionItem extends Item
         $a->set_show_pagination(false);
         $answers_table = $a->get_items_page();
         $this->form_loader->append_section($answers_table);
-        //print_r($answers_table);
     }
 }
 

@@ -16,7 +16,7 @@ class Javascript
     private $container  = null;
     private $jquery     = false;
     private $jquery_validate = false;
-    private $datepicker = false;
+    private $add_uiwidgets = false;
     private $dirtyforms = false;
     private $treeview   = false;
     private $jstree     = false;
@@ -93,7 +93,7 @@ class Javascript
         $this->add_js_link('jquery-2.1.1.min.js');
         $this->add_js_link('jquery-ui.min.js');
         $this->add_js_link('jquery.smartmenus.js');
-        $this->add_js_link('jquery-migrate-1.2.1.js');
+        //$this->add_js_link('jquery-migrate-1.2.1.js');
         $this->jquery = true;
     }
     
@@ -180,7 +180,7 @@ JS;
         $this->jquery_validate = true;
     }
 
-     public function add_datepicker()
+     public function add_uiwidgets()
     {
         if (!$this->container) {
             $this->set_container();
@@ -191,9 +191,11 @@ JS;
         $code =
 <<<JS
 $("input.popup_date").datepicker({ showButtonPanel: true, changeYear: true, changeMonth: true });
+$( "#radio" ).buttonset();
+$( "#checkbox" ).buttonset();
 JS;
         $this->add_jblock($code);
-        $this->datepicker = true;
+        $this->add_uiwidgets = true;
     } 
 
     public function add_treeview()

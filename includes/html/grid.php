@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id$
-* @package		MZPortal.Framework
-* @subpackage	HTML
-* @copyright	Copyright (C) 2009-2014 МИАЦ ИО
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   HTML
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 */
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 

@@ -17,15 +17,15 @@ class DossierTicketList extends ItemList
     protected $namespace    = 'dossier_ticket';
     protected $task         = 'ticket_list';
     protected $obj          = 'ticket';
-    protected $order_task   = 'answer_list';
-    protected $default_cols = array( 'oid', 'текст_ответа', 'правильный');
-    protected $question;
+    protected $order_task   = 'quiz_ticket';
+    protected $default_cols = array( 'oid', 'тема', 'настройка', 'в_процессе', 'реализована');
+    protected $dossier_id;
     
-    public function __construct($question)
+    public function __construct($dossier_id)
     {
         parent::__construct($this->model, $this->source, $this->namespace );
-        $this->question = $question;
-        $this->where = " AND s.question_id = '{$this->question}' ";
+        $this->dossier_id = $dossier_id;
+        $this->where = " AND s.dossier_id = '{$this->dossier_id}' ";
     }
     
     protected function set_constrains()
@@ -39,9 +39,12 @@ class DossierTicketList extends ItemList
     protected function list_options()
     {
         $options = array();
-        $options['oid']             = array('sort' => false, 'type' => 'checkbox' ); 
-        $options['текст_ответа']    = array('sort' => true,  'type' => 'plain');
-        $options['правильный']      = array('sort' => true,  'type' => 'plain'); 
+        $options['oid']         = array('sort' => false, 'type' => 'checkbox' ); 
+        $options['тема']        = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_topics' );
+        $options['настройка']   = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_settings'); 
+        $options['настройка']   = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_settings'); 
+        $options['в_процессе']  = array('sort' => true,  'type' => 'plain', 'ref' => 'bool'); 
+        $options['реализована'] = array('sort' => true,  'type' => 'plain', 'ref' => 'bool'); 
         return $options;
     }
     

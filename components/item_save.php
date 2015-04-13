@@ -12,7 +12,7 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class ItemSave 
 {
     protected $model;
-    protected $query;
+    protected $query = null;
     protected $item;
     protected $l_obj = null;
     protected $r_obj = null;
@@ -31,6 +31,30 @@ class ItemSave
         $this->get_post_values();
     }
     
+    public function __set($name, $value)
+    {
+        if ($this->query) {
+            $this->query->$name = $value;            
+        }
+    }
+    
+    public function set_model($model)
+    {
+        if ($model) {
+            $this->model = $model;
+            if (!$item) {
+                $this->query = new $this->model();
+            }
+            else {
+                $this->query = new $this->model($item);
+            }
+        }
+    }
+    
+    public function get_item()
+    {
+        return $this->item;
+    }
     public function get_post_values()
     {
     }
@@ -42,6 +66,7 @@ class ItemSave
         }
         if (!$this->item) {
             $this->query->insert();
+            $this->item = $this->query->oid;
             return $this->query->oid;
         }
         else {
@@ -67,6 +92,7 @@ class ItemSave
             return false;
         }
         if ($this->query->insert()) {
+            $this->item = $this->query->oid;
             return true;
         }
     }

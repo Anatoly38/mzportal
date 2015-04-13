@@ -12,11 +12,15 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'component_acl.php' );
 require_once ( MZPATH_BASE .DS.'components'.DS.'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
+
+require_once ( MZPATH_BASE .DS.'components'.DS.'com_quiz' .DS.'model'.DS.'quiz_ticket_query.php' );
+require_once ( MZPATH_BASE .DS.'components'.DS.'com_quiz' .DS.'model'.DS.'quiz_ticket_save.php' );
 require_once ( 'model' . DS . 'dossier_query.php' );
 require_once ( 'model' . DS . 'dossier_cab_query.php' );
 require_once ( 'model' . DS . 'dossier_save.php' );
 require_once ( 'model' . DS . 'attest_cab_user_query.php' );
 require_once ( 'model' . DS . 'attest_cab_user_save.php' );
+require_once ( 'model' . DS . 'attest_ticket_save.php' );
 
 require_once ( 'model' . DS . 'np_association_query.php' );
 require_once ( 'model' . DS . 'np_association_save.php' );
@@ -24,7 +28,10 @@ require_once ( 'model' . DS . 'expert_group_query.php' );
 require_once ( 'model' . DS . 'expert_group_save.php' );
 
 require_once ( 'views' . DS . 'dossier_list.php' );
+require_once ( 'views' . DS . 'dossier_ticket_list.php' );
 require_once ( 'views' . DS . 'dossier_item.php' );
+require_once ( 'views' . DS . 'ticket_item.php' );
+require_once ( 'views' . DS . 'ticket_items.php' );
 require_once ( 'views' . DS . 'attest_cab_user_item.php' );
 
 require_once ( 'views' . DS . 'np_association_list.php' );
@@ -147,7 +154,7 @@ class AttAdmin extends Component
         $this->view_dossier_list();
     }
 
-    protected function exec_quiz_ticket()
+    protected function exec_quiz_tickets()
     {
         $dossier = (array)Request::getVar('dossier');
         if ( count($dossier) > 1 ) {
@@ -155,13 +162,95 @@ class AttAdmin extends Component
             $this->view_dossier_list();
         }
         Content::set_route('dossier', $dossier[0]);
-        $d = new DossierTicketQuery($dossier[0]);
-        $this->view_attest_cab_user_item($d->uid);
-        Message::error('Логин и пароль для этого аттестационного дела еще не созданы, введите новые');
-            Content::set_route('cab_user');
-            $this->view_attest_cab_user_item();
-        }
+        $this->view_dossier_ticket_list($dossier[0]);
     }
+    
+    protected function exec_new_ticket()
+    {
+        $dossier = (array)Request::getVar('dossier');
+        if (!$dossier[0]) {
+            Message::error('Аттестационное дело не определено');
+            $this->view_dossier_list();
+        }
+        Content::set_route('dossier', $dossier[0]);
+        $this->view_new_ticket_items();
+    }
+    
+    protected function exec_ticket_edit()
+    {
+        $dossier = (array)Request::getVar('dossier');
+        $ticket = (array)Request::getVar('ticket');
+        if (!$dossier[0]) {
+            Message::error('Аттестационное дело не определено');
+            $this->view_dossier_list();
+        }
+        Content::set_route('dossier', $dossier[0]);
+        if (!$ticket[0]) {
+            Message::error('Не определена попытка тестирования для редактирования');
+            $this->view_dossier_ticket_list($dossier[0]);
+        }
+        Content::set_route('ticket', $ticket[0]);
+        $this->view_ticket_item($ticket[0]);
+    }
+    
+    protected function exec_tickets_insert()
+    {
+        $dossier    = Request::getVar('dossier');
+        if (!$dossier) {
+            Message::error('Аттестационное дело не определено');
+            $this->view_dossier_list();
+        }
+        Content::set_route('dossier', $dossier);
+        $ticket_qount = (int)Request::getVar('ticket_count');
+        $main_topic = Request::getVar('main_topic');
+        $setting    = Request::getVar('setting');
+        $link_type = Reference::get_id('аттестационное_дело-тикет', 'link_types');
+        for ($i = 0; $i < $ticket_qount; $i++) {
+            $t = new AttestTicketSave();
+            $t->тема        = $main_topic;
+            $t->настройка   = $setting;
+            $t->в_процессе  = false;
+            $t->реализована = false;
+            $t->save();
+            $t->set_left_obj($dossier);
+            $t->set_right_obj($t->get_item());
+            $t->set_association($link_type);
+        }
+        $this->view_dossier_ticket_list($dossier);
+    }
+    
+    protected function exec_ticket_save()
+    {
+        $dossier = Request::getVar('dossier');
+        $ticket = Request::getVar('ticket');
+        if (!$dossier || !$ticket) {
+            Message::error('Не определено аттестационное дело и/или попытка тестирования для редактирования');
+            $this->view_dossier_list();
+        }
+        Content::set_route('dossier', $dossier);
+        $t = new QuizTicketSave($ticket);
+        $t->save();
+        $this->view_dossier_ticket_list($dossier);
+    }
+    
+    protected function exec_ticket_delete()
+    {
+        $dossier = Request::getVar('dossier');
+        $ticket = (array)Request::getVar('ticket');
+        if (!$dossier || !$ticket[0]) {
+            Message::error('Не определено аттестационное дело и/или попытка тестирования для удаления');
+            $this->view_dossier_list();
+        }
+        Content::set_route('dossier', $dossier);
+        $qd = new DeleteItems($ticket);
+        $this->view_dossier_ticket_list($dossier);
+    }
+    
+    protected function exec_cancel_tickets_edit()
+    {
+        $this->view_dossier_list();
+    }
+    
     // Медицинские ассоциации
     protected function exec_np_association_list()
     {
@@ -253,6 +342,8 @@ class AttAdmin extends Component
         $edit_b->set_option('obligate', true);
         $user_b = self::set_toolbar_button('user', 'edit_attest_cab_user' , 'Доступ в личный кабинет');
         $user_b->set_option('obligate', true);
+        $ticket_b = self::set_toolbar_button('quiz', 'quiz_tickets' , 'Попытки тестирования');
+        $ticket_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'dossier_delete' , 'Удалить');
         $del_b->set_option('obligate', true);
         $del_b->set_option('confirmDelete', true);
@@ -262,7 +353,7 @@ class AttAdmin extends Component
     
     protected function view_dossier_item() 
     {
-        self::set_title('Ввод нового аттестационного дела');
+        Page_Title::set('Ввод нового аттестационного дела');
         $i = new DossierItem();
         $i->new_item(); 
         $sb = self::set_toolbar_button('save', 'dossier_save' , 'Сохранить данные аттестационного дела');
@@ -304,6 +395,49 @@ class AttAdmin extends Component
         $this->set_content($form);
     }
 
+   protected function view_dossier_ticket_list($d)
+    {
+        $title = 'Предоставленные попытки тестирования ';
+        $confirm = 'Удаление выбранных попыток тестирования';
+        $this->current_task = substr( __FUNCTION__ , 5);
+        $list = new DossierTicketList($d);
+        self::set_title($title);
+        self::set_toolbar_button('new', 'new_ticket' , 'Предоставить новые попытки');
+        $edit_b = self::set_toolbar_button('edit', 'ticket_edit' , 'Редактировать');
+        $edit_b->set_option('obligate', true);
+        $del_b = self::set_toolbar_button('delete', 'ticket_delete' , 'Удалить');
+        $del_b->set_option('obligate', true);
+        $del_b->set_option('confirmDelete', true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_tickets_edit' , 'Закрыть');
+        $this->set_content($list->get_items_page());
+    }
+    
+    protected function view_new_ticket_items()
+    {
+        Page_Title::set('Ввод новых тикетов (попыток) тестирования');
+        $i = new TicketItems(); 
+        $i->new_item(); 
+        $sb = self::set_toolbar_button('save', 'tickets_insert' , 'Сохранить данные о попытках тестирования');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_tickets_edit' , 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }
+    
+    protected function view_ticket_item($t) 
+    {
+        self::set_title('Редактирование параметров попытки тестирования');
+        $i = new TicketItem($t);
+        $i->edit_item(); 
+        $sb = self::set_toolbar_button('save', 'ticket_save' , 'Сохранить');
+        $sb->validate(true);
+        $cb = self::set_toolbar_button('cancel', 'cancel_tickets_edit' , 'Закрыть');
+        $cb->track_dirty(true);
+        $form = $i->get_form();
+        $this->set_content($form);
+    }  
+    
     // Медицинские ассоциации    
    protected function view_np_association_list()
     {

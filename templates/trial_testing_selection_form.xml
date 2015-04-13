@@ -13,7 +13,7 @@
         </tr>
         <tr>
             <td width="185" valign="top" class="key">
-                Использовать параметры тем тестирования из настройки
+                Использовать параметры тестирования из настройки
             </td>
             <td>
                 <справочник вид="список" имя="dic_quiz_settings" name="setting" />
@@ -36,27 +36,18 @@
             </td>
         </tr>
         <tr>
-            <td width="185" valign="top" class="key">
-                Сортировка
-            </td>
-            <td>
-                <select id="q_order" name="q_order">
-                    <option value=""></option>
-                    <option value="ordered" selected="selected">От первого к последнему</option>
-                    <option value="random">В случайном порядке</option>
-                </select>            
+            <td colspan="2">
+                <div id="radio">
+                    <input type="radio" id="radio1" name="q_order" value="ordered" /><label for="radio1">Сортировка от первого к последнему (по базе данных)</label>
+                    <input type="radio" id="radio2" name="q_order" value="random" checked="checked" /><label for="radio2">В случайном порядке</label>
+                </div>
             </td>
         </tr>        
         <tr>
-            <td width="185" valign="top" class="key">
-                Показывать варианты ответов при выводе результатов
-            </td>
-            <td>
-                <select id="show_answers" name="show_answers">
-                    <option value=""></option>
-                    <option value="1" selected="selected">Да</option>
-                    <option value="2">Нет</option>
-                </select>            
+            <td colspan="2">
+                <div id="checkbox">
+                    <input type="checkbox" id="show_answers" name="show_answers" value="1" /><label for="show_answers">Показывать варианты ответа при выводе результатов</label>
+                </div>
             </td>
         </tr>
         </tbody>

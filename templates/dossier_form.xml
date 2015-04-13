@@ -21,6 +21,14 @@
             </td>
         </tr>
         <tr>
+            <td width="185" valign="top" class="key">
+                Адрес электронной почты
+            </td>
+            <td>
+                <input type="text" name="e_mail" id="e_mail" style="width: 400px; height: 17px;" value="" class="email"/>
+            </td>
+        </tr>
+        <tr>
             <td valign="top" class="key">
                 Медицинская организация (основное место работы)
             </td>
@@ -43,6 +51,13 @@
             </td>
             <td>
                 <справочник вид="список" имя="dic_position_short" name="вид_должности" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div id="checkbox">
+                    <input type="checkbox" id="архив" name="архив" value="1" disabled="disabled" /><label for="архив">Сдано в архив</label>
+                </div>
             </td>
         </tr>
         </tbody>

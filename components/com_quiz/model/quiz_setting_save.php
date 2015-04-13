@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quiz
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -26,6 +26,8 @@ class QuizSettingSave extends ItemSave
         $this->query->доп_тема3_доля         = Request::getVar('доп_тема3_доля');
         $this->query->количество_вопросов    = Request::getVar('количество_вопросов');
         $this->query->продолжительность_теста= Request::getVar('продолжительность_теста');
+        $this->query->сортировка             = Request::getVar('сортировка');
+        $this->query->показ_ответов          = Request::getVar('показ_ответов');
         
     }
 }

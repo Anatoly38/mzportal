@@ -1,0 +1,41 @@
+<form_pane>
+<fieldset class="adminform">
+    <legend>Тестирование</legend>
+    <table cellspacing="1" class="admintable">
+        <tbody>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Основная тема тестирования
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="тема" проверка="required" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Использовать параметры тестирования из настройки
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_settings" name="настройка" проверка="required"/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Пин-код
+            </td>
+            <td>
+                <input type="text" name="пин_код" id="код" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Реализована
+            </td>
+            <td>
+                <input type="text" name="реализована" id="реализована" style="width: 100px; height: 17px;" value=""/>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</fieldset>
+</form_pane>

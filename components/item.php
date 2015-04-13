@@ -68,13 +68,9 @@ class Item
                $values = array_merge($values, $add); 
             }
         }
+        //print_r($values);
         $this->form_loader->load_values($values);
     }
-    
-/*     protected function set_route($name, $value)
-    {
-        $content = Content::set_route($name, $value);
-    } */
     
     public function get_form()
     {

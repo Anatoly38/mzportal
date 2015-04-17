@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
  Прямой доступ запрещен
  */
@@ -12,16 +12,12 @@ defined( '_MZEXEC' ) or die( 'Restricted access' );
 class Layout 
 {
     private static $instance = false;
-    private $layout; // Документ DOM в который загружеем дерево объектов для панели задач
+    private $layout; // Документ DOM в который загружаем дерево объектов для панели задач
     
-    private function __construct() 
+    private function __construct($tmpl_file = null) 
     {
-        $tmpl_file = TEMPLATES . DS. MZConfig::$default_layout;
         $this->layout = new DOMdocument();
         $this->layout->formatOutput = true;
-        if ($tmpl_file) {
-            $this->layout->load($tmpl_file);
-        }
     }
     
     public static function getInstance()
@@ -30,6 +26,15 @@ class Layout
             self::$instance = new Layout();
         }
         return self::$instance;    
+    }
+    
+    public function load($tmpl_file = null)
+    {
+        if (!$tmpl_file) {
+            return false;
+        }
+        $this->layout->load($tmpl_file);
+        return $this->layout;
     }
     
     public function get_layout()

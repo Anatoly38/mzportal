@@ -70,6 +70,7 @@ class Toolbar_Content
         }
         $js = Javascript::getInstance();
         foreach ($this->buttons as $b) {
+            //print_r($b->options);
             $js->add_toolbar_button($b->options);
         }
         $toolbar = $this->container->getElementsByTagName('div')->item(0);

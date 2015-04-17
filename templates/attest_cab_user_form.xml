@@ -17,6 +17,7 @@
             </td>
             <td>
                 <input type="text" name="pwd" id="pwd" style="width: 400px; height: 17px;" class="required" value=""/>
+                <button id="pvdGen">Генерировать</button>
             </td>
         </tr>
         </tbody>

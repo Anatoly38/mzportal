@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quiz
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -52,7 +52,7 @@ require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'user_list.ph
 
 class Quiz extends ComponentACL
 {
-    protected $default_view = 'view_trial_testing_selection';
+    protected $default_view = 'view_topic_list';
     
 // темы тестирования
     protected function exec_new()
@@ -311,15 +311,17 @@ class Quiz extends ComponentACL
             echo 'Нет данных для сохранения';
             exit;
         }
-        $json_decoded =json_decode($answers, 1);
+        $json_decoded =json_decode($answers, true);
         $i = 0;
+        
         foreach($json_decoded as $answer) {
-            $a = new QuizAnswerQuery((int)$answer['answerId']);
-            (int)$answer['correctAnswer'] == 1 ? $a->правильный = 0 : $a->правильный = 1;
+            $a = new QuizAnswerQuery($answer);
+            $a->правильный ? $a->правильный = 0 : $a->правильный = 1;
             $a->update();
             $i++;
-        }
-        echo 'Изменено вариантов ответа: ' . $i ;
+        } 
+        //echo 'Изменено вариантов ответа: ' . $i ;
+        print_r($json_decoded);
     }
     
     protected function exec_set_correct_answer()
@@ -471,21 +473,22 @@ class Quiz extends ComponentACL
         $ea->set_option('obligate', true);
         $correct = self::set_toolbar_button('check', 'set_correct_answer' , 'Установить/Снять правильный ответ');
         $correct->set_option( 'action', $this->_set_correct_answer_js() );
-        $correct->set_option( 'leavePage', false );
         $correct->set_option('obligate', true);
         $form = $i->get_form();
         $this->set_content($form);
     }
     
-    protected function _set_correct_answer_js() 
+    private function _set_correct_answer_js() 
     {
         $code = 
 <<<JS
-$(function(){
+function(){
     var collate =[];
-    $(".item_list").find('.ui-state-highlight').each(function() {
-        collate.push('{"answerId": "' + parseInt($(this).attr("id")) + '", "correctAnswer": "' + parseInt($(this).find('td').last().html()) + '"}');
+    i = 0;
+    $(".grid_row.ui-state-highlight").each(function() {
+        collate.push($(this).attr("id"));
     });
+    q_count = collate.length;
     output = '[' + collate.join(",") + ']';
     $.ajax(
         {
@@ -493,8 +496,21 @@ $(function(){
             url: 'asinc.php?app=54&task=corranswer_asinc_save',
             data: { answers: output }
         }
-        ).done(function( msg ) { $("#updated_answers").val(msg); $("#adminForm").submit(); });
-});
+        ).done(function( msg ) { 
+            message = '<div class="ui-state-highlight ui-corner-all" id="message">';
+            message += '<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>';
+            message += '<strong> Изменено вариантов ответа - ' + q_count + '</strong><br /></p></div>';
+            for (var i = 0; i < q_count; i++) {
+                if ($("#" + collate[i]).find(".правильный").text() == 'Да') {
+                    $("#" + collate[i]).find(".правильный").text("Нет");
+                }
+                else {
+                    $("#" + collate[i]).find(".правильный").text("Да");
+                }
+            }
+            $(message).appendTo('.message');
+        });
+}
 JS;
         return $code;
     }
@@ -594,8 +610,8 @@ JS;
         $obj = new QuizTopicQuery($topic);
         self::set_title('Пробное тестирование по теме "' . $obj->название_темы . '"'); 
         $stop_test = self::set_toolbar_button('cancel', 'cancel_trial_test' , 'Прервать выполнение теста');
-        $stop_test->set_option('action', "$('#quiz-container').quiz('stopQuiz', 'Тест прерван пользователем' );");
-        $stop_test->set_option('leavePage', false );
+        $stop_test->set_option('action', "function () { $('#quiz-container').quiz('stopQuiz', 'Тест прерван пользователем' ); }");
+        //$stop_test->set_option('leavePage', false );
         //$save_res = self::set_toolbar_button('save', 'save_test_result' , 'Сохранить результат теста');
         //$save_res->set_option('showStatus', false );
         

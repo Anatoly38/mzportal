@@ -131,7 +131,7 @@ class HTMLGrid
 
     private function set_plain($value, $name= null, $i = null, $oid = null) 
     {
-        $tag = "<td>" . $value . "</td>";
+        $tag = "<td class=\"" . $name . "\">" . $value . "</td>";
         return $tag;
     }
     

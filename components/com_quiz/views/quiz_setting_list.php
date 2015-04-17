@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quize
-* @copyright    Copyright (C) 2090-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -18,9 +18,9 @@ class QuizSettingList extends ItemList
     protected $task         = 'settings_list';
     protected $obj          = 'quiz_setting';
     protected $order_task   = 'settings_list';
-    protected $default_cols = array( 'oid', 'наименование', 'доп_тема1_наименование', 'доп_тема1_доля', 'доп_тема2_наименование', 'доп_тема2_доля', 'доп_тема3_наименование', 
-                                        'доп_тема3_доля', 'количество_вопросов', 'продолжительность_теста' );
-    
+    protected $default_cols = array( 'oid', 'наименование', 'доп_тема1_наименование', 'доп_тема1_доля', 'доп_тема2_наименование', 
+                                    'доп_тема2_доля', 'доп_тема3_наименование', 'доп_тема3_доля', 'количество_вопросов', 
+                                    'продолжительность_теста' , 'сортировка', 'показ_ответов');
     public function __construct()
     {
         parent::__construct($this->model, $this->source, $this->namespace );        
@@ -45,6 +45,9 @@ class QuizSettingList extends ItemList
         $options['доп_тема2_доля']          = array('sort' => true,  'type' => 'plain');
         $options['доп_тема3_наименование']  = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_topics' ); 
         $options['доп_тема3_доля']          = array('sort' => true,  'type' => 'plain');
+        $options['количество_вопросов']     = array('sort' => true,  'type' => 'plain');
+        $options['сортировка']              = array('sort' => true,  'type' => 'plain', 'ref' => 'bool' ); 
+        $options['показ_ответов']           = array('sort' => true,  'type' => 'plain', 'ref' => 'bool' ); 
         return $options;
     }
     

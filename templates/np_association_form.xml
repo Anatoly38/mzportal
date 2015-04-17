@@ -1,5 +1,4 @@
 <form_pane>
-<input type="hidden" id="oid" name="oid[]" value="" />
 <fieldset class="adminform">
     <legend>Медицинская ассоциация</legend>
     <table cellspacing="1" class="admintable">

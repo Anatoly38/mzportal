@@ -13,10 +13,15 @@ class Reference
 {
     public static function get_name($ref_id, $ref_table, $preffix = 'dic_')
     {
-        $ref_table = $preffix . $ref_table;
-        $dbh = new DB_mzportal();
-        $query = "SELECT наименование FROM $ref_table WHERE код = :1";
-        list($name) = $dbh->prepare($query)->execute($ref_id)->fetch_row();
+        if ($ref_table === 'bool') {
+            $ref_id ? $name = 'Да' : $name = 'Нет';
+        }
+        else {
+            $ref_table = $preffix . $ref_table;
+            $dbh = new DB_mzportal();
+            $query = "SELECT наименование FROM $ref_table WHERE код = :1";
+            list($name) = $dbh->prepare($query)->execute($ref_id)->fetch_row();
+        }
         return $name;
     }
     

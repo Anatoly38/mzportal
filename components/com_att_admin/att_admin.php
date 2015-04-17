@@ -30,6 +30,7 @@ require_once ( 'model' . DS . 'expert_group_save.php' );
 require_once ( 'views' . DS . 'dossier_list.php' );
 require_once ( 'views' . DS . 'dossier_ticket_list.php' );
 require_once ( 'views' . DS . 'dossier_item.php' );
+require_once ( 'views' . DS . 'dossier_profile.php' );
 require_once ( 'views' . DS . 'ticket_item.php' );
 require_once ( 'views' . DS . 'ticket_items.php' );
 require_once ( 'views' . DS . 'attest_cab_user_item.php' );
@@ -89,12 +90,13 @@ class AttAdmin extends Component
         $dossier = (array)Request::getVar('dossier');
         if (!$dossier[0]) {
             $s = new DossierSave();
-            $s->insert_data();
+            //$s->insert_data();
         } 
         else {
             $s = new DossierSave($dossier[0]);
-            $s->update_data();
+            //$s->update_data();
         }
+        $s->save();
         $this->view_dossier_list();
     }
     
@@ -251,6 +253,12 @@ class AttAdmin extends Component
         $this->view_dossier_list();
     }
     
+    protected function exec_print_dossier_profile()
+    {
+        $dossier = explode(',', Request::getVar('dossier'));
+        $this->view_dossier_profile($dossier[0]);
+    }
+    
     // Медицинские ассоциации
     protected function exec_np_association_list()
     {
@@ -275,12 +283,13 @@ class AttAdmin extends Component
         $assoc = (array)Request::getVar('np_association');
         if (!$assoc[0]) {
             $s = new NPAssociationSave();
-            $s->insert_data();
+            //$s->insert_data();
         } 
         else {
             $s = new NPAssociationSave($assoc[0]);
-            $s->update_data();
+           // $s->update_data();
         }
+        $s->save();
         $this->view_np_association_list();
     }
 
@@ -344,6 +353,20 @@ class AttAdmin extends Component
         $user_b->set_option('obligate', true);
         $ticket_b = self::set_toolbar_button('quiz', 'quiz_tickets' , 'Попытки тестирования');
         $ticket_b->set_option('obligate', true);
+        $pb = self::set_toolbar_button('print', 'print_dossier_profile' , 'Распечатать профиль');
+        $pb->set_option('obligate', true);
+        $js_func = 
+<<<JS
+function () { 
+    objects = "dossier=";
+    $(".grid_row.ui-state-highlight").each( function () {
+            objects += $(this).attr("id") + ',';
+        }
+    );
+    window.open('print.php?app={$this->app}&task=print_dossier_profile&' + objects); 
+}
+JS;
+        $pb->set_option('action', $js_func);
         $del_b = self::set_toolbar_button('delete', 'dossier_delete' , 'Удалить');
         $del_b->set_option('obligate', true);
         $del_b->set_option('confirmDelete', true);
@@ -375,7 +398,27 @@ class AttAdmin extends Component
         $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);
-    }    
+    }
+
+    private function _gen_pwd()
+    {
+        $js = Javascript::getInstance();
+        $js->add_js_link('jquery.pGenerator.js');
+        $code = 
+<<<JS
+$("#pvdGen").pGenerator({
+        'bind': 'click',
+        'passwordElement': '#pwd',
+        'displayElement': null,
+        'passwordLength': 6,
+        'uppercase': true,
+        'lowercase': true,
+        'numbers':   true,
+        'specialChars': false
+});
+JS;
+        $js->add_jblock($code);
+    }
     
     protected function view_attest_cab_user_item($u = null) 
     {
@@ -391,6 +434,7 @@ class AttAdmin extends Component
         $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_attest_cab_user_edit' , 'Закрыть');
         $cb->track_dirty(true);
+        $this->_gen_pwd();
         $form = $i->get_form();
         $this->set_content($form);
     }
@@ -436,6 +480,18 @@ class AttAdmin extends Component
         $cb->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);
+    }  
+  
+    protected function view_dossier_profile($d) 
+    {
+        $p = new DossierProfile($d);
+        $p->show_title("Профиль аттестационного дела");
+        $p->show_dossier();
+        $p->show_title("Доступ в личный кабинет");
+        $p->show_cab_user();
+        $p->show_title("Прохождение тестов");
+        $p->show_quiz_attempts();
+        $this->set_content($p->get_text());
     }  
     
     // Медицинские ассоциации    

@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
-* @copyright    Copyright (C) 2010-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2010-2015 МИАЦ ИО
 
  Прямой доступ запрещен
  */
@@ -81,10 +81,14 @@ public $site;               // Сведенная воедино html-стран
         $this->registry->oid = (array)Request::getVar('oid');
     }
 
-    public function get_layout()
+    public function get_layout($template_file = null)
     {
+        if (!$template_file) {
+            $template_file = MZConfig::$default_layout;
+        }
         $l = Layout::getInstance();
-        $this->layout = $l->get_layout();
+        //print_r($l);
+        $this->layout = $l->load(TEMPLATES . DS. $template_file);
     }
 
     public function get_message()
@@ -258,10 +262,15 @@ public $site;               // Сведенная воедино html-стран
         }
     }
 
-    public function set_css()
+    public function set_css($css_file = false)
     {
         $css = CSS::getInstance();
-        $css->add_style_link('mzportal.main.css');
+        if (!$css_file) {
+            $css->add_style_link(MZConfig::$default_style);
+        }
+        else {
+            $css->add_style_link($css_file);
+        }
         $css->add_jquery_ui();
         $css_nodes = $css->get_css();
         if ($css_nodes instanceof DOMNodeList) {

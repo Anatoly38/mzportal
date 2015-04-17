@@ -64,7 +64,7 @@ class Message
         $this->document = new DOMdocument();
         $this->document->formatOutput = true;
         $this->root = $this->document->createElement('div');
-        $this->root->setAttribute('class', 'ui-widget');
+        $this->root->setAttribute('class', 'ui-widget message');
         $this->document->appendChild($this->root);
     }
 

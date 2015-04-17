@@ -171,7 +171,7 @@ class ItemList
         foreach ($stmt as $id) {
             $this->add(new $this->model($id));
         }
-        return $stmt;
+        return $this->items;
     }
 
     public function get_items_page() 
@@ -250,6 +250,7 @@ class ItemList
             if ($this->show_pagination) {
                 $footer = $this->display_pagination();
             }
+            //print_r($grid_data);
             $t = new HTMLGrid($grid_data, $footer, $this->limitstart, $this->order, $this->direction);
             $t->set_task($this->task);
             $t->set_object_name($this->obj);

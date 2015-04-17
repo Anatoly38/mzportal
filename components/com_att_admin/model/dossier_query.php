@@ -39,7 +39,7 @@ class DossierQuery extends ClActiveRecord
                     WHERE oid = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
         if(!$data) {
-            throw new Exception("Группа не существует");
+            throw new Exception("Аттестационное дело не существует");
         }
         $this->oid          = $oid;
         $this->номер_дела   = $data['номер_дела'];
@@ -67,7 +67,7 @@ class DossierQuery extends ClActiveRecord
                         экспертная_группа = :5,
                         вид_должности     = :6
                     WHERE 
-                        oid = :6";
+                        oid = :7";
         try {
             $dbh->prepare($query)->execute( 
                                         $this->номер_дела,
@@ -81,7 +81,7 @@ class DossierQuery extends ClActiveRecord
             Message::alert('Изменения при редактировании успешно сохранены');
         } 
         catch (Exception $e) {
-            Message::error('Ошибка: изменения при редактированиии не сохранены!');
+            Message::error('Ошибка: изменения при редактировании не сохранены!');
             return false;
         }
         try {

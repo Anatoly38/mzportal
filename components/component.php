@@ -12,6 +12,7 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'com_frontpage'.DS.'views' .DS. '
 
 class Component
 {
+    protected $app;
     protected $task;
     protected $current_task;
     protected $content;
@@ -28,6 +29,7 @@ class Component
     protected function init()
     {
         $r = Registry::getInstance();
+        $this->app = $r->application;
         $this->task = $r->task;
         $r->current_task = $this->task;
         $this->current_task = &$r->current_task;

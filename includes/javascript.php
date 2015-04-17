@@ -339,7 +339,7 @@ JS;
         }
     }
     
-    private static function to_js_obj($a=false, $quotes = true, $function = false)
+    private static function to_js_obj($a = false, $quotes = true, $function = false)
     {
         if (is_null($a)) return 'null';
         if ($a === false) return 'false';
@@ -350,8 +350,11 @@ JS;
             }
             static $jsonReplaces = array(array("\\", "/", "\n", "\t", "\r", "\b", "\f", '"'),
             array('\\\\', '\\/', '\\n', '\\t', '\\r', '\\b', '\\f', '\"'));
+            //if ($function) {
+                //return 'function () {' . $a . '}' ;
+            //} 
             if ($function) {
-                return 'function () {' . $a . '}' ;
+                return $a;
             } 
             else if ($quotes) {
                 return '"' . str_replace($jsonReplaces[0], $jsonReplaces[1], $a) . '"';
@@ -374,7 +377,7 @@ JS;
         }
         else {
             foreach ($a as $k => $v) {
-                $function = strstr($v, '$') ? true : false; 
+                $function = strstr($v, 'function') ? true : false; 
                 $result[] = self::to_js_obj($k, false).': '.self::to_js_obj($v, is_int($v) ? false : true, $function);
             }
             return '{ ' . join(', ', $result) . ' }';

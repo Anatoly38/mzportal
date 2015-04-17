@@ -41,7 +41,7 @@ class QuizAnswerList extends ItemList
         $options = array();
         $options['oid']             = array('sort' => false, 'type' => 'checkbox' ); 
         $options['текст_ответа']    = array('sort' => true,  'type' => 'plain');
-        $options['правильный']      = array('sort' => true,  'type' => 'plain'); 
+        $options['правильный']      = array('sort' => true,  'type' => 'plain', 'ref' => 'bool'); 
         return $options;
     }
     

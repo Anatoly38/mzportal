@@ -20,6 +20,9 @@ class MZConfig
     public static $list_limit           = 20; // кол-во объектов в списке по умолчанию
     public static $default_application  = '2'; // Frontpage
     public static $default_layout       = 'main_layout.xml';
+    public static $default_style        = 'mzportal.main.css';
+    public static $print_layout         = 'print_layout.xml';
+    public static $print_style          = 'print.css';
     public static $task_pane_tmpl       = 'task_view.tmpl.xml';
     public static $table_tmpl           = 'table_view.tmpl.xml';
     public static $tp_link_type         = '5' ; // тип иерархии для объектов панели задач

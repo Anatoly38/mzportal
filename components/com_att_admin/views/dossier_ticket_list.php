@@ -42,7 +42,6 @@ class DossierTicketList extends ItemList
         $options['oid']         = array('sort' => false, 'type' => 'checkbox' ); 
         $options['тема']        = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_topics' );
         $options['настройка']   = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_settings'); 
-        $options['настройка']   = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_settings'); 
         $options['в_процессе']  = array('sort' => true,  'type' => 'plain', 'ref' => 'bool'); 
         $options['реализована'] = array('sort' => true,  'type' => 'plain', 'ref' => 'bool'); 
         return $options;

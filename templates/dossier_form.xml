@@ -1,5 +1,4 @@
 <form_pane>
-<input type="hidden" id="oid" name="oid[]" value="" />
 <fieldset class="adminform">
     <legend>Аттестационное дело</legend>
     <table cellspacing="1" class="admintable">
@@ -25,7 +24,7 @@
                 Адрес электронной почты
             </td>
             <td>
-                <input type="text" name="e_mail" id="e_mail" style="width: 400px; height: 17px;" value="" class="email"/>
+                <input type="text" name="email" id="email" style="width: 400px; height: 17px;" value="" class="email"/>
             </td>
         </tr>
         <tr>

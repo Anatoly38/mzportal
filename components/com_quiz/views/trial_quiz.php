@@ -148,6 +148,9 @@ class TrialQuiz
         $stmt = $this->dbh->execute($query)->fetch();
         shuffle($stmt);
         $js_object = "";
+        if (count($stmt) < $qcount) {
+            $qcount = count($stmt);
+        }
         for ($i = 0; $i <  $qcount; $i++) {
             $o = new QuizQuestionQuery($stmt[$i]);
             $answers = $this->get_answers($o->oid);

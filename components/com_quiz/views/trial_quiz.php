@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quiz
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -13,21 +13,19 @@ class TrialQuiz
 {
     private $dbh;
     private $topic;
-    public $setting = false;
-    public $q_count = 0;
-    public $duration = 60;
-    private $random;
-    private $show_correct_answers;
+    public $setting = null;
+    private $q_count = 0;
+    private $duration = 60; // продолжительность теста в минутах
+    private $ordered = false;
+    private $correct_answers = false;
     private $init_questions; // json объект
     
-    public function __construct($topic = false, $random = false, $show_correct_answers = true) {
+    public function __construct($topic = false) {
         if (!$topic) {
             throw new Exception("Не определена тема тестирования");
         }
         $this->dbh = new DB_mzportal();
         $this->topic = $topic;
-        $this->random = $random;
-        $this->show_correct_answers = $show_correct_answers;
     }
     
     public function start_quiz()
@@ -36,23 +34,60 @@ class TrialQuiz
         $this->append_script_tags();
         $this->append_html();    
     }
+    
+    public function set_settings($s_id)
+    {
+        try {
+            $this->setting  = new QuizSettingQuery($s_id);
+            $this->q_count  = $this->setting->количество_вопросов;
+            $this->duration = $this->setting->продолжительность_теста;
+            $this->ordered  = $this->setting->сортировка;
+            $this->correct_answers =$this->setting->показ_ответов;
+        }
+        catch (Exception $e) {
+            Message::error('Ошибки инициализации настроек тестирования');
+        }
+    }
+    
+    public function set_qcount($q)
+    {
+        $this->q_count = (int)$q;
+        return $this->q_count;
+    }
+    
+    public function set_duration($d)
+    {
+        $this->duration = (int)$d;
+        return $this->duration;
+    }
+    
+    public function show_ordered($t = true)
+    {
+        $this->ordered = (bool)$t;
+        return $this->ordered;
+    }
+    
+    public function show_correct_answers($t = true)
+    {
+        $this->correct_answers = (bool)$t;
+        return $this->correct_answers;
+    }
 
     private function compose_set()
     {
         if (!$this->q_count) {
-            $this->q_count  = $this->get_questions_count();
+            $this->q_count  = $this->get_questions_count(); // Если не указано конкретное число вопросов в квизе выводим все вопросы по указанно теме
         } 
         if (!$this->setting) {
             $ret = $this->get_questions($this->topic, $this->q_count);
         } 
         else {
-            $s = new QuizSettingQuery($this->setting);
-            $add_topic1 = $s->доп_тема1_наименование;
-            $add_topic2 = $s->доп_тема2_наименование;
-            $add_topic3 = $s->доп_тема3_наименование;
-            $qcount1 =  floor($this->q_count/100*$s->доп_тема1_доля);
-            $qcount2 =  floor($this->q_count/100*$s->доп_тема2_доля);
-            $qcount3 =  floor($this->q_count/100*$s->доп_тема3_доля);
+            $add_topic1 = $this->setting->доп_тема1_наименование;
+            $add_topic2 = $this->setting->доп_тема2_наименование;
+            $add_topic3 = $this->setting->доп_тема3_наименование;
+            $qcount1 =  round($this->q_count/100*$this->setting->доп_тема1_доля);
+            $qcount2 =  round($this->q_count/100*$this->setting->доп_тема2_доля);
+            $qcount3 =  round($this->q_count/100*$this->setting->доп_тема3_доля);
             $main_topic_qount = $this->q_count-($qcount1+$qcount2+$qcount3);
             $main = $this->get_questions($this->topic, $main_topic_qount);
             $ret1 = $this->get_questions($add_topic1, $qcount1);
@@ -68,7 +103,7 @@ class TrialQuiz
     
     private function get_questions($topic, $qcount) 
     {
-        if ($this->random) {
+        if (!$this->ordered) {
             $ret = $this->get_shuffled_questions($topic, $qcount);
         } 
         else {
@@ -177,7 +212,7 @@ class TrialQuiz
     private function append_script_tags()
     {
         $seconds = $this->duration * 60;
-        $this->show_correct_answers ? $show_ca = 'true' : $show_ca = 'false';
+        $this->correct_answers ? $show_ca = 'true' : $show_ca = 'false';
         $css = CSS::getInstance();
         $css->add_style_link('quiz_styles.css');
         $css->add_style_link('timeTo.css');
@@ -186,7 +221,6 @@ class TrialQuiz
         $js->add_quiz();
         $jquizzy = "$('#quiz-container').quiz( { questions: init.questions, timeToTest: {$seconds}, showCorrectAnswers: {$show_ca} });";
         $js->add_jblock($jquizzy);
-        
         
     }
     

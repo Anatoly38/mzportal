@@ -38,18 +38,18 @@
         <tr>
             <td colspan="2">
                 <div id="radio">
-                    <input type="radio" id="radio1" name="q_order" value="ordered" /><label for="radio1">Сортировка от первого к последнему (по базе данных)</label>
-                    <input type="radio" id="radio2" name="q_order" value="random" checked="checked" /><label for="radio2">В случайном порядке</label>
+                    <input type="radio" id="radio1" name="q_order" value="1" /><label for="radio1">Сортировка от первого к последнему (по базе данных)</label>
+                    <input type="radio" id="radio2" name="q_order" value="0" checked="checked" /><label for="radio2">В случайном порядке</label>
                 </div>
             </td>
-        </tr>        
+        </tr>
         <tr>
             <td colspan="2">
                 <div id="checkbox">
                     <input type="checkbox" id="show_answers" name="show_answers" value="1" /><label for="show_answers">Показывать варианты ответа при выводе результатов</label>
                 </div>
             </td>
-        </tr>
+        </tr> 
         </tbody>
     </table>
 </fieldset>

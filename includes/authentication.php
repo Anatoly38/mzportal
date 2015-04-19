@@ -1,6 +1,6 @@
 <?php
 /** 
- * @version	 
+ * @version 
  */
 require_once ('common/database.php' );
  

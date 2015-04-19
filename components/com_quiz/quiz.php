@@ -348,22 +348,31 @@ class Quiz extends ComponentACL
     
     protected function exec_start_trial_test()
     {
-        $topic      = Request::getVar('topic');
-        $setting    = Request::getVar('setting');
-        $q_count    = Request::getVar('q_count');
-        $duration = Request::getVar('duration');
-        (int)Request::getVar('show_answers') == 1 ? $show_correct_answers = true : $show_correct_answers = false;
-        Request::getVar('q_order') == 'random' ? $random = true : $random = false;
-        $q = new TrialQuiz($topic, $random, $show_correct_answers);
+        $topic = Request::getVar('topic');
+        if (!$topic) {
+            Message::error('Не определена основная тема теста');
+            $this->view_topic_list();
+        } 
+        $setting        = Request::getVar('setting');
+        $q_count        = Request::getVar('q_count');
+        $duration       = Request::getVar('duration');
+        $q_order        = Request::getVar('q_order');
+        $show_answers   = Request::getVar('show_answers');
+
+        $q = new TrialQuiz($topic);
+        
+        if ($setting) {
+            $q->set_settings($setting);
+        }        
         if ($q_count) {
-            $q->q_count = $q_count;
+            $q->set_qcount($q_count);
         }
         if ($duration) {
-            $q->duration = $duration;
+            $q->set_duration($duration);
         }
-        if ($setting) {
-            $q->setting = $setting;
-        }
+        $q->show_ordered($q_order);
+        $q->show_correct_answers($show_answers);
+        
         Content::set_route('source', '');
         $q->start_quiz();
         $this->view_trial_testing($topic);

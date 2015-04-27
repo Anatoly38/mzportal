@@ -55,6 +55,12 @@ $(function() {
               <li><a href="index.php?app=54&#38;task=settings_list">Настройки тестирования</a></li> 
             </ul>
           </li>
+          <li><a href="#">НСИ</a>
+            <ul>
+              <li><a href="index.php?app=4">Территории</a></li>
+              <li><a href="index.php?app=9">Медицинские организации</a></li>
+            </ul>
+          </li>
         </ul>
     </div>
     <div class="ui-widget-header">

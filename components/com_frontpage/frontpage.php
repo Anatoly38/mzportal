@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id$
-* @package		MZPortal.Framework
-* @subpackage	Frontpage
-* @copyright	Copyright (C) 2011 МИАЦ ИО
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Frontpage
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -14,8 +14,8 @@ require_once ( 'views' . DS . 'view_cpanel.php' );
 
 class Frontpage extends Component
 {
-    protected	$default_view = 'view_frontpage';
-	private 	$custom_components = array();
+    protected   $default_view = 'view_frontpage';
+    private     $custom_components = array();
     
     protected function view_frontpage() 
     {

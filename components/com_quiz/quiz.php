@@ -358,29 +358,48 @@ class Quiz extends ComponentACL
         $duration       = Request::getVar('duration');
         $q_order        = Request::getVar('q_order');
         $show_answers   = Request::getVar('show_answers');
-
-        $q = new TrialQuiz($topic);
-        
-        if ($setting) {
-            $q->set_settings($setting);
-        }        
-        if ($q_count) {
-            $q->set_qcount($q_count);
+        try {
+            $q = new TrialQuiz($topic);
+            if ($setting) {
+                $q->set_settings($setting);
+            }        
+            if ($q_count) {
+                $q->set_qcount($q_count);
+            }
+            if ($duration) {
+                $q->set_duration($duration);
+            }
+            $q->show_ordered($q_order);
+            $q->show_correct_answers($show_answers);
+            Content::set_route('source', '');
+            $q->start_quiz();      
         }
-        if ($duration) {
-            $q->set_duration($duration);
+        catch (Exception $e) {
+            Message::error($e);
         }
-        $q->show_ordered($q_order);
-        $q->show_correct_answers($show_answers);
-        
-        Content::set_route('source', '');
-        $q->start_quiz();
         $this->view_trial_testing($topic);
     }
     
-    protected function exec_save_test_result()
+    protected function exec_save_result()
     {
+        print_r($_POST);
+        $b = $_POST['begined']/1000;
+        $e = $_POST['ended']/1000;
+        echo "Начало теста " . date('Y-m-d H:i:s', $b);
+        echo "Окончание теста " . date('Y-m-d H:i:s', $e);
+    }
     
+    protected function exec_get_question()
+    {
+        $questions = json_decode($_POST['ids']);
+        $q_texts = array();
+        foreach ($questions as $q) {
+            $q_obj = new QuizQuestionQuery($q);
+            $q_texts[] = $q_obj->текст_вопроса;
+        }
+        //$ret = implode(',' , $q_texts);
+        echo json_encode($q_texts);
+        //echo $ret;
     }
     
 // Результаты тестирования    
@@ -620,7 +639,6 @@ JS;
         self::set_title('Пробное тестирование по теме "' . $obj->название_темы . '"'); 
         $stop_test = self::set_toolbar_button('cancel', 'cancel_trial_test' , 'Прервать выполнение теста');
         $stop_test->set_option('action', "function () { $('#quiz-container').quiz('stopQuiz', 'Тест прерван пользователем' ); }");
-        //$stop_test->set_option('leavePage', false );
         //$save_res = self::set_toolbar_button('save', 'save_test_result' , 'Сохранить результат теста');
         //$save_res->set_option('showStatus', false );
         

@@ -60,7 +60,7 @@ class Item
         $this->form_loader = new Form_Template_Loader($full_path);
     }
     
-    protected function set_values($add = null)
+    public function set_values($add = null)
     {
         $values = $this->query->get_as_array();
         if ($add != null) {

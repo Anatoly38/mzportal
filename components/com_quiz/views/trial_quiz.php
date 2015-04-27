@@ -24,6 +24,9 @@ class TrialQuiz
         if (!$topic) {
             throw new Exception("Не определена тема тестирования");
         }
+        if (!self::qcount($topic)){
+            throw new Exception("Нет вопросов по основной теме");
+        }
         $this->dbh = new DB_mzportal();
         $this->topic = $topic;
     }
@@ -112,6 +115,16 @@ class TrialQuiz
         return $ret;
     }
     
+    public static function qcount($topic)
+    {
+        $dbh = new DB_mzportal();
+        $q = "SELECT count(s.oid) FROM quiz_question_topic AS s 
+                        JOIN `sys_objects` AS `o` ON `s`.`oid` = `o`.`oid`  
+                        WHERE `s`.`topic_id` = :1 AND `o`.`deleted` <> '1'";
+        list($count) = $dbh->prepare($q)->execute($topic)->fetch_row();
+        return $count;
+    }
+    
     private function get_ordered_questions($topic, $qcount = null)
     {
         $limit = '';
@@ -126,7 +139,8 @@ class TrialQuiz
         $js_object = "";
         while ($data = $r->fetch_assoc()) {
             $answers = $this->get_answers($data['oid']);
-            $js_object .= "{ 'question':'" . $data['текст_вопроса'];
+            //$js_object .= "{ 'question':'" . $data['текст_вопроса'];
+            $js_object .= "{ 'question':'" ;
             $js_object .= "','answers':" . $answers['answers'] . ",";
             $js_object .= "'ca':{$answers['correct_ans']},";
             $js_object .= "'qId':{$data['oid']},";
@@ -154,7 +168,8 @@ class TrialQuiz
         for ($i = 0; $i <  $qcount; $i++) {
             $o = new QuizQuestionQuery($stmt[$i]);
             $answers = $this->get_answers($o->oid);
-            $js_object .= "{ 'question':'" . $o->текст_вопроса;
+            //$js_object .= "{ 'question':'" . $o->текст_вопроса;
+            $js_object .= "{ 'question':'" ;
             $js_object .= "','answers':" . $answers['answers'] . ",";
             $js_object .= "'ca':{$answers['correct_ans']},";
             $js_object .= "'qId':{$o->oid},";
@@ -227,6 +242,43 @@ class TrialQuiz
         
     }
     
+    private function obfuscate($text)
+    {
+        $text = str_split($text);
+        $o = '';
+        foreach ($text as $l)
+        {
+            $o .= '%' . ord($l);
+        }
+        return $o;
+    }
+    
+/*     
+    private function obfuscate($text)
+    {
+        $text = str_split($text, 2);
+        $o = '';
+        foreach ($text as $l)
+        {
+            $o .= '%' . $l[0] . (ord($l[0])+ord($l[1]));
+        }
+        return $o;
+    }
+
+
+private function obfuscate($text)
+    {
+        $text = str_split($text, 2);
+        $o = '';
+        foreach ($text as $l)
+        {
+            $v1 = ord($l[0]);  
+            $v2 = isset($l[1]) ? ord($l[1]) : 0;
+            $o .= '%' . $l[0] . ( $v1 + $v2) ;
+        }
+        return $o;
+    }
+ */    
     private function append_html()
     {
     $html = 

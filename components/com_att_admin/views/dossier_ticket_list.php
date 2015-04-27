@@ -32,7 +32,7 @@ class DossierTicketList extends ItemList
     {
         $constr = Constraint::getInstance();
         $constr->set_namespace($this->namespace);
-        $constr->add_filter('текст_ответа');
+        //$constr->add_filter('текст_ответа');
         $constr->get_filters();
     }
     

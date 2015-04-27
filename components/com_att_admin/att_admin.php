@@ -127,12 +127,12 @@ class AttAdmin extends Component
         try {
             $d = new DossierCabQuery($dossier[0]);
             Content::set_route('cab_user', $d->uid);
-            $this->view_attest_cab_user_item($d->uid);
+            $this->view_attest_cab_user_item($d->uid, $dossier[0]);
         }
         catch (Exception $e) {
             Message::error('Логин и пароль для этого аттестационного дела еще не созданы, введите новые');
             Content::set_route('cab_user');
-            $this->view_attest_cab_user_item();
+            $this->view_attest_cab_user_item(null, $dossier[0] );
         }
     }
     
@@ -420,12 +420,14 @@ JS;
         $js->add_jblock($code);
     }
     
-    protected function view_attest_cab_user_item($u = null) 
+    protected function view_attest_cab_user_item($u = null, $dossier_id) 
     {
         self::set_title('Ввод логина и пароля для пользователя личного кабинета аттестационной комиссии');
         $i = new AttestCabUserItem($u);
         if (!$u) {
             $i->new_item();
+            $def = array('name' => $dossier_id);
+            $i->set_values($def);
         } 
         else {
             $i->edit_item();
@@ -445,6 +447,7 @@ JS;
         $confirm = 'Удаление выбранных попыток тестирования';
         $this->current_task = substr( __FUNCTION__ , 5);
         $list = new DossierTicketList($d);
+        $list->set_show_constraint(false);
         self::set_title($title);
         self::set_toolbar_button('new', 'new_ticket' , 'Предоставить новые попытки');
         $edit_b = self::set_toolbar_button('edit', 'ticket_edit' , 'Редактировать');

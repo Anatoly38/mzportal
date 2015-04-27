@@ -57,10 +57,10 @@ class ClActiveRecord
     
     public function get_as_array()
     {
-        if(!$this->oid) 
+/*         if(!$this->oid) 
         {
             throw new Exception("Код объекта не определен");
-        }
+        } */
         $fields = array();
         foreach($this as $key => $value) {
             $fields[$key] = $value;

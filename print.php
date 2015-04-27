@@ -11,7 +11,7 @@ define( 'DS', DIRECTORY_SEPARATOR );
 
 require_once ( MZPATH_BASE .DS.'includes'.DS.'factory.php' );
 
-$mainframe = new MZFactory();
+$mainframe = MZFactory::getInstance();
     // Проверяем авторизован ли пользователь
 $mainframe->check_auth();
 $mainframe->get_layout(MZConfig::$print_layout);

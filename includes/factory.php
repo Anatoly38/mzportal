@@ -9,7 +9,6 @@
  */
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 require_once ( MZPATH_BASE .DS.'common'.DS.'db.php' );
-//require_once ( MZPATH_BASE .DS.'common'.DS.'database.php' );
 require_once ( MZPATH_BASE .DS.'configuration.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'defines.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'session'.DS.'session.php' );
@@ -30,18 +29,27 @@ require_once ( MODULES     .DS.'mod_message'.DS.'message.php' );
 
 class MZFactory
 {
-private $layout;
-private $registry;
-private $user_id = null;
-private $default_application;
-private $tools_pane;        // DOMnode объект для панели инструментов
-private $task_pane;         // DOMnode объект для панели задач
-private $content;           // DOMnode объект собственно содержания
-public $site;               // Сведенная воедино html-страница
+    private static $instance = false;
+    private $layout;
+    private $registry;
+    private $user_id = null;
+    private $default_application;
+    private $tools_pane;        // DOMnode объект для панели инструментов
+    private $task_pane;         // DOMnode объект для панели задач
+    private $content;           // DOMnode объект собственно содержания
+    public $site;               // Сведенная воедино html-страница
 
-    public function __construct() 
+    private function __construct() 
     {
         $this->init();
+    }
+    
+    public static function getInstance()
+    {
+        if(self::$instance === false) {
+            self::$instance = new MZFactory;
+        }
+        return self::$instance;       
     }
     
     public function check_auth() {
@@ -81,6 +89,18 @@ public $site;               // Сведенная воедино html-стран
         $this->registry->oid = (array)Request::getVar('oid');
     }
 
+    public function set_application($app) 
+    {
+        $this->registry->application = $app;
+        return true;
+    }
+    
+    public function set_task($task = false) 
+    {
+        $this->registry->task = $task;
+        return true;
+    }
+    
     public function get_layout($template_file = null)
     {
         if (!$template_file) {

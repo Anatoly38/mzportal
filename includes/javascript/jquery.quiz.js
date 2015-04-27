@@ -7,6 +7,9 @@
             }
             endTime = $.now();
             spentTime = Math.round((endTime - startTime) / 1000) ;
+            spentTimeMin = Math.floor(spentTime/60);
+            spentTimeSec = spentTime - (spentTimeMin*60);
+            var questionIds = [];
             superContainer.find('ul.answers').each(function(index) {
                 var qAnswer = [];
                 r = 1;
@@ -16,8 +19,35 @@
                     }
                     r++;
                 });
+                questionIds.push($(this).attr("id"));
                 userAnswers.push(qAnswer);
             });
+            var collate =[];
+            for (r = 0; r < userAnswers.length; r++) {
+                collate.push('{"questionNumber":"'+parseInt(questionIds[r])+'", UserAnswer:"'+userAnswers[r]+'"}');
+            }
+            res = '[' + collate.join(",") + ']';
+            if (quizConfig.sendResultsURL !== null) 
+            {
+                console.log("Попытка отправки результатов теста");
+                $.ajax({
+                    type: 'POST',
+                    url: quizConfig.sendResultsURL,
+                    data: { 
+                        task: 'save_result', 
+                        cause: reason, 
+                        answers: res, 
+                        begined: startTime,
+                        ended: endTime
+                    }
+                }).done(function( msg ) { 
+                    alert(msg);
+                    message = '<div class="ui-state-highlight ui-corner-all" id="message">';
+                    message += '<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>';
+                    message += '<strong>Результаты сохранены</strong><br /></p></div>';
+                    $(message).appendTo('.message');
+                });
+            }
             countdown.timeTo("stop");
             progressKeeper.hide();
             notice.hide();
@@ -53,9 +83,12 @@
                 }
                 resultSet += '</ul></div></div>';
             }
-            resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя </span> </div>';
+            if (quizConfig.showCorrectAnswers) {
+                resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, ';
+                resultSet += '<span class="selected-point"> - Выбор пользователя </span> </div>';                
+            }
             score = roundReloaded(trueCount / questionLength * 100, 2);
-            resultSet = '<h2 class="qTitle">' + reason + '<br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%, затрачено времени ' + spentTime + ' сек.</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
+            resultSet = '<h2 class="qTitle">' + reason + '<br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%, затрачено времени ' + spentTimeMin + ' мин.</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
             if (quizConfig.showCorrectAnswers) {
@@ -68,7 +101,7 @@
             superContainer.find('.slide-container').hide(function() {
                 superContainer.find('.results-container').fadeIn(500); 
             });
-            $('#' + quizConfig.saveResultButtonId).toolbar('showButton');
+            $('#' + quizConfig.closePageButtonId).toolbar('showButton');
             $('#' + quizConfig.cancelTestButtonId).toolbar('hideButton');
             superContainer.data('quizEnded', 1);
             return true;
@@ -84,13 +117,13 @@
             startText : 'Начало теста',
             endText: 'Тест завершен',
             splashImage: 'includes/style/images/play-icon.png',
-            sendResultsURL: 'includes/get_result.php',
+            sendResultsURL: 'quiz_helper.php',
             timeToTest: 3600,
             hostip: '172.16.172.33', 
             //hostip: '127.0.0.1:8080',
             showCorrectAnswers: true,
-            saveResultButtonId: 'save_test_result',
-            cancelTestButtonId: 'cancel_trial_test',
+            closePageButtonId: 'close_quizpage',
+            cancelTestButtonId: 'cancel_quiz',
             resultComments :  
             {
                 perfect: 'Замечательно! (оценка - 5)',
@@ -152,7 +185,7 @@
                 contentFob += '<div class="slide-container">';
                 contentFob += '<div class="question-type">Тип вопроса: "' + qType(quizConfig.questions[questionsIteratorIndex].qT) + '"</div>';
                 contentFob += '<div class="question-number">' + (questionsIteratorIndex + 1) + '/' + quizConfig.questions.length + '</div>';
-                contentFob += '<div class="question">' + quizConfig.questions[questionsIteratorIndex].question + '</div>'
+                contentFob += '<div class="question"></div>'
                 contentFob += '<ul id="' + quizConfig.questions[questionsIteratorIndex].qId +  '" class="answers">';
                 for (answersIteratorIndex = 0; answersIteratorIndex < quizConfig.questions[questionsIteratorIndex].answers.length; answersIteratorIndex++) {
                     contentFob += '<li>' + quizConfig.questions[questionsIteratorIndex].answers[answersIteratorIndex] + '</li>';
@@ -172,7 +205,29 @@
                 answers.push(quizConfig.questions[questionsIteratorIndex].ca);
             }
             superContainer.html(introFob + contentFob + exitFob);
-
+            var qid_collate = [];
+            for (r = 0; r < quizConfig.questions.length; r++) {
+                qid_collate.push( quizConfig.questions[r].qId  );
+            }
+            q_ids = '[' + qid_collate.join(",") + ']';
+            $.ajax({
+                type: 'POST',
+                url: quizConfig.sendResultsURL,
+                data: { 
+                    task: 'get_question', 
+                    ids: q_ids
+                }
+            }).done(function(ret) { 
+                t = $.parseJSON(ret);
+                r = 0;
+                superContainer.find('.question').each(function() {
+                        $(this).text(t[r]);
+                        quizConfig.questions[r].question = t[r];
+                        r++;
+                    } 
+                );
+            });
+            
             progress = superContainer.find('.progress');
             progressKeeper = superContainer.find('.progress-keeper');
             notice = superContainer.find('.notice');
@@ -203,7 +258,31 @@
             }
             return resultArr;
         };
+        
+ /*        function deobfuscate(s)
+        {
+            s = s.split('%').slice(1);
+            c = '';
+            for (i = 0; i < s.length; i++)
+            {
+                console.log("Номер символа " +  s[i]);
+                c += String.fromCharCode(s[i]);
+            }
+            return c;
+        }
 
+        function deobfuscate(s)
+        {
+            s = s.split('%').slice(1);
+            c = '';
+            for (i = 0; i < s.length; i++)
+            {
+                c += s[i] + String.fromCharCode(s[i].substr(1)-s[i].charCodeAt());
+            }
+            return c;
+        }
+         */
+         
         roundReloaded = function(num, dec) {
             var result = Math.round(num * Math.pow(10, dec)) / Math.pow(10, dec);
             return result;
@@ -283,83 +362,7 @@
                 return false;
             }
             countdown.timeTo("stop");
-            fulfillment('Все вопросы пройдены', this);
+            methods.stopQuiz(' Все вопросы пройдены. ');
         });
-
-        fulfillment = function(reason, obj) {
-            endTime = $.now();
-            spentTime = Math.round((endTime - startTime) / 1000) ;
-            superContainer.find('ul.answers').each(function(index) {
-                var qAnswer = [];
-                r = 1;
-                $(this).children('li').each(function() {
-                    if ($(this).hasClass('selected')) {
-                        qAnswer.push(r);
-                    }
-                    r++;
-                });
-                 userAnswers.push(qAnswer);
-            });
-            var collate =[];
-            for (r=0; r<userAnswers.length;r++) {
-                collate.push('{questionNumber:"'+parseInt(r+1)+'", UserAnswer:"'+userAnswers[r]+'"}');
-            }
-            res = '[' + collate.join(",") + ']';
-            $("#source").val(res);
-            if (quizConfig.sendResultsURL !== null) 
-            {
-                console.log("Попытка отправки результатов теста");
-
-                $.ajax({
-                    type: 'POST',
-                    url: quizConfig.sendResultsURL,
-                    data: res,
-                    complete: function () {console.log("Успешная отправка результатов теста");}
-                });
-            }
-            progressKeeper.hide();
-            var results = checkAnswers(),
-            resultSet = '',
-            trueCount = 0,
-            score,
-            url;
-
-            for (var i = 0, toLoopTill = results.length; i < toLoopTill; i++) {
-                if (results[i] === true) {
-                    trueCount++;
-                }
-                resultSet += '<div class="result-row"> Вопрос №' + (i + 1) + (results[i] === true ? "<div class='correct'><span>Верно</span></div>": "<div class='wrong'><span>Неверно</span></div>");
-                resultSet += '<div class="resultsview-qhover">' + quizConfig.questions[i].question;
-                resultSet += "<ul>";
-                for (answersIteratorIndex = 0; answersIteratorIndex < quizConfig.questions[i].answers.length; answersIteratorIndex++) {
-                    var correctAdd = '';
-                    var selectedAdd = '';
-                    if ($.inArray( answersIteratorIndex + 1 , quizConfig.questions[i].ca ) !== -1 ) {
-                        correctAdd += 'right';
-                    }
-                    if ($.inArray( answersIteratorIndex + 1 , userAnswers[i] ) !== -1 ) {
-                        selectedAdd += ' selected-point';
-                    }
-                    resultSet += '<li class="' + correctAdd + '"><span class="' + selectedAdd + '"></span>' + quizConfig.questions[i].answers[answersIteratorIndex] + '</li>';
-                }
-                resultSet += '</ul></div></div>';
-            }
-            resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, <span class="selected-point"> - Выбор пользователя </span></div>';
-            score = roundReloaded(trueCount / questionLength * 100, 2);
-            resultSet = '<h2 class="qTitle">Результат: ' + judgeSkills(score) + '.<br/>Вы набрали ' + score + '%, затрачено времени ' + spentTime + ' сек.</h2>' + resultSet + '<div class="jquizzy-clear"></div>';
-            superContainer.find('.result-keeper').html(resultSet).show(500);
-            superContainer.find('.resultsview-qhover').hide();
-            if (quizConfig.showCorrectAnswers) {
-            superContainer.find('.result-row').hover(function() {
-                $(this).find('.resultsview-qhover').show();
-                }, function() {
-                $(this).find('.resultsview-qhover').hide();
-                });
-            };
-            $(obj).parents('.slide-container').fadeOut(500, function() {
-                $(obj).next().fadeIn(500);
-            });
-            return false;
-        }
     };
 })(jQuery);

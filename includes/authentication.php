@@ -2,7 +2,7 @@
 /** 
  * @version 
  */
-require_once ('common/database.php' );
+require_once ('common/db.php' );
  
 class Authentication 
 {

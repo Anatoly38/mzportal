@@ -141,6 +141,10 @@ html, body {
     padding: 0.1em 0.5em;
 }
 
+.item_deleted {
+    text-decoration: line-through;
+}
+
 .pagination {
     display:table;
     margin:0 auto;

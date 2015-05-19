@@ -68,12 +68,11 @@ class ItemSave
         if (!$this->item) {
             $this->query->insert();
             $this->item = $this->query->oid;
-            return $this->query->oid;
         }
         else {
             $this->query->update();
-            return true;
         }
+        return $this->query->oid;
     }
 
     public function update_data()

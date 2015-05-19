@@ -18,7 +18,7 @@ require_once ( 'model' . DS . 'quiz_topic_qcount_query.php' );
 require_once ( 'model' . DS . 'quiz_question_query.php' );
 require_once ( 'model' . DS . 'quiz_question_view_query.php' );
 require_once ( 'model' . DS . 'quiz_question_save.php' );
-
+require_once ( 'model' . DS . 'quiz_ticket_query.php' );
 require_once ( 'model' . DS . 'quiz_setting_query.php' );
 require_once ( 'model' . DS . 'quiz_setting_save.php' );
 
@@ -47,6 +47,10 @@ require_once ( 'views' . DS . 'trial_testing_selection_form.php' );
 require_once ( 'views' . DS . 'trial_quiz.php' );
 
 require_once ( MODULES . DS . 'mod_user'  . DS . 'acl.php' );
+require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'model' . DS . 'dossier_query.php' );
+require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'model' . DS . 'dossier_cab_query.php' );
+require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'views' . DS . 'dossier_profile.php' );
+require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'views' . DS . 'dossier_ticket_list.php' );
 require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'access_list.php' );
 require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'user_list.php' );
 
@@ -142,6 +146,24 @@ class Quiz extends ComponentACL
         $this->view_edit_question_item($question[0]);
     }
     
+    protected function exec_next_question()
+    {
+        $question = (array)Request::getVar('question');
+        $next_question = QuizQuestionQuery::next($question[0]);
+        Content::set_route('question', $next_question->oid);
+        Content::set_route('updated_answers');
+        $this->view_edit_question_item($next_question->oid);
+    }
+    
+    protected function exec_prev_question()
+    {
+        $question = (array)Request::getVar('question');
+        $prev_question = QuizQuestionQuery::prev($question[0]);
+        Content::set_route('question', $prev_question->oid);
+        Content::set_route('updated_answers');
+        $this->view_edit_question_item($prev_question->oid);
+    }
+    
     protected function exec_question_save()
     {
         $question = (array)Request::getVar('question');
@@ -154,6 +176,25 @@ class Quiz extends ComponentACL
             $s->update_data();
         }
         $this->view_question_list();
+    }    
+    
+    protected function exec_question_apply()
+    {
+        $question = (array)Request::getVar('question');
+        $topic = (array)Request::getVar('topic');
+        if (!$question[0] || !$topic[0]) {
+            Message::error("Не указан вопрос и/или тема теста");
+            $this->view_question_list();
+        }
+        $s = new QuizQuestionSave($question[0]);
+        $q = $s->save();
+        //print_r($q);
+        $link_type = Reference::get_id('тема-вопрос', 'link_types');
+        $s->set_left_obj($topic[0]);
+        $s->set_right_obj($q);
+        $s->set_association($link_type);
+        Content::set_route('question', $q);
+        $this->view_edit_question_item($q);
     }
     
     protected function exec_delete_question()
@@ -323,6 +364,25 @@ class Quiz extends ComponentACL
         //echo 'Изменено вариантов ответа: ' . $i ;
         print_r($json_decoded);
     }
+
+    protected function exec_answers_asinc_delete()
+    {
+        $answers = Request::getVar('answers');
+        if (is_array($answers) && count($answers) < 1) {
+            echo 'Нет данных для сохранения';
+            exit;
+        }
+        $json_decoded =json_decode($answers, true);
+        $i = 0;
+        $answers_to_delete = array(); 
+        foreach($json_decoded as $answer) {
+            $answers_to_delete[] = $answer;
+            $i++;
+        } 
+        $qd = new DeleteItems($answers_to_delete);
+        //echo 'Удалено вариантов ответа: ' . $i ;
+        print_r($json_decoded);
+    }
     
     protected function exec_set_correct_answer()
     {
@@ -359,6 +419,13 @@ class Quiz extends ComponentACL
         $q_order        = Request::getVar('q_order');
         $show_answers   = Request::getVar('show_answers');
         try {
+            $t = new QuizTicketQuery(0);
+            $t->set_update_message(false);
+            $t->тема = $topic;
+            $t->запуск_теста = time();
+            $t->в_процессе = 1;
+            $t->статус = 2;
+            $t->update();
             $q = new TrialQuiz($topic);
             if ($setting) {
                 $q->set_settings($setting);
@@ -372,6 +439,9 @@ class Quiz extends ComponentACL
             $q->show_ordered($q_order);
             $q->show_correct_answers($show_answers);
             Content::set_route('source', '');
+            Content::set_route('ticket', '0');
+            Content::set_route('status', '2');
+            Content::set_route('dossier_id', '165728');
             $q->start_quiz();      
         }
         catch (Exception $e) {
@@ -382,11 +452,101 @@ class Quiz extends ComponentACL
     
     protected function exec_save_result()
     {
-        print_r($_POST);
-        $b = $_POST['begined']/1000;
-        $e = $_POST['ended']/1000;
-        echo "Начало теста " . date('Y-m-d H:i:s', $b);
-        echo "Окончание теста " . date('Y-m-d H:i:s', $e);
+        $ticket     = (int)Request::getVar('ticket');
+        $dossier_id = (int)Request::getVar('dossier_id');
+        $b = Request::getVar('begined')/1000;
+        $e = Request::getVar('ended')/1000;
+        $score = Request::getVar('percentage');
+        $cause = Request::getVar('cause');
+        $d = $e-$b;
+        try {
+            $t = new QuizTicketQuery($ticket);
+            $t->set_update_message(false);
+            $t->начало_теста = $b;
+            $t->окончание_теста = $e;
+            $t->продолжительность = round($d);
+            $t->в_процессе = 0;
+            $t->реализована = 1;
+            $t->балл = $score;
+            switch (true) {
+                case $score >= 90  :
+                    $t->оценка = 5;
+                    break;
+                case $score >= 80 :
+                    $t->оценка = 4;
+                    break;
+                case $score >= 70 :
+                    $t->оценка = 3;
+                    break;
+                case $score >= 50 :
+                    $t->оценка = 2;
+                    break;
+                case $score < 50 :
+                    $t->оценка = 1;
+                    break;
+            }
+            switch ($cause) {
+                case ' Все вопросы пройдены. ' :
+                    $t->статус = 1;
+                    break;
+                case ' Время отведенное на ответы исчерпано. ' :
+                    $t->статус = 3;
+                    break;
+                case ' Тест прерван пользователем. ' :
+                    $t->статус = 4;
+                    break;
+            }
+            $t->update();
+            $p = new DossierProfile($dossier_id);
+            $p->show_title("Профиль аттестационного дела");
+            $p->show_dossier();
+            $to  = 'shameev@miac-io.ru';
+            $subject = 'Протокол сдачи теста';
+            // текст письма
+            $message = '
+            <html>
+            <head>
+              <title>Протокол сдачи теста</title>
+            </head>
+            <body>' 
+              . $p->get_text() .
+              '<h2>Протокол сдачи теста</h2>
+              <table border="1">
+                <tr>
+                  <td>Основная тема теста</td><td>' . Reference::get_name($t->тема, 'quiz_topics') . '</td>
+                </tr>
+                <tr>
+                  <td>Настройка тестирования</td><td>' . Reference::get_name($t->настройка, 'quiz_settings') . '</td>
+                </tr>
+                <tr>
+                  <td>Дата и время начала теста</td><td>' . date("d.m.Y H:s", $t->начало_теста) . '</td>
+                </tr>
+                <tr>
+                  <td>Продолжительность</td><td>' . $t->продолжительность .' сек.</td>
+                </tr>
+                <tr>
+                  <td>Статус</td><td>' . $cause . '</td>
+                </tr>
+                <tr>
+                  <td>Доля правильных ответов (%)</td><td>' . $t->балл . '</td>
+                </tr>
+                <tr>
+                  <td>Оценка</td><td>' . $t->оценка . '</td>
+                </tr>
+              </table>
+            </body>
+            </html>
+            ';
+            $headers  = 'MIME-Version: 1.0' . "\r\n";
+            $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+            $headers .= 'From: attest@miac-io.ru' . "\r\n";
+            $mstatus = mail($to, $subject, $message, $headers);
+            
+            print("Результаты теста сохранены");
+        }
+        catch (Exception $e) {
+            print("Ошибка при сохранении результата теста. Обратитесь к администратору." . $e);
+        }
     }
     
     protected function exec_get_question()
@@ -478,6 +638,8 @@ class Quiz extends ComponentACL
         self::set_title('Ввод нового вопроса теста');
         $i = new QuizQuestionItem();
         $i->new_item(); 
+        $ab = self::set_toolbar_button('apply', 'question_apply' , 'Применить');
+        $ab->validate(true);
         $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
         $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_question_edit', 'Закрыть');
@@ -490,9 +652,11 @@ class Quiz extends ComponentACL
     {
         self::set_title('Редактирование вопроса теста');
         $i = new QuizQuestionItem($q);
-        $i->edit_item(); 
+        $i->edit_item();
         $i->get_answers();
-        $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить вопрос');
+        $ab = self::set_toolbar_button('apply', 'question_apply' , 'Применить изменения');
+        $ab->validate(true);
+        $sb = self::set_toolbar_button('save', 'question_save' , 'Сохранить и закрыть вопрос');
         $sb->validate(true);
         $cb = self::set_toolbar_button('cancel', 'cancel_question_edit' , 'Закрыть');
         $cb->track_dirty(true);
@@ -502,6 +666,13 @@ class Quiz extends ComponentACL
         $correct = self::set_toolbar_button('check', 'set_correct_answer' , 'Установить/Снять правильный ответ');
         $correct->set_option( 'action', $this->_set_correct_answer_js() );
         $correct->set_option('obligate', true);
+        $da = self::set_toolbar_button('delete', 'delete_answer' , 'Удалить ответ');
+        $da->set_option( 'action', $this->_set_delete_answer_js() );
+        $da->set_option('obligate', true);
+        $prev = self::set_toolbar_button('back', 'prev_question' , 'Предыдущий вопрос');
+        $prev->track_dirty(true);
+        $next = self::set_toolbar_button('forward', 'next_question' , 'Следующий вопрос');
+        $next->track_dirty(true);
         $form = $i->get_form();
         $this->set_content($form);
     }
@@ -535,6 +706,38 @@ function(){
                 else {
                     $("#" + collate[i]).find(".правильный").text("Да");
                 }
+            }
+            $(message).appendTo('.message');
+        });
+}
+JS;
+        return $code;
+    }
+    
+    private function _set_delete_answer_js() 
+    {
+        $code = 
+<<<JS
+function(){
+    var collate =[];
+    i = 0;
+    $(".grid_row.ui-state-highlight").each(function() {
+        collate.push($(this).attr("id"));
+    });
+    q_count = collate.length;
+    output = '[' + collate.join(",") + ']';
+    $.ajax(
+        {
+            type: 'POST',
+            url: 'asinc.php?app=54&task=answers_asinc_delete',
+            data: { answers: output }
+        }
+        ).done(function( msg ) { 
+            message = '<div class="ui-state-highlight ui-corner-all" id="message">';
+            message += '<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>';
+            message += '<strong> Удалено ответов - ' + q_count + '</strong><br /></p></div>';
+            for (var i = 0; i < q_count; i++) {
+                $("#" + collate[i]).addClass( "item_deleted" );
             }
             $(message).appendTo('.message');
         });
@@ -637,11 +840,39 @@ JS;
     {
         $obj = new QuizTopicQuery($topic);
         self::set_title('Пробное тестирование по теме "' . $obj->название_темы . '"'); 
-        $stop_test = self::set_toolbar_button('cancel', 'cancel_trial_test' , 'Прервать выполнение теста');
-        $stop_test->set_option('action', "function () { $('#quiz-container').quiz('stopQuiz', 'Тест прерван пользователем' ); }");
+        $stop_test = self::set_toolbar_button('cancel', 'cancel_quiz' , 'Прервать выполнение теста');
+        $stop_test->set_option('action', $this->_get_js());
         //$save_res = self::set_toolbar_button('save', 'save_test_result' , 'Сохранить результат теста');
         //$save_res->set_option('showStatus', false );
-        
+    }
+    
+    protected function _get_js() 
+    {
+        $js = 
+<<<EOT
+function () {
+    var test_dialog = '<div id="delete-warning" title="Подтвердите действие">';
+    test_dialog += '<p>Текущий сеанс тестирования будет прекращен. Вы уверены?</p></div>'
+    $(test_dialog).appendTo('body').dialog({
+        resizable: false,
+        width: 450,
+        height: 170,
+        modal: true,
+        buttons: {
+            "Прекратить тест": function() {
+                $( this ).dialog( "close" );
+                $('#quiz-container').quiz('stopQuiz', ' Тест прерван пользователем. ' ); 
+                return true;
+            },
+            "Вернуться к выполнению ": function() {
+                $( this ).dialog( "close" );
+                return false;
+            }
+        }
+    });
+}
+EOT;
+        return $js;
     }
  
 // Результаты тестирования

@@ -60,6 +60,22 @@
             </td>
         </tr>
         <tr>
+            <td valign="top" class="key">
+                Дополнительная тема 4, Наименование
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="доп_тема4_наименование" />
+            </td>
+        </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Дополнительная тема 4, Доля
+            </td>
+            <td>
+                 <input type="number" name="доп_тема4_доля" id="доп_тема4_доля" style="width: 60px; height: 17px;" value="" min="0" max="99" /> %
+            </td>
+        </tr>
+        <tr>
             <td width="185" valign="top" class="key">
                 Количество вопросов
             </td>

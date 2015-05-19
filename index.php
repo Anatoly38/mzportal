@@ -49,8 +49,8 @@ echo 'Регистри: ' . print_r($r);
 //print_r($s);
 //$c = Constraint::getInstance();
 //print_r($c);
-//echo '<br />Сессия: ';
-//echo 'Сессия: ' . print_r($_SESSION);
-print_r($_POST);
+echo '<br />Сессия: ';
+echo 'Сессия: ' . print_r($_SESSION);
+//print_r($_POST);
 //print_r($_FILES);
 ?>

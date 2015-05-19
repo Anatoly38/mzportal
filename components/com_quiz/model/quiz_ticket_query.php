@@ -18,13 +18,20 @@ class QuizTicketQuery extends ClActiveRecord
     public $тема;
     public $настройка;
     public $пин_код;
+    public $запуск_теста;
     public $в_процессе;
     public $текущий_вопрос;
+    public $начало_теста;
+    public $окончание_теста;
+    public $продолжительность;
     public $реализована;
+    public $статус;
+    public $оценка;
+    public $балл;
     
     public function __construct($oid = false)
     {
-        if (!$oid) {
+        if ($oid === false) {
             return;
         }
         $dbh = new DB_mzportal;
@@ -32,9 +39,16 @@ class QuizTicketQuery extends ClActiveRecord
                         a.тема,
                         a.настройка,
                         a.пин_код,
+                        a.запуск_теста,
                         a.в_процессе,
                         a.текущий_вопрос,
-                        a.реализована
+                        a.начало_теста,
+                        a.окончание_теста,
+                        a.продолжительность,
+                        a.реализована,
+                        a.статус,
+                        a.оценка,
+                        a.балл
                     FROM {$this->source} AS a 
                     WHERE oid = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
@@ -45,14 +59,22 @@ class QuizTicketQuery extends ClActiveRecord
         $this->тема             = $data['тема'];
         $this->настройка        = $data['настройка'];
         $this->пин_код          = $data['пин_код'];
+        $this->запуск_теста     = $data['запуск_теста'];
         $this->в_процессе       = $data['в_процессе'];
         $this->текущий_вопрос   = $data['текущий_вопрос'];
+        $this->начало_теста     = $data['начало_теста'];
+        $this->окончание_теста  = $data['окончание_теста'];
+        $this->продолжительность = $data['продолжительность'];
         $this->реализована      = $data['реализована'];
+        $this->статус           = $data['статус'];
+        $this->оценка           = $data['оценка'];
+        $this->балл             = $data['балл'];
+        
     }
 
     public function update() 
     {
-        if(!$this->oid) 
+        if($this->oid === null || $this->oid === false) 
         {
             throw new Exception("Для вызова update() необходим код объекта");
         }
@@ -63,36 +85,54 @@ class QuizTicketQuery extends ClActiveRecord
                         тема            = :1,
                         настройка       = :2,
                         пин_код         = :3,
-                        в_процессе      = :4,
-                        текущий_вопрос  = :5,
-                        реализована     = :6
+                        запуск_теста    = :4,
+                        в_процессе      = :5,
+                        текущий_вопрос  = :6,
+                        начало_теста    = :7,
+                        окончание_теста = :8,
+                        продолжительность = :9,
+                        реализована     = :10,
+                        статус          = :11,
+                        оценка          = :12,
+                        балл            = :13
                     WHERE 
-                        oid = :7";
+                        oid = :14";
         try {
             $dbh->prepare($query)->execute( 
                                         $this->тема,
                                         $this->настройка,
                                         $this->пин_код,
+                                        $this->запуск_теста,
                                         $this->в_процессе,
                                         $this->текущий_вопрос,
+                                        $this->начало_теста,
+                                        $this->окончание_теста,
+                                        $this->продолжительность,
                                         $this->реализована,
+                                        $this->статус,
+                                        $this->оценка,
+                                        $this->балл,
                                         $this->oid
                                         );
-            Message::alert('Изменения при редактировании данных документа успешно сохранены');
+            if ($this->show_update_message) {
+                Message::alert('Изменения при редактировании данных документа успешно сохранены');
+            }
         } 
         catch (Exception $e) {
             Message::error('Ошибка: изменения при редактированиии данных документа не сохранены!');
             return false;
         }
-        try {
-            $obj = new MZObject($this->oid);
-            $obj->name = 'Попытка тестирования';
-            $obj->description = $this->тема;
-            $obj->update();
-        }
-        catch (Exception $e) {
-            Message::error('Ошибка: изменения <object> не сохранены!');
-            return false;
+        if ($this->oid !== 0) {
+            try {
+                $obj = new MZObject($this->oid);
+                $obj->name = 'Попытка тестирования';
+                $obj->description = $this->тема;
+                $obj->update();
+            }
+            catch (Exception $e) {
+                Message::error('Ошибка: изменения <object> не сохранены!');
+                return false;
+            }
         }
     }
     
@@ -117,20 +157,35 @@ class QuizTicketQuery extends ClActiveRecord
                     (oid, 
                     тема,
                     настройка,
+                    пин_код,
+                    запуск_теста,
                     в_процессе,
                     текущий_вопрос,
-                    реализована
-                    )
-                    VALUES(:1, :2, :3, :4, :5, :6)";
+                    начало_теста,
+                    окончание_теста,
+                    продолжительность,
+                    реализована,
+                    статус,
+                    оценка,
+                    балл)
+                    VALUES(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14)";
         $dbh = new DB_mzportal;
         try {
             $dbh->prepare($query)->execute( 
                                         $this->oid,
                                         $this->тема,
                                         $this->настройка,
+                                        $this->пин_код,
+                                        $this->запуск_теста,
                                         $this->в_процессе,
                                         $this->текущий_вопрос,
-                                        $this->реализована
+                                        $this->начало_теста,
+                                        $this->окончание_теста,
+                                        $this->продолжительность,
+                                        $this->реализована,
+                                        $this->статус,
+                                        $this->оценка,
+                                        $this->балл
                                         );
         }
         catch (MysqlException $e) {

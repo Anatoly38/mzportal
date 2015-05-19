@@ -19,6 +19,14 @@
                 <справочник вид="список" имя="dic_question_types" name="тип_вопроса" проверка="required" />
             </td>
         </tr>
+        <tr>
+            <td width="185" valign="top" class="key">
+                Тип вопроса
+            </td>
+            <td>
+                <справочник вид="список" имя="dic_quiz_topics" name="topic" проверка="required" />
+            </td>
+        </tr>
         </tbody>
     </table>
 <!--     <legend>Варианты ответов</legend>

@@ -27,27 +27,6 @@
                 collate.push('{"questionNumber":"'+parseInt(questionIds[r])+'", UserAnswer:"'+userAnswers[r]+'"}');
             }
             res = '[' + collate.join(",") + ']';
-            if (quizConfig.sendResultsURL !== null) 
-            {
-                console.log("Попытка отправки результатов теста");
-                $.ajax({
-                    type: 'POST',
-                    url: quizConfig.sendResultsURL,
-                    data: { 
-                        task: 'save_result', 
-                        cause: reason, 
-                        answers: res, 
-                        begined: startTime,
-                        ended: endTime
-                    }
-                }).done(function( msg ) { 
-                    alert(msg);
-                    message = '<div class="ui-state-highlight ui-corner-all" id="message">';
-                    message += '<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>';
-                    message += '<strong>Результаты сохранены</strong><br /></p></div>';
-                    $(message).appendTo('.message');
-                });
-            }
             countdown.timeTo("stop");
             progressKeeper.hide();
             notice.hide();
@@ -56,7 +35,6 @@
             questionResult = '',
             trueCount = 0,
             score;
-
             for (var i = 0, toLoopTill = results.length; i < toLoopTill; i++) {
                 if (results[i] === true) {
                     trueCount++;
@@ -88,6 +66,28 @@
                 resultSet += '<span class="selected-point"> - Выбор пользователя </span> </div>';                
             }
             score = roundReloaded(trueCount / questionLength * 100, 2);
+            if (quizConfig.sendResultsURL !== null) {
+                console.log("Попытка отправки результатов теста");
+                $.ajax({
+                    type: 'POST',
+                    url: quizConfig.sendResultsURL,
+                    data: { 
+                        task: 'save_result', 
+                        cause: reason, 
+                        ticket: $("#ticket").val(), 
+                        dossier_id: $("#dossier_id").val(), 
+                        answers: res,
+                        percentage: score,
+                        begined: startTime,
+                        ended: endTime
+                    }
+                }).done(function( msg ) { 
+                    message = '<div class="ui-state-highlight ui-corner-all" id="message">';
+                    message += '<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: .3em;"></span>';
+                    message += '<strong>' + msg + '</strong><br /></p></div>';
+                    $(message).appendTo('.message');
+                });
+            }
             resultSet = '<h2 class="qTitle">' + reason + '<br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%, затрачено времени ' + spentTimeMin + ' мин.</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
@@ -120,6 +120,7 @@
             sendResultsURL: 'quiz_helper.php',
             timeToTest: 3600,
             hostip: '172.16.172.33', 
+            //hostip: 'quiz.miac-io.ru',
             //hostip: '127.0.0.1:8080',
             showCorrectAnswers: true,
             closePageButtonId: 'close_quizpage',
@@ -148,6 +149,7 @@
         
         quizConfig = $.extend(defaults, settings);  
         if (window.location.host != quizConfig.hostip) {
+            console.log('Хост ' + window.location.host);
             $(this).html('<div class="intro-container slide-container"><h2 class="qTitle">Ошибка подготовки вопросов (1)</h2></div>');
             return;
         }
@@ -290,13 +292,13 @@
             
         judgeSkills = function(score) {
             var returnString;
-            if (score == 100)
+            if (score >= 90)
                 return quizConfig.resultComments.excellent;
-            else if (score > 85)
+            else if (score >= 80)
                 return quizConfig.resultComments.good;
-            else if (score > 70)
+            else if (score >= 70)
                 return quizConfig.resultComments.average;
-            else if (score > 50)
+            else if (score >= 50)
                 return quizConfig.resultComments.bad;
             else
                 return quizConfig.resultComments.poor;

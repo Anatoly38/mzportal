@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   AttAdmin
-* @copyright    Copyright (C) 2090-2015 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */

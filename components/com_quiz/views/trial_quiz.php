@@ -79,7 +79,7 @@ class TrialQuiz
     private function compose_set()
     {
         if (!$this->q_count) {
-            $this->q_count  = $this->get_questions_count(); // Если не указано конкретное число вопросов в квизе выводим все вопросы по указанно теме
+            $this->q_count  = $this->get_questions_count(); // Если не указано конкретное число вопросов в квизе выводим все вопросы по указанной теме
         } 
         if (!$this->setting) {
             $ret = $this->get_questions($this->topic, $this->q_count);
@@ -88,15 +88,18 @@ class TrialQuiz
             $add_topic1 = $this->setting->доп_тема1_наименование;
             $add_topic2 = $this->setting->доп_тема2_наименование;
             $add_topic3 = $this->setting->доп_тема3_наименование;
+            $add_topic4 = $this->setting->доп_тема4_наименование;
             $qcount1 =  round($this->q_count/100*$this->setting->доп_тема1_доля);
             $qcount2 =  round($this->q_count/100*$this->setting->доп_тема2_доля);
             $qcount3 =  round($this->q_count/100*$this->setting->доп_тема3_доля);
-            $main_topic_qount = $this->q_count-($qcount1+$qcount2+$qcount3);
+            $qcount4 =  round($this->q_count/100*$this->setting->доп_тема4_доля);
+            $main_topic_qount = $this->q_count-($qcount1+$qcount2+$qcount3+$qcount4);
             $main = $this->get_questions($this->topic, $main_topic_qount);
             $ret1 = $this->get_questions($add_topic1, $qcount1);
             $ret2 = $this->get_questions($add_topic2, $qcount2);
             $ret3 = $this->get_questions($add_topic3, $qcount3);
-            $ret = $main . $ret1 . $ret2 . $ret3;
+            $ret4 = $this->get_questions($add_topic4, $qcount4);
+            $ret = $main . $ret1 . $ret2 . $ret3. $ret4;
         }
         $js_object_string = "var init = {'questions': [";
         $js_object_string .= $ret;

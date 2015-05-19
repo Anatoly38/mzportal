@@ -2,7 +2,7 @@
 /**
 * @version      $Id$
 * @package      MZPortal.Framework
-* @subpackage   Att_Admin
+* @subpackage   AttAdmin
 * @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
@@ -18,7 +18,7 @@ class DossierTicketList extends ItemList
     protected $task         = 'ticket_list';
     protected $obj          = 'ticket';
     protected $order_task   = 'quiz_ticket';
-    protected $default_cols = array( 'oid', 'тема', 'настройка', 'в_процессе', 'реализована');
+    protected $default_cols = array( 'oid', 'тема', 'настройка', 'в_процессе', 'реализована', 'статус', 'оценка', 'балл');
     protected $dossier_id;
     
     public function __construct($dossier_id)
@@ -44,6 +44,9 @@ class DossierTicketList extends ItemList
         $options['настройка']   = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_settings'); 
         $options['в_процессе']  = array('sort' => true,  'type' => 'plain', 'ref' => 'bool'); 
         $options['реализована'] = array('sort' => true,  'type' => 'plain', 'ref' => 'bool'); 
+        $options['статус']      = array('sort' => true,  'type' => 'plain', 'ref' => 'quiz_status'); 
+        $options['оценка']      = array('sort' => true,  'type' => 'plain'); 
+        $options['балл']        = array('sort' => true,  'type' => 'plain'); 
         return $options;
     }
     

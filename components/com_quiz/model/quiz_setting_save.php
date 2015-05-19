@@ -24,10 +24,18 @@ class QuizSettingSave extends ItemSave
         $this->query->доп_тема2_доля         = Request::getVar('доп_тема2_доля');
         $this->query->доп_тема3_наименование = Request::getVar('доп_тема3_наименование');
         $this->query->доп_тема3_доля         = Request::getVar('доп_тема3_доля');
+        $this->query->доп_тема4_наименование = Request::getVar('доп_тема4_наименование');
+        $this->query->доп_тема4_доля         = Request::getVar('доп_тема4_доля');
         $this->query->количество_вопросов    = Request::getVar('количество_вопросов');
         $this->query->продолжительность_теста= Request::getVar('продолжительность_теста');
         $this->query->сортировка             = Request::getVar('сортировка');
-        $this->query->показ_ответов          = Request::getVar('показ_ответов');
+        $show = Request::getVar('показ_ответов');
+        if (isset($show)) {
+            $this->query->показ_ответов      = Request::getVar('показ_ответов');
+        }
+        else {
+            $this->query->показ_ответов = 0;
+        }
         
     }
 }

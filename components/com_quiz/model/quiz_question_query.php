@@ -112,6 +112,34 @@ class QuizQuestionQuery extends ClActiveRecord
         catch (MysqlException $e) {
             Message::error($e->code);
         }
-    } 
+    }
+    
+    public static function next($current)
+    {
+        if (!$current) {
+            throw new Exception("Не указан идентификатор текущего вопроса");
+        }
+        $dbh = new DB_mzportal;
+        $query = "SELECT oid FROM quiz_question WHERE oid > :1 LIMIT 1";
+        list($id) = $dbh->prepare($query)->execute($current)->fetch_row();
+        if(!$id) {
+            throw new Exception("Код вопроса не найден");
+        }
+        return new QuizQuestionQuery($id);
+    }
+    
+    public static function prev($current)
+    {
+        if (!$current) {
+            throw new Exception("Не указан идентификатор текущего вопроса");
+        }
+        $dbh = new DB_mzportal;
+        $query = "SELECT oid FROM quiz_question WHERE oid < :1 ORDER BY oid DESC LIMIT 1";
+        list($id) = $dbh->prepare($query)->execute($current)->fetch_row();
+        if(!$id) {
+            throw new Exception("Код вопроса не найден");
+        }
+        return new QuizQuestionQuery($id);
+    }
 }
 ?>

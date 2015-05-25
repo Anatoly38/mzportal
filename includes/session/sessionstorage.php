@@ -1,9 +1,9 @@
 <?php
 /**
-* @version		$Id:sessionstorage.php 6961 2010-01-17 16:06:53Z tcp $
-* @package		MZPortal.Framework
-* @subpackage	Session
-* @copyright	Copyright (C) 2010 МИАЦ ИО
+* @version      $Id$
+* @package      MZPortal.Framework
+* @subpackage   Session
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 */
 
 defined( '_MZEXEC' ) or die( 'Restricted access' );
@@ -17,7 +17,7 @@ class SessionStorage
     private function __construct()
     {
         $this->register();
-        $this->max_lifetime = 2880; 
+        $this->max_lifetime = 2880; //48 минут
         //$this->max_lifetime = get_cfg_var("session.gc_maxlifetime"); 
     }
 

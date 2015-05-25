@@ -265,7 +265,7 @@
     min-height: 20px;
     font-size: 12px;
     line-height: 80%;
-    background: url(images/answer.png) no-repeat 5px 2px #FCFCFC;
+    /* background: url(images/answer.png) no-repeat 5px 2px #FCFCFC; */
     border:1px solid #F6F6F6;
     border-radius: 3px;
 }

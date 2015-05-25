@@ -51,8 +51,10 @@
                 for (answersIteratorIndex = 0; answersIteratorIndex < quizConfig.questions[i].answers.length; answersIteratorIndex++) {
                     var correctAdd = '';
                     var selectedAdd = '';
-                    if ($.inArray( answersIteratorIndex + 1 , quizConfig.questions[i].ca ) !== -1 ) {
-                        correctAdd += 'right';
+                    if (quizConfig.showCorrectAnswers) {
+                        if ($.inArray( answersIteratorIndex + 1 , quizConfig.questions[i].ca ) !== -1 ) {
+                            correctAdd += 'right';
+                        }
                     }
                     if ($.inArray( answersIteratorIndex + 1 , userAnswers[i] ) !== -1 ) {
                         selectedAdd += ' selected-point';
@@ -61,10 +63,11 @@
                 }
                 resultSet += '</ul></div></div>';
             }
+            resultSet += '<div class="jquizzy-clear"></div><div class="legend"> ';
             if (quizConfig.showCorrectAnswers) {
-                resultSet += '<div class="jquizzy-clear"></div><div class="legend"> <span class="right-point"> - Правильный ответ</span>, ';
-                resultSet += '<span class="selected-point"> - Выбор пользователя </span> </div>';                
+                resultSet += '<span class="right-point"> - Правильный ответ</span>, ';
             }
+            resultSet += '<span class="selected-point"> - Выбор пользователя </span> </div>';                
             score = roundReloaded(trueCount / questionLength * 100, 2);
             if (quizConfig.sendResultsURL !== null) {
                 console.log("Попытка отправки результатов теста");
@@ -76,6 +79,7 @@
                         cause: reason, 
                         ticket: $("#ticket").val(), 
                         dossier_id: $("#dossier_id").val(), 
+                        trial: $("#trial").val(), 
                         answers: res,
                         percentage: score,
                         begined: startTime,
@@ -91,13 +95,13 @@
             resultSet = '<h2 class="qTitle">' + reason + '<br/> Результат: ' + judgeSkills(score) + ', Вы набрали ' + score + '%, затрачено времени ' + spentTimeMin + ' мин.</h2> ' + resultSet + '<div class="jquizzy-clear"/>';
             superContainer.find('.result-keeper').html(resultSet).show(500);
             superContainer.find('.resultsview-qhover').hide();
-            if (quizConfig.showCorrectAnswers) {
+            //if (quizConfig.showCorrectAnswers) {
                 superContainer.find('.result-row').hover(function() {
                     $(this).find('.resultsview-qhover').show();
                     }, function() {
                     $(this).find('.resultsview-qhover').hide();
                     });
-            }
+            //}
             superContainer.find('.slide-container').hide(function() {
                 superContainer.find('.results-container').fadeIn(500); 
             });

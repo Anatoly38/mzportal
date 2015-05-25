@@ -21,10 +21,10 @@
         </tr>
         <tr>
             <td width="185" valign="top" class="key">
-                Тип вопроса
+                Вопрос входит в тему тестирования
             </td>
             <td>
-                <справочник вид="список" имя="dic_quiz_topics" name="topic" проверка="required" />
+                <справочник вид="список" имя="dic_quiz_topics" name="topic_id" проверка="required" />
             </td>
         </tr>
         </tbody>

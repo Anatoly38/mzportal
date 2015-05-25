@@ -119,7 +119,7 @@ class QuizTicketQuery extends ClActiveRecord
             }
         } 
         catch (Exception $e) {
-            Message::error('Ошибка: изменения при редактированиии данных документа не сохранены!');
+            Message::error('Ошибка: изменения при редактировании данных документа не сохранены!');
             return false;
         }
         if ($this->oid !== 0) {

@@ -109,7 +109,7 @@ class ItemSave
         return $this->r_obj;
     }
     
-    public function set_association($link_type = null)
+    public function set_association($link_type = null, $one_to_one = false)
     {
         if (!$link_type) {
             throw new Exception("Не указан вид ассоциации");
@@ -117,12 +117,23 @@ class ItemSave
         if (!$this->l_obj || !$this->r_obj) {
             throw new Exception("Один или оба объекта для установки ассоциации не существуют");
         }
-        try {
-            LinkObjects::set_link($this->l_obj, $this->r_obj, $link_type);  
+        if ($one_to_one) {
+            try {
+                LinkObjects::set_lto1_link($this->l_obj, $this->r_obj, $link_type);  
+            }
+            catch (Exception $e) {
+                Message::error('Ошибка: Ассоциация между объектами (1:1) не сохранена!');
+                return false;
+            }
         }
-        catch (Exception $e) {
-            Message::error('Ошибка: Ассоциация между объектами не сохранена!');
-            return false;
+        else {
+            try {
+                LinkObjects::set_link($this->l_obj, $this->r_obj, $link_type);  
+            }
+            catch (Exception $e) {
+                Message::error('Ошибка: Ассоциация между объектами не сохранена!');
+                return false;
+            }            
         }
     }
 }

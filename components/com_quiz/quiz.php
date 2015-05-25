@@ -14,6 +14,7 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 require_once ( 'model' . DS . 'quiz_topic_query.php' );
 require_once ( 'model' . DS . 'quiz_topic_save.php' );
+require_once ( 'model' . DS . 'quiz_result.php' );
 require_once ( 'model' . DS . 'quiz_topic_qcount_query.php' );
 require_once ( 'model' . DS . 'quiz_question_query.php' );
 require_once ( 'model' . DS . 'quiz_question_view_query.php' );
@@ -166,22 +167,19 @@ class Quiz extends ComponentACL
     
     protected function exec_question_save()
     {
-        $question = (array)Request::getVar('question');
-        if (!$question[0]) {
-            $s = new QuizQuestionSave();
-            $s->insert_data();
-        } 
-        else {
-            $s = new QuizQuestionSave($question[0]);
-            $s->update_data();
-        }
+        $this->_question_save();
         $this->view_question_list();
-    }    
-    
+    }
+
     protected function exec_question_apply()
     {
+        $this->view_edit_question_item($this->_question_save());
+    }
+
+    private function _question_save()
+    {
         $question = (array)Request::getVar('question');
-        $topic = (array)Request::getVar('topic');
+        $topic = (array)Request::getVar('topic_id');
         if (!$question[0] || !$topic[0]) {
             Message::error("Не указан вопрос и/или тема теста");
             $this->view_question_list();
@@ -192,11 +190,11 @@ class Quiz extends ComponentACL
         $link_type = Reference::get_id('тема-вопрос', 'link_types');
         $s->set_left_obj($topic[0]);
         $s->set_right_obj($q);
-        $s->set_association($link_type);
+        $s->set_association($link_type, true);
         Content::set_route('question', $q);
-        $this->view_edit_question_item($q);
+        return $q;
     }
-    
+
     protected function exec_delete_question()
     {
         $question = (array)Request::getVar('quiz_question');
@@ -394,7 +392,7 @@ class Quiz extends ComponentACL
         $this->view_edit_question_item($q);
     }
 
-// Пробное тестирование
+// Тестирование
 
     protected function exec_trial_testing_selection()
     {
@@ -447,6 +445,7 @@ class Quiz extends ComponentACL
         catch (Exception $e) {
             Message::error($e);
         }
+        Content::set_route('trial', 1);
         $this->view_trial_testing($topic);
     }
     
@@ -454,12 +453,18 @@ class Quiz extends ComponentACL
     {
         $ticket     = (int)Request::getVar('ticket');
         $dossier_id = (int)Request::getVar('dossier_id');
-        $b = Request::getVar('begined')/1000;
-        $e = Request::getVar('ended')/1000;
-        $score = Request::getVar('percentage');
-        $cause = Request::getVar('cause');
+        $trial      = (bool)Request::getVar('trial');
+        $b      = Request::getVar('begined')/1000;
+        $e      = Request::getVar('ended')/1000;
+        $score  = Request::getVar('percentage');
+        $cause  = Request::getVar('cause');
+        $result_answes = Request::getVar('answers');
         $d = $e-$b;
         try {
+            $r = new QuizResult();
+            $r->oid = $ticket;
+            $r->result = $result_answes;
+            $r->update();
             $t = new QuizTicketQuery($ticket);
             $t->set_update_message(false);
             $t->начало_теста = $b;
@@ -468,7 +473,7 @@ class Quiz extends ComponentACL
             $t->в_процессе = 0;
             $t->реализована = 1;
             $t->балл = $score;
-            switch (true) {
+            switch (true) { // Добавить возможность работы со шкалами
                 case $score >= 90  :
                     $t->оценка = 5;
                     break;
@@ -497,55 +502,60 @@ class Quiz extends ComponentACL
                     break;
             }
             $t->update();
-            $p = new DossierProfile($dossier_id);
-            $p->show_title("Профиль аттестационного дела");
-            $p->show_dossier();
-            $to  = 'shameev@miac-io.ru';
-            $subject = 'Протокол сдачи теста';
-            // текст письма
-            $message = '
-            <html>
-            <head>
-              <title>Протокол сдачи теста</title>
-            </head>
-            <body>' 
-              . $p->get_text() .
-              '<h2>Протокол сдачи теста</h2>
-              <table border="1">
-                <tr>
-                  <td>Основная тема теста</td><td>' . Reference::get_name($t->тема, 'quiz_topics') . '</td>
-                </tr>
-                <tr>
-                  <td>Настройка тестирования</td><td>' . Reference::get_name($t->настройка, 'quiz_settings') . '</td>
-                </tr>
-                <tr>
-                  <td>Дата и время начала теста</td><td>' . date("d.m.Y H:s", $t->начало_теста) . '</td>
-                </tr>
-                <tr>
-                  <td>Продолжительность</td><td>' . $t->продолжительность .' сек.</td>
-                </tr>
-                <tr>
-                  <td>Статус</td><td>' . $cause . '</td>
-                </tr>
-                <tr>
-                  <td>Доля правильных ответов (%)</td><td>' . $t->балл . '</td>
-                </tr>
-                <tr>
-                  <td>Оценка</td><td>' . $t->оценка . '</td>
-                </tr>
-              </table>
-            </body>
-            </html>
-            ';
-            $headers  = 'MIME-Version: 1.0' . "\r\n";
-            $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
-            $headers .= 'From: attest@miac-io.ru' . "\r\n";
-            $mstatus = mail($to, $subject, $message, $headers);
-            
-            print("Результаты теста сохранены");
+            if (!$trial) {
+                $dp = new DossierProfile($dossier_id);
+                $dp->show_title("Профиль аттестационного дела");
+                $dp->show_dossier();
+                $to  = 'shameev@miac-io.ru';
+                $subject = 'Протокол сдачи теста';
+                // текст письма
+                $message = '
+                <html>
+                <head>
+                  <title>Протокол сдачи теста</title>
+                </head>
+                <body>' 
+                  . $dp->get_text() .
+                  '<h2>Протокол сдачи теста</h2>
+                  <table border="1">
+                    <tr>
+                      <td>Основная тема теста</td><td>' . Reference::get_name($t->тема, 'quiz_topics') . '</td>
+                    </tr>
+                    <tr>
+                      <td>Настройка тестирования</td><td>' . Reference::get_name($t->настройка, 'quiz_settings') . '</td>
+                    </tr>
+                    <tr>
+                      <td>Дата и время начала теста</td><td>' . date("d.m.Y H:s", $t->начало_теста) . '</td>
+                    </tr>
+                    <tr>
+                      <td>Продолжительность</td><td>' . $t->продолжительность .' сек.</td>
+                    </tr>
+                    <tr>
+                      <td>Статус</td><td>' . $cause . '</td>
+                    </tr>
+                    <tr>
+                      <td>Доля правильных ответов (%)</td><td>' . $t->балл . '</td>
+                    </tr>
+                    <tr>
+                      <td>Оценка</td><td>' . $t->оценка . '</td>
+                    </tr>
+                  </table>
+                </body>
+                </html>
+                ';
+                $headers  = 'MIME-Version: 1.0' . "\r\n";
+                $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+                $headers .= 'From: attest@miac-io.ru' . "\r\n";
+                $mstatus = mail($to, $subject, $message, $headers);
+                print("Результаты теста сохранены");
+            }
+            else {
+                print("Результаты пробного тестирования сохранены успешно" . $result_answes);
+            }
         }
         catch (Exception $e) {
-            print("Ошибка при сохранении результата теста. Обратитесь к администратору." . $e);
+            print("Ошибка при сохранении результата теста. Обратитесь к администратору." . $e );
+            //print("Ошибка при сохранении результата теста. Обратитесь к администратору.");
         }
     }
     

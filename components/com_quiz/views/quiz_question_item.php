@@ -12,7 +12,7 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'item.php' );
 
 class QuizQuestionItem extends Item 
 {
-    protected $model    = 'QuizQuestionQuery';
+    protected $model    = 'QuizQuestionViewQuery';
     protected $form     = 'quiz_question_form_tmpl';
 
     public function get_answers() {

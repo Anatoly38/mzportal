@@ -9,12 +9,13 @@
 */
 defined( '_MZEXEC' ) or die( 'Restricted access' );
 
-require_once ( MZPATH_BASE .DS.'components'.DS.'component_acl.php' );
-require_once ( MZPATH_BASE .DS.'components'.DS.'delete_items.php' );
+require_once ( COMPONENTS .DS. 'component_acl.php' );
+require_once ( COMPONENTS .DS. 'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 require_once ( 'model' . DS . 'quiz_topic_query.php' );
 require_once ( 'model' . DS . 'quiz_topic_save.php' );
 require_once ( 'model' . DS . 'quiz_result.php' );
+require_once ( 'model' . DS . 'quiz_answers.php' );
 require_once ( 'model' . DS . 'quiz_topic_qcount_query.php' );
 require_once ( 'model' . DS . 'quiz_question_query.php' );
 require_once ( 'model' . DS . 'quiz_question_view_query.php' );
@@ -41,7 +42,8 @@ require_once ( 'views' . DS . 'quiz_setting_item.php' );
 require_once ( 'views' . DS . 'quiz_answer_list.php' );
 require_once ( 'views' . DS . 'quiz_answer_item.php' );
 
-require_once ( 'views' . DS . 'quiz_result_list.php' );
+require_once ( 'views' . DS . 'quiz_protocol.php' );
+require_once ( 'views' . DS . 'completed_quiz_list.php' );
 require_once ( 'views' . DS . 'download_question_file_form.php' );
 require_once ( 'views' . DS . 'quiz_q_temp_list.php' );
 require_once ( 'views' . DS . 'trial_testing_selection_form.php' );
@@ -50,6 +52,7 @@ require_once ( 'views' . DS . 'trial_quiz.php' );
 require_once ( MODULES . DS . 'mod_user'  . DS . 'acl.php' );
 require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'model' . DS . 'dossier_query.php' );
 require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'model' . DS . 'dossier_cab_query.php' );
+require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'model' . DS . 'attest_dossier_ticket_query.php' );
 require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'views' . DS . 'dossier_profile.php' );
 require_once ( COMPONENTS . DS . 'com_att_admin' . DS . 'views' . DS . 'dossier_ticket_list.php' );
 require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'access_list.php' );
@@ -58,6 +61,7 @@ require_once ( COMPONENTS . DS . 'com_users' . DS . 'views' . DS . 'user_list.ph
 class Quiz extends ComponentACL
 {
     protected $default_view = 'view_topic_list';
+    private $attest_app = 'AttAdmin';
     
 // темы тестирования
     protected function exec_new()
@@ -260,55 +264,6 @@ class Quiz extends ComponentACL
         }
     }
 
-    // Настройки тестирования
-    protected function exec_settings_list()
-    {
-        $this->view_settings_list();
-    }
-    
-    protected function exec_setting_new()
-    {
-        Content::set_route('quiz_setting');
-        $this->view_new_setting_item();
-    }
-    
-    protected function exec_setting_edit()
-    {
-        $quiz_setting = (array)Request::getVar('quiz_setting');
-        Content::set_route('quiz_setting', $quiz_setting[0]);
-        $this->view_edit_setting_item($quiz_setting[0]);
-    }
-    
-    protected function exec_setting_save()
-    {
-        $quiz_setting = (array)Request::getVar('quiz_setting');
-        if (!$quiz_setting[0]) {
-            $s = new QuizSettingSave();
-            $s->insert_data();
-        } 
-        else {
-            $s = new QuizSettingSave($quiz_setting[0]);
-            $s->update_data();
-        }
-        $this->view_settings_list();
-    }
-    
-    protected function exec_setting_delete()
-    {
-        $setting = (array)Request::getVar('quiz_setting');
-        if (!$setting[0]) {
-            Message::error('Вопрос(ы) не определен(ы)!');
-            $this->view_settings_list();
-        } 
-        $qd = new DeleteItems($setting);
-        $this->view_settings_list();
-    }
-
-    protected function exec_setting_cancel_edit()
-    {
-        $this->view_settings_list();
-    }
-
 // Работа с ответами
 
     protected function exec_edit_answer()
@@ -392,6 +347,55 @@ class Quiz extends ComponentACL
         $this->view_edit_question_item($q);
     }
 
+    // Настройки тестирования
+    protected function exec_settings_list()
+    {
+        $this->view_settings_list();
+    }
+    
+    protected function exec_setting_new()
+    {
+        Content::set_route('quiz_setting');
+        $this->view_new_setting_item();
+    }
+    
+    protected function exec_setting_edit()
+    {
+        $quiz_setting = (array)Request::getVar('quiz_setting');
+        Content::set_route('quiz_setting', $quiz_setting[0]);
+        $this->view_edit_setting_item($quiz_setting[0]);
+    }
+    
+    protected function exec_setting_save()
+    {
+        $quiz_setting = (array)Request::getVar('quiz_setting');
+        if (!$quiz_setting[0]) {
+            $s = new QuizSettingSave();
+            $s->insert_data();
+        } 
+        else {
+            $s = new QuizSettingSave($quiz_setting[0]);
+            $s->update_data();
+        }
+        $this->view_settings_list();
+    }
+    
+    protected function exec_setting_delete()
+    {
+        $setting = (array)Request::getVar('quiz_setting');
+        if (!$setting[0]) {
+            Message::error('Вопрос(ы) не определен(ы)!');
+            $this->view_settings_list();
+        } 
+        $qd = new DeleteItems($setting);
+        $this->view_settings_list();
+    }
+
+    protected function exec_setting_cancel_edit()
+    {
+        $this->view_settings_list();
+    }
+
 // Тестирование
 
     protected function exec_trial_testing_selection()
@@ -463,7 +467,7 @@ class Quiz extends ComponentACL
         try {
             $r = new QuizResult();
             $r->oid = $ticket;
-            $r->result = $result_answes;
+            $r->result = $result_answes; // Протокол прохождения теста в формате JSON
             $r->update();
             $t = new QuizTicketQuery($ticket);
             $t->set_update_message(false);
@@ -503,11 +507,15 @@ class Quiz extends ComponentACL
             }
             $t->update();
             if (!$trial) {
-                $dp = new DossierProfile($dossier_id);
-                $dp->show_title("Профиль аттестационного дела");
-                $dp->show_dossier();
-                $to  = 'shameev@miac-io.ru';
-                $subject = 'Протокол сдачи теста';
+                $p = new QuizProtocol($ticket);
+                $p->show_strong("Аттестационное дело");
+                $p->show_dossier();
+                $p->show_strong("Результат выполнения тестового задания");
+                $p->show_ticket();
+                $p->show_strong("Протокол");
+                $p->show_questions();
+                $to  = MZConfig::$emails;
+                $subject = "=?utf-8?b?" . base64_encode('Протокол сдачи теста') . "?=";
                 // текст письма
                 $message = '
                 <html>
@@ -515,42 +523,20 @@ class Quiz extends ComponentACL
                   <title>Протокол сдачи теста</title>
                 </head>
                 <body>' 
-                  . $dp->get_text() .
-                  '<h2>Протокол сдачи теста</h2>
-                  <table border="1">
-                    <tr>
-                      <td>Основная тема теста</td><td>' . Reference::get_name($t->тема, 'quiz_topics') . '</td>
-                    </tr>
-                    <tr>
-                      <td>Настройка тестирования</td><td>' . Reference::get_name($t->настройка, 'quiz_settings') . '</td>
-                    </tr>
-                    <tr>
-                      <td>Дата и время начала теста</td><td>' . date("d.m.Y H:s", $t->начало_теста) . '</td>
-                    </tr>
-                    <tr>
-                      <td>Продолжительность</td><td>' . $t->продолжительность .' сек.</td>
-                    </tr>
-                    <tr>
-                      <td>Статус</td><td>' . $cause . '</td>
-                    </tr>
-                    <tr>
-                      <td>Доля правильных ответов (%)</td><td>' . $t->балл . '</td>
-                    </tr>
-                    <tr>
-                      <td>Оценка</td><td>' . $t->оценка . '</td>
-                    </tr>
-                  </table>
-                </body>
+                  . $p->get_text() .
+                '</body>
                 </html>
                 ';
                 $headers  = 'MIME-Version: 1.0' . "\r\n";
-                $headers .= 'Content-type: text/html; charset=utf-8' . "\r\n";
+                $headers .= "Content-type: text/html; charset=utf-8 \r\n";
+                $headers .= "Content-Transfer-Encoding:base64 \r\n"; 
                 $headers .= 'From: attest@miac-io.ru' . "\r\n";
-                $mstatus = mail($to, $subject, $message, $headers);
+                $mstatus = mail($to, $subject, base64_encode($message), $headers);
                 print("Результаты теста сохранены");
             }
             else {
-                print("Результаты пробного тестирования сохранены успешно" . $result_answes);
+                //print("Результаты пробного тестирования сохранены успешно" . $result_answes);
+                print("Результаты пробного тестирования сохранены успешно");
             }
         }
         catch (Exception $e) {
@@ -567,9 +553,7 @@ class Quiz extends ComponentACL
             $q_obj = new QuizQuestionQuery($q);
             $q_texts[] = $q_obj->текст_вопроса;
         }
-        //$ret = implode(',' , $q_texts);
         echo json_encode($q_texts);
-        //echo $ret;
     }
     
 // Результаты тестирования    
@@ -592,8 +576,7 @@ class Quiz extends ComponentACL
         $edit_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'delete' , 'Удалить');
         $del_b->set_option('obligate', true);
-        DeleteItems::set_confirm_dialog($confirm);
-        //self::set_toolbar_button('switch', 'current_acl' , 'Доступ');
+        $del_b->set_option('confirmDelete', true);
         $this->set_content($list->get_items_page());
     }
 
@@ -638,7 +621,8 @@ class Quiz extends ComponentACL
         $edit_b->set_option('obligate', true);
         $del_b = self::set_toolbar_button('delete', 'delete_question' , 'Удалить');
         $del_b->set_option('obligate', true);
-        DeleteItems::set_confirm_dialog($confirm, 'delete_question');
+        $del_b->set_option('confirmDelete', true);
+        
         //self::set_toolbar_button('upload', 'download_question_file' , 'Загрузить файл');        
         $this->set_content($list->get_items_page());
     }
@@ -891,10 +875,25 @@ EOT;
     {
         $title = 'Результаты тестирования';
         $this->current_task = 'result_list';
-        $list = new QuizResultList();
+        $list = new CompletedQuizList();
         self::set_title($title);
-        //$edit_b = self::set_toolbar_button('edit', 'edit_question' , 'Редактировать');
-        //$edit_b->set_option('obligate', true);
+        $att_app_id = Application::get_application_id($this->attest_app);
+        $pb = self::set_toolbar_button('print', 'print_quiz_protocol' , 'Распечатать протокол тестирования');
+        $pb->set_option('obligate', true);
+        $js_func = 
+<<<JS
+function () { 
+    query_string = "ticket=";
+    var collate =[];
+    $(".grid_row.ui-state-highlight").each( function () {
+            collate.push($(this).attr("id"));
+        }
+    );
+    query_string += collate.join(",");
+    window.open('print.php?app={$att_app_id}&task=print_quiz_protocol&' + query_string); 
+}
+JS;
+        $pb->set_option('action', $js_func);
         $this->set_content($list->get_items_page());
     }
 }

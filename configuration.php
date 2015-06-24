@@ -32,6 +32,11 @@ class MZConfig
     public static $root_uid             = 500;
     public static $everyone_uid         = 501;
     
+    // Аттестационные дела
+    public static $emails               = 'shameev@miac-io.ru,shameev38@gmail.com'; // Список адресов электронной почты на которые высылаются протоколы тестирования
+    //public static $emails               = 'shameev@miac-io.ru,igb@miac-io.ru, mlo@miac-io.ru'; // Список адресов электронной почты на которые высылаются протоколы тестирования
+    public static $only_positive        = false; // Отправлять протоколы только положительно пройденных тестов
+    
     // Шаблоны форм компонентов
     public static $assignment_form              = 'assignment_form.xml';
     public static $mon_form_tmpl                = 'mon_form.xml';

@@ -183,6 +183,13 @@
     text-align: center;
 }
 
+.main-quiz-holder .notice_multi {
+    position: absolute;
+    bottom: 50px;
+    right: 52px;
+    color: red;
+}
+
 .main-quiz-holder .notice {
     position: absolute;
     bottom: 50px;

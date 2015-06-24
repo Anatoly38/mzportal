@@ -13,15 +13,28 @@ class Reference
 {
     public static function get_name($ref_id, $ref_table, $preffix = 'dic_')
     {
-        if ($ref_table === 'bool') {
-            $ref_id ? $name = 'Да' : $name = 'Нет';
+        switch ($ref_table) {
+            case 'bool': 
+                $ref_id ? $name = 'Да' : $name = 'Нет';
+                break;
+            case 'sec_to_min': 
+                $name = round(($ref_id)/60);
+                break;
+            case 'date_time': 
+                $name = date('d.m.Y H:s', $ref_id);
+                break;
+            default:
+                $ref_table = $preffix . $ref_table;
+                $dbh = new DB_mzportal();
+                $query = "SELECT наименование FROM $ref_table WHERE код = :1";
+                list($name) = $dbh->prepare($query)->execute($ref_id)->fetch_row();
         }
-        else {
-            $ref_table = $preffix . $ref_table;
-            $dbh = new DB_mzportal();
-            $query = "SELECT наименование FROM $ref_table WHERE код = :1";
-            list($name) = $dbh->prepare($query)->execute($ref_id)->fetch_row();
-        }
+        return $name;
+    }
+    
+    public static function get_bool($ref_id)
+    {
+        $ref_id ? $name = 'Да' : $name = 'Нет';
         return $name;
     }
     

@@ -26,9 +26,11 @@ class ItemList
     protected $conditions   = false;
     protected $constraints  = null;
     protected $order        = null;
+    protected $default_order= null;
     protected $direction    = null;
-    protected $show_constraint = true;
-    protected $show_pagination = true;
+    protected $default_direction    = 'asc';
+    protected $show_constraint      = true;
+    protected $show_pagination      = true;
     protected $id           = 'oid'; // Для sql запросов
     protected $obj          = 'oid'; // Для передачи на html страницу
     protected $task         = 'default';
@@ -43,7 +45,7 @@ class ItemList
         $this->source = $source;
         $this->dbh = new DB_mzportal();
 
-        if ($namespace != false) {
+        if ($namespace !== false) {
             $this->set_session($namespace);
         }
         $this->set_constrains();
@@ -54,16 +56,17 @@ class ItemList
         if (MZSession::hasNS($namespace)) {
             $this->limitstart = Request::set_value('limitstart', 0, $namespace);
             $this->limit = Request::set_value('limit', MZConfig::$list_limit, $namespace);
-            $this->order = Request::set_value('order', null, $namespace);
-            $this->direction = Request::set_value('direction', 'asc', $namespace);
+            $this->order = Request::set_value('order', $this->default_order, $namespace);
+            $this->direction = Request::set_value('direction', $this->default_direction, $namespace);
         }
         else {
             $this->limitstart = 0;
             $this->limit = MZConfig::$list_limit;
-            $this->order = null;
+            $this->order = $this->default_order;
             MZSession::set('limitstart', 0, $namespace);
             MZSession::set('limit', MZConfig::$list_limit, $namespace);
-            MZSession::set('order', null, $namespace);
+            MZSession::set('order', $this->default_order, $namespace);
+            MZSession::set('direction', $this->default_direction, $namespace);
         }
     }
 

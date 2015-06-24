@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Factory
-* @copyright    Copyright (C) 2011 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
  
 Прямой доступ запрещен
 */
@@ -13,12 +13,10 @@ require_once ( MZPATH_BASE .DS.'includes'.DS.'loader.php' );
 
 class AppException extends Exception 
 { 
-
     public function get_message()
     {
         return $this->message;
     }
-
 }
 
 class Application
@@ -53,6 +51,17 @@ class Application
         }
     }
     
+    public static function get_application_id($app_name) 
+    {
+        $dbh = new DB_mzportal();
+        $query="SELECT cid FROM sys_classes WHERE name = :1 and type ='controller'";
+        list($app_id) = $dbh->prepare($query)->execute($app_name)->fetch_row();
+        if (!$app_id) {
+            throw new AppException("Приложение не найдено");
+        }
+        return $app_id;
+    }
+    
     public static function get_user_applications($uid) 
     {
         $acl_restriction = "AND (a.uid = :1 OR a.uid IN (SELECT ug.uid FROM sys_users_groups AS ug  WHERE ug.gid = a.acl_id)) ";
@@ -64,7 +73,6 @@ class Application
         $apps = $dbh->prepare($query)->execute($uid)->fetch();
         return $apps;
     }
-
 }
 
 ?>

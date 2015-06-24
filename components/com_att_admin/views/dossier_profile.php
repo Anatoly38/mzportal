@@ -14,6 +14,7 @@ class DossierProfile
 {
     private $dossier_id;
     private $text;
+    private $page_breake = false;
     
     public function __construct($id = false)
     {
@@ -93,9 +94,14 @@ class DossierProfile
         $t = '1. Адрес сайта - ЛК аттестуемого: http://quiz.miac-io.ru <br/>';            
         $t .= '2. По вопросам работы с тестами обращаться по т. (3952)280-325 <br/>';
         $t .= '   или по электронной почте attest@miac-io.ru<br/>';
-        $t .= '3. В аттестационное дело будет включен будет включен ПЕРВЫЙ сданный на положительную оценку тест. Оставшиеся попытки аннулируются.<br/>';
+        $t .= '3. В аттестационное дело будет включен ПЕРВЫЙ сданный на положительную оценку тест. Оставшиеся попытки аннулируются.<br/>';
         $this->add_text($t);
         return $t;
+    }
+    
+    public function set_pagebreake($p = true)
+    {
+        $this->page_breake = $p;
     }
     
     public function add_text($t)
@@ -105,7 +111,11 @@ class DossierProfile
     
     public function get_text()
     {
-        return $this->text;
+        $all =  '';
+        $this->page_breake ? $all .= '<div style="page-break-after:always;">' :  $all .= '';
+        $all .= $this->text;
+        $this->page_breake ? $all .= '</div>' :  $all .= '';
+        return $all;
     }
   
 }

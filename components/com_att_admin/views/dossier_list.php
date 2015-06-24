@@ -12,13 +12,18 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'item_list.php' );
 
 class DossierList extends ItemList
 {
-    protected $model        = 'DossierQuery';
-    protected $source       = 'attest_dossier';
+    protected $model        = 'AttestDossierTicketcountCabuserQuery';
+    protected $source       = 'attest_dossier_ticketcount_cabuser_view';
     protected $namespace    = 'dossier';
     protected $task         = 'dossier_list';
     protected $obj          = 'dossier';
     protected $order_task   = 'dossier_list';
-    protected $default_cols = array( 'oid', 'номер_дела', 'фио', 'email', 'мо', 'экспертная_группа', 'вид_должности');
+    protected $order = 'oid';
+    protected $default_order    = 'oid';
+    protected $direction        = 'desc';
+    protected $default_direction    = 'desc';
+    
+    //protected $default_cols = array( 'oid', 'номер_дела', 'фио', 'email', 'мо', 'экспертная_группа', 'вид_должности', 'Кол_во_попыток_тестирования', 'Доступ_в_личный_кабинет');
     
     public function __construct()
     {
@@ -47,6 +52,8 @@ class DossierList extends ItemList
         $options['мо']          = array('sort' => true,  'type' => 'plain', 'ref' => 'subordination' );
         $options['экспертная_группа']   = array('sort' => true,  'type' => 'plain', 'ref' => 'expert_groups' );
         $options['вид_должности']       = array('sort' => true,  'type' => 'plain', 'ref' => 'position_short' );
+        $options['Кол_во_попыток_тестирования'] = array('sort' => true,  'type' => 'plain' );
+        $options['Доступ_в_личный_кабинет']     = array('sort' => true,  'type' => 'plain' );
         return $options;
     }
   

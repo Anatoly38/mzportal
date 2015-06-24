@@ -24,9 +24,9 @@ class QuizResult
         }
         $dbh = new DB_mzportal;
         $query =    "SELECT
-                        a.result,
+                        `a`.`result`
                     FROM {$this->source} AS a 
-                    WHERE a.oid = :1";
+                    WHERE `a`.`oid` = :1";
         $data = $dbh->prepare($query)->execute($oid)->fetch_assoc();
         if(!$data) {
             throw new Exception("Не найден результат тестирования");

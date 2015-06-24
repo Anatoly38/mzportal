@@ -29,7 +29,7 @@ class QuizTopicList extends ItemList
         $constr = Constraint::getInstance();
         $constr->set_namespace($this->namespace);
         $constr->add_filter('название_темы');
-        $constr->add_filter('экспертная_группа', 'dic_expert_groups', 'код', 'наименование' , 'экспертная группа');
+        $constr->add_filter('экспертная_группа', 'dic_expert_groups', 'наименование', 'наименование', 'экспертная группа');
 
         $constr->get_filters();
     }

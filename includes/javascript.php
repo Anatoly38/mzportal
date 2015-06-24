@@ -294,7 +294,7 @@ JS;
         if ($this->quiz) {
             return true;
         }
-        $this->add_js_link('jquery.quiz.js');
+        $this->add_js_link('jquery.quiz.min.js');
         $this->add_js_link('jquery.timeTo.js');
         $this->quiz = true;
     }

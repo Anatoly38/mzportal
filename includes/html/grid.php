@@ -56,23 +56,24 @@ class HTMLGrid
         $tags = '<thead>';
         $tags .= '<tr class="ui-widget-header">';
         if ($this->with_number) {
-            $tags .= "<th>#</th>";
+            $tags .= '<th style="width:30px;">#</th>';
         }
 
         foreach ($data[0] as $column => $description) {
+            $title = str_replace('_',' ',$description['title']);
             if ($description['type'] == 'checkbox') {
-                $tags .= '<th title="Выделить все элементы" class="select_all_rows"><span class="ui-icon ui-icon-check"></span></th>';
+                $tags .= '<th title="Выделить все элементы" class="select_all_rows" style="width:30px;"><span class="ui-icon ui-icon-check"></span></th>';
             } 
             else {
                 if ($description['sort']) {
-                    $tags .= '<th>' . $this->sort(  $description['title'], 
+                    $tags .= '<th>' . $this->sort(  $title, 
                                                     $description['name'], 
                                                     $this->direction, 
                                                     $this->order_task);
                     $tags .= '</th>';
                 }
                 else {
-                    $tags .= '<th>' . $description['title'] . '</th>';
+                    $tags .= '<th>' . $title . '</th>';
                 }
             }
         }
@@ -131,7 +132,7 @@ class HTMLGrid
 
     private function set_plain($value, $name= null, $i = null, $oid = null) 
     {
-        $tag = "<td class=\"" . $name . "\">" . $value . "</td>";
+        $tag = "<td class=\"" . $name . "\">" . htmlspecialchars($value) . "</td>";
         return $tag;
     }
     

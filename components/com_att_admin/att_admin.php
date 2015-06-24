@@ -14,13 +14,16 @@ require_once ( COMPONENTS .DS.'delete_items.php' );
 require_once ( MZPATH_BASE .DS.'includes'.DS.'link_objects.php' );
 
 require_once ( COMPONENTS .DS.'com_quiz' .DS.'model'.DS.'quiz_ticket_query.php' );
+require_once ( COMPONENTS .DS.'com_quiz' .DS.'model'.DS.'quiz_question_query.php' );
 require_once ( COMPONENTS .DS.'com_quiz' .DS.'model'.DS.'quiz_ticket_save.php' );
 require_once ( COMPONENTS .DS.'com_quiz' .DS.'model'.DS.'quiz_result.php' );
+require_once ( COMPONENTS .DS.'com_quiz' .DS.'model'.DS.'quiz_answers.php' );
 require_once ( COMPONENTS .DS.'com_quiz' .DS.'views'.DS.'quiz_protocol.php' );
 require_once ( 'model' . DS . 'dossier_query.php' );
 require_once ( 'model' . DS . 'dossier_cab_query.php' );
 require_once ( 'model' . DS . 'dossier_save.php' );
 require_once ( 'model' . DS . 'attest_dossier_ticket_query.php' );
+require_once ( 'model' . DS . 'attest_dossier_ticketcount_cabuser_query.php' );
 require_once ( 'model' . DS . 'attest_cab_user_query.php' );
 require_once ( 'model' . DS . 'attest_cab_user_save.php' );
 require_once ( 'model' . DS . 'attest_ticket_save.php' );
@@ -259,7 +262,7 @@ class AttAdmin extends Component
     protected function exec_print_dossier_profile()
     {
         $dossier = explode(',', Request::getVar('dossier'));
-        $this->view_dossier_profile($dossier[0]);
+        $this->view_dossier_profile($dossier);
     }
     
     protected function exec_print_quiz_protocol() 
@@ -367,19 +370,20 @@ class AttAdmin extends Component
         $js_func = 
 <<<JS
 function () { 
-    objects = "dossier=";
+    query_string = "dossier=";
+    var collate =[];
     $(".grid_row.ui-state-highlight").each( function () {
-            objects += $(this).attr("id") + ',';
+            collate.push($(this).attr("id"));
         }
     );
-    window.open('print.php?app={$this->app}&task=print_dossier_profile&' + objects); 
+    query_string += collate.join(",");
+    window.open('print.php?app={$this->app}&task=print_dossier_profile&' + query_string); 
 }
 JS;
         $pb->set_option('action', $js_func);
         $del_b = self::set_toolbar_button('delete', 'dossier_delete' , 'Удалить');
         $del_b->set_option('obligate', true);
         $del_b->set_option('confirmDelete', true);
-        //DeleteItems::set_confirm_dialog($confirm);
         $this->set_content($list->get_items_page());
     }
     
@@ -465,22 +469,22 @@ JS;
         $del_b->set_option('obligate', true);
         $del_b->set_option('confirmDelete', true);
         $cb = self::set_toolbar_button('cancel', 'cancel_tickets_edit' , 'Закрыть');
-        
         $pb = self::set_toolbar_button('print', 'print_quiz_protocol' , 'Распечатать протокол тестирования');
         $pb->set_option('obligate', true);
         $js_func = 
 <<<JS
 function () { 
-    objects = "ticket=";
+    query_string = "ticket=";
+    var collate =[];
     $(".grid_row.ui-state-highlight").each( function () {
-            objects += $(this).attr("id") + ',';
+            collate.push($(this).attr("id"));
         }
     );
-    window.open('print.php?app={$this->app}&task=print_quiz_protocol&' + objects); 
+    query_string += collate.join(",");
+    window.open('print.php?app={$this->app}&task=print_quiz_protocol&' + query_string); 
 }
 JS;
         $pb->set_option('action', $js_func);
-        
         $this->set_content($list->get_items_page());
     }
     
@@ -510,32 +514,48 @@ JS;
         $this->set_content($form);
     }  
   
-    protected function view_dossier_profile($d) 
+    protected function view_dossier_profile($dossier) 
     {
-        $p = new DossierProfile($d);
-        $p->show_title("Профиль аттестационного дела");
-        $p->show_dossier();
-        $p->show_title("Доступ в личный кабинет");
-        $p->show_cab_user();
-        $p->show_title("Прохождение тестов");
-        $p->show_quiz_attempts();
-        $p->show_title("Дополнительная информация");
-        $p->show_hints();
-        $this->set_content($p->get_text());
+        $i = 1;
+        $c = count($dossier);
+        foreach ($dossier as $d) {
+            if (!empty($d)) {
+                $p = new DossierProfile($d);
+                $p->show_title("Профиль аттестационного дела");
+                $p->show_dossier();
+                $p->show_title("Доступ в личный кабинет");
+                $p->show_cab_user();
+                $p->show_title("Прохождение тестов");
+                $p->show_quiz_attempts();
+                $p->show_title("Дополнительная информация");
+                $p->show_hints();
+                if ( $i !== $c ) {
+                    $p->set_pagebreake(true);
+                }
+                $this->set_content($p->get_text());
+                $i++;
+            }
+        }
     }  
     
     protected function view_quiz_protocol($tickets)
     {
-         foreach ($tickets as $t) {
+        $i = 1;
+        $c = count($tickets);
+        foreach ($tickets as $t) {
             if (!empty($t)) {
                 $p = new QuizProtocol($t);
-                $p->show_title("Профиль аттестационного дела");
+                $p->show_strong("Аттестационное дело");
                 $p->show_dossier();
-                $p->show_title("Результат выполнения тестового задания");
+                $p->show_strong("Результат выполнения тестового задания");
                 $p->show_ticket();
-                $p->show_title("Вопросы");
+                $p->show_strong("Протокол");
                 $p->show_questions();
+                if ( $i !== $c ) {
+                    $p->set_pagebreake(true);
+                }
                 $this->set_content($p->get_text());
+                $i++;
             }
         } 
     }

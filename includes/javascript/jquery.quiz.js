@@ -24,12 +24,13 @@
             });
             var collate =[];
             for (r = 0; r < userAnswers.length; r++) {
-                collate.push('{"questionNumber":"'+parseInt(questionIds[r])+'", UserAnswer:"'+userAnswers[r]+'"}');
+                collate.push('{"questionNumber":"'+parseInt(questionIds[r])+'", "userAnswers":"'+userAnswers[r]+'"}');
             }
             res = '[' + collate.join(",") + ']';
             countdown.timeTo("stop");
             progressKeeper.hide();
             notice.hide();
+            notice_multi.hide();
             var results = checkAnswers(),
             resultSet = '',
             questionResult = '',
@@ -125,6 +126,7 @@
             timeToTest: 3600,
             hostip: '172.16.172.33', 
             //hostip: 'quiz.miac-io.ru',
+            //hostip: 'attest.miac-io.ru',
             //hostip: '127.0.0.1:8080',
             showCorrectAnswers: true,
             closePageButtonId: 'close_quizpage',
@@ -172,7 +174,8 @@
         answers = [];
         introFob = '<div class="intro-container slide-container"><div class="question-number">'+quizConfig.startText+'</div><a class="nav-start" href="#"><img src="'+quizConfig.splashImage+'" /></a></div>';
         exitFob =  '<div class="results-container slide-container"><div class="question-number">'+quizConfig.endText+'</div><div class="result-keeper"></div></div>';
-        exitFob += '<div class="notice">Пожалуйста выберите вариант ответа</div><div class="progress-keeper" ><div class="progress"></div></div>';
+        exitFob += '<div class="notice">Пожалуйста выберите вариант ответа</div><div class="notice_multi">Для данного вопроса нужно выбрать более одного правильного ответа</div>';
+        exitFob += '<div class="progress-keeper" ><div class="progress"></div></div>';
         contentFob = '';
         startTime = '';
         endTime = '';
@@ -237,12 +240,14 @@
             progress = superContainer.find('.progress');
             progressKeeper = superContainer.find('.progress-keeper');
             notice = superContainer.find('.notice');
+            notice_multi = superContainer.find('.notice_multi');
             progressWidth = progressKeeper.width();
             userAnswers = [];
             questionLength = quizConfig.questions.length;
             slidesList = superContainer.find('.slide-container');
             progressKeeper.hide();
             notice.hide();
+            notice_multi.hide();
             slidesList.hide().first().fadeIn(500);
         }
         
@@ -337,11 +342,22 @@
         });
 
         superContainer.find('.next').click(function() {
+            notice.hide();
+            notice_multi.hide();
+            var multianswer = false;
+            if ($(this).parents('.slide-container').find('div.question-type').text() === 'Тип вопроса: "Несколько ответов"') {
+                multianswer = true;
+            }
             if ($(this).parents('.slide-container').find('li.selected').length === 0) {
                 notice.fadeIn(300);
                 return false;
             }
             notice.hide();
+            if ($(this).parents('.slide-container').find('li.selected').length === 1 && multianswer) {
+                notice_multi.fadeIn(300);
+                return false;
+            }
+            notice_multi.hide();
             $(this).parents('.slide-container').fadeOut(500, function() {
                 $(this).next().fadeIn(500);
             });

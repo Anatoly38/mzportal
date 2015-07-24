@@ -43,7 +43,7 @@ class QuestionImport
         $a = 0;
         foreach ($items as $item) {
             $q_temp = new QuizQTempQuery($item);
-            $q_oid = $this->insert_qestion($q_temp->текст_вопроса);
+            $q_oid = $this->insert_qestion($q_temp);
             $ret = $this->insert_answers($item, $q_oid);
             $a = $a + $ret['t_qount'];
             $q++;
@@ -54,13 +54,14 @@ class QuestionImport
         return $converted;
     }
     
-    private function insert_qestion($text)
+    private function insert_qestion($q_temp)
     {
-        if (!$text) {
+        if (!$q_temp) {
             return false;
         }
         $q_obj = new QuizQuestionQuery();
-        $q_obj->текст_вопроса = $text;
+        $q_obj->текст_вопроса   = $q_temp->текст_вопроса;
+        $q_obj->тип_вопроса     = $q_temp->тип_вопроса;
         $q_obj->insert();
         try {
             LinkObjects::set_link($this->topic, $q_obj->oid, $this->topic_question_link); // Ассоциация между темой и вопросом теста

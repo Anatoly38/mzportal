@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Quiz
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -67,7 +67,7 @@ class QuizAnswerQuery extends ClActiveRecord
         try {
             $obj = new MZObject($this->oid);
             $obj->name = 'Ответ на вопрос теста';
-            $obj->description = $this->текст_ответа;
+            //$obj->description = $this->текст_ответа;
             $obj->update();
         }
         catch (Exception $e) {
@@ -86,7 +86,7 @@ class QuizAnswerQuery extends ClActiveRecord
         // Регистрация нового объекта в таблице sys_objects
         $obj = MZObject::set_class_id($class_name); // Создаем объект класса MZObject с определенной переменной $class_id
         $obj->name = 'Ответ на вопрос теста';
-        $obj->description = $this->текст_ответа;
+        //$obj->description = $this->текст_ответа;
         $obj->deleted = 0;
         if (isset($this->acl_id)) {
             $obj->acl_id = $this->acl_id;

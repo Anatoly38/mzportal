@@ -15,7 +15,7 @@ class QuizQTempList extends ItemList
     protected $model        = 'QuizQTempQuery';
     protected $source       = 'quiz_q_temp';
     protected $namespace    = 'quiz_q_temp';
-    protected $task         = 'default';
+    protected $task         = 'q_temp_list';
     protected $obj          = 'quiz_q_temp';
     protected $id           = 'номер_пп';
     //protected $default_cols = array( 'id', 'текст_вопроса', 'тип_вопроса' );

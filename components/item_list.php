@@ -171,9 +171,22 @@ class ItemList
         }
         //print_r($query);
         $stmt = $this->dbh->execute($query)->fetch();
-        foreach ($stmt as $id) {
-            $this->add(new $this->model($id));
+        $ids = implode(',', $stmt);
+        //print_r($ids);
+        $query = "SELECT * FROM {$this->source} WHERE {$this->id} IN ({$ids})";
+        $rows = $this->dbh->execute($query)->fetchall_assoc();
+        foreach ($rows as $row) {
+            $item = new $this->model();
+            foreach ($row as $coltitle => $cell) {
+                $item->$coltitle = $cell;
+            }
+            $this->items[] = $item;
         }
+//        $this->set_collection($stmt);
+ //       foreach ($stmt as $id) {
+//            $this->add(new $this->model($id));
+//        }
+        //print_r($this->items);
         return $this->items;
     }
 
@@ -188,7 +201,7 @@ class ItemList
     {
         $this->items[] = $item;
     }
-
+    
     protected function list_options()
     {
         return array();
@@ -196,7 +209,8 @@ class ItemList
 
     protected function get_param()
     {
-        $param = $this->items[0]->get_fields_titles();
+        //$param = $this->items[0]->get_fields_titles();
+        $param = ClActiveRecord::get_titles($this->source);
         return $param;
     }
 

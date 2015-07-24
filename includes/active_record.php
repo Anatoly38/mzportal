@@ -85,6 +85,22 @@ class ClActiveRecord
         return $titles;
     }
     
+    public static function get_titles($table)
+    {
+        $dbh = new DB_mzportal;
+        $fields = array();
+        $titles = array();
+        $fields = $dbh->get_fields($table);
+        foreach ($fields as $fkey => $fvalue) {
+            if (!$fvalue['comment']) {
+                $titles[$fkey] = $fkey;
+            } 
+            else {
+                $titles[$fkey] = $fvalue['comment'];
+            }
+        }
+        return $titles;
+    }
 
 }
 ?>

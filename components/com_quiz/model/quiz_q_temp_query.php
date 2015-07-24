@@ -60,7 +60,7 @@ class QuizQTempQuery extends ClActiveRecord
             Message::alert('Изменения при редактировании данных документа успешно сохранены');
         } 
         catch (Exception $e) {
-            Message::error('Ошибка: изменения при импортировании вопросов теста не сохранены!');
+            Message::error('Ошибка: изменения при импорте вопросов теста не сохранены!');
             return false;
         }
     }
@@ -87,6 +87,26 @@ class QuizQTempQuery extends ClActiveRecord
         }
         catch (MysqlException $e) {
             Message::error($e->code);
+        }
+    }
+    
+    public static function get_question_type($id)
+    {
+        if (!$id) {
+            return false;
+        }
+        $dbh = new DB_mzportal;
+        $query = "SELECT SUM(`правильный`) AS `count` FROM `quiz_a_temp` WHERE `номер_пп` = {$id}";
+        list($count) = $dbh->execute($query)->fetch_row();
+        switch (true) {
+            case $count == 1:
+                return 1;
+                break;
+            case $count > 1:
+                return 2;
+                break;
+            default:
+               return null;
         }
     }
 

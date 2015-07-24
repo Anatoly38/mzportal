@@ -242,7 +242,7 @@ class Quiz extends ComponentACL
     
     protected function exec_cancel_import()
     {
-        $this->view_question_list();
+        $this->view_topic_list();
     }
 
     protected function exec_q_temp_list()
@@ -258,6 +258,7 @@ class Quiz extends ComponentACL
             $this->view_question_list();
         } else {
             $import = new QuestionImport($temp_topic);
+            $import->set_q_type_mode(false);
             $ret = $import->import_all();
             Message::alert('Импортировано ' .$ret['q_count'] . ' вопросов и ' . $ret['a_count'] . ' ответов по теме "' . Reference::get_name($temp_topic, 'quiz_topics') . '"' );
             $this->view_question_list();

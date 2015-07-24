@@ -3,7 +3,7 @@
 * @version      $Id$
 * @package      MZPortal.Framework
 * @subpackage   Tasks
-* @copyright    Copyright (C) 2009-2014 МИАЦ ИО
+* @copyright    Copyright (C) 2009-2015 МИАЦ ИО
 
 Прямой доступ запрещен
 */
@@ -13,7 +13,7 @@ require_once ( MZPATH_BASE .DS.'components'.DS.'item_list.php' );
 class TaskList extends ItemList
 {
     protected $model = 'TaskQuery';
-    protected $source = 'tasks_view';
+    protected $source = 'tasks';
     protected $namespace = 'task_list';
     protected $obj = 'component';
     protected $default_cols = array('oid', 'наименование', 'описание', 'component_id', 'входит_в');
@@ -29,12 +29,6 @@ class TaskList extends ItemList
         $constr->set_namespace($this->namespace);
         $constr->add_filter('наименование');
         $constr->get_filters();
-    }
-    
-    //protected function add(TaskQuery $item)
-    protected function add($item)
-    {
-        parent::add($item);
     }
 
     protected function list_options()
